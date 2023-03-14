@@ -1,0 +1,22 @@
+- CẤU TRÚC DỮ LIỆU VÀ GIẢI THUẬT -
+1. GIỚI THIỆU
+2. BÀI TOÁN TÌM KIẾM
+    mô tả chi tiết:
+    INPUT:
+        1 số nguyên n 0 <= n <= 1 tỷ cho biết số lượng phần tử trong mảng.
+        n số nguyên tiếp theo có giá trị không quas 1 tỷ, là các phần tử của mảng
+        1 số nguyên x 0 <= x <= 1 tỷ là giá trị cần TÌM
+    OUTPUT:
+        Một số nguyên là vị trí của x trong mảng a, nếu không có kết quả, trả về -1, nếu có nhiều phần tử trùng nhau, xuất ra vị trí phần tử đầu tiên tìm thấy
+
+    tìm kiếm tuyến tính: lần lượt duyệt từng phần tử
+    cách cài đặc giảm chi phí nhất: nhét x vào mảng
+
+    xét trường hợp tốt nhất: x nằm ở đầu mảng
+                    xấu nhất: x nằm cuối mảng hoặc không tồn tại trong mảng.
+
+
+    tìm kiếm nhị phân:
+    - dùng 2 đầu đọc L R để giới hạn phạm vi tìm kiếm.
+
+

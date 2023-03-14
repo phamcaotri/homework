@@ -1,0 +1,30 @@
+Bài 1: một bài tập đơn giản để tôi hiểu cách sử dụng class, đối tượng, thuộc tính, hành vi. 
+Bài 2: nâng cao một chút, tôi muốn tìm hiểu về cách sử dụng constructor, từ khoá public, private, protected,... 
+Bài 3: tôi muốn chương trình từ bài 1, 2 có thể chạy được, nên hãy giao bài tập thực tế 
+Bài 4: tôi muốn học về tính đóng gói 
+Bài 5: tôi muốn học về tính kế thừa 
+Bài 6: tôi muốn học về tính đa hình 
+Bài 7: tôi muốn học về việc phân chia một ứng dụng thành nhiều tập tin nhỏ khác nhau và liên kết chúng lại
+
+Bài 1: Bạn có thể định nghĩa một lớp Shape với các thuộc tính width và height và một phương thức area() để tính 
+diện tích của hình.
+
+Bài 2: Bạn có thể sử dụng constructor để khởi tạo giá trị cho width và height khi tạo một đối tượng Shape. 
+Bạn cũng có thể sử dụng từ khoá public, private và protected để quy định phạm vi truy cập của các thành viên trong lớp.
+
+Bài 3: Bạn có thể viết một chương trình chính để nhập vào các thông tin của một hình và gọi phương thức area() 
+để in ra kết quả.
+
+Bài 4: Bạn có thể sử dụng getter và setter để bảo vệ dữ liệu trong lớp Shape. Bạn cũng có thể sử dụng từ khoá 
+const để khai báo các phương thức không làm thay đổi giá trị của các thuộc tính.
+
+Bài 5: Bạn có thể định nghĩa hai lớp con Triangle và Rectangle kế thừa từ lớp Shape. Bạn cũng có thể ghi đè 
+phương thức area() trong hai lớp con này để tính diện tích riêng cho tam giác và hình chữ nhật.
+
+Bài 6: Bạn có thể sử dụng từ khoá virtual để khai báo phương thức area() trong lớp cha Shape. Điều này cho 
+phép bạn sử dụng đa hình khi gọi phương thức area() thông qua con trỏ hoặc tham chiếu của lớp cha.
+
+Bài 7: Bạn có thể chia nhỏ chương trình thành nhiều file .h và .cpp khác nhau. Ví dụ, bạn có thể viết các 
+khai báo của lớp Shape, Triangle và Rectangle trong file shape.h, triangle.h và rectangle.h; viết các định 
+nghĩa của các phương thức trong file shape.cpp, triangle.cpp và rectangle.cpp; viết chương trình chính trong 
+file main.cpp. Sau đó bạn cần include các file header vào file main.cpp và biên dịch toàn bộ project.
