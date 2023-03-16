@@ -1,0 +1,18 @@
+Các thuận toán sx:
+## ĐƠN GIẢN + kém hiệu quả
+1. selectionsort
+2. insertionsort
+3. interchangesort
+4. bubblesort
+5. shakesort
+6. binary insertionsort
+7. countingsort
+
+## PHỨC TẠP + hiệu quả cao
+8. quicksort
+9. mergesort
+10. heapsort
+11. radixsort
+12. shellsort
+
+150 7169 2464 3155 123 3309 5362 9162 1480 2336
