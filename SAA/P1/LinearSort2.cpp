@@ -2,12 +2,10 @@
 #include <iostream>
 using namespace std;
 
-void inputArray(int a[],int &n)
+void inputArray(int *&a,int &n)
 {
     
     cin >> n;
-    
-    
     int *b = new int[n];
     a = b;
     for (int i = 0; i < n; i++) {
