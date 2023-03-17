@@ -55,10 +55,6 @@ class QuickSort : public Draw {
                 if (i <= j) {
                     count_swap ++;
                     swap(a[i], a[j]);
-                    if (pivot == i)
-                        swap(pivot,j);
-                    if (pivot == j)
-                        swap(j,pivot);
                     toDraw(a,n,pivot,i,j);
                     i ++; j --;
                 }
