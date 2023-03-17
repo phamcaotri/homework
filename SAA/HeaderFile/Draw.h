@@ -6,9 +6,10 @@
 #include <chrono>
 #include <thread>
 #include "Sort.h"
+#include "ArrayFunction.h"
 using namespace std;
 
-class Draw : public Sort{
+class Draw : public Sort, public ArrayFunction{
     private:
         int ms = 0;
     public:
@@ -20,7 +21,7 @@ class Draw : public Sort{
                 this -> ms = 0;
         }
 
-        void toDraw(int a[], int n, int max_value, int pivot, int i, int j) {
+        void toDraw(int a[], int n, int pivot, int i, int j) {
             
             string buffer;
             system("cls");

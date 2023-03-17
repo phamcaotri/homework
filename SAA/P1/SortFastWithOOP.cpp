@@ -9,10 +9,9 @@ int main() {
     cin >> n;
     int *a = new int[n];
     
-    ArrayFunction standard;
     QuickSort QuickSort;
-    standard.input(a,n);
-    QuickSort.setDelayTime(100);
+    QuickSort.input(a,n);
+    QuickSort.setDelayTime(10);
     QuickSort.SortAndDraw(a,n,0,n-1);
     return 0;
 }

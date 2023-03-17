@@ -6,6 +6,8 @@ using namespace std;
 
 
 class ArrayFunction {
+    protected:
+        int max_value;
     public:
         int max(int a[], int n) {
             int max = a[0];
@@ -20,6 +22,7 @@ class ArrayFunction {
         void input(int a[], int n) {
             for (int i = 0; i < n; i++)
                 cin >> a[i];
+            max_value = max(a,n);
         }
 
         void output(int a[], int n) {

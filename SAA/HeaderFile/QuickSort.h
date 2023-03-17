@@ -2,8 +2,7 @@
 #ifndef QUICKSORT_H // include guard
 #define QUICKSORT_H
 #include "Draw.h"
-#include "ArrayFunction.h"
-class QuickSort : public Draw, public ArrayFunction {
+class QuickSort : public Draw {
     private:
 
     public:
@@ -32,23 +31,22 @@ class QuickSort : public Draw, public ArrayFunction {
         }
 
         void SortAndDraw(int a[], int n ,int left, int right) {
-            int max_value = max(a,n);
             int mid = a[(left+right)/2];
             int i = left, j = right;
-            toDraw(a,n, max_value,(left+right)/2,i,j);
+            toDraw(a,n,(left+right)/2,i,j);
             while (i <= j) {
                 count_compare ++;
                 while (a[i] < mid) {
                     i ++;
                     count_compare ++;
-                    toDraw(a,n, max_value,(left+right)/2,i,j);
+                    toDraw(a,n,(left+right)/2,i,j);
                     
                 }
 
                 while (a[j] > mid) {
                     j --;  
                     count_compare ++;
-                    toDraw(a,n, max_value,(left+right)/2,i,j);
+                    toDraw(a,n,(left+right)/2,i,j);
                     
                 }
 
@@ -56,7 +54,7 @@ class QuickSort : public Draw, public ArrayFunction {
                     count_compare ++;
                     count_swap ++;
                     swap(a[i], a[j]);
-                    toDraw(a,n,max_value,(left+right)/2,i,j);
+                    toDraw(a,n,(left+right)/2,i,j);
 
                     
                     i ++; j --;
