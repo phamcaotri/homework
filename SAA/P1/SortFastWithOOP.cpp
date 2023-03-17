@@ -1,6 +1,6 @@
 #include <iostream>
-#include "ArrayFunction.h"
-#include "QuickSort.h"
+#include "C:\Users\caotr\Documents\GitHub\homework\SAA\HeaderFile\ArrayFunction.h"
+#include "C:\Users\caotr\Documents\GitHub\homework\SAA\HeaderFile\QuickSort.h"
 using namespace std;
 
 
@@ -16,3 +16,4 @@ int main() {
     QuickSort.SortAndDraw(a,n,0,n-1);
     return 0;
 }
+
