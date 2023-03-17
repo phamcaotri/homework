@@ -6,6 +6,7 @@ using namespace std;
 
 
 class ArrayFunction {
+
     protected:
         int max_value;
     public:

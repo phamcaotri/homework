@@ -5,14 +5,24 @@
 #include <string>
 #include <chrono>
 #include <thread>
-#include "Sort.h"
 #include "ArrayFunction.h"
 using namespace std;
 
-class Draw : public Sort, public ArrayFunction{
+class Draw : public ArrayFunction{
     private:
         int ms = 0;
+    protected:
+        int count_compare = 0;
+        int count_swap = 0;
     public:
+
+        int getNumberOfCompare() {
+            return count_compare;
+        }
+
+        int getNumberOfSwap() {
+            return count_swap;
+        }
 
         void setDelayTime(int ms) {
             if (ms >= 0)
