@@ -1,0 +1,17 @@
+void draw(int a[], int n) {
+    std::cout << "\033[2J\033[H";
+    int max_value = max(a, n);
+
+    for (int i = max_value; i > 0; i--) {
+        for (int j = 0; j < n; j++) {
+            if (a[j] >= i) {
+                cout << a[j] << " ";
+            }
+            else {
+                cout << "  ";
+            }
+        }
+        cout << "\n";
+    }
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
+}
