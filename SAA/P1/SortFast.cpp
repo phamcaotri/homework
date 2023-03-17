@@ -1,6 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+int so_sanh = 0;
+int so_swap = 0;
+
 int max(int a[], int n) {
     int max = a[0];
     for (int i = 1; i < n; i++) {
@@ -49,6 +52,7 @@ void draw(int a[], int n, int max_value, int pivot, int i, int j) {
     for (int m = 0; m < n; m++) {
         buffer.append("---");
     }
+    buffer += "so so sanh: "+ to_string(so_sanh) + ", so swap: " + to_string(so_swap);
     cout << buffer;
     this_thread::sleep_for(std::chrono::milliseconds(100));
 }
@@ -69,26 +73,33 @@ void QuickSort(int a[], int n ,int left, int right) {
     int mid = a[(left+right)/2];
     int i = left, j = right;
     draw(a,n, max_value,(left+right)/2,i,j);
-    while (i < j) {
+    while (i <= j) {
+        so_sanh ++;
         while (a[i] < mid) {
             i ++;
+            so_sanh ++;
             draw(a,n, max_value,(left+right)/2,i,j);
+            
         }
 
         while (a[j] > mid) {
             j --;  
+            so_sanh ++;
             draw(a,n, max_value,(left+right)/2,i,j);
+            
         }
 
         if (i <= j) {
+            so_swap ++;
+            so_sanh ++;
             swap(a[i], a[j]);
             draw(a,n,max_value,(left+right)/2,i,j);
+
               
             i ++; j --;
         }
         
     }
-    
     if (left < j) QuickSort(a,n ,left,j);
     if (right > i) QuickSort(a,n ,i,right);
 }
