@@ -31,36 +31,40 @@ class QuickSort : public Draw {
         }
 
         void SortAndDraw(int a[], int n ,int left, int right) {
-            int mid = a[(left+right)/2];
+            int pivot = (left+right)/2;
+            int mid = a[pivot];
             int i = left, j = right;
-            toDraw(a,n,(left+right)/2,i,j);
+            count_compare += 3; // 3 while compare 1 last time when it exit
+            toDraw(a,n,pivot,i,j);
             while (i <= j) {
                 count_compare ++;
                 while (a[i] < mid) {
                     i ++;
                     count_compare ++;
-                    toDraw(a,n,(left+right)/2,i,j);
+                    toDraw(a,n,pivot,i,j);
                     
                 }
 
                 while (a[j] > mid) {
                     j --;  
                     count_compare ++;
-                    toDraw(a,n,(left+right)/2,i,j);
+                    toDraw(a,n,pivot,i,j);
                     
                 }
-
+                count_compare ++;
                 if (i <= j) {
-                    count_compare ++;
                     count_swap ++;
                     swap(a[i], a[j]);
-                    toDraw(a,n,(left+right)/2,i,j);
-
-                    
+                    if (pivot == i)
+                        swap(pivot,j);
+                    if (pivot == j)
+                        swap(j,pivot);
+                    toDraw(a,n,pivot,i,j);
                     i ++; j --;
                 }
                 
             }
+            count_compare += 2;
             if (left < j) SortAndDraw(a,n ,left,j);
             if (right > i) SortAndDraw(a,n ,i,right);
         }
