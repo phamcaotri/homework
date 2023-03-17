@@ -6,11 +6,10 @@
 using namespace std;
 
 int  vitrung(int n) {
-
-    return pow(2,n+1);
-
+    if (n == 0)
+        return 2;
+    return 2*vitrung(n-1);
 }
-
 int goitien(int n) {
     if (n == 1)
         return 1120;
