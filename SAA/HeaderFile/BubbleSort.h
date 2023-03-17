@@ -16,13 +16,16 @@ class BubbleSort : public Draw {
 
         void SortAndDraw(int a[], int n) {
             for (int i = 0; i < n ; i++)
-                for (int j = 0; j < n-i-1; j++)
+                for (int j = 0; j < n-i-1; j++) {
+                    count_compare ++;
+                    toDraw(a,n,n-i-1,i,j);
                     if (a[j] > a[j+1]) {
-                        count_compare ++;
                         count_swap ++;
                         swap(a[j],a[j+1]);
                         toDraw(a,n,n-i-1,i,j);
                     }
+                }
+
                         
         }
 };

@@ -8,21 +8,23 @@ int main() {
     int n;
     cin >> n;
     int *a = new int[n];
-    BubbleSort BubbleSort;
-    BubbleSort.input(a,n);
-    BubbleSort.setDelayTime(10);
-    BubbleSort.SortAndDraw(a,n);
-
     /*
-    QuickSort QuickSort;
-    QuickSort.input(a,n);
-    QuickSort.setDelayTime(10);
-    QuickSort.SortAndDraw(a,n,0,n-1);
-    */
     SimpleSort SimpleSort;
     SimpleSort.input(a,n);
-    SimpleSort.setDelayTime(10);
+    SimpleSort.setDelayTime(0);
     SimpleSort.SortAndDraw(a,n);
+
+    BubbleSort BubbleSort;
+    BubbleSort.input(a,n);
+    BubbleSort.setDelayTime(0);
+    BubbleSort.SortAndDraw(a,n);
+    */
+    QuickSort QuickSort;
+    QuickSort.input(a,n);
+    QuickSort.setDelayTime(100);
+    QuickSort.SortAndDraw(a,n,0,n-1);
+
+
     return 0;
 }
 

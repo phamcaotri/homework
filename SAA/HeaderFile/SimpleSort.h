@@ -16,13 +16,16 @@ class SimpleSort : public Draw {
 
         void SortAndDraw(int a[], int n) {
             for (int i = 0; i < n ; i++)
-                for (int j = 0; j < n; j++)
+                for (int j = 0; j < n; j++) {
+                    count_compare ++;
+                    toDraw(a,n,i,j,-1);
                     if (a[i] < a[j]) {
-                        count_compare ++;
                         count_swap ++;
                         swap(a[i],a[j]);
                         toDraw(a,n,i,j,-1);
                     }
+                }
+
                         
         }
 };
