@@ -4,5 +4,5 @@
 #include "QuickSort.h"
 #include "SimpleSort.h"
 #include "BubbleSort.h"
-
+#include "MergeSort.h"
 #endif

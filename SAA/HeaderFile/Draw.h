@@ -14,6 +14,7 @@ class Draw : public ArrayFunction{
     protected:
         int count_compare = 0;
         int count_swap = 0;
+        int count_access_array = 0;
     public:
 
         int getNumberOfCompare() {
@@ -67,9 +68,9 @@ class Draw : public ArrayFunction{
 
             }
             for (int m = 0; m < n; m++) {
-                buffer.append("---");
+                buffer.append("--");
             }
-            buffer += "so so sanh: "+ to_string(count_compare) + ", so swap: " + to_string(count_swap);
+            buffer += "so so sanh: "+ to_string(count_compare) + ", so swap: " + to_string(count_swap) + ", so truy cap mang: " + to_string(count_access_array);
             cout << buffer;
             this_thread::sleep_for(std::chrono::milliseconds(ms));
         }
