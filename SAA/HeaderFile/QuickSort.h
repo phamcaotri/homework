@@ -20,7 +20,7 @@ class QuickSort : public Draw {
                 }
 
                 if (i <= j) {
-                    std::swap(a[i], a[j]);
+                    swap(a[i], a[j]);
                     i ++; 
                     j --;
                 }
