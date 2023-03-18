@@ -8,10 +8,11 @@
 #include "ArrayFunction.h"
 using namespace std;
 
-class Draw : public ArrayFunction{
+class Draw : public ArrayFunction {
     private:
-        int ms = 0;
+        
     protected:
+        int ms = 0;
         int count_compare = 0;
         int count_swap = 0;
         int count_access_array = 0;
@@ -35,7 +36,7 @@ class Draw : public ArrayFunction{
             return ms;
         }
 
-        void toDraw(int a[], int n, int pivot, int i, int j) {
+        void toDraw(int pivot, int i, int j) {
             
             string buffer;
             system("cls");
@@ -62,16 +63,16 @@ class Draw : public ArrayFunction{
                         }
                     }
                     else {
-                        buffer.append("  ");
+                        buffer += "  ";
                     }
 
-                    buffer.append(" ");
+                    buffer += " ";
                 }
-                buffer.append("\n");
+                buffer += "\n";
 
             }
             for (int m = 0; m < n; m++) {
-                buffer.append("--");
+                buffer += "--";
             }
             buffer += "so so sanh: "+ to_string(count_compare) + ", so swap: " + to_string(count_swap) + ", so truy cap mang: " + to_string(count_access_array);
             cout << buffer;

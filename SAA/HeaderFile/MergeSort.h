@@ -40,7 +40,7 @@ class MergeSort : public Draw {
         void mergeAndDraw(int a[], int n, int start, int pivot, int end) {
             int *b = new int[end-start+1];
             int i = start, j = pivot +1, k = 0;
-            toDraw(a,n,pivot,i,j);
+            toDraw(pivot,i,j);
             count_compare += 2;
             while (i <= pivot and j <= end) {
                 count_compare += 3; //compare while and if
@@ -49,13 +49,13 @@ class MergeSort : public Draw {
                     b[k] = a[i];
                     k++;
                     i++;
-                    toDraw(a,n,pivot,i,j);
+                    toDraw(pivot,i,j);
                 }
                 else {
                     b[k] = a[j];
                     k++;
                     j++;
-                    toDraw(a,n,pivot,i,j);
+                    toDraw(pivot,i,j);
 
                 }
             }
@@ -65,14 +65,14 @@ class MergeSort : public Draw {
                 count_access_array ++;
                 b[k] = a[i];
                 k++;
-                toDraw(a,n,pivot,i,j);
+                toDraw(pivot,i,j);
             }
             for (j;j <= end; j++) {
                 count_compare ++;
                 count_access_array ++;
                 b[k] = a[j];
                 k++;
-                toDraw(a,n,pivot,i,j);
+                toDraw(pivot,i,j);
             }
 
             k = 0;
@@ -81,7 +81,7 @@ class MergeSort : public Draw {
                 count_compare ++;
                 a[i] = b[k];
                 k++;
-                toDraw(a,n,pivot,i,j);
+                toDraw(pivot,i,j);
             }
                 
         }
