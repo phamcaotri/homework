@@ -13,10 +13,6 @@ class QuickSort : public Draw {
             this -> ms = ms;
             max_value = max(a,n);
         }
-        QuickSort(int n, int ms = 0) {
-            this -> n = n;
-            this -> ms = ms;
-        }
 
         void Sort(int left, int right) {
             int pivot = a[(left+right)/2];
