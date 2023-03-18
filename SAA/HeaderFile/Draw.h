@@ -31,6 +31,9 @@ class Draw : public ArrayFunction{
             else
                 this -> ms = 0;
         }
+        int getDelayTime() {
+            return ms;
+        }
 
         void toDraw(int a[], int n, int pivot, int i, int j) {
             

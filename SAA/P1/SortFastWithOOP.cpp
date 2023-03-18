@@ -18,19 +18,17 @@ int main() {
     BubbleSort.input(a,n);
     BubbleSort.setDelayTime(0);
     BubbleSort.SortAndDraw(a,n);
-    */
-
-
 
     QuickSort QuickSort;
     QuickSort.input(a,n);
     QuickSort.setDelayTime(10);
     QuickSort.SortAndDraw(a,n,0,n-1);
+    */
 
     MergeSort MergeSort;
     MergeSort.input(a,n);
     MergeSort.setDelayTime(10);
-    MergeSort.SortAndDraw(a,n,0,n-1);
+    MergeSort.SortAndDrawWithQuickSort(a,n,0,n-1);
 
     return 0;
 }
