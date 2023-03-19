@@ -7,14 +7,14 @@ class SimpleSort : public Draw {
 
     public:
 
-        void Sort(vector<int> a, int n) {
+        void Sort() {
             for (int i = 0; i < n ; i++)
                 for (int j = 0; j < n; j++)
                     if (a[i] < a[j])
                         swap(a[i],a[j]);
         }
 
-        void SortAndDraw(vector<int> a, int n) {
+        void SortAndDraw() {
             for (int i = 0; i < n ; i++)
                 for (int j = 0; j < n; j++) {
                     count_compare ++;

@@ -26,7 +26,7 @@ class ArrayFunction {
             max_value = max(a,n);
         }
 
-// GETTER - SETTER METHODS ------------------------------------------
+// GETTER - SETTER METHODS -----------------------------------------
 
         void setArray(vector<int> a, int &n) {
                 cin >> n;
@@ -41,7 +41,7 @@ class ArrayFunction {
             }
         }
 
-// OTHER METHODS ----------------------------------------------------
+// OTHER METHODS ---------------------------------------------------
 
         int max(vector<int> a, int n) {
             int max = a[0];

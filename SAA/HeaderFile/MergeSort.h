@@ -4,6 +4,29 @@
 #include "Draw.h"
 
 class MergeSort : public Draw {
+
+
+    public:
+// CONSTRUCTORS ----------------------------------------------------
+        using Draw::Draw;
+
+// OTHER METHODS ---------------------------------------------------
+
+        void Sort(int start, int end) {
+            int pivot = (start + end)/2;
+            if (start < pivot) Sort(start,pivot);
+            if (end > pivot +1 ) Sort(pivot+1,end);
+            merge(start,pivot,end);
+        }
+
+        void SortAndDraw(int start, int end) {
+            int pivot = (start + end)/2;
+            count_compare += 2;
+            if (start < pivot) SortAndDraw(start,pivot);
+            if (end > pivot +1) SortAndDraw(pivot+1,end);
+            mergeAndDraw(start,pivot,end);      
+        }  
+
     private:
     
         void merge(int start, int pivot, int end) {
@@ -87,26 +110,6 @@ class MergeSort : public Draw {
             }
                 
         }
-
-    public:
-        using Draw::Draw;
-
-        void Sort(int start, int end) {
-            int pivot = (start + end)/2;
-            if (start < pivot) Sort(start,pivot);
-            if (end > pivot +1 ) Sort(pivot+1,end);
-            merge(start,pivot,end);
-            
-
-        }
-
-        void SortAndDraw(int start, int end) {
-            int pivot = (start + end)/2;
-            count_compare += 2;
-            if (start < pivot) SortAndDraw(start,pivot);
-            if (end > pivot +1) SortAndDraw(pivot+1,end);
-            mergeAndDraw(start,pivot,end);      
-        }  
 };
 
 #endif
