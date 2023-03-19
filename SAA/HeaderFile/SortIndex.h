@@ -5,5 +5,4 @@
 #include "SimpleSort.h"
 #include "BubbleSort.h"
 #include "MergeSort.h"
-#include "C:\Users\caotr\Documents\GitHub\homework\SAA\HeaderFile\MethodFile.QuickSort.cpp"
 #endif
