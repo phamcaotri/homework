@@ -5,7 +5,8 @@
 
 class MergeSort : public Draw {
     private:
-        void merge(int a[], int start, int pivot, int end) {
+    
+        void merge(int start, int pivot, int end) {
             int *b = new int[end-start+1];
             int i = start, j = pivot +1, k = 0;
             while (i <= pivot and j <= end) {
@@ -37,7 +38,8 @@ class MergeSort : public Draw {
             }
                 
         }
-        void mergeAndDraw(int a[], int n, int start, int pivot, int end) {
+
+        void mergeAndDraw(int start, int pivot, int end) {
             int *b = new int[end-start+1];
             int i = start, j = pivot +1, k = 0;
             toDraw(pivot,i,j);
@@ -85,28 +87,26 @@ class MergeSort : public Draw {
             }
                 
         }
-    public:
 
-        void Sort(int a[], int n, int start, int end) {
+    public:
+        using Draw::Draw;
+
+        void Sort(int start, int end) {
             int pivot = (start + end)/2;
-            if (start < pivot) Sort(a,n,start,pivot);
-            if (end > pivot +1 ) Sort(a,n,pivot+1,end);
-            merge(a,start,pivot,end);
+            if (start < pivot) Sort(start,pivot);
+            if (end > pivot +1 ) Sort(pivot+1,end);
+            merge(start,pivot,end);
             
 
         }
 
-        void SortAndDraw(int a[], int n, int start, int end) {
+        void SortAndDraw(int start, int end) {
             int pivot = (start + end)/2;
             count_compare += 2;
-            if (start < pivot) SortAndDraw(a,n,start,pivot);
-            if (end > pivot +1) SortAndDraw(a,n,pivot+1,end);
-            mergeAndDraw(a,n,start,pivot,end); 
-            
-
-                        
-        }   
-
+            if (start < pivot) SortAndDraw(start,pivot);
+            if (end > pivot +1) SortAndDraw(pivot+1,end);
+            mergeAndDraw(start,pivot,end);      
+        }  
 };
 
 #endif

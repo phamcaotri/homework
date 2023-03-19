@@ -17,6 +17,10 @@ class Draw : public ArrayFunction {
         int count_swap = 0;
         int count_access_array = 0;
     public:
+        Draw() {}
+        Draw(int a[], int n, int ms = 0) : ArrayFunction(a,n) {
+            this -> ms = ms;
+        }
 
         int getNumberOfCompare() {
             return count_compare;

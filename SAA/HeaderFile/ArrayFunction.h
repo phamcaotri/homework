@@ -2,6 +2,7 @@
 #ifndef ARRAYFUNCTION_H
 #define ARRAYFUNCTION_H
 #include <iostream>
+#include <algorithm>
 using namespace std;
 
 
@@ -12,6 +13,14 @@ class ArrayFunction {
         int n = 0;
         int *a = new int[n];
     public:
+
+        ArrayFunction() {}
+        ArrayFunction(int a[], int n) {
+            this -> a = a;
+            this -> n = n;
+            max_value = max(a,n);
+        }
+
         int max(int a[], int n) {
             int max = a[0];
             for (int i = 1; i < n; i++) {
@@ -40,6 +49,14 @@ class ArrayFunction {
                 a[i] = rand() % n + 1;
             }
             max_value = max(a,n);
+        }
+
+        void createShuffledArray() {
+            for (int i = 0; i < n; i++) {
+                a[i] = i+1;
+            }
+            random_shuffle(a,a+n-1);
+            max_value = n;
         }
 };
 

@@ -1,6 +1,5 @@
 #include <iostream>
-#include "C:\Users\caotr\Documents\GitHub\homework\SAA\HeaderFile\Sort.h"
-
+#include "C:\Users\caotr\Documents\GitHub\homework\SAA\HeaderFile\SortIndex.h"
 using namespace std;
 
 
@@ -9,9 +8,12 @@ int main() {
     cin >> n;
     int *a = new int[n];
     
-    QuickSort qs1(a,n,10);
-    qs1.createRamdomizeArray();
-    qs1.SortAndDraw(0,n-1);
+    QuickSort s1(a,n,10);
+    s1.createShuffledArray();
+    s1.SortAndDraw_RandomPivot(0,n-1);
+    MergeSort s2(a,n,10);
+    s2.createShuffledArray();
+    s2.SortAndDraw(0,n-1);
 
     return 0;
 }
