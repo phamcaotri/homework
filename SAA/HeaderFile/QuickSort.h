@@ -6,7 +6,10 @@ class QuickSort : public Draw {
     private:
 
     public:
+// CONSTRUCTORS ----------------------------------------------------
         using Draw::Draw; //inherit constructor
+
+// OTHER METHODS ---------------------------------------------------
 
         void Sort(int left, int right) {
             int mid = a[(left+right)/2];
@@ -28,6 +31,27 @@ class QuickSort : public Draw {
             }
             if (left < j) Sort(left,j);
             if (right > i) Sort(i,right);
+        }
+
+        void Sort_RandomPivot(int left, int right) {
+            srand(time(NULL));
+            int i = left, j = right;
+            int pivot = left + rand() % (right-left);
+            int mid = a[pivot];
+            while (i <= j) {
+                while (a[i] < mid) {
+                    i ++;
+                }
+                while (a[j] > mid) {
+                    j --;  
+                }
+                if (i <= j) {
+                    swap(a[i], a[j]);
+                    i ++; j --;
+                }   
+            }
+            if (left < j) SortAndDraw_RandomPivot(left,j);
+            if (right > i) SortAndDraw_RandomPivot(i,right);
         }
 
         void SortAndWatch(int left, int right) {
@@ -108,5 +132,6 @@ class QuickSort : public Draw {
             if (right > i) SortAndDraw_RandomPivot(i,right);
         }
 };
+
 #endif
 

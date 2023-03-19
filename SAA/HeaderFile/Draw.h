@@ -3,19 +3,17 @@
 #define DRAW_H
 #include <iostream>
 #include <string>
-#include <chrono>
-#include <thread>
+
 #include "ArrayFunction.h"
+#include "SortAnalyze.h"
 using namespace std;
 
-class Draw : public ArrayFunction {
+class Draw : public ArrayFunction, public SortAnalyze {
     private:
         
     protected:
         int ms = 0;
-        int count_compare = 0;
-        int count_swap = 0;
-        int count_access_array = 0;
+
     public:
 // CONSTRUCTORS ----------------------------------------------------
         Draw() {}
@@ -33,17 +31,17 @@ class Draw : public ArrayFunction {
         int getNumberOfSwap() {
             return count_swap;
         }
-
+        int getDelayTime() {
+            return ms;
+        }
         void setDelayTime(int ms) {
             if (ms >= 0)
                 this -> ms = ms;
             else
                 this -> ms = 0;
         }
-        int getDelayTime() {
-            return ms;
-        }
-        
+
+
 // OTHER METHODS ----------------------------------------------------
  
         void toDraw(int pivot, int i, int j) {
