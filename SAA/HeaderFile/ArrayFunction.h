@@ -2,6 +2,7 @@
 #ifndef ARRAYFUNCTION_H
 #define ARRAYFUNCTION_H
 #include <iostream>
+#include <vector>
 #include <algorithm>
 using namespace std;
 
@@ -11,17 +12,38 @@ class ArrayFunction {
     protected:
         int max_value = 0;
         int n = 0;
-        int *a = new int[n];
+        vector<int> a;
     public:
 
+// CONSTRUCTORS ----------------------------------------------------
         ArrayFunction() {}
-        ArrayFunction(int a[], int n) {
+        ArrayFunction(vector<int> a, int n) {
             this -> a = a;
             this -> n = n;
             max_value = max(a,n);
         }
+        ArrayFunction(int n) : n(n), a(n) {
+            max_value = max(a,n);
+        }
 
-        int max(int a[], int n) {
+// GETTER - SETTER METHODS ------------------------------------------
+
+        void setArray(vector<int> a, int &n) {
+                cin >> n;
+            for (int i = 0; i < n; i++)
+                cin >> a[i];
+            max_value = max(a,n);
+        }
+
+        void getArray(vector<int> a, int n) {
+            for (int i = 0; i < n; i++) {
+                cout << a[i] << ' ';
+            }
+        }
+
+// OTHER METHODS ----------------------------------------------------
+
+        int max(vector<int> a, int n) {
             int max = a[0];
             for (int i = 1; i < n; i++) {
                 if (a[i] > max) {
@@ -30,19 +52,6 @@ class ArrayFunction {
             }
             return max;
         }
-
-        void input(int a[], int n) {
-            for (int i = 0; i < n; i++)
-                cin >> a[i];
-            max_value = max(a,n);
-        }
-
-        void output(int a[], int n) {
-            for (int i = 0; i < n; i++) {
-                cout << a[i] << ' ';
-            }
-        }
-
         void createRamdomizeArray() {
             srand(time(NULL));
             for (int i = 0; i < n; i++) {
@@ -55,7 +64,7 @@ class ArrayFunction {
             for (int i = 0; i < n; i++) {
                 a[i] = i+1;
             }
-            random_shuffle(a,a+n-1);
+            random_shuffle(a.begin(),a.end());
             max_value = n;
         }
 };

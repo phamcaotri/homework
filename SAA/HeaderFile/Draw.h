@@ -17,11 +17,15 @@ class Draw : public ArrayFunction {
         int count_swap = 0;
         int count_access_array = 0;
     public:
+// CONSTRUCTORS ----------------------------------------------------
         Draw() {}
-        Draw(int a[], int n, int ms = 0) : ArrayFunction(a,n) {
+        Draw(vector<int> a, int n, int ms = 0) : ArrayFunction(a,n) {
             this -> ms = ms;
         }
-
+        Draw(int n, int ms = 0) : ArrayFunction(n) {
+            this -> ms = ms;
+        }
+// GETTER - SETTER METHODS ------------------------------------------
         int getNumberOfCompare() {
             return count_compare;
         }
@@ -39,7 +43,9 @@ class Draw : public ArrayFunction {
         int getDelayTime() {
             return ms;
         }
-
+        
+// OTHER METHODS ----------------------------------------------------
+ 
         void toDraw(int pivot, int i, int j) {
             
             string buffer;
