@@ -6,6 +6,8 @@ class BubbleSort : public Draw {
     private:
 
     public:
+// CONSTRUCTORS ----------------------------------------------------
+        using Draw::Draw; //inherit constructor
 
         void Sort() {
             for (int i = 0; i < n ; i++)

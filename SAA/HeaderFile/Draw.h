@@ -3,10 +3,13 @@
 #define DRAW_H
 #include <iostream>
 #include <string>
+#include <chrono>
+#include <thread>
 
 #include "ArrayFunction.h"
 #include "SortAnalyze.h"
 using namespace std;
+using namespace std::chrono;
 
 class Draw : public ArrayFunction, public SortAnalyze {
     private:
@@ -24,13 +27,7 @@ class Draw : public ArrayFunction, public SortAnalyze {
             this -> ms = ms;
         }
 // GETTER - SETTER METHODS ------------------------------------------
-        int getNumberOfCompare() {
-            return count_compare;
-        }
 
-        int getNumberOfSwap() {
-            return count_swap;
-        }
         int getDelayTime() {
             return ms;
         }
@@ -84,7 +81,7 @@ class Draw : public ArrayFunction, public SortAnalyze {
             }
             buffer += "so so sanh: "+ to_string(count_compare) + ", so swap: " + to_string(count_swap) + ", so truy cap mang: " + to_string(count_access_array);
             cout << buffer;
-            this_thread::sleep_for(std::chrono::milliseconds(ms));
+            this_thread::sleep_for(milliseconds(ms));
         }
 };
 

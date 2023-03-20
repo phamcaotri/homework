@@ -1,8 +1,6 @@
 // SortAnalyze.h
 #ifndef SORTANALYZE_H
 #define SORTANALYZE_H
-#include <chrono>
-#include <thread>
 
 class SortAnalyze {
     protected:
@@ -14,13 +12,20 @@ class SortAnalyze {
 // CONSTRUCTORS ----------------------------------------------------
 
 
+// VIRTUAL METHODS -------------------------------------------------
+
 
 // GETTER - SETTER METHODS -----------------------------------------
 
+        int getNumberOfCompare() {
+            return count_compare;
+        }
 
+        int getNumberOfSwap() {
+            return count_swap;
+        }
 
 // OTHER METHODS ---------------------------------------------------
-
 
 
 };

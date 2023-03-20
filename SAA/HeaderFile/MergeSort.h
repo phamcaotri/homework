@@ -30,7 +30,7 @@ class MergeSort : public Draw {
     private:
     
         void merge(int start, int pivot, int end) {
-            int *b = new int[end-start+1];
+            vector<int> b(end-start+1);
             int i = start, j = pivot +1, k = 0;
             while (i <= pivot and j <= end) {
                 if (a[i] < a[j]) {
@@ -63,7 +63,7 @@ class MergeSort : public Draw {
         }
 
         void mergeAndDraw(int start, int pivot, int end) {
-            int *b = new int[end-start+1];
+            vector<int> b(end-start+1);
             int i = start, j = pivot +1, k = 0;
             toDraw(pivot,i,j);
             count_compare += 2;

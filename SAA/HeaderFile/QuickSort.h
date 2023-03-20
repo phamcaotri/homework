@@ -50,8 +50,8 @@ class QuickSort : public Draw {
                     i ++; j --;
                 }   
             }
-            if (left < j) SortAndDraw_RandomPivot(left,j);
-            if (right > i) SortAndDraw_RandomPivot(i,right);
+            if (left < j) Sort_RandomPivot(left,j);
+            if (right > i) Sort_RandomPivot(i,right);
         }
 
         void SortAndWatch(int left, int right) {
@@ -132,6 +132,9 @@ class QuickSort : public Draw {
             if (right > i) SortAndDraw_RandomPivot(i,right);
         }
 };
+
+// ANALYZE METHODS --------------------------------------------------
+
 
 #endif
 
