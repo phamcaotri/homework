@@ -10,10 +10,10 @@ int main() {
     
     //s1.SortAndDraw_RandomPivot(0,n-1);
     //for (int i = 10; i = 1000000000; i *= 10) {
-        MergeSort s1(n,50);
+        BubbleSort s1(n,10);
         s1.createShuffledArray();
         //auto start = high_resolution_clock::now();
-        s1.SortAndDraw(0,n-1);
+        s1.SortAndDraw();
         //auto stop = high_resolution_clock::now();
         //auto duration = duration_cast<nanoseconds>(stop - start);
         //cout << i << ", runtime: " << duration.count() << " ns" << '\n';

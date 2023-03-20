@@ -13,7 +13,8 @@ using namespace std::chrono;
 
 class Draw : public ArrayFunction, public SortAnalyze {
     private:
-        
+        string buffer;
+
     protected:
         int ms = 0;
 
@@ -42,9 +43,7 @@ class Draw : public ArrayFunction, public SortAnalyze {
 // OTHER METHODS ----------------------------------------------------
  
         void toDraw(int pivot, int i, int j) {
-            
-            string buffer;
-            system("cls");
+            buffer.clear();
             for (int k = max_value; k > 0; k--) {
                 for (int l = 0; l < n; l++) {
                     if (a[l] >= k) {
@@ -80,7 +79,7 @@ class Draw : public ArrayFunction, public SortAnalyze {
                 buffer += "--";
             }
             buffer += "so so sanh: "+ to_string(count_compare) + ", so swap: " + to_string(count_swap) + ", so truy cap mang: " + to_string(count_access_array);
-            cout << buffer;
+            cout << "\033[1;1H" << buffer;
             this_thread::sleep_for(milliseconds(ms));
         }
 };
