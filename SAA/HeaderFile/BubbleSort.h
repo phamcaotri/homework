@@ -19,9 +19,10 @@ class BubbleSort : public Draw {
         }
 
         void SortAndDraw() {
+            count_compare += 2;
             for (int i = 0; i < n-1 ; i++)
                 for (int j = 0; j < n-i-1; j++) {
-                    count_compare ++;
+                    count_compare += 3;
                     toDraw(n-i-1,i,j);
                     if (a[j] > a[j+1]) {
                         count_swap ++;

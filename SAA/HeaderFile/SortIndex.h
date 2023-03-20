@@ -5,4 +5,6 @@
 #include "SimpleSort.h"
 #include "BubbleSort.h"
 #include "MergeSort.h"
+#include "InsertionSort.h"
+#include "ShakeSort.h"
 #endif

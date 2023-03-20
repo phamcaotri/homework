@@ -20,22 +20,24 @@ class ArrayFunction {
         ArrayFunction(vector<int> a, int n) {
             this -> a = a;
             this -> n = n;
-            max_value = max(a,n);
+            max_value = max();
         }
         ArrayFunction(int n) : n(n), a(n) {
-            max_value = max(a,n);
+            max_value = max();
         }
 
 // GETTER - SETTER METHODS -----------------------------------------
 
-        void setArray(vector<int> a, int &n) {
-                cin >> n;
+        void setArray() {
+            cin >> n;
+            vector<int> a(n);
             for (int i = 0; i < n; i++)
                 cin >> a[i];
-            max_value = max(a,n);
+            this -> a = a;
+            max_value = max();
         }
 
-        void getArray(vector<int> a, int n) {
+        void getArray() {
             for (int i = 0; i < n; i++) {
                 cout << a[i] << ' ';
             }
@@ -43,7 +45,7 @@ class ArrayFunction {
 
 // OTHER METHODS ---------------------------------------------------
 
-        int max(vector<int> a, int n) {
+        int max() {
             int max = a[0];
             for (int i = 1; i < n; i++) {
                 if (a[i] > max) {
@@ -57,7 +59,7 @@ class ArrayFunction {
             for (int i = 0; i < n; i++) {
                 a[i] = rand() % n + 1;
             }
-            max_value = max(a,n);
+            max_value = max();
         }
 
         void createShuffledArray() {
