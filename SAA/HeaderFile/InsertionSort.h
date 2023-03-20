@@ -1,13 +1,13 @@
-//BubbleSort.h
-#ifndef BUBBLESORT_H // include guard
-#define BUBBLESORT_H
+//InsertionSort.h
+#ifndef INSERTIONSORT_H // include guard
+#define INSERTIONSORT_H
 #include "Draw.h"
-class BubbleSort : public Draw {
+class InsertionSort : public Draw {
     private:
 
     public:
 // CONSTRUCTORS ----------------------------------------------------
-        using Draw::Draw; //inherit constructor
+        using Draw::Draw;
 
 // OTHER METHODS ---------------------------------------------------
 

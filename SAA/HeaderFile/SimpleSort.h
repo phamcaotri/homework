@@ -9,6 +9,8 @@ class SimpleSort : public Draw {
 // CONSTRUCTORS ----------------------------------------------------
         using Draw::Draw; //inherit constructor
 
+// OTHER METHODS ---------------------------------------------------
+
         void Sort() {
             for (int i = 0; i < n ; i++)
                 for (int j = 0; j < n; j++)
