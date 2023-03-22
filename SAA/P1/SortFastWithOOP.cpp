@@ -4,14 +4,14 @@
 using namespace std;
 
 int main() {
-    int n = 50;
+    int n = 10;
 
     //s1.SortAndDraw_RandomPivot(0,n-1);
     //for (int i = 10; i = 1000000000; i *= 10) {
-        ShakeSort s1(n,500);
+        HeapSort s1(n,10);
         s1.createShuffledArray();
         //auto start = high_resolution_clock::now();
-        s1.SortAndDraw4();
+        s1.Sort();
         //auto stop = high_resolution_clock::now();
         //auto duration = duration_cast<nanoseconds>(stop - start);
         //cout << i << ", runtime: " << duration.count() << " ns" << '\n';

@@ -7,4 +7,5 @@
 #include "MergeSort.h"
 #include "InsertionSort.h"
 #include "ShakeSort.h"
+#include "HeapSort.h"
 #endif
