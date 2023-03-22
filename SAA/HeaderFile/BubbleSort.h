@@ -36,4 +36,3 @@ class BubbleSort : public Draw {
 };
 
 #endif
-
