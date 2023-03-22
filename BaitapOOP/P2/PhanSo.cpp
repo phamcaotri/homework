@@ -7,6 +7,7 @@ class PhanSo {
         int mau_so;
     public:
         PhanSo() {}
+        PhanSo(const PhanSo &p) {}
         PhanSo(int tu_so, int mau_so) : tu_so(tu_so) , mau_so(mau_so) {}
         void setPhanSo() {
             cin >> tu_so;
