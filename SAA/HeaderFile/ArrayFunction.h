@@ -8,7 +8,7 @@ using namespace std;
 
 
 class ArrayFunction {
-
+    
     protected:
         int max_value = 0;
         int n = 0;
@@ -38,6 +38,7 @@ class ArrayFunction {
         }
 
         void getArray() {
+            cout << '\n';
             for (int i = 0; i < n; i++) {
                 cout << a[i] << ' ';
             }
