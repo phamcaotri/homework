@@ -12,24 +12,39 @@ class BubbleSort : public Draw {
 // OTHER METHODS ---------------------------------------------------
 
         void Sort() {
-            for (int i = 0; i < n-1 ; i++)
-                for (int j = 0; j < n-i-1; j++)
-                    if (a[j] > a[j+1])
+            bool swapped = true;
+            for (int i = 1; i < n and swapped ; i++) {
+                swapped = false;
+                for (int j = 0; j < n-i ; j++)
+                    if (a[j] > a[j+1]) {
                         swap(a[j],a[j+1]);
+                        swapped = true;
+                    }
+
+            }
+
+
         }
 
         void SortAndDraw() {
-            count_compare += 2;
-            for (int i = 0; i < n-1 ; i++)
+            bool swapped = true;                        
+                                                        count_compare ++; //exit loop
+            for (int i = 0; i < n-1 and swapped; i++) {
+                swapped = false;
+                                                        count_compare += 2; //exit loop + inside loop
                 for (int j = 0; j < n-i-1; j++) {
-                    count_compare += 3;
-                    toDraw(n-i-1,i,j);
+                    
+                                                        count_compare += 2; // inside loop + compare
+                                                        toDraw(n-i,i,j);
                     if (a[j] > a[j+1]) {
-                        count_swap ++;
+                                                        count_swap ++;
                         swap(a[j],a[j+1]);
-                        toDraw(n-i-1,i,j);
+                        swapped = true;
+                                                        toDraw(n-i,i,j);
                     }
                 }
+            }
+
 
                         
         }

@@ -71,6 +71,15 @@ class ArrayFunction {
             random_shuffle(a.begin(),a.end());
             max_value = n;
         }
+
+        void createTestArray() {
+            // random but only 1
+            for (int i = 0; i < n; i++) {
+                a[i] = i+1;
+            }
+            random_shuffle(a.begin(),a.end());
+            max_value = n;
+        }
 };
 
 #endif
