@@ -8,4 +8,6 @@
 #include "InsertionSort.h"
 #include "ShakeSort.h"
 #include "HeapSort.h"
+#include "SelectionSort.h"
+#include "InterchangeSort.h"
 #endif
