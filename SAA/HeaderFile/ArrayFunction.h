@@ -64,6 +64,7 @@ class ArrayFunction {
         }
 
         void createShuffledArray() {
+            srand(time(NULL));
             for (int i = 0; i < n; i++) {
                 a[i] = i+1;
             }
