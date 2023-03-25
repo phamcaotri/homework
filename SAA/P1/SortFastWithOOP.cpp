@@ -6,9 +6,9 @@ using namespace std;
 
 int main() {
 
-    
 
-    int n = 8000000;
+
+    int n = 30000;
     if (0) {
         BubbleSort s1(n,1);
         s1.createTestArray();
@@ -27,7 +27,7 @@ int main() {
         s3.measureTime();
         cout << s3.isSorted() << '\n';
     }
-    if (0) {
+    if (1) {
         QuickSort s4(n,1);
         s4.createMoutainArray();
         s4.measureTime(0,n-1);
@@ -46,7 +46,7 @@ int main() {
         s6.measureTime();
         cout << s6.isSorted() << '\n';
     }
-    if (0) {
+    if (1) {
         MergeSort s7(n,1);
         s7.createTestArray();
         s7.measureTime(0,n-1);
@@ -70,7 +70,7 @@ int main() {
         s10.measureTime(0,n-1);
         cout << s10.isSorted() << '\n';
     }
-    if (1) {
+    if (0) {
         HeapSort_old s11(n,1);
         s11.createTestArray();
         s11.measureTime();
