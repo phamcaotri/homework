@@ -8,7 +8,7 @@ int main() {
 
 
 
-    int n = 30000;
+    int n = 1000000000;
     if (0) {
         BubbleSort s1(n,1);
         s1.createTestArray();
@@ -27,9 +27,9 @@ int main() {
         s3.measureTime();
         cout << s3.isSorted() << '\n';
     }
-    if (1) {
+    if (0) {
         QuickSort s4(n,1);
-        s4.createMoutainArray();
+        s4.createTestArray();
         s4.measureTime(0,n-1);
         cout << s4.isSorted() << '\n';
     }
@@ -39,14 +39,14 @@ int main() {
         s5.measureTime();
         cout << s5.isSorted() << '\n';
     }
-    if (1) {
+    if (0) {
         HeapSort s6(n,1);
         s6.createTestArray();
         //6.SortAndDraw();
         s6.measureTime();
         cout << s6.isSorted() << '\n';
     }
-    if (1) {
+    if (0) {
         MergeSort s7(n,1);
         s7.createTestArray();
         s7.measureTime(0,n-1);
@@ -73,6 +73,13 @@ int main() {
     if (0) {
         HeapSort_old s11(n,1);
         s11.createTestArray();
+        s11.measureTime();
+        cout << s11.isSorted() << '\n';
+    }
+    if (1) {
+        CountSort s11(n,100);
+        s11.createTestArray();
+        //s11.SortAndDraw();
         s11.measureTime();
         cout << s11.isSorted() << '\n';
     }
