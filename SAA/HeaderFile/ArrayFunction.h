@@ -6,6 +6,8 @@
 #include <algorithm>
 using namespace std;
 
+// maximum number of element support
+const int MAX = 2000000000;
 
 class ArrayFunction {
     
@@ -16,25 +18,37 @@ class ArrayFunction {
     public:
 
 // CONSTRUCTORS ----------------------------------------------------
-        ArrayFunction() {}
+
+        ArrayFunction(int n = 0) {
+            if (n > 0 and n < MAX) {
+                a.resize(n);
+                this -> n = n;
+            }
+            max_value = max();
+        }
         ArrayFunction(vector<int> a, int n) {
+            if (n > 0 and n < MAX) {
+                a.resize(n);
+                this -> n = n;
+            }
             this -> a = a;
-            this -> n = n;
             max_value = max();
         }
-        ArrayFunction(int n) : n(n), a(n) {
-            max_value = max();
-        }
+
 
 // GETTER - SETTER METHODS -----------------------------------------
 
-        void setArray() {
+        // input n and a[n], return false if input is invalid 
+        bool setArray() {
             cin >> n;
+            if (n < 0 or n > 2000000000)
+                return false;
             vector<int> a(n);
             for (int i = 0; i < n; i++)
                 cin >> a[i];
             this -> a = a;
             max_value = max();
+            return true;
         }
 
         void getArray() {
