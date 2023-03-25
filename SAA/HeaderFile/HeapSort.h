@@ -64,18 +64,27 @@ class HeapSort : public Draw {
             }
         }
         void downArrange(int n, int self, int left_child, int right_child) {
-            if (left_child >= n)
-                return;
-            if (a[self] < a[left_child]) {
-                swap(a[self],a[left_child]);
-                return downArrange(n, left_child,2*left_child+1,2*left_child+2);
-            }
             if (right_child >= n)
-                return;
-            if (a[self] > a[right_child]) {
-                swap(a[self],a[right_child]);
-                return downArrange(n, right_child,2*right_child+1,2*right_child+2);
+                if (left_child >= n)
+                    return;
+                else {
+                    swap(a[self],a[left_child]);
+                    return;
+                }
+                    
+
+            else {
+                if (a[left_child] > a[right_child] and a[self] < a[left_child]) {
+                    swap(a[self],a[left_child]);
+                    return downArrangeAndDraw(n, left_child,2*left_child+1,2*left_child+2);
+                }
+                if (a[left_child] < a[right_child] and a[self] < a[right_child]) {
+                    swap(a[self],a[right_child]);
+                    return downArrangeAndDraw(n, right_child,2*right_child+1,2*right_child+2);
+                }
             }
+
+
         }
         void downArrangeAndDraw(int n, int self, int left_child, int right_child) {
             if (right_child >= n)
@@ -112,24 +121,25 @@ public:
 
         void Sort() {
             Heapify();
-            for (int i = 0 ; i < n; i++) {
-                swap(a[i],a[n-i-1]);
-                downArrange(n-i-1,i,2*i+1,2*i+2);
-
-                
+            for (int i = 1 ; i < n; i++) {
+                swap(a[0],a[n-i]);
+                downArrange(n-i,0,1,2);   
             }
+            if (a[0] > a[1])
+                swap(a[0],a[1]);            
 
         }
         void SortAndDraw() {
             HeapifyAndDraw();
-            for (int i = 0 ; i < n-2; i++) {
-                toDraw(n-i-1,2*i+1,2*i+2);
-                swap(a[0],a[n-i-1]);
-                downArrangeAndDraw(n-i-1,0,1,2);
-                toDraw(n-i-1,2*i+1,2*i+2);
+            for (int i = 1 ; i < n; i++) {  
+                swap(a[0],a[n-i]);
+                downArrangeAndDraw(n-i,0,1,2);
+                toDraw(n-i,-1,-1);
                 
             }
-
+            if (a[0] > a[1])
+                swap(a[0],a[1]);
+            toDraw(0,-1,-1);
         }
 };
 

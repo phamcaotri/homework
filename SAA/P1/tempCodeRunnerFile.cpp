@@ -1,1 +1,2 @@
-F
+
+        s1.SortAndDraw();

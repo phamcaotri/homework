@@ -42,6 +42,12 @@ class ArrayFunction {
             for (int i = 0; i < n; i++) {
                 cout << a[i] << ' ';
             }
+            cout << '\n';
+            if (isSorted()) {
+                cout << "Sorted Array." << '\n';
+            } else {
+                cout << "Unsorted Array." << '\n';
+            }
         }
 
 // OTHER METHODS ---------------------------------------------------
@@ -54,6 +60,15 @@ class ArrayFunction {
                 }
             }
             return max;
+        }
+
+        bool isSorted() {
+            for (int i = 1; i < n; i++) {
+                if (a[i] < a[i-1]) {
+                    return false;
+                }
+            }
+            return true;
         }
         void createRamdomizeArray() {
             srand(time(NULL));
@@ -80,6 +95,22 @@ class ArrayFunction {
             random_shuffle(a.begin(),a.end());
             max_value = n;
         }
+        void createReverseArray() {
+            for (int i = 0; i < n; i++) {
+                a[i] = n-i;
+            }
+            max_value = n;
+        }
+        void createMoutainArray() {
+            for (int i = 0; i < n/2; i++) {
+                a[i] = i+1;
+            }
+            for (int i = n/2; i < n; i++) {
+                a[i] = n-i;
+            }
+            max_value = max();           
+        }
+
 };
 
 #endif

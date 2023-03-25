@@ -8,10 +8,11 @@
 
 #include "ArrayFunction.h"
 #include "SortAnalyze.h"
+#include "TimeMeasure.h"
 using namespace std;
 using namespace std::chrono;
 
-class Draw : public ArrayFunction, public SortAnalyze {
+class Draw : public ArrayFunction, public SortAnalyze, public TimeMeasure {
     private:
         string buffer;
 

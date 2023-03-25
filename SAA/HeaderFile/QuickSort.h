@@ -12,7 +12,8 @@ class QuickSort : public Draw {
 // OTHER METHODS ---------------------------------------------------
 
         void Sort(int left, int right) {
-            int mid = a[(left+right)/2];
+            int pivot = (left+right)/2;
+            int mid = a[pivot];
             int i = left, j = right;
             while (i <= j) {
                 while (a[i] < mid) {
@@ -31,34 +32,6 @@ class QuickSort : public Draw {
             }
             if (left < j) Sort(left,j);
             if (right > i) Sort(i,right);
-        }
-
-        void Sort_RandomPivot(int left, int right) {
-            srand(time(NULL));
-            int i = left, j = right;
-            int pivot = left + rand() % (right-left);
-            int mid = a[pivot];
-            while (i <= j) {
-                while (a[i] < mid) {
-                    i ++;
-                }
-                while (a[j] > mid) {
-                    j --;  
-                }
-                if (i <= j) {
-                    swap(a[i], a[j]);
-                    i ++; j --;
-                }   
-            }
-            if (left < j) Sort_RandomPivot(left,j);
-            if (right > i) Sort_RandomPivot(i,right);
-        }
-
-        void SortAndWatch(int left, int right) {
-            auto start = std::chrono::high_resolution_clock::now();
-            Sort(left,right);
-            auto finish = std::chrono::high_resolution_clock::now();
-            cout << "\nrun time: " << std::chrono::duration_cast<std::chrono::nanoseconds>(finish-start).count()/1000000.0 << "ms\n";
         }
 
         void SortAndDraw(int left, int right) {
