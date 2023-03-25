@@ -21,7 +21,7 @@ class MergeSort : public Draw {
 
         void SortAndDraw(int start, int end) {
             int pivot = (start + end)/2;
-            count_compare += 2;
+                                                                        count_compare += 2;
             if (start < pivot) SortAndDraw(start,pivot);
             if (end > pivot +1) SortAndDraw(pivot+1,end);
             mergeAndDraw(start,pivot,end);      
@@ -65,48 +65,48 @@ class MergeSort : public Draw {
         void mergeAndDraw(int start, int pivot, int end) {
             vector<int> b(end-start+1);
             int i = start, j = pivot +1, k = 0;
-            toDraw(pivot,i,j);
-            count_compare += 2;
+                                                                        toDraw(pivot,i,j);
+                                                                        count_compare += 2;
             while (i <= pivot and j <= end) {
-                count_compare += 3; //compare while and if
-                count_access_array ++;
+                                                                        count_compare += 3; //compare while and if
+                                                                        count_access_array ++;
                 if (a[i] < a[j]) {
                     b[k] = a[i];
                     k++;
                     i++;
-                    toDraw(pivot,i,j);
+                                                                        toDraw(pivot,i,j);
                 }
                 else {
                     b[k] = a[j];
                     k++;
                     j++;
-                    toDraw(pivot,i,j);
+                                                                        toDraw(pivot,i,j);
 
                 }
             }
-            count_compare += 2;
+                                                                        count_compare += 2;
             for (i;i <= pivot; i++) {
-                count_compare ++;
-                count_access_array ++;
+                                                                        count_compare ++;
+                                                                        count_access_array ++;
                 b[k] = a[i];
                 k++;
-                toDraw(pivot,i,j);
+                                                                        toDraw(pivot,i,j);
             }
             for (j;j <= end; j++) {
-                count_compare ++;
-                count_access_array ++;
+                                                                        count_compare ++;
+                                                                        count_access_array ++;
                 b[k] = a[j];
                 k++;
-                toDraw(pivot,i,j);
+                                                                        toDraw(pivot,i,j);
             }
 
             k = 0;
-            count_compare ++;
+                                                                        count_compare ++;
             for (i = start; i <= end; i++) {
-                count_compare ++;
+                                                                        count_compare ++;
                 a[i] = b[k];
                 k++;
-                toDraw(pivot,i,j);
+                                                                        toDraw(pivot,i,j);
             }
                 
         }

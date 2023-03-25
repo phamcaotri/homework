@@ -19,15 +19,15 @@ class SimpleSort : public Draw {
         }
 
         void SortAndDraw() {
-            count_compare += 2;
+                                                            count_compare += 2;
             for (int i = 0; i < n ; i++)
                 for (int j = 0; j < n; j++) {
-                    count_compare += 3;
-                    toDraw(i,j,-1);
+                                                            count_compare += 3;
+                                                            toDraw(i,j,-1);
                     if (a[i] < a[j]) {
-                        count_swap ++;
+                                                            count_swap ++;
                         swap(a[i],a[j]);
-                        toDraw(i,j,-1);
+                                                            toDraw(i,j,-1);
                     }
                 }
 

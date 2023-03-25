@@ -11,4 +11,5 @@
 #include "SelectionSort.h"
 #include "InterchangeSort.h"
 #include "QuickSortRP.h"
+#include "HeapSort_old.h"
 #endif

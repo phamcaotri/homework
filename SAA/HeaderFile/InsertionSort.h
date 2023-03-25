@@ -20,15 +20,15 @@ class InsertionSort : public Draw {
         }
 
         void SortAndDraw() {
-            count_compare += 2;
+                                                        count_compare += 2;
             for (int i = 1; i < n ; i++)
                 for (int j = i; j > 0; j--) {
-                    count_compare += 3;
-                    toDraw(i,j,-1);
+                                                        count_compare += 3;
+                                                        toDraw(i,j,-1);
                     if (a[j] < a[j-1]) {
-                        count_swap ++;
+                                                        count_swap ++;
                         swap(a[j],a[j-1]);
-                        toDraw(i,j,-1);
+                                                        toDraw(i,j,-1);
                     }
                     else break;
                 }

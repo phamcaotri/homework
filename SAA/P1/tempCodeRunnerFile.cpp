@@ -1,2 +1,2 @@
 
-        s1.SortAndDraw();
+    if (0) {

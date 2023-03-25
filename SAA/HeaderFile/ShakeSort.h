@@ -41,27 +41,27 @@ class ShakeSort : public Draw {
         void SortAndDraw() {
             bool swapped;
    
-            count_compare += 3;
+                                                                        count_compare += 3;
             for (int i = 0; i < n/2 ; i++) {
-                count_compare ++;
+                                                                        count_compare ++;
                 swapped = false;
                 for (int j = i; j < n-i-1; j++) {
-                    count_compare += 2;
-                    toDraw(j,i,n-i-1);
+                                                                        count_compare += 2;
+                                                                        toDraw(j,i,n-i-1);
                     if (a[j] > a[j+1]) {
                         swap(a[j],a[j+1]);
-                        toDraw(j,i,n-i-1);
+                                                                        toDraw(j,i,n-i-1);
                         swapped = true;
                     }
 
                 }
 
                 for (int j = n-i-1 ; j > i ; j--) {
-                    count_compare += 3;
-                    toDraw(j,i,n-i-1);
+                                                                        count_compare += 3;
+                                                                        toDraw(j,i,n-i-1);
                     if (a[j] < a[j-1]) {
                         swap(a[j],a[j-1]);
-                        toDraw(j,i,n-i-1);
+                                                                        toDraw(j,i,n-i-1);
                         swapped = true;
                     }     
                 }
@@ -72,40 +72,40 @@ class ShakeSort : public Draw {
         }
 
         void SortAndDraw2() {
-            count_compare += 3;
+                                                                        count_compare += 3;
             for (int i = 0; i < n/2 ; i+=2) {
-                count_compare ++;
+                                                                        count_compare ++;
                 for (int j = i; j < n-i-1; j++) {
-                    count_compare += 2;
-                    toDraw(j,i,n-i-1);
+                                                                        count_compare += 2;
+                                                                        toDraw(j,i,n-i-1);
                     if (a[j] > a[j+1]) {
                         swap(a[j],a[j+1]);
-                        toDraw(j,i,n-i-1);
+                                                                        toDraw(j,i,n-i-1);
                     }
 
                 }
                 i+=2;
                 for (int j = n-i-1 ; j > i ; j--) {
-                    count_compare += 2;
-                    toDraw(j,i,n-i-1);
+                                                                        count_compare += 2;
+                                                                        toDraw(j,i,n-i-1);
                     if (a[j] < a[j-1]) {
                         swap(a[j],a[j-1]);
-                        toDraw(j,i,n-i-1);
+                                                                        toDraw(j,i,n-i-1);
                     }     
                 }
                 
 
             }
             {
-            count_compare += 2;
+                                                                        count_compare += 2;
             for (int i = 1; i < n ; i++)
                 for (int j = i; j > 0; j--) {
-                    count_compare += 3;
-                    toDraw(i,j,-1);
+                                                                        count_compare += 3;
+                                                                        toDraw(i,j,-1);
                     if (a[j] < a[j-1]) {
-                        count_swap ++;
+                                                                        count_swap ++;
                         swap(a[j],a[j-1]);
-                        toDraw(i,j,-1);
+                                                                        toDraw(i,j,-1);
                     }
                     else break;
                 }           
