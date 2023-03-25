@@ -13,20 +13,20 @@ class ArrayFunction {
     
     protected:
         int max_value = 0;
-        int n = 0;
+        int n = 1;
         vector<int> a;
     public:
 
 // CONSTRUCTORS ----------------------------------------------------
 
-        ArrayFunction(int n = 0) {
+        ArrayFunction(int n = 1) {
             if (n > 0 and n < MAX) {
                 a.resize(n);
                 this -> n = n;
             }
             max_value = max();
         }
-        ArrayFunction(vector<int> a, int n) {
+        ArrayFunction(vector<int> a, int n = 1) {
             if (n > 0 and n < MAX) {
                 a.resize(n);
                 this -> n = n;
@@ -41,13 +41,20 @@ class ArrayFunction {
         // input n and a[n], return false if input is invalid 
         bool setArray() {
             cin >> n;
-            if (n < 0 or n > 2000000000)
+            if (n < 0 or n > MAX)
                 return false;
-            vector<int> a(n);
+            a.resize(n);
             for (int i = 0; i < n; i++)
                 cin >> a[i];
-            this -> a = a;
             max_value = max();
+            return true;
+        }
+
+        bool setN() {
+            cin >> n;
+            if (n < 0 or n > MAX)
+                return false;
+            a.resize(n);
             return true;
         }
 
@@ -63,6 +70,7 @@ class ArrayFunction {
                 cout << "Unsorted Array." << '\n';
             }
         }
+
 
 // OTHER METHODS ---------------------------------------------------
 
@@ -100,9 +108,8 @@ class ArrayFunction {
             random_shuffle(a.begin(),a.end());
             max_value = n;
         }
-
+        // random but only 1 set
         void createTestArray() {
-            // random but only 1
             for (int i = 0; i < n; i++) {
                 a[i] = i+1;
             }
