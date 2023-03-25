@@ -13,4 +13,5 @@
 #include "QuickSortRP.h"
 #include "HeapSort_old.h"
 #include "CountSort.h"
+#include "InsertionSort2.h"
 #endif
