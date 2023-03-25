@@ -9,6 +9,81 @@
         //auto duration = duration_cast<nanoseconds>(stop - start);
         //cout << i << ", runtime: " << duration.count() << " ns" << '\n';
 
-        6437 192 3746 5510 8872 15591 2733 13142 14238 16336 17308 17588 19858 29050 29202 8515 26345 29236 14379 9555
+sort ranking: (50000)
 
-        6437 192 3746 5510 8872 15591 2733 13142 14238 16336 17308 17588 19858 29050 29202 8515 26345 29236 14379 9555 
+SimpleSort: 11.1815s
+BubbleSort 10.3523s
+InterchangeSort 10.1037s
+ShakeSort: 9.30935s
+InsertionSort: 5.65721s
+SelectionSort 3.68423s
+HeapSort: 0.0158071s
+MergeSort: 0.0169789s
+QuickSortRP: 0.0075496s
+QuickSort: 0.0072709s
+
+
+class IArrayFunction {
+public:
+  virtual void inputArray() = 0;
+  virtual void outputArray() = 0;
+  virtual void randomArray() = 0;
+};
+
+class ArrayFunction : public IArrayFunction {
+public:
+  void inputArray() override { ... }
+  void outputArray() override { ... }
+  void randomArray() override { ... }
+};
+
+class ISortAnalyze {
+public:
+  virtual void countCompare() = 0;
+  virtual void countSwap() = 0;
+  virtual void countAccess() = 0;
+};
+
+class SortAnalyze : public ISortAnalyze {
+public:
+  void countCompare() override { ... }
+  void countSwap() override { ... }
+  void countAccess() override { ... }
+};
+
+class ITimeMeasure {
+public:
+  virtual void startTimer() = 0;
+  virtual void stopTimer() = 0;
+  virtual double getElapsedTime() = 0;
+};
+
+class TimeMeasure : public ITimeMeasure {
+public:
+  void startTimer() override { ... }
+  void stopTimer() override { ... }
+  double getElapsedTime() override { ... }
+};
+
+class Draw {
+public:
+  Draw(IArrayFunction* arrFunc, ISortAnalyze* sortAnalyze, ITimeMeasure* timeMeasure) :
+    m_arrFunc(arrFunc), m_sortAnalyze(sortAnalyze), m_timeMeasure(timeMeasure) {}
+  
+  void drawSort() {
+    m_arrFunc->randomArray();
+    m_timeMeasure->startTimer();
+    // Perform sorting algorithm
+    m_timeMeasure->stopTimer();
+    m_arrFunc->outputArray();
+    std::cout << "Total compares: " << m_sortAnalyze->countCompare() << std::endl;
+    std::cout << "Total swaps: " << m_sortAnalyze->countSwap() << std::endl;
+    std::cout << "Total array accesses: " << m_sortAnalyze->countAccess() << std::endl;
+    std::cout << "Total execution time: " << m_timeMeasure->getElapsedTime() << " seconds" << std::endl;
+  }
+
+private:
+  IArrayFunction* m_arrFunc;
+  ISortAnalyze* m_sortAnalyze;
+  ITimeMeasure* m_timeMeasure;
+};
