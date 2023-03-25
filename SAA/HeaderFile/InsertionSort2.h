@@ -2,6 +2,8 @@
 #ifndef INSERTIONSORT2_H // include guard
 #define INSERTIONSORT2_H
 #include "Draw.h"
+
+// dùng phương pháp shift
 class InsertionSort2 : public Draw {
     private:
 
@@ -30,7 +32,6 @@ class InsertionSort2 : public Draw {
             for (int i = 1; i < n ; i++) {                   
                 int j = i-1;
                 int x = a[i];
-                                                        count_access_array ++;
                                                         toDraw(i,j,-1);
                                                         count_compare += 2;
                 for (; j >= 0 and x < a[j]; j--) {

@@ -14,4 +14,5 @@
 #include "HeapSort_old.h"
 #include "CountSort.h"
 #include "InsertionSort2.h"
+#include "InsertionSort3.h"
 #endif

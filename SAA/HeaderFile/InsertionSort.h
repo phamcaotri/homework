@@ -2,6 +2,7 @@
 #ifndef INSERTIONSORT_H // include guard
 #define INSERTIONSORT_H
 #include "Draw.h"
+// dùng phương pháp swap
 class InsertionSort : public Draw {
     private:
 
