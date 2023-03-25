@@ -115,7 +115,7 @@ class Interface : public ArrayFunction {
             do {
                 cin >> user_input;
                 if (user_input == '1') {
-                    QuickSort s(this -> a, this -> n);
+                    QuickSort s(n);
                     s.measureTime();
                     cout << s.isSorted() << '\n';
                     break;
