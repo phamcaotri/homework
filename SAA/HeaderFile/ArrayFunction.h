@@ -131,6 +131,7 @@ class ArrayFunction {
             max_value = max();           
         }
 
+        
 };
 
 #endif
