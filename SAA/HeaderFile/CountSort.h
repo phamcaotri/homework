@@ -13,7 +13,7 @@ class CountSort : public Draw {
 // OTHER METHODS ---------------------------------------------------
 
         void Sort() {
-            vector<int> b(max_value, 0);
+            vector<unsigned char> b(max_value, 0);
             for (int i = 0; i < n; i++) {
                 b[a[i]-1] ++;
             }
@@ -30,7 +30,7 @@ class CountSort : public Draw {
         }
 
         void SortAndDraw() {
-            vector<int> b(max_value, 0);
+            vector<unsigned char> b(max_value, 0);
                                                                 count_compare ++;
             for (int i = 0; i < n; i++) {
                                                                 count_compare ++;

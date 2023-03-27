@@ -50,8 +50,7 @@ class ArrayFunction {
             return true;
         }
 
-        bool setN() {
-            cin >> n;
+        bool setN(int n = 1) {
             if (n < 0 or n > MAX)
                 return false;
             a.resize(n);
