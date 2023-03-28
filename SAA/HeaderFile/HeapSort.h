@@ -5,7 +5,6 @@
 
 class HeapSort : public Draw {
     private:
-        
         void heapifyUp(int self, int father) {
             if (a[self] > a[father]) {
                 swap(a[self], a[father]);
@@ -48,7 +47,9 @@ public:
 
 // OTHER METHODS ---------------------------------------------------
 
-
+        string getName() {
+            return "Heap Sort";
+        }
 
         void Sort() {
             Heapify();

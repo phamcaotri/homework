@@ -9,7 +9,10 @@ class ShakeSort : public Draw {
     public:
 // CONSTRUCTORS ----------------------------------------------------
         using Draw::Draw; //inherit constructor
-
+        string getName() {
+            return "Shake Sort";
+        }
+        
         void Sort() {
             bool swapped;
 

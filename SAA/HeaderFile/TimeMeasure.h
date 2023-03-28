@@ -8,28 +8,26 @@
 using namespace std;
 using namespace std::chrono;
 
-class TimeMeasure {
+class TimeMeasure{
     public:
-    // Khai báo một con trỏ hàm có kiểu void (Sort::*)() để trỏ đến các hàm sort không có tham số và không trả về giá trị
+    // Khai báo một phương thức ảo để sort
     virtual void Sort() {}
     virtual void Sort(int, int) {}
 
 
     // Khai báo một phương thức để đo thời gian chạy của hàm sort
-    void measureTime() {
+    double measureTime(int n) {
         auto start = high_resolution_clock::now();
         Sort();
+        Sort(0,n-1);
         auto stop = high_resolution_clock::now();
         auto duration = duration_cast<nanoseconds>(stop - start);
-        cout <<"runtime: " << fixed << duration.count()/1000000000.0 << " s" << '\n';
+        cout <<"runtime: " << fixed << duration.count()/1000000000.0 << "s" << '\n';
+        return duration.count()/1000000000.0;
     }
-    void measureTime(int left, int right) {
-        auto start = high_resolution_clock::now();
-        Sort(left, right);
-        auto stop = high_resolution_clock::now();
-        auto duration = duration_cast<nanoseconds>(stop - start);
-        cout <<"runtime: " << fixed << duration.count()/1000000000.0 << " s" << '\n';
-    }
+
+
+
 };
 
 #endif

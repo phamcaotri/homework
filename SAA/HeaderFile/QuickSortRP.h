@@ -10,7 +10,10 @@ class QuickSortRP : public Draw {
         using Draw::Draw; //inherit constructor
 
 // OTHER METHODS ---------------------------------------------------
-
+        string getName() {
+            return "Quick Sort Random Pivot";
+        }
+        
         void Sort(int left, int right) {
             srand(time(NULL));
             int i = left, j = right;

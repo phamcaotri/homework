@@ -3,14 +3,15 @@
 #define QUICKSORT_H
 #include "Draw.h"
 class QuickSort : public Draw {
-    private:
-
     public:
 // CONSTRUCTORS ----------------------------------------------------
         using Draw::Draw; //inherit constructor
 
 // OTHER METHODS ---------------------------------------------------
-
+        string getName() {
+            return "Quick Sort";
+        }
+        
         void Sort(int left, int right) {
             int pivot = (left+right)/2;
             int mid = a[pivot];

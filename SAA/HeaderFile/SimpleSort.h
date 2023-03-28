@@ -10,7 +10,10 @@ class SimpleSort : public Draw {
         using Draw::Draw; //inherit constructor
 
 // OTHER METHODS ---------------------------------------------------
-
+        string getName() {
+            return "Simple Sort";
+        }
+        
         void Sort() {
             for (int i = 0; i < n ; i++)
                 for (int j = 0; j < n; j++)

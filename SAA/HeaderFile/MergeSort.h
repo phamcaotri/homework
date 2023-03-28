@@ -12,6 +12,10 @@ class MergeSort : public Draw {
 
 // OTHER METHODS ---------------------------------------------------
 
+        string getName() {
+            return "Merge Sort";
+        }
+        
         void Sort(int start, int end) {
             int pivot = (start + end)/2;
             if (start < pivot) Sort(start,pivot);
@@ -28,7 +32,7 @@ class MergeSort : public Draw {
         }  
 
     private:
-    
+
         void merge(int start, int pivot, int end) {
             vector<int> b(end-start+1);
             int i = start, j = pivot +1, k = 0;
@@ -110,6 +114,7 @@ class MergeSort : public Draw {
             }
                 
         }
+
 };
 
 #endif

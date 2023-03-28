@@ -6,26 +6,27 @@
 #include <chrono>
 #include <thread>
 
-#include "ArrayFunction.h"
 #include "SortAnalyze.h"
-#include "TimeMeasure.h"
+#include "SortAlgorithm.h"
+
 using namespace std;
 using namespace std::chrono;
 
-class Draw : public ArrayFunction, public SortAnalyze, public TimeMeasure {
+class Draw : public SortAlgorithm, public SortAnalyze {
     private:
         string buffer;
-
     protected:
         int ms = 0;
 
-    public:
 // CONSTRUCTORS ----------------------------------------------------
         Draw() {}
-        Draw(vector<int> a, int n, int ms = 0) : ArrayFunction(a,n) {
+        Draw(vector<int> a, int n, int ms = 0) {
+            this -> a = a;
+            this -> n = n;
             this -> ms = ms;
         }
-        Draw(int n, int ms = 0) : ArrayFunction(n) {
+        Draw(int n, int ms = 0) {
+            this -> n = n;
             this -> ms = ms;
         }
 // GETTER - SETTER METHODS ------------------------------------------

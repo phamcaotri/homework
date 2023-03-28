@@ -45,6 +45,11 @@ class InsertionSort3 : public Draw {
 
 // OTHER METHODS ---------------------------------------------------
 
+
+        string getName() {
+            return "Insertion Sort with shift and binary search";
+        }
+        
         void Sort() {
             for (int i = 1; i < n ; i++) {
                 int x = a[i];

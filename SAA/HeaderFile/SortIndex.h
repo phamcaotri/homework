@@ -15,4 +15,5 @@
 #include "CountSort.h"
 #include "InsertionSort2.h"
 #include "InsertionSort3.h"
+#include "InPlaceMergeSort.h"
 #endif

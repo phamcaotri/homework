@@ -11,7 +11,10 @@ class CountSort : public Draw {
         using Draw::Draw; //inherit constructor
 
 // OTHER METHODS ---------------------------------------------------
-
+        string getName() {
+            return "Count Sort";
+        }
+        
         void Sort() {
             vector<unsigned char> b(max_value, 0);
             for (int i = 0; i < n; i++) {
@@ -25,8 +28,6 @@ class CountSort : public Draw {
                     j++;
                 }
             }
-
-
         }
 
         void SortAndDraw() {

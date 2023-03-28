@@ -24,7 +24,6 @@ void qSort(int *a, int left, int right) {
     if (right > i) qSort(a, i,right);
 }
 
-
 void sort(int *a, int n) {
     int *b = new int[n];
     int *c = new int[n];
@@ -60,7 +59,7 @@ void sort(int *a, int n) {
         }
     }
 
-    delete[] b;
+    delete[] b, c;
     
 }
 

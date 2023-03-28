@@ -12,6 +12,9 @@ class InsertionSort2 : public Draw {
         using Draw::Draw;
 
 // OTHER METHODS ---------------------------------------------------
+        string getName() {
+            return "Insertion Sort with shift";
+        }
 
         void Sort() {
             for (int i = 1; i < n ; i++) {

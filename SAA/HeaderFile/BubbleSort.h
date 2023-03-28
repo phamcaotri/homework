@@ -2,7 +2,7 @@
 #ifndef BUBBLESORT_H // include guard
 #define BUBBLESORT_H
 #include "Draw.h"
-class BubbleSort : public Draw {
+class BubbleSort : public Draw{
     private:
 
     public:
@@ -10,6 +10,9 @@ class BubbleSort : public Draw {
         using Draw::Draw; //inherit constructor
 
 // OTHER METHODS ---------------------------------------------------
+        string getName() {
+            return "Bubble Sort";
+        }
 
         void Sort() {
             bool swapped = true;

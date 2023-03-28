@@ -10,7 +10,10 @@ class SelectionSort : public Draw {
         using Draw::Draw; //inherit constructor
 
 // OTHER METHODS ---------------------------------------------------
-
+        string getName() {
+            return "Selection Sort";
+        }
+        
         void Sort() {
             for (int i = 0; i < n - 1; i++) {
                 int min = i;

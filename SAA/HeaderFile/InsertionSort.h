@@ -11,6 +11,9 @@ class InsertionSort : public Draw {
         using Draw::Draw;
 
 // OTHER METHODS ---------------------------------------------------
+        string getName() {
+            return "Insertion Sort with swap";
+        }
 
         void Sort() {
             for (int i = 1; i < n ; i++)

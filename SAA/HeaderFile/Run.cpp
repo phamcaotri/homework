@@ -2,9 +2,33 @@
 #include "SortIndex.h"
 
 int main() {
-    BubbleSort s1;
+    vector<SortAlgorithm*> algorithms;
+    algorithms.push_back(new BubbleSort);
+    algorithms.push_back(new CountSort);
+    algorithms.push_back(new HeapSort_old);
+    algorithms.push_back(new HeapSort);
+    algorithms.push_back(new InsertionSort);
+    algorithms.push_back(new InsertionSort2);
+    algorithms.push_back(new InsertionSort3);
+    algorithms.push_back(new InterchangeSort);
+    algorithms.push_back(new MergeSort);
+    algorithms.push_back(new QuickSort);
+    algorithms.push_back(new QuickSortRP);
+    algorithms.push_back(new SelectionSort);
+    algorithms.push_back(new SimpleSort);
+    algorithms.push_back(new ShakeSort);
+    algorithms.push_back(new InPlaceMergeSort);
+
     SortList list;
-    list.addAlgorithm(&s1);
-    list.runAllAlgorithms(50000);
+// add algorithms to list
+    list.addAlgorithms(algorithms);
+// time measure all algorithms
+    list.timeMeasureAllAlgorithms(10);
+    list.rankAlgorithms();
+    list.printRank();
+// time measure one algorithm
+    // MergeSort s(50,10);
+    // s.createTestArray();
+    // s.SortAndDraw(0,50-1);
     return 0;
 }

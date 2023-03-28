@@ -6,7 +6,7 @@
 #include <algorithm>
 using namespace std;
 
-// maximum number of element support
+// maximum value of n
 const int MAX = 2000000000;
 
 class ArrayFunction {
@@ -19,6 +19,7 @@ class ArrayFunction {
 
 // CONSTRUCTORS ----------------------------------------------------
 
+        // default constructor
         ArrayFunction(int n = 1) {
             if (n > 0 and n < MAX) {
                 a.resize(n);
@@ -26,6 +27,7 @@ class ArrayFunction {
             }
             max_value = max();
         }
+        // constructor with vector
         ArrayFunction(vector<int> a, int n = 1) {
             if (n > 0 and n < MAX) {
                 a.resize(n);
@@ -54,6 +56,7 @@ class ArrayFunction {
             if (n < 0 or n > MAX)
                 return false;
             a.resize(n);
+            this -> n = n;
             return true;
         }
 

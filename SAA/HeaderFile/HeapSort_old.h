@@ -3,38 +3,6 @@
 #define HEAPSORT_OLD_H
 #include "Draw.h"
 
-// class Heap {
-//     private:
-//         int value;
-//         int father = 0;
-//         int self;
-//         int left_child;
-//         int right_child;
-//     public:
-//         int getFather() {
-//             return father;
-//             }
-//         int getSelf() {
-//             return self;
-//         }
-//         void setSelf(int self = 0) {
-//             this -> self = self;
-//             if (self > 0)
-//                 father = (self-1)/2;
-//             left_child = 2*self + 1;
-//             right_child = 2*self + 2;
-//         }
-
-//         int getLeftChild() {
-//             return left_child;
-//         }
-//         int getRightChild() {
-//             return right_child;
-//         }
-
-
-// };
-
 
 class HeapSort_old : public Draw {
     private:
@@ -117,7 +85,9 @@ public:
 
 // OTHER METHODS ---------------------------------------------------
 
-
+        string getName() {
+            return "Heap Sort_old";
+        }
 
         void Sort() {
             Heapify();
