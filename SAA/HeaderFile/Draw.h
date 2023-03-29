@@ -15,7 +15,7 @@ using namespace std::chrono;
 class Draw : public SortAlgorithm, public SortAnalyze {
     private:
         string buffer;
-    protected:
+    public:
         int ms = 0;
 
 // CONSTRUCTORS ----------------------------------------------------
@@ -27,6 +27,7 @@ class Draw : public SortAlgorithm, public SortAnalyze {
         }
         Draw(int n, int ms = 0) {
             this -> n = n;
+            a.resize(n);
             this -> ms = ms;
         }
 // GETTER - SETTER METHODS ------------------------------------------

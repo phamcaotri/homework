@@ -16,4 +16,6 @@
 #include "InsertionSort2.h"
 #include "InsertionSort3.h"
 #include "InPlaceMergeSort.h"
+#include "ShellSort.h"
+#include "ShellSort2.h"
 #endif
