@@ -5,7 +5,6 @@ int main() {
     vector<SortAlgorithm*> algorithms;
     algorithms.push_back(new BubbleSort);
     algorithms.push_back(new CountSort);
-    algorithms.push_back(new HeapSort_old);
     algorithms.push_back(new HeapSort);
     algorithms.push_back(new InsertionSort);
     algorithms.push_back(new InsertionSort2);
@@ -23,7 +22,7 @@ int main() {
 // add algorithms to list
     list.addAlgorithms(algorithms);
 // time measure all algorithms
-    list.timeMeasureAllAlgorithms(10);
+    list.timeMeasureAllAlgorithms(1000, "shuffled array");
     list.rankAlgorithms();
     list.printRank();
 // time measure one algorithm
@@ -32,3 +31,4 @@ int main() {
     // s.SortAndDraw(0,50-1);
     return 0;
 }
+  

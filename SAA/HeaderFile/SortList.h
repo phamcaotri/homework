@@ -5,8 +5,24 @@
 #include "SortAlgorithm.h"
 class SortList {
     private:
-    // list of algorithms, each algorithm is a pointer to a class, which is a child of Draw class
-    vector<SortAlgorithm*> list;
+        // list of algorithms, each algorithm is a pointer to a class, which is a child of Draw class
+        vector<SortAlgorithm*> list;
+        // hàm gọi các cách random mảng khác nhau thông qua đầu vào là array_type
+        void randomArray(SortAlgorithm* algorithm, string array_type) {
+            if (array_type == "test array") {
+                algorithm -> createTestArray();
+            }
+            else if (array_type == "random array") {
+                algorithm -> createRamdomizeArray();
+            }
+            else if (array_type == "shuffled array") { 
+                algorithm -> createShuffledArray();
+            }
+            else if (array_type == "mountain array") { 
+                algorithm -> createMoutainArray();
+            }
+        }
+
     public:
         void addAlgorithm(SortAlgorithm* algorithm) {
             list.push_back(algorithm);
@@ -16,17 +32,17 @@ class SortList {
             for (int i = 0; i < algorithms.size(); i++)
                 list.push_back(algorithms[i]);
         }
-        void timeMeasure(int n, int algorithm) {
+        void timeMeasure(int n, int algorithm, string array_type = "test array") {
             list[algorithm] -> setN(n);
-            list[algorithm] -> createTestArray();
+            randomArray(list[algorithm], array_type);
             list[algorithm] -> measureTime(n);
             cout << list[algorithm] -> isSorted() << endl << endl;
         }
 
-        void timeMeasureAllAlgorithms(int n) {
+        void timeMeasureAllAlgorithms(int n, string array_type = "test array") {
             for (int i = 0; i < list.size(); i++) {
                 list[i] -> setN(n);
-                list[i] -> createTestArray();
+                randomArray(list[i], array_type);
                 cout << list[i] -> getName() << ": ";
                 list[i] -> setRuntime(list[i] -> measureTime(n));
                 cout << list[i] -> isSorted() << endl << endl;
