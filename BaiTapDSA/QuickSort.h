@@ -1,8 +1,10 @@
 //QuickSort.h
 #ifndef QUICKSORT_H // include guard
 #define QUICKSORT_H
+
 #include "SortAlgorithm.h"
-class QuickSort : public Algorithm {
+
+class QuickSort : public SortAlgorithm {
     public:
 // CONSTRUCTORS ----------------------------------------------------
         using Draw::Draw; //inherit constructor
