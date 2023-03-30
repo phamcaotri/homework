@@ -3,7 +3,7 @@
 #define MERGESORT_H
 #include "SortAlgorithm.h"
 
-class MergeSort : public Algorithm {
+class MergeSort : public SortAlgorithm {
 
 
     public:

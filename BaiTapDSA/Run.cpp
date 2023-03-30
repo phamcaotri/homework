@@ -7,19 +7,14 @@ int main() {
     //algorithms.push_back(new BubbleSort);
         // algorithms.push_back(new CountSort);
         // algorithms.push_back(new HeapSort);
+    //algorithms.push_back(new BinaryInsertionSort);
     //algorithms.push_back(new InsertionSort);
-    //algorithms.push_back(new InsertionSort2);
-    //algorithms.push_back(new InsertionSort3);
     //algorithms.push_back(new InterchangeSort);
         // algorithms.push_back(new MergeSort);
         //algorithms.push_back(new QuickSort);
-        // algorithms.push_back(new QuickSortRP);
     //algorithms.push_back(new SelectionSort);
-    //algorithms.push_back(new SimpleSort);
     //algorithms.push_back(new ShakeSort);
-    //algorithms.push_back(new InPlaceMergeSort);
         // algorithms.push_back(new ShellSort);
-        // algorithms.push_back(new ShellSort2);
         algorithms.push_back(new RadixSort);
     SortList list;
 // add algorithms to list
@@ -28,11 +23,6 @@ int main() {
     list.timeMeasureAllAlgorithms(10000, "shuffled array");
     list.rankAlgorithms();
 
-// time measure one algorithm
-    RadixSort s(50,10);
-    s.createShuffledArray();
-    s.SortAndDraw();
-    list.printRank();
     return 0;
 }
   

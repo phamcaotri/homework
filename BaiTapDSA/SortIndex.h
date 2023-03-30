@@ -2,21 +2,15 @@
 #ifndef SORTINDEX_H
 #define SORTINDEX_H
 #include "QuickSort.h"
-#include "SimpleSort.h"
 #include "BubbleSort.h"
 #include "MergeSort.h"
-#include "InsertionSort.h"
+#include "BinaryInsertionSort.h"
 #include "ShakeSort.h"
 #include "HeapSort.h"
 #include "SelectionSort.h"
 #include "InterchangeSort.h"
-#include "QuickSortRP.h"
-#include "HeapSort_old.h"
 #include "CountSort.h"
-#include "InsertionSort2.h"
-#include "InsertionSort3.h"
-#include "InPlaceMergeSort.h"
+#include "InsertionSort.h"
 #include "ShellSort.h"
-#include "ShellSort2.h"
 #include "RadixSort.h"
 #endif
