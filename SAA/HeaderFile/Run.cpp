@@ -25,7 +25,7 @@ int main() {
 // add algorithms to list
     list.addAlgorithms(algorithms);
 // time measure all algorithms
-    list.timeMeasureAllAlgorithms(1000, "shuffled array");
+    list.timeMeasureAllAlgorithms(10000, "shuffled array");
     list.rankAlgorithms();
 
 // time measure one algorithm
