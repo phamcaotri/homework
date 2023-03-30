@@ -1,9 +1,9 @@
 // InterchangeSort.h
 #ifndef INTERCHANGESORT_H
 #define INTERCHANGESORT_H
-#include "Draw.h"
+#include "SortAlgorithm.h"
 
-class InterchangeSort : public Draw {
+class InterchangeSort : public SortAlgorithm {
     private:
 
     public:
@@ -23,23 +23,5 @@ class InterchangeSort : public Draw {
                         swap(a[i],a[j]);
         }
 
-        void SortAndDraw() {
-                                                        count_compare ++;
-            for (int i = 0; i < n-1 ; i++) {
-                                                        count_compare += 2;
-                for (int j = i+1; j < n; j++) {
-                                                        toDraw(i,j,-1);
-                                                        count_compare += 2;
-                    if (a[i] > a[j]) {
-                                                        count_swap ++;
-                        swap(a[i],a[j]);
-                    }
-                                                        toDraw(i,j,-1);
-                } 
-            }
-
-
-
-        }
 };
 #endif
