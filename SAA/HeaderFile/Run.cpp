@@ -25,12 +25,12 @@ int main() {
     list.addAlgorithms(algorithms);
 // time measure all algorithms
     list.timeMeasureAllAlgorithms(500000, "shuffled array");
-    //list.rankAlgorithms();
+    list.rankAlgorithms();
 
 // time measure one algorithm
-    ShellSort s(50,100);
-    s.createShuffledArray();
-    s.SortAndDraw();
+    // ShellSort s(50,100);
+    // s.createShuffledArray();
+    // s.SortAndDraw();
     list.printRank();
     return 0;
 }
