@@ -16,13 +16,14 @@ class RadixSort : public Draw {
         }
         
         void Sort() {
-            vector<vector<int>> b(10,vector<int> (max_value));
-            int max_radix = size(to_string(max_value));
-            for (int radix = 1; radix < pow(10,max_radix); radix *= 10) {
+            vector<vector<int>> b(10,vector<int> (n));
+            int num_integer = size(to_string(max_value));
+            for (int radix = 1; radix < pow(10,num_integer); radix *= 10) {
                 vector<int> c(10,0);
                 for (int i = 0; i < n; i++) {
-                    b[(a[i]/(radix))%10][c[(a[i]/(radix))%10]] = a[i];
-                    c[(a[i]/(radix))%10] ++;
+                    int index = (a[i]/(radix))%10;
+                    b[index][c[index]] = a[i];
+                    c[index] ++;
                 }
                 int k = 0;
                 for (int i = 0; i < 10; i++) {
@@ -34,13 +35,14 @@ class RadixSort : public Draw {
             }
         }
         void SortAndDraw() {
-            vector<vector<int>> b(10,vector<int> (max_value));
-            int max_radix = size(to_string(max_value));
-            for (int radix = 1; radix < pow(10,max_radix); radix *= 10) {
+            vector<vector<int>> b(10,vector<int> (n));
+            int num_integer = size(to_string(max_value));
+            for (int radix = 1; radix < pow(10,num_integer); radix *= 10) {
                 vector<int> c(10,0);
                 for (int i = 0; i < n; i++) {
-                    b[(a[i]/(radix))%10][c[(a[i]/(radix))%10]] = a[i];
-                    c[(a[i]/(radix))%10] ++;
+                    int index = (a[i]/(radix))%10;
+                    b[index][c[index]] = a[i];
+                    c[index] ++;
                                                                     toDraw(i,-1,-1);
                 }
                 int k = 0;
@@ -48,7 +50,7 @@ class RadixSort : public Draw {
                     for (int j = 0; j < c[i]; j++ ) {
                         a[k] = b[i][j];
                         k++;
-                                                                    toDraw(i,-1,-1);
+                                                                    toDraw(k,-1,-1);
                     }
                 }
             }
