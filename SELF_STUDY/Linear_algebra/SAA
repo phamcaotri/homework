@@ -20,3 +20,13 @@
     - dùng 2 đầu đọc L R để giới hạn phạm vi tìm kiếm.
 
 
+Nhược điểm của mảng tĩnh:
+1. Không hỗ trợ kích thước mảng lớn
+2. Thừa bộ nhớ, hoặc thiếu bộ nhớ trong lúc sử dụng
+3. Xoá, thêm phần tử không hiệu quả
+4. Trong trường hợp bộ nhớ gần đầy, không thể cấp phát mảng.
+
+Mảng động khắc phục được nhược điểm 1,2 của mảng tĩnh, nhưng vẫn có nhược điểm 3, 4.
+=> Kiểu dữ liệu danh sách liên kết đơn (SLL) là giải pháp tốt nhất.
+
+DSLK là cấu trúc gồm nhiều phần tử có thể nằm ở nhiều vị trí khác nhau trong bộ nhớ, được liên kết lại bởi con trỏ.

@@ -17,26 +17,25 @@ class ShellSort : public Draw {
             // chia mảng thành các phần tử k giảm dần
             // sắp xếp các phần tử k đó theo insertion sort
             // lặp lại đến khi k = 1
-            for (int k = log2(n); k >= 1; (k/2 >=1)?(k/=2):(k-=1))
-                for (int i = 0; i < n-k; i+=k)
-                    for (int j = i; j >= 0; j -= k) { 
-                        if (a[j+k] < a[j]) {
-                            swap(a[j+k],a[j]);
-                        } else break;
+
+            for (int k = n/2; k > 0; k /= 2 )
+                for (int i = k; i < n; i++)
+                    for (int j = i; j >= k and a[j] < a[j-k]; j -= k) {
+                            swap(a[j],a[j-k]);
+
                 }
             }
         void SortAndDraw() {
             // chia mảng thành các phần tử k giảm dần
             // sắp xếp các phần tử k đó theo insertion sort
             // lặp lại đến khi k = 1
-                                                                        toDraw(-1,-1,-1);  
-            for (int k = log2(n); k >= 1; (k/2>=1)?(k/=2):(k-=1))
-                for (int i = 0; i < n-k; i+=k)
-                    for (int j = i; j >= 0; j -= k) {
-                                                                        toDraw(i,j,k);   
-                        if (a[j+k] < a[j]) {
-                            swap(a[j+k],a[j]);
-                        } else break;
+
+            for (int k = n/2; k > 0; k /= 2 )
+                for (int i = k; i < n; i++)
+                    for (int j = i; j >= k and a[j] < a[j-k]; j -= k) {
+                            swap(a[j],a[j-k]);
+                                                                            toDraw(j,j-k,-1);                   
+
                 }
             }
 };
