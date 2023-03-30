@@ -18,4 +18,5 @@
 #include "InPlaceMergeSort.h"
 #include "ShellSort.h"
 #include "ShellSort2.h"
+#include "RadixSort.h"
 #endif
