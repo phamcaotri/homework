@@ -7,7 +7,7 @@ class BubbleSort : public SortAlgorithm {
 
     public:
 // CONSTRUCTORS ----------------------------------------------------
-        using Draw::Draw; //inherit constructor
+
 
 // OTHER METHODS ---------------------------------------------------
         string getName() {

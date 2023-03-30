@@ -24,7 +24,6 @@ class BinaryInsertionSort : public SortAlgorithm {
 
     public:
 // CONSTRUCTORS ----------------------------------------------------
-        using Draw::Draw;
 
 // OTHER METHODS ---------------------------------------------------
 

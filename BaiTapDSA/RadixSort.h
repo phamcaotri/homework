@@ -2,13 +2,13 @@
 #ifndef RADIXSORT_H
 #define RADIXSORT_H
 #include "SortAlgorithm.h"
-
+#include <math.h>
 class RadixSort : public SortAlgorithm {
     private:
 
     public:
 // CONSTRUCTORS ----------------------------------------------------
-        using Draw::Draw; //inherit constructor
+
 
 // OTHER METHODS ---------------------------------------------------
         string getName() {

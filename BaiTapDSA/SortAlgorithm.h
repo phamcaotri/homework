@@ -11,6 +11,7 @@ class SortAlgorithm : public ArrayFunction, public TimeMeasure {
     protected:
         double runtime;
     public:
+        using ArrayFunction::ArrayFunction;
         virtual string getName() = 0;
         // get runtime
         double getRuntime() {

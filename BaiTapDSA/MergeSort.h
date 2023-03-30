@@ -8,7 +8,7 @@ class MergeSort : public SortAlgorithm {
 
     public:
 // CONSTRUCTORS ----------------------------------------------------
-        using Draw::Draw;
+
 
 // OTHER METHODS ---------------------------------------------------
 

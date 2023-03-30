@@ -7,21 +7,6 @@ class SortList {
     private:
         // list of algorithms, each algorithm is a pointer to a class, which is a child of Draw class
         vector<SortAlgorithm*> list;
-        // hàm gọi các cách random mảng khác nhau thông qua đầu vào là array_type
-        void randomArray(SortAlgorithm* algorithm, string array_type) {
-            if (array_type == "test array") {
-                algorithm -> createTestArray();
-            }
-            else if (array_type == "random array") {
-                algorithm -> createRamdomizeArray();
-            }
-            else if (array_type == "shuffled array") { 
-                algorithm -> createShuffledArray();
-            }
-            else if (array_type == "mountain array") { 
-                algorithm -> createMoutainArray();
-            }
-        }
 
     public:
         void addAlgorithm(SortAlgorithm* algorithm) {
@@ -34,7 +19,7 @@ class SortList {
         }
         void timeMeasure(int n, int algorithm, string array_type = "test array") {
             list[algorithm] -> setN(n);
-            randomArray(list[algorithm], array_type);
+            list[algorithm]-> createShuffledArray();
             list[algorithm] -> measureTime(n);
             cout << list[algorithm] -> isSorted() << endl << endl;
         }
@@ -42,7 +27,7 @@ class SortList {
         void timeMeasureAllAlgorithms(int n, string array_type = "test array") {
             for (int i = 0; i < list.size(); i++) {
                 list[i] -> setN(n);
-                randomArray(list[i], array_type);
+                list[i]-> createShuffledArray();
                 cout << list[i] -> getName() << ": ";
                 list[i] -> setRuntime(list[i] -> measureTime(n));
                 cout << list[i] -> isSorted() << endl << endl;

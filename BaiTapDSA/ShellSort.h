@@ -6,7 +6,7 @@ class ShellSort : public SortAlgorithm {
     private:
 
     public:
-        using Draw::Draw;
+
 
         string getName() {
             return "Shell Sort";

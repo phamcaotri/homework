@@ -8,7 +8,7 @@ class InterchangeSort : public SortAlgorithm {
 
     public:
 // CONSTRUCTORS ----------------------------------------------------
-        using Draw::Draw; //inherit constructor
+
 
 // OTHER METHODS ---------------------------------------------------
 

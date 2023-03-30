@@ -7,7 +7,7 @@ class ShakeSort : public SortAlgorithm {
 
     public:
 // CONSTRUCTORS ----------------------------------------------------
-        using Draw::Draw; //inherit constructor
+
 
         string getName() {
             return "Shake Sort";

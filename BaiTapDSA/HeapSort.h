@@ -35,7 +35,7 @@ class HeapSort : public SortAlgorithm {
 
 public:
 // CONSTRUCTORS ----------------------------------------------------
-        using Draw::Draw;
+
 
 
 // OTHER METHODS ---------------------------------------------------

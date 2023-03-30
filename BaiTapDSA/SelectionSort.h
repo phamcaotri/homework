@@ -2,12 +2,12 @@
 #ifndef SELECTIONSORT_H// include guard
 #define SELECTIONSORT_H
 #include "SortAlgorithm.h"
-class SelectionSort : public Algorithm {
+class SelectionSort : public SortAlgorithm {
     private:
 
     public:
 // CONSTRUCTORS ----------------------------------------------------
-        using Draw::Draw; //inherit constructor
+
 
 // OTHER METHODS ---------------------------------------------------
         string getName() {
