@@ -1,4 +1,10 @@
 //ArrayFunction.h
+/*
+Chức năng của class ArrayFunction:
+1. Lưu trữ mảng a và n cho từng class Sort kế thừa
+2. Cung cấp các phương thức để thao tác với mảng a
+
+*/
 #ifndef ARRAYFUNCTION_H
 #define ARRAYFUNCTION_H
 #include <iostream>
@@ -10,11 +16,12 @@ using namespace std;
 const int MAX = 2000000000;
 
 class ArrayFunction {
-    
     protected:
+
         int max_value = 0;
         int n = 1;
         vector<int> a;
+
     public:
 
 // CONSTRUCTORS ----------------------------------------------------
@@ -51,7 +58,7 @@ class ArrayFunction {
             max_value = max();
             return true;
         }
-
+        // input n. return false if input is invalid
         bool setN(int n = 1) {
             if (n < 0 or n > MAX)
                 return false;
@@ -59,7 +66,7 @@ class ArrayFunction {
             this -> n = n;
             return true;
         }
-
+        // trả về mảng a và tình trạng sắp xếp của mảng
         void getArray() {
             cout << '\n';
             for (int i = 0; i < n; i++) {

@@ -1,8 +1,8 @@
 //BubbleSort.h
 #ifndef BUBBLESORT_H // include guard
 #define BUBBLESORT_H
-#include "Draw.h"
-class BubbleSort : public Draw{
+#include "SortAlgorithm.h"
+class BubbleSort : public SortAlgorithm {
     private:
 
     public:
@@ -27,29 +27,6 @@ class BubbleSort : public Draw{
             }
 
 
-        }
-
-        void SortAndDraw() {
-            bool swapped = true;                        
-                                                        count_compare ++; //exit loop
-            for (int i = 0; i < n-1 and swapped; i++) {
-                swapped = false;
-                                                        count_compare += 2; //exit loop + inside loop
-                for (int j = 0; j < n-i-1; j++) {
-                    
-                                                        count_compare += 2; // inside loop + compare
-                                                        toDraw(n-i,i,j);
-                    if (a[j] > a[j+1]) {
-                                                        count_swap ++;
-                        swap(a[j],a[j+1]);
-                        swapped = true;
-                                                        toDraw(n-i,i,j);
-                    }
-                }
-            }
-
-
-                        
         }
 };
 

@@ -1,9 +1,9 @@
 // RadixSort.h
 #ifndef RADIXSORT_H
 #define RADIXSORT_H
-#include "Draw.h"
+#include "SortAlgorithm.h"
 
-class RadixSort : public Draw {
+class RadixSort : public SortAlgorithm {
     private:
 
     public:
@@ -30,27 +30,6 @@ class RadixSort : public Draw {
                     for (int j = 0; j < c[i]; j++ ) {
                         a[k] = b[i][j];
                         k++;
-                    }
-                }
-            }
-        }
-        void SortAndDraw() {
-            vector<vector<int>> b(10,vector<int> (n));
-            int num_integer = size(to_string(max_value));
-            for (int radix = 1; radix < pow(10,num_integer); radix *= 10) {
-                vector<int> c(10,0);
-                for (int i = 0; i < n; i++) {
-                    int index = (a[i]/(radix))%10;
-                    b[index][c[index]] = a[i];
-                    c[index] ++;
-                                                                    toDraw(i,-1,-1);
-                }
-                int k = 0;
-                for (int i = 0; i < 10; i++) {
-                    for (int j = 0; j < c[i]; j++ ) {
-                        a[k] = b[i][j];
-                        k++;
-                                                                    toDraw(k,-1,-1);
                     }
                 }
             }
