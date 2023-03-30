@@ -30,3 +30,16 @@ Mảng động khắc phục được nhược điểm 1,2 của mảng tĩnh, n
 => Kiểu dữ liệu danh sách liên kết đơn (SLL) là giải pháp tốt nhất.
 
 DSLK là cấu trúc gồm nhiều phần tử có thể nằm ở nhiều vị trí khác nhau trong bộ nhớ, được liên kết lại bởi con trỏ.
+Một node gồm 2 thành phần:
+1. Giá trị của node
+2. Con trỏ trỏ đến node tiếp theo
+
+struct Node {
+    int data;
+    Node *next;
+}
+struct List {
+    Node *head;
+    Node *tail;
+
+}
