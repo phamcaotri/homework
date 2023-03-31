@@ -12,43 +12,81 @@ struct List {
     Node* tail = NULL;
 };
 
-
 Node* getNode(int x) {
-    Node *p = new Node;
-    if (p == NULL) {
+    Node *new_node = new Node;
+    // trường hợp cấp phát không thành công
+    if (new_node == NULL) {
         cout << "Memory allocation failed";
         return NULL;
     }
-    p->data = x;
-    p->next = NULL;
-    return p;
+    // trường hợp cấp phát thành công
+    new_node->data = x;
+    new_node->next = NULL;
+    return new_node;
 }
 
-// function to add a new node at the head
-void addHead(List &l, int x) {
-    // bước 1: tạo node mới
-    Node *p = getNode(x);
-    if (l.head == NULL) { //danh sách rỗng
-        l.head = l.tail = p;
+void addHead(List *l, int x) {
+    Node *new_node = getNode(x);
+    // trường hợp danh sách rỗng
+    if (l->head == NULL) {
+        l->head = l->tail = new_node;
     }
     else {
-        p->next = l.head;
-        l.head = p;
+    // trường hợp danh sách không rỗng
+        new_node->next = l->head;
+        l->head = new_node;
     }
 }
-// function to add a new node at the tail
-void addTail(List &l, int x) {
-    // bước 1: tạo node mới
-    Node *p = getNode(x);
-    if (l.tail == NULL) { //danh sách rỗng
-        l.head = l.tail = p;
+
+void addTail(List *l, int x) {
+    Node *new_node = getNode(x);
+    // trường hợp danh sách rỗng
+    if (l->tail == NULL) {
+        l->head = l->tail = new_node;
     }
     else {
-        l.tail->next = p;
-        l.tail = p;
+    // trường hợp danh sách không rỗng
+        l->tail->next = new_node;
+        l->tail = new_node;
     }
 }
-// A linked list node
+
+void addAfter(List *l, Node *this_node, int x) {
+    Node *new_node = getNode(x);
+    // trường hợp danh sách rỗng
+    if (this_node == NULL) {
+        l->head = l->tail = new_node;
+    }
+    else {
+    // trường hợp danh sách không rỗng
+        new_node->next = this_node->next;
+        this_node->next = new_node;
+    // trường hợp thêm vào cuối danh sách
+        if (this_node == l->tail) {
+            l->tail = new_node;
+        }
+    }
+}
+
+void deleteHead(List *l) {
+    // trường hợp danh sách rỗng
+    if (l->head == NULL) {
+        return;
+    }
+    // trường hợp danh sách có 1 phần tử
+    else if (l->head == l->tail) {
+        delete l->head;
+        l->head = l->tail = NULL;
+    }
+    // trường hợp danh sách có nhiều hơn 1 phần tử
+    else {
+        Node *temp = l->head;
+        l->head = l->head->next;
+        delete temp;
+    }
+}
+
+
 
 
 int main() {
