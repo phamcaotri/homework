@@ -1,30 +1,35 @@
 // SortList.h
+/*
+Chức năng của class SortList:
+1. Chứa danh sách các thuật toán sắp xếp
+2. Cung cấp giao diện cho người dùng
+3. Gọi hàm sắp xếp để tính thời gian chạy, xếp hạng thuật toán theo thời gian chạy
+*/
 #ifndef SORTLIST_H
 #define SORTLIST_H
 #include "SortIndex.h"
 #include "SortAlgorithm.h"
 class SortList {
     private:
-        // list of algorithms, each algorithm is a pointer to a class, which is a child of Draw class
+        // danh sách các thuật toán
         vector<SortAlgorithm*> list;
 
     public:
-        // create a menu of algorithms, user can choose which algorithm to use
         void menu() {
             // yêu cầu người dùng nhập số nguyên n dưới 2 tỷ, nếu không thỏa mãn yêu cầu, yêu cầu nhập lại
             int n;
-            cout << "Enter n between 0 and 2 billion: ";
+            cout << "Enter number n between 0 and 2 billion: ";
             do {
                 cin >> n;
                 if (n < 0 or n > MAX)
-                    cout << "Please enter a number between 0 and 2 billion again: ";
+                    cout << "Please enter a number n between 0 and 2 billion again: ";
             } while (n < 0 or n > MAX);
 
 
             for (int i = 0; i < list.size(); i++) {
                 cout << i+1 << ": " << list[i] -> getName() << '\n';
             }
-            // user input a number to choose an algorithm, if the number is not in the list, the program will ask user to input again
+            // yêu cầu người dùng nhập số nguyên trong khoảng 1 đến số lượng thuật toán, nếu không thỏa mãn yêu cầu, yêu cầu nhập lại
             int choice;
             cout << "Choose an algorithm: ";
             do {
@@ -45,11 +50,14 @@ class SortList {
             for (int i = 0; i < algorithms.size(); i++)
                 list.push_back(algorithms[i]);
         }
+
         void timeMeasure(int n, int algorithm) {
             list[algorithm] -> setN(n);
             list[algorithm]-> createShuffledArray();
-            list[algorithm] -> measureTime(n);
+            list[algorithm] -> setRuntime(list[algorithm] -> measureTime(n));
             list[algorithm] -> getArray();
+            cout << list[algorithm] -> getName() << " runtime: " << fixed << list[algorithm] -> getRuntime() << " s" << endl;
+            
         }
 
         void timeMeasureAllAlgorithms(int n) {

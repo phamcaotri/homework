@@ -1,4 +1,5 @@
 // SortIndex.h
+// Class này chứa các include của các class sắp xếp để tiện cho việc sử dụng
 #ifndef SORTINDEX_H
 #define SORTINDEX_H
 #include "QuickSort.h"

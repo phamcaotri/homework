@@ -26,7 +26,6 @@ class RadixSort : public SortAlgorithm {
             }
             // tính số chữ số của số lớn nhất
             int max_digit = to_string(abs(max_value)).size();
-            
             vector<vector<int>> b(10,vector<int> (n)); // mảng b để lưu các phần tử
             for (int base = 1; base < pow(10,max_digit); base *= 10) {
                 vector<int> c(10,0); // mảng c để lưu số lần xuất hiện của các phần tử

@@ -35,7 +35,6 @@ class CountSort : public SortAlgorithm {
                     j++;
                 }
             }
-
             // nếu có số âm, thì chuyển về lại
             if (min_value < 0) {
                 for (int i = 0; i < n; i++) {

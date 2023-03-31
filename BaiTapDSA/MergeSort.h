@@ -39,7 +39,6 @@ class MergeSort : public SortAlgorithm {
                     b[k] = a[j];
                     k++;
                     j++;
-
                 }
             }
             for (i;i <= pivot; i++) { // nếu nửa trái còn phần tử, thì gộp vào
@@ -50,13 +49,11 @@ class MergeSort : public SortAlgorithm {
                 b[k] = a[j];
                 k++;
             }
-
             k = 0;
             for (i = start; i <= end; i++) { // gán lại mảng a
                 a[i] = b[k];
                 k++;
-            }
-                
+            } 
         }
 
 };

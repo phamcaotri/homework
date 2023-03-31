@@ -25,8 +25,6 @@ class InsertionSort : public SortAlgorithm {
                 }
                 a[j+1] = x; // chèn phần tử x vào vị trí
             }
-
-
         }
 
 
