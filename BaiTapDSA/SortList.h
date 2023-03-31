@@ -66,6 +66,7 @@ class SortList {
                 list[i]-> createShuffledArray();
                 cout << list[i] -> getName() << ": ";
                 list[i] -> setRuntime(list[i] -> measureTime(n));
+                cout << list[i] -> getName() << " runtime: " << list[i] -> getRuntime() << " s" << endl;
                 cout << ((list[i] -> isSorted()) ? ("is Sorted") : ("not Sorted")) << endl << endl;
             }
         }

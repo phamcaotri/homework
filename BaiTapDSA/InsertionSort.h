@@ -13,7 +13,7 @@ class InsertionSort : public SortAlgorithm {
 
 // OTHER METHODS ---------------------------------------------------
         string getName() {
-            return "Insertion Sortt";
+            return "Insertion Sort";
         }
 
         void Sort() {

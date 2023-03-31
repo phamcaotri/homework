@@ -10,18 +10,18 @@ int main() {
     // algorithms.push_back(new BinaryInsertionSort);
     // algorithms.push_back(new BubbleSort);
     // algorithms.push_back(new ShakeSort);
-    algorithms.push_back(new CountSort);
-    algorithms.push_back(new QuickSort);
-    algorithms.push_back(new MergeSort);
-    algorithms.push_back(new HeapSort);
-    algorithms.push_back(new ShellSort);
+    //algorithms.push_back(new CountSort);
+    //algorithms.push_back(new QuickSort);
+    //algorithms.push_back(new MergeSort);
+    //algorithms.push_back(new HeapSort);
+    //algorithms.push_back(new ShellSort);
     algorithms.push_back(new RadixSort);
     SortList list;
     list.addAlgorithms(algorithms);
 
     char choice;
     do {
-        list.menu();
+        list.timeMeasureAllAlgorithms(1220703125);
         cout << "Do you want to continue? (y/n): ";
         do {
             cin >> choice;
