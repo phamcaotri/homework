@@ -12,23 +12,39 @@ class CountSort : public SortAlgorithm {
 
 // OTHER METHODS ---------------------------------------------------
         string getName() {
-            return "Count Sort";
+            return "Counting Sort";
         }
         
         void Sort() {
-            vector<unsigned char> b(max_value, 0);
-            for (int i = 0; i < n; i++) {
-                b[a[i]-1] ++;
+            // if there are negative numbers, shift all numbers to positive
+            if (min_value < 0) {
+                for (int i = 0; i < n; i++) {
+                    a[i] -= min_value;
+                }
+                max_value -= min_value;
             }
-            int j = 0;
-            for (int i = 0; i < max_value; i++) {
-                while (b[i] > 0) {
-                    a[j] = i;
-                    b[i] --;
-                    j++;
+            vector<int> b(n);
+            vector<int> c(max_value+1,0);
+            for (int i = 0; i < n; i++) {
+                c[a[i]]++;
+            }
+            for (int i = 1; i <= max_value; i++) {
+                c[i] += c[i-1];
+            }
+            for (int i = n-1; i >= 0; i--) {
+                b[c[a[i]] - 1] = a[i];
+                c[a[i]]--;
+            }
+            a = b;
+            // if there are negative numbers, shift all numbers back to negative
+            if (min_value < 0) {
+                for (int i = 0; i < n; i++) {
+                    a[i] += min_value;
                 }
             }
         }
+
+    
 
 };
 
