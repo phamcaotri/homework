@@ -10,6 +10,7 @@ Chức năng của class ArrayFunction:
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <string>
 using namespace std;
 
 // maximum value of n
@@ -19,45 +20,14 @@ class ArrayFunction {
     protected:
 
         int max_value = 0;
+        int min_value = 0;
         int n = 1;
         vector<int> a;
 
     public:
 
-// CONSTRUCTORS ----------------------------------------------------
-
-        // default constructor
-        ArrayFunction(int n = 1) {
-            if (n > 0 and n < MAX) {
-                a.resize(n);
-                this -> n = n;
-            }
-            max_value = max();
-        }
-        // constructor with vector
-        ArrayFunction(vector<int> a, int n = 1) {
-            if (n > 0 and n < MAX) {
-                a.resize(n);
-                this -> n = n;
-            }
-            this -> a = a;
-            max_value = max();
-        }
-
-
 // GETTER - SETTER METHODS -----------------------------------------
 
-        // input n and a[n], return false if input is invalid 
-        bool setArray() {
-            cin >> n;
-            if (n < 0 or n > MAX)
-                return false;
-            a.resize(n);
-            for (int i = 0; i < n; i++)
-                cin >> a[i];
-            max_value = max();
-            return true;
-        }
         // input n. return false if input is invalid
         bool setN(int n = 1) {
             if (n < 0 or n > MAX)
@@ -68,11 +38,13 @@ class ArrayFunction {
         }
         // trả về mảng a và tình trạng sắp xếp của mảng
         void getArray() {
+            string buffer;
             cout << '\n';
             for (int i = 0; i < n; i++) {
-                cout << a[i] << ' ';
+                buffer += to_string(a[i]) + " ";
             }
-            cout << '\n';
+            buffer += "\n";
+            cout << buffer;
             if (isSorted()) {
                 cout << "Sorted Array." << '\n';
             } else {
@@ -93,6 +65,16 @@ class ArrayFunction {
             return max;
         }
 
+        int min() {
+            int min = a[0];
+            for (int i = 1; i < n; i++) {
+                if (a[i] < min) {
+                    min = a[i];
+                }
+            }
+            return min;
+        }
+
         bool isSorted() {
             for (int i = 1; i < n; i++) {
                 if (a[i] < a[i-1]) {
@@ -104,11 +86,12 @@ class ArrayFunction {
 
         void createShuffledArray() {
             srand(time(NULL));
+            // randomize the array with n elements, each element is in range [-10000, 10000]
             for (int i = 0; i < n; i++) {
-                a[i] = i+1;
+                a[i] = rand() % 20001 - 10000;
             }
-            random_shuffle(a.begin(),a.end());
-            max_value = n;
+            max_value = max();
+            min_value = min();
         }     
 };
 

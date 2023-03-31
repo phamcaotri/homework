@@ -6,6 +6,7 @@
 class RadixSort : public SortAlgorithm {
     private:
 
+
     public:
 // CONSTRUCTORS ----------------------------------------------------
 
@@ -15,25 +16,42 @@ class RadixSort : public SortAlgorithm {
             return "Radix Sort";
         }
         
+        // radix sort, using vector a, n, max_value, min_value from class,  sort byte by byte, and works with negative numbers
         void Sort() {
-            vector<vector<int>> b(10,vector<int> (n));
-            int num_integer = size(to_string(max_value));
-            for (int radix = 1; radix < pow(10,num_integer); radix *= 10) {
-                vector<int> c(10,0);
+            // if there are negative numbers, shift all numbers to positive
+            if (min_value < 0) {
                 for (int i = 0; i < n; i++) {
-                    int index = (a[i]/(radix))%10;
-                    b[index][c[index]] = a[i];
-                    c[index] ++;
+                    a[i] -= min_value;
                 }
-                int k = 0;
-                for (int i = 0; i < 10; i++) {
-                    for (int j = 0; j < c[i]; j++ ) {
-                        a[k] = b[i][j];
-                        k++;
-                    }
+                max_value -= min_value;
+            }
+            int max_digit = to_string(abs(max_value)).size();
+            int base = 1;
+            for (int i = 0; i < max_digit; i++) {
+                vector<int> b(n);
+                vector<int> c(10,0);
+                for (int j = 0; j < n; j++) {
+                    c[(a[j]/base)%10]++;
+                }
+                for (int j = 1; j < 10; j++) {
+                    c[j] += c[j-1];
+                }
+                for (int j = n-1; j >= 0; j--) {
+                    b[c[(a[j]/base)%10] - 1] = a[j];
+                    c[(a[j]/base)%10]--;
+                }
+                a = b;
+                base *= 10;
+            }
+            // if there are negative numbers, shift all numbers back to negative
+            if (min_value < 0) {
+                for (int i = 0; i < n; i++) {
+                    a[i] += min_value;
                 }
             }
         }
+
+
 };
 
 #endif

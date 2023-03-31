@@ -9,6 +9,34 @@ class SortList {
         vector<SortAlgorithm*> list;
 
     public:
+        // create a menu of algorithms, user can choose which algorithm to use
+        void menu() {
+            // yêu cầu người dùng nhập số nguyên n dưới 2 tỷ, nếu không thỏa mãn yêu cầu, yêu cầu nhập lại
+            int n;
+            cout << "Enter n between 0 and 2 billion: ";
+            do {
+                cin >> n;
+                if (n < 0 or n > MAX)
+                    cout << "Please enter a number between 0 and 2 billion again: ";
+            } while (n < 0 or n > MAX);
+
+
+            for (int i = 0; i < list.size(); i++) {
+                cout << i+1 << ": " << list[i] -> getName() << '\n';
+            }
+            // user input a number to choose an algorithm, if the number is not in the list, the program will ask user to input again
+            int choice;
+            cout << "Choose an algorithm: ";
+            do {
+                cin >> choice;
+                if (choice < 0 or choice > list.size())
+                    cout << "Please choose a number in the list again: ";
+            } while (choice < 1 or choice > list.size());
+            
+
+            timeMeasure(n, choice-1);
+        }   
+
         void addAlgorithm(SortAlgorithm* algorithm) {
             list.push_back(algorithm);
         }
@@ -17,20 +45,20 @@ class SortList {
             for (int i = 0; i < algorithms.size(); i++)
                 list.push_back(algorithms[i]);
         }
-        void timeMeasure(int n, int algorithm, string array_type = "test array") {
+        void timeMeasure(int n, int algorithm) {
             list[algorithm] -> setN(n);
             list[algorithm]-> createShuffledArray();
             list[algorithm] -> measureTime(n);
-            cout << list[algorithm] -> isSorted() << endl << endl;
+            list[algorithm] -> getArray();
         }
 
-        void timeMeasureAllAlgorithms(int n, string array_type = "test array") {
+        void timeMeasureAllAlgorithms(int n) {
             for (int i = 0; i < list.size(); i++) {
                 list[i] -> setN(n);
                 list[i]-> createShuffledArray();
                 cout << list[i] -> getName() << ": ";
                 list[i] -> setRuntime(list[i] -> measureTime(n));
-                cout << list[i] -> isSorted() << endl << endl;
+                cout << ((list[i] -> isSorted()) ? ("is Sorted") : ("not Sorted")) << endl << endl;
             }
         }
 

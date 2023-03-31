@@ -1,10 +1,10 @@
-//InsertionSort2.h
-#ifndef INSERTIONSORT2_H // include guard
-#define INSERTIONSORT2_H
+//InsertionSort.h
+#ifndef INSERTIONSORT_H // include guard
+#define INSERTIONSORT_H
 #include "SortAlgorithm.h"
 
 // dùng phương pháp shift
-class InsertionSort2 : public SortAlgorithm {
+class InsertionSort : public SortAlgorithm {
     private:
 
     public:
@@ -13,7 +13,7 @@ class InsertionSort2 : public SortAlgorithm {
 
 // OTHER METHODS ---------------------------------------------------
         string getName() {
-            return "Insertion Sort with shift";
+            return "Insertion Sortt";
         }
 
         void Sort() {

@@ -19,7 +19,7 @@ class BubbleSort : public SortAlgorithm {
             for (int i = 1; i < n and swapped ; i++) {
                 swapped = false;
                 for (int j = 0; j < n-i ; j++)
-                    if (a[j] > a[j+1]) {
+                    if (a[j] > a[j+1]) { // đổi chỗ 2 phần tử nếu sai thứ tự
                         swap(a[j],a[j+1]);
                         swapped = true;
                     }

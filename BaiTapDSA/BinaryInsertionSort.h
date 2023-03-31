@@ -3,15 +3,12 @@
 #define BINARYINSERTIONSORT_H
 #include "SortAlgorithm.h"
 
-// dùng phương pháp shift + binarysearch
 class BinaryInsertionSort : public SortAlgorithm {
     private:
         int BinarySearch(int x, int start, int end) {
-            //tìm điểm nằm giữa
             if (end < start)
                 return start;
             int mid  =  (end+start)/2;
-
             if (x == a[mid])
                 return mid;
             else {
@@ -27,19 +24,18 @@ class BinaryInsertionSort : public SortAlgorithm {
 
 // OTHER METHODS ---------------------------------------------------
 
-
         string getName() {
-            return "Insertion Sort with shift and binary search";
+            return "Binary Insertion Sort";
         }
         
         void Sort() {
             for (int i = 1; i < n ; i++) {
-                int x = a[i];
-                int k = BinarySearch(x,0,i-1);
-                for (int j = i-1; j >= k; j--) {
+                int x = a[i]; 
+                int k = BinarySearch(x,0,i-1); // tìm vị trí chèn
+                for (int j = i-1; j >= k; j--) { // dời các phần tử sang phải
                     a[j+1] = a[j];
                 }
-                a[k] = x;
+                a[k] = x; // chèn phần tử x vào vị trí k
             }
         }
 };
