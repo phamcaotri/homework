@@ -19,7 +19,7 @@ class InterchangeSort : public SortAlgorithm {
         void Sort() {
             for (int i = 0; i < n-1 ; i++)
                 for (int j = i+1; j < n; j++) 
-                    if (a[i] > a[j])
+                    if (a[i] > a[j]) // đổi chỗ 2 phần tử nếu sai thứ tự
                         swap(a[i],a[j]);
         }
 

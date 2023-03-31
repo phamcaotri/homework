@@ -19,11 +19,11 @@ class InsertionSort : public SortAlgorithm {
         void Sort() {
             for (int i = 1; i < n ; i++) {
                 int j = i-1;
-                int x = a[i];
-                for (; j >= 0 and x < a[j]; j--) {
+                int x = a[i]; // lấy phần tử thứ i
+                for (; j >= 0 and x < a[j]; j--) { // dời các phần tử sang phải
                     a[j+1] = a[j];
                 }
-                a[j+1] = x;
+                a[j+1] = x; // chèn phần tử x vào vị trí
             }
 
 

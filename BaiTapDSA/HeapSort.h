@@ -13,14 +13,14 @@ class HeapSort : public SortAlgorithm {
         }
 
 
-        //sử dụng hàm này để tạo cây heap cũng là một cách, hoạt động tốt nếu dữ liệu đầu vào tuần tự
+        // hàm khởi tạo cây heap
         void Heapify() {
             for (int i = 1 ; i < n; i++) {
                     heapifyUp(i,(i-1)/2);
 
             }
         }
-
+        // hàm khôi phục tính đúng đắn của cây heap
         void heaplifyDown(int n, int self, int left_child, int right_child) {
             int largest = self;
             if (left_child < n and a[left_child] > a[largest])
@@ -45,10 +45,10 @@ public:
         }
 
         void Sort() {
-            Heapify();
+            Heapify(); // khởi tạo cây heap
             for (int i = 1 ; i < n; i++) {
-                swap(a[0],a[n-i]);
-                heaplifyDown(n-i,0,1,2);   
+                swap(a[0],a[n-i]); // đưa phần tử lớn nhất về cuối mảng
+                heaplifyDown(n-i,0,1,2);   // khôi phục tính đúng đắn của cây heap
             }          
 
         }
