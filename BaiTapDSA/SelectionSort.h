@@ -17,13 +17,11 @@ class SelectionSort : public SortAlgorithm {
         void Sort() {
             for (int i = 0; i < n - 1; i++) {
                 int min = i;
-                for (int j = i+1; j < n; j++) {
-                    
+                for (int j = i+1; j < n; j++) {         
                     if (a[min] > a[j]) // tìm phần tử nhỏ nhất
                         min = j;   
                 }
                 swap(a[i],a[min]); // đổi chỗ phần tử nhỏ nhất với phần tử đầu tiên của mảng hiện hành
-
             }
 
 

@@ -23,10 +23,7 @@ class BubbleSort : public SortAlgorithm {
                         swap(a[j],a[j+1]);
                         swapped = true;
                     }
-
             }
-
-
         }
 };
 

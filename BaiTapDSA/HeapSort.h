@@ -17,7 +17,6 @@ class HeapSort : public SortAlgorithm {
         void Heapify() {
             for (int i = 1 ; i < n; i++) {
                     heapifyUp(i,(i-1)/2);
-
             }
         }
         // hàm khôi phục tính đúng đắn của cây heap
@@ -28,7 +27,7 @@ class HeapSort : public SortAlgorithm {
             if (right_child < n and a[right_child] > a[largest])
                 largest = right_child;
             if (largest != self) {
-                swap(a[self], a[largest]);
+                swap(a[self], a[largest]); // đổi chỗ phần tử lớn nhất với phần tử cha
                 heaplifyDown(n, largest, 2*largest+1, 2*largest+2);
             }
         }
@@ -50,7 +49,6 @@ public:
                 swap(a[0],a[n-i]); // đưa phần tử lớn nhất về cuối mảng
                 heaplifyDown(n-i,0,1,2);   // khôi phục tính đúng đắn của cây heap
             }          
-
         }
 
 };

@@ -21,11 +21,9 @@ class QuickSort : public SortAlgorithm {
                 while (a[i] < mid) {
                     i ++;
                 }
-
                 while (a[j] > mid) {
                     j --;  
                 }
-
                 if (i <= j) { // đổi chỗ
                     swap(a[i], a[j]);
                     i ++; 
