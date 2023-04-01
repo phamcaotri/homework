@@ -49,7 +49,7 @@ int main() {
                 b[i] = range;
                 
 
-            }
+            } else break;
         }
     }
     b[k-1] = sum - cumulative_sum(b,k-1);
