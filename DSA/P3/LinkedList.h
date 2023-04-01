@@ -59,6 +59,14 @@ class LinkedList {
         LinkedList operator+=(int x) {
             return operator+(x);
         }
+        // define operator [] to get data of node at index k
+        int operator[](int k) {
+            Node* p = head;
+            for (int i = 0; i < k; i++) {
+                p = p->getNext();
+            }
+            return p->getData();
+        }
         
         void addHead(int x) {
             Node* new_node = new Node(x);
@@ -130,6 +138,7 @@ class LinkedList {
             }
             return NULL;
         }
+
         // method to print all nodes
         void print() {
             Node* p = head;
