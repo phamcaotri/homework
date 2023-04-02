@@ -19,7 +19,8 @@ class ShellSort : public SortAlgorithm {
             for (int k = n/2; k > 0; k /= 2 )
                 for (int i = k; i < n; i++)
                     for (int j = i; j >= k and a[j] < a[j-k]; j -= k) {
-                            swap(a[j],a[j-k]);
+                        swap(a[j],a[j-k]);
+
                 }
             }
 

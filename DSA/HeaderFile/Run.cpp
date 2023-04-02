@@ -20,18 +20,18 @@ int main() {
     //algorithms.push_back(new InPlaceMergeSort);
         // algorithms.push_back(new ShellSort);
         // algorithms.push_back(new ShellSort2);
-        algorithms.push_back(new RadixSort);
+        //algorithms.push_back(new RadixSort);
     SortList list;
 // add algorithms to list
     list.addAlgorithms(algorithms);
 // time measure all algorithms
-    //list.timeMeasureAllAlgorithms(10000, "shuffled array");
+    list.timeMeasureAllAlgorithms(1000000, "shuffled array");
     //list.rankAlgorithms();
 
 // time measure one algorithm
-    SimpleSort s(50,0);
-    s.createShuffledArray();
-    s.SortAndDraw();
+    // SimpleSort s(50,0);
+    // s.createShuffledArray();
+    // s.SortAndDraw();
     //list.printRank();
     return 0;
 }
