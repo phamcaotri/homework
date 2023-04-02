@@ -10,7 +10,7 @@ void grid(double k) {
             cout << "-1 -1" << endl;
             break;
         }
-        if (m == (int)m and n >= m) {
+        if (m == (long)m and n >= m) {
             cout << m << " " << n << endl;
             break;
         }
@@ -20,9 +20,9 @@ void grid(double k) {
 }
 
 int main() {
-    int t; cin >> t;
+    long t; cin >> t;
     double k;
-    for (int i = 0; i < t; i++) {
+    for (long i = 0; i < t; i++) {
         cin >> k;
         grid(k);
     }

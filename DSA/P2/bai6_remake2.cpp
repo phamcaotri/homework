@@ -2,7 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
-#include <string>
+#include <unordered_map>
 
 using namespace std;
 
@@ -20,19 +20,6 @@ void Sort(vector<long> &a, long max_value) {
         }
     }
 }
-
-// tìm kiếm nhị phân trong vector v
-long findv(vector<long> v, long b) {
-    long l = 0, r = v.size() - 1;
-    while (l <= r) {
-        long mid = (l + r) / 2;
-        if (v[mid] == b) return mid;
-        if (v[mid] < b) l = mid + 1;
-        else r = mid - 1;
-    }
-    return -1;
-}
-
 long binarysearch(vector<long> v, long b) {
     long l = 0, r = v.size() - 1;
     while (l <= r) {
@@ -44,10 +31,10 @@ long binarysearch(vector<long> v, long b) {
     return l;
 }
 
-
 int main() {
     // khai báo vector v
     vector<long> v;
+    unordered_map<long, long> m;
     long a, b, max_value = 0;
     int i = 0;
     do {
@@ -55,16 +42,25 @@ int main() {
         if (a == 0) break;
         cin >> b;
         if (a == 1) {
-            v.insert(v.begin() + binarysearch(v, b), b);
+            if (m.find(b) == m.end()) {
+                m[b] = 1;
+                v.push_back(b);
+            }
             if (b > max_value) 
                 max_value = b;
-            //
+            
         }
         else {
-            //Sort(v, max_value);
+            if (m.find(b) == m.end()) {
+                cout << "0" << '\n';
+            }
+            else {
+                Sort(v, max_value);
+                cout << binarysearch(v, b) + 1 << '\n';
+
+            }
         }
 
     } while(true);
-    
     return 0;
 }

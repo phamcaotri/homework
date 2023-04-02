@@ -2,33 +2,27 @@
 #include <vector>
 using namespace std;
 
-bool canDivide(vector<int>& pages, int k, int limit) {
-    int numTapes = 1;
-    int tapeSum = 0;
-    for (int i = 0; i < pages.size(); i++) {
-        if (pages[i] > limit) {
+bool canDivide(vector<long>& trang, long k, long limit) {
+    long num_chuong = 1;
+    long chuong_sum = 0;
+    for (long i = 0; i < trang.size(); i++) {
+        if (trang[i] > limit) {
             return false;
         }
-        if (tapeSum + pages[i] > limit) {
-            numTapes++;
-            tapeSum = 0;
+        if (chuong_sum + trang[i] > limit) {
+            num_chuong++;
+            chuong_sum = 0;
         }
-        tapeSum += pages[i];
+        chuong_sum += trang[i];
     }
-    return numTapes <= k;
+    return num_chuong <= k;
 }
 
-int findMaxPages(vector<int>& pages, int k) {
-    int total = 0;
-    int maxPage = 0;
-    for (int i = 0; i < pages.size(); i++) {
-        total += pages[i];
-        maxPage = max(maxPage, pages[i]);
-    }
-    int left = maxPage, right = total;
+long findMaxtrang(vector<long>& trang, long k, long left, long right) {
+
     while (left <= right) {
-        int mid = (left + right) / 2;
-        if (canDivide(pages, k, mid)) {
+        long mid = (left + right) / 2;
+        if (canDivide(trang, k, mid)) {
             right = mid - 1;
         } else {
             left = mid + 1;
@@ -38,13 +32,16 @@ int findMaxPages(vector<int>& pages, int k) {
 }
 
 int main() {
-    int n, k;
+    long total = 0;
+    long max_trang = 0;
+    long n, k;
     cin >> n >> k;
-    vector<int> pages(n);
-    for (int i = 0; i < n; i++) {
-        cin >> pages[i];
+    vector<long> trang(n);
+    for (long i = 0; i < n; i++) {
+        cin >> trang[i];
+        total += trang[i];
+        max_trang = max(max_trang, trang[i]);
     }
-    int maxPages = findMaxPages(pages, k);
-    cout << maxPages << endl;
+    cout << findMaxtrang(trang, k, max_trang, total);
     return 0;
 }
