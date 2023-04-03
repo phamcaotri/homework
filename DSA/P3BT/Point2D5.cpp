@@ -1,18 +1,3 @@
-/*Cho một tập N điểm (x,y) trên mặt phẳng Oxy. Bạn hãy sắp xếp và in ra các điểm tăng dần theo x, nếu x bằng nhau thì sắp xếp các điểm giảm dần theo y.
-
- Input: 
-
-    Dòng đầu tiên chứa số nguyên N
-
-,  (1≤N≤106)
-
-là số lượng điểm trên mặt phẳng.
-
-N dòng tiếp theo gồm 2 số nguyên x, y (−109≤x,y≤109)
-
-    là toạ độ của các điểm trên mặt phẳng.
-
-Output:   Các điểm đã được sắp xếp , mỗi điểm được in trên một hàng.*/
 
 #include <iostream>
 #include <algorithm>
