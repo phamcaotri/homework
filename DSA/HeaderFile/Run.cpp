@@ -18,7 +18,7 @@ int main() {
     //algorithms.push_back(new SimpleSort);
     //algorithms.push_back(new ShakeSort);
     //algorithms.push_back(new InPlaceMergeSort);
-        // algorithms.push_back(new ShellSort);
+        //algorithms.push_back(new ShellSort);
         // algorithms.push_back(new ShellSort2);
         //algorithms.push_back(new RadixSort);
     SortList list;
@@ -26,8 +26,8 @@ int main() {
     list.addAlgorithms(algorithms);
 // time measure all algorithms
     list.timeMeasureAllAlgorithms(1000000, "shuffled array");
+    
     //list.rankAlgorithms();
-
 // time measure one algorithm
     // SimpleSort s(50,0);
     // s.createShuffledArray();
@@ -35,4 +35,5 @@ int main() {
     //list.printRank();
     return 0;
 }
+
   

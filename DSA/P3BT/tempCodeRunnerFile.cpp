@@ -1,2 +1,1 @@
-
-    for (int i = 0; 
+m = sqrt(k) - 1, n = sqrt(k);
