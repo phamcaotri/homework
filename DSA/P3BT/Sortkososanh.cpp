@@ -15,9 +15,9 @@ int Max(int *A, int n){
 }
 
 
-void my_sort(int *A, int n){
+void my_sort(int *a, int n){
     if (n == 0) return;
-    int max_value = Max(A, n);
+    int max_value = Max(a, n);
     int i = 0;
     int *B = new int[max_value+1];
     
@@ -27,14 +27,14 @@ void my_sort(int *A, int n){
     }
     i = 0;
     while (not ( i == n)) {
-        B[A[i]] ++;
+        B[a[i]] ++;
         i++;
     }
     int j = 0;
     i = 0;
     while ( not ( i == max_value+1)) {
         while (not ( B[i] == 0)) {
-            A[j] = i;
+            a[j] = i;
             B[i] --;
             j++;
         }
