@@ -1,0 +1,26 @@
+NGoại lệ: hàm bạn, lớp bạn được phép truy cập phạm vi private.
+tính chất hàm bạn: phải được cho, không được nhận
+không đối xứng, không bắc cầu
+
+a là bạn của b => a đc truy cập các thành phần riêng tư của b, nhưng b không truy cập được tprt của a
+
+ví dụ: 
+class Counterclass {
+    private:
+        int Counter;
+    public:
+        char CounterChar;
+        void Init(char);
+        void AddOne() {
+            Counter++;
+        }
+        friend int Total(int);
+    
+};
+
+int Total(int max) {
+}
+
+lớp bạn:
+
+friend class TenLop;
