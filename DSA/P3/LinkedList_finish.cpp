@@ -307,8 +307,8 @@ void addBeforeNode(DList &l, DNode* this_node, int x) {
         new_node->prev = this_node->prev;
         this_node->prev = new_node;
         // gắn node trước nút này vào node mới
-        if (new_node->pPrev != NULL) {
-            new_node->pPrev->pNext = new_node;
+        if (new_node->prev != NULL) {
+            new_node->prev->next = new_node;
         }
         if (this_node == l.head) {
             l.head = new_node;
