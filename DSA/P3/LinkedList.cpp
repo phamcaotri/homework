@@ -68,26 +68,65 @@ void addAfter(List *l, Node *this_node, int x) {
     }
 }
 
+
 void deleteHead(List *l) {
     // trường hợp danh sách rỗng
-    if (l->head == NULL) {
+    if (l->head == NULL)
         return;
-    }
+    Node *this_node = l->head;
+    l->head = l->head->next;
+    this_node->next = NULL;
+    delete this_node;
     // trường hợp danh sách có 1 phần tử
-    else if (l->head == l->tail) {
-        delete l->head;
-        l->head = l->tail = NULL;
+    if (l->head == NULL)
+        l->tail == NULL;
+}
+
+Node* findX(List* l, int x) {
+    Node* p = l->head;
+    while (p != NULL) {
+        if (p->data == x) {
+            return p;
+        }
+    p = p->next;
     }
-    // trường hợp danh sách có nhiều hơn 1 phần tử
-    else {
-        Node *temp = l->head;
-        l->head = l->head->next;
-        delete temp;
-    }
+    return NULL;     
 }
 
 
+void deleteAt(List *l, int x) {
+    // trường hợp danh sách rỗng
+    if (l->head == NULL)
+        return;
+    // trường hợp xoá đầu
+    if (l->head->next == NULL) {
+        deleteHead(l);
+        return;
+    }
+    Node *this_node = l->head, *node_before = NULL;
+    while (this_node != NULL) {
+        if (this_node->data == x)
+            break;
+        node_before = this_node;
+        this_node = this_node->next;
+    }  
+    node_before->next = this_node->next;
+    this_node->next = NULL;
+    // trường hợp xoá cuối
+    if (this_node == l->tail)
+        l->tail = node_before;
+    delete this_node;
+}
 
+void printList(List* l) {
+    Node* p = l->head;
+    while (p != NULL) {
+    cout << p->data << ' ';
+    p = p->next;
+    } 
+    
+
+}
 
 int main() {
     List l;
