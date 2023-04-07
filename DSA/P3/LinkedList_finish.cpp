@@ -231,6 +231,8 @@ void addList(List &l1, List &l2) {
     l1.tail = l2.tail;
 }
 
+// danh sách liên kết đôi
+
 struct DNode {
     int data;
     DNode* next;

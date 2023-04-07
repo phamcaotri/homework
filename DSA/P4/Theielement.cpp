@@ -160,6 +160,10 @@ void inputList(List &l, int n) {
 }
 
 void outputList(List &l) {
+    if (l.head == NULL) {
+        cout << "List is empty";
+        return;
+    }
     node* this_node = l.head;
     while (this_node != NULL) {
         cout << this_node->info << " ";
@@ -208,7 +212,7 @@ void Init(List &L)
 node* findElement(List &l, int i) {
     // trường hợp danh sách rỗng
     if (l.head == NULL) {
-        cout << "The list is empty";
+        cout << "List is empty";
         return NULL;
     }
     // trường hợp i không hợp lệ

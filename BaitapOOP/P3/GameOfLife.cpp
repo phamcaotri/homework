@@ -75,6 +75,7 @@ class GameOfLifeMap {
                     }
                 }
                 map = next;
+                output();
             }
             
 
@@ -91,7 +92,7 @@ int main() {
     game.input(m,n);
     cin >> k;
     game.Generation(k);
-    game.output();
+    //game.output();
 
     return 0;
 }

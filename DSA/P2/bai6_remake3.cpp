@@ -8,8 +8,8 @@ using namespace std;
 
 int main() {
     unordered_map<char, char> m;
-    set<long> s;
-    long a, b;
+    set<long long> s;
+    long long a, b;
 
     do {
         cin >> a;
@@ -26,7 +26,7 @@ int main() {
                 cout << "0" << '\n';
             }
             else {
-                cout << distance(s.begin(), s.find(b)) + 1 << '\n';
+                cout << distance(s.begin(), s.lower_bound(b)) + 1 << '\n';
             }
         }
             
