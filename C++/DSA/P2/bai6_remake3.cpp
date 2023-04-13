@@ -1,34 +1,27 @@
-
-#include <iostream>
-#include <algorithm>
-#include <unordered_map>
+#include <stdio.h>
 #include <set>
 
 using namespace std;
 
 int main() {
-    unordered_map<char, char> m;
-    set<long long> s;
-    long long a, b;
+    set<int> s;
+    int a, b;
 
     do {
-        cin >> a;
-        if (a == 0) break;
-        cin >> b;
+        scanf("%d", &a);
+        if (!a) break;
+        scanf("%d", &b);
         if (a == 1) {
-            if (m.find(b) == m.end()) {
-                s.insert(b);
-                m[b] = 1;
-            }
+            s.emplace(b);
         }
         else {
-            if (m.find(b) == m.end()) {
-                cout << "0" << '\n';
-            }
-            else {
-                cout << distance(s.begin(), s.lower_bound(b)) + 1 << '\n';
-            }
+            auto it = s.find(b);
+            if (it == s.end())
+                printf("0\n");
+            else
+                printf("%d\n", distance(s.begin(), it) + 1);
         }
+
             
     } while(true);
     return 0;

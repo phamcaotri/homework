@@ -19,14 +19,12 @@ void quickSort(pair<int,int> *s, int l, int r) {
 }
 
 int main() {
-    cin.tie(NULL);
-    ios_base::sync_with_stdio(false);
     int n; cin >> n;
     pair<int,int>* v = new pair<int, int>[n];
     
     for (int i = 0; i < n; i++) {
         int x, y;
-        cin >> x >> y;
+        scanf("%d %d", &x, &y);
         v[i] = make_pair(x, -y);
     }
     quickSort(v, 0, n-1);

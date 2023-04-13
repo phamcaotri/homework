@@ -1,1 +1,2 @@
-m = sqrt(k) - 1, n = sqrt(k);
+
+    if (l < j) quickSort(a, b, l, j);

@@ -1,0 +1,38 @@
+nhược điểm của mảng:
+1. kích thước cố định, gây thừa hoặc thiếu bộ nhớ
+2. thao tác thêm xoá trong mảng không được tự nhiên, chi phí cao (O(n))
+3. cần một vùng nhớ liên tục để lưu trữ mảng
+
+
+ưu điểm của danh sách liên kết:
+1. tận dụng được bộ nhớ
+2. thao tác thêm xoá trong danh sách liên kết được tự nhiên, chi phí thấp (O(1)) vì chỉ cần thay đổi các liên kết
+3. kiểu cấu trúc động, có thể cấp phát hoặc xoá bộ nhớ khi cần thiết
+
+nhược điểm danh sách liên kết:
+1. tốn bộ nhớ hơn mảng, vì cần lưu thêm các liên kết
+2. không thể truy cập ngẫu nhiên, chỉ có thể truy cập theo chiều từ đầu đến cuối danh sách, chi phí O(n)
+3. thao tác tìm kiếm trong danh sách liên kết có chi phí O(n)
+
+ưu điểm của cây nhị phân tìm kiếm:
+1. kế thừa toàn bộ ưu điểm của danh sách liên kết, khắc phục một phần nhược điểm của danh sách liên kết
+2. tốc độ tìm kiếm nhanh hơn mảng và danh sách liên kết
+
+khuyết điểm:
+1. tốn bộ nhớ 
+
+cây là 1 cấu trúc có nhiều phần tử, cùng một kiểu dữ liệu, có một nốt đặt biệt gọi là nút gốc, các nút còn lại được phân ra làm các nhánh cây con
+một nút có thể chứa nhiều giá trị, nhưng phải có cùng kiểu dữ liệu.
+cây nhị phân là cây mà mỗi nút có tối đa 2 con (multi branch tree)
+cây rỗng vẫn là cây nhị phân
+nút lá là nút không có con
+nút cha là nút không có cha
+nút trong là các nút còn lại
+mức (đếm từ 0), nút gốc là mức 0, các nút con của nút gốc là mức 1, các nút con của các nút con của nút gốc là mức 2, ...
+2 nút có cùng cha thì có cùng mức và có quan hệ anh em
+chiều cao của cây là mức cao nhất của cây
+nút x được gọi là tổ tiên của y nếu cây con của x chứa y
+bậc của 1 nút là số nút con trực tiếp của nút đó
+bậc của cây là bậc lớn nhất trong số các nút (không phải là bậc của nút gốc)
+cách duyệt cây (lần lượt xét từng phần tử)
+cây nhiều nhánh (multi branch tree) mỗi nút có thể có nhiều hơn 2 con.

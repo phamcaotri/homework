@@ -103,7 +103,7 @@ import math
 
 #tạo class GameOfLifeMap
 class GameOfLifeMap:
-    #khởi tạo
+    #khởi tạo, tương tự constructor trong c++
     def __init__(self, m = 0, n = 0):
         self.m = m
         self.n = n
@@ -117,11 +117,9 @@ class GameOfLifeMap:
         self.m = m
         self.n = n
         self.map = []
+        # cho phép nhập trên cùng 1 dòng
         for i in range(m):
-            self.map.append([])
-            for j in range(n):
-                x = int(input())
-                self.map[i].append(x)
+            self.map.append(list(map(int, input().split())))
     #xuất
     def output(self):
         for i in range(self.m):
@@ -165,3 +163,4 @@ game.input(m,n)
 k = int(input())
 game.Generation(k)
 game.output()
+
