@@ -1,0 +1,18 @@
+$$ a^2+b^2 = c^2 \\
+\small\frac{1}{2} \cdot \frac{1}{2} = \frac{1}{4} \\
+0.5 \\
+\frac{1}{2} \cdot \frac{1}{2} = \frac{1}{4} \\
+
+\delta x^2/ \delta x (x^2)= 2x \\
+\frac{d}{dx} x^2 = 2x \\
+\int f(x) dx = F(x) + C \\
+\int_{a}^{b} f(x) dx = F(b) - F(a) \\
+\int_{a}^{b} f(x) dx = \int_{a}^{b} f(x) dx + \int_{a}^{b} f(x) dx \\
+\sum_{i=1}^{n} a_i \\
+\prod_{i=1}^{n} a_i \\
+\int_{C} \mathbf{F} \cdot d\mathbf{r} \\
+\int_{C} \mathbf{F} \cdot d\mathbf{r} = \oint_{C} \mathbf{F} \cdot d\mathbf{l} \\
+\mathbb{R} \\
+n \in \mathbb{N}
+
+$$
