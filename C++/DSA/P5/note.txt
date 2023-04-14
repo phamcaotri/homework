@@ -24,15 +24,36 @@ khuyết điểm:
 cây là 1 cấu trúc có nhiều phần tử, cùng một kiểu dữ liệu, có một nốt đặt biệt gọi là nút gốc, các nút còn lại được phân ra làm các nhánh cây con
 một nút có thể chứa nhiều giá trị, nhưng phải có cùng kiểu dữ liệu.
 cây nhị phân là cây mà mỗi nút có tối đa 2 con (multi branch tree)
-cây rỗng vẫn là cây nhị phân
-nút lá là nút không có con
-nút cha là nút không có cha
-nút trong là các nút còn lại
+    cây rỗng vẫn là cây nhị phân
+    nút lá là nút không có con
+    nút cha là nút không có cha
+    nút trong là các nút còn lại
 mức (đếm từ 0), nút gốc là mức 0, các nút con của nút gốc là mức 1, các nút con của các nút con của nút gốc là mức 2, ...
-2 nút có cùng cha thì có cùng mức và có quan hệ anh em
+    2 nút có cùng cha thì có cùng mức và có quan hệ anh em
 chiều cao của cây là mức cao nhất của cây
 nút x được gọi là tổ tiên của y nếu cây con của x chứa y
 bậc của 1 nút là số nút con trực tiếp của nút đó
-bậc của cây là bậc lớn nhất trong số các nút (không phải là bậc của nút gốc)
+    bậc của cây là bậc lớn nhất trong số các nút (không phải là bậc của nút gốc)
 cách duyệt cây (lần lượt xét từng phần tử)
+    có 3 cách duyệt chính
+    duyệt theo thứ tự trước (NLR): xét nút gốc, sau đó duyệt cây con trái, cuối cùng duyệt cây con phải
+    duyệt theo thứ tự giữa (LNR): duyệt cây con trái, xét nút gốc, cuối cùng duyệt cây con phải
+    duyệt theo thứ tự sau (LRN): duyệt cây con trái, duyệt cây con phải, xét nút gốc
 cây nhiều nhánh (multi branch tree) mỗi nút có thể có nhiều hơn 2 con.
+cây nhị phân tìm kiếm (BST) 
+    là cây nhị phân
+    giá trị nút con bên trái < cha < con bên phải
+    do đó, toàn bộ giá trị nhánh trái < cha < toàn bộ giá trị nhánh phải
+
+    28 17 5 9 12 30 57 7 2 13
+
+                                                    28
+                                        17                      30
+                                5                                           57
+                                    9
+                        2        7      12 
+                                            13
+RLN
+    57 30 13 12 7 9 2 5 17 28
+LNR
+    2 5 7 9 12 13 17 28 30 57

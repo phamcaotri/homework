@@ -134,5 +134,11 @@
     "*test.py"
   ],
   "python.testing.pytestEnabled": false,
-  "python.testing.unittestEnabled": true
+  "python.testing.unittestEnabled": true,
+  "files.exclude": {
+    "**/.aux": true,
+    "**/.fdb_latexmk": true,
+    "**/.fls": true,
+    "**/synctex.gz": true
+  }
 }

@@ -25,8 +25,8 @@ class TimeMeasure{
         Sort();
         Sort(0,n-1);
         auto stop = high_resolution_clock::now();
-        auto duration = duration_cast<milliseconds>(stop - start);
-        return duration.count();
+        auto duration = duration_cast<nanoseconds>(stop - start);
+        return duration.count()/1000000000.0;
     }
 // /1000000000.0
 
