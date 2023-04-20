@@ -1,0 +1,101 @@
+cách khai báo operator trong c++:
+nên dùng opeatetor như phương thức hay hàm bạn
+chuyển kiểu bằng constructor
+chuyển kiểu bằng phép toán chuyển kiểu
+
+cú pháp: X::operator Y() { //code }
+ví dụ:
+class PhanSo
+{
+private:
+    int tu, mau;
+public:
+    PhanSo(int t = 0, int m = 1) : tu(t), mau(m) {}
+    operator double() { return (double)tu / mau; }
+    operator int() { return tu / mau; }
+};
+
+nếu có nhiều cách chuyển kiểu thì xảy ra sự nhập nhằng
+cách giải quyết: dùng toán tử chuyển kiểu ẩn danh
+cú pháp: operator Y() { //code }
+ví dụ:
+class PhanSo
+{
+private:
+    int tu, mau;
+public:
+    PhanSo(int t = 0, int m = 1) : tu(t), mau(m) {}
+    operator double() { return (double)tu / mau; }
+    operator int() { return tu / mau; }
+    operator ()(int x) { return tu * x / mau; }
+};
+
+nếu dùng lớp có chứa mảng động, thì phải viết lại toán tử gán
+thao tác 1: dọn đẹp tài nguyên cũ
+thao tác 2: cấp phát tài nguyên mới, sao chép dữ liệu
+
+opeatetor đặc biệt:
+gọi hàm bạn trong lớp PhanSo
+<<: toán tử xuất
+ostream& operator << (ostream& os, PhanSo ps)
+{
+    os << ps.tu << "/" << ps.mau;
+    return os;
+}  
+
+>>: toán tử nhập
+istream& operator >> (istream& is, PhanSo& ps)
+{
+    is >> ps.tu >> ps.mau;
+    return is;
+}
+cần có & để gán
+
+[]: toán tử truy cập phần tử
+int& operator [] (int i)
+{
+    return a[i];
+}
+1. chỉ cần return a[i] thì chương trình tự gán giá trị cho a[i]
+2. cần có & để gán
+3. không hỗ trợ kiểu const, cần overload thêm 1 hàm
+4. chỉ hỗ trợ 1 tham số
+
+(): toán tử gọi hàm
+int operator () (int x)
+{
+    return tu * x / mau;
+}
+
+++: toán tử tăng 1 đơn vị
+++a: trả về tham chiếu đến a (sau khi tăng)
+a++: trả về giá trị bằng với a trước khi tăng
+
+ThoiGian& opeatetor++()
+{
+    ++giay;
+    if (giay == 60)
+    {
+        giay = 0;
+        ++phut;
+        if (phut == 60)
+        {
+            phut = 0;
+            ++gio;
+            if (gio == 24)
+                gio = 0;
+        }
+    }
+    return *this;
+}
+trong trường hợp này, cả t++ và ++t đều trả về tham chiếu đến t (đều trả về giá trị sau khi tăng)
+nếu vậy thì cần overload thêm 1 hàm có tham số giả định để phân biệt (chỉ áp dụng với ++, --, +, -, !, ~,...)
+ThoiGian operator++(int)
+{
+    ThoiGian tg = *this;
+    ++*this;
+    return tg;
+}
+trong trường hợp này, t++ trả về giá trị trước khi tăng, ++t trả về giá trị sau khi tăng
+không sử dụng &
+

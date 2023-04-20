@@ -1,0 +1,55 @@
+\documentclass{article}
+\usepackage{titling}
+\usepackage[vietnamese]{babel}
+\usepackage{amsmath}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\begin{document}
+
+\begin{titlingpage}
+% list all notations for discrete mathematics
+\begin{center}
+\textbf{List of Notations}
+\end{center}
+\hbox{toán tử phủ định (gọi tắt là "phủ"): $\neg$\\}
+\hbox{toán tử hợp "hội": $\wedge$\\}
+\hbox{toán tử giao "tuyển": $\vee$\\}
+\hbox{toán tử kéo theo "kéo theo": $\rightarrow$\\}
+\hbox{toán tử kéo theo 2 chiều "kéo theo 2 chiều": $\leftrightarrow$\\}
+\hbox{toán tử phủ định của toán tử hợp "phủ định của p (gạch đầu): $\overline{p}$\\}
+\hbox{ký hiệu suy ra: $\Rightarrow$\\}
+\hbox{ký hiệu tương đương: $\Leftrightarrow$\\}
+% nếu có thể, sử dụng ký hiệu phủ định overline (gạch đầu) thay cho ký hiệu phủ định neg (gạch dưới)
+% phủ định (p kéo theo (q hội r)) tương đương phủ định (p kéo theo r) tuyển (p hội phủ q)
+$\overline{p\rightarrow(q\wedge r)}\Leftrightarrow(\overline{p\rightarrow r}\vee(p\wedge\overline{q}))$ \\
+% (p kéo theo (q kéo theo r)) kéo theo ((p kéo theo q) kéo theo (p kéo theo r))
+1: 
+$(p\rightarrow(q\rightarrow r))\rightarrow((p\rightarrow q)\rightarrow(p\rightarrow r))$ \\
+2: 
+$(p\rightarrow q)\rightarrow(\neg q\rightarrow \neg p)$ \\
+3: 
+$(p\land q)\rightarrow p$ \\
+4: 
+$(p\leftrightarrow q)\leftrightarrow((p\rightarrow q)\land(q\rightarrow p))$ \\
+5: 
+$(p\land q)\rightarrow(q\land p)$ \\
+6: 
+$(p\rightarrow q)\rightarrow((r\rightarrow q)\rightarrow(p\rightarrow r))$ \\
+% (phủ q tuyển (p hội r)) hội (p tuyển r) hội phủ q tương đương phủ ((p tuyển r) kéo theo q)
+7:
+$(\overline{q}\vee(p\wedge r))\wedge(p\vee r)\wedge\overline{q}\Leftrightarrow\overline{(p\vee r)\rightarrow q}$ \\
+
+$(p\rightarrow q)\wedge(q\rightarrow r)\wedge(p\vee \overline{r})\Rightarrow(p\vee q)$ \\
+$(p\wedge(q\vee r))\wedge((\overline{p}\vee q)\wedge(r\rightarrow\overline{q}))\Rightarrow(\overline{p}\vee(q\wedge r))$ \\
+$((p\vee q)\rightarrow(p\vee r))\Rightarrow(r\rightarrow((q\vee p)\rightarrow q))$ \\
+$(p\rightarrow(q\rightarrow r))\Leftrightarrow((p\rightarrow q)\wedge(q\rightarrow r)\wedge(p\vee r))$ \\
+$(p\vee(q\wedge r))\wedge((p\rightarrow q)\wedge (r\rightarrow q))\Rightarrow(p\vee q\vee r)$ \\
+$(p\rightarrow(q\rightarrow r))\wedge((p\wedge q)\rightarrow r)\Rightarrow(p\rightarrow(p\vee q))$ \\
+$(p\vee q)\wedge(p\vee r)\wedge(\overline{q}\vee \overline{r})\Rightarrow(p\vee(q\wedge r))$ \\
+$(p\rightarrow q)\wedge(q\rightarrow r)\Rightarrow ((p\vee q)\rightarrow(p\rightarrow r))$ \\
+$(p\vee(q\wedge r))\vee((p\vee q)\wedge(p\vee r))\Rightarrow p$ \\
+$((p\vee q)\rightarrow r)\wedge((p\wedge q)\rightarrow r) \Rightarrow (p\rightarrow(q\rightarrow r))$ \\
+
+\end{titlingpage}
+\end{document}

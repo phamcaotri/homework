@@ -1,0 +1,41 @@
+cây avl là một loại cây cân bằng yếu, tức là xét bất kỳ nút nào đó trên cây, chênh lệch chiều cao của nhánh trái và nhánh phải không quá 1
+có 3 trường hợp
+lệch trái, lệch phải, cân bằng
+khi thêm:
+ưu tiên nút xa gốc nhất
+1. cây có bị mất cân bằng hay không? mất cân bằng tại đâu (T)
+2. T bị lệch trái hay phải , nút bên đó là (T1)
+3. T1 lệch trái hay phải?
+4. nếu lệch phải xoay trái, lệch trái xoay phải, xoay T1 rồi tới T1 (nếu ko lệch thì chỉ xoay 1 lần)
+
+khi xoá:
+ưu tiên nút gần gốc nhất
+sau khi xoá (tương tự cây nhị phân) thì:
+1. cây có bị mất cân bằng hay không? mất cân bằng tại đâu (T)
+2. T bị lệch trái hay phải , nút bên đó là (T1)
+3. T1 lệch trái hay phải?
+4. nếu lệch phải xoay trái, lệch trái xoay phải, xoay T1 rồi tới T1 (nếu không lệch chỉ xoay 1 lần)
+5. kiểm tra xem cây đã cân bằng hay chưa, nếu chưa thì lặp lại bước 2
+
+cây nhiều nhánh tìm kiếm:
+cây nhiều nhánh tìm kiếm là một loại cây nhị phân, mỗi nút có thể có nhiều nhánh
+1. nút có m giá trị thì có m +1 nhánh
+2. nút con bên trái 1 giá trị thì nhỏ hơn hoặc bằng, nút con bên phải 1 giá trị thì lớn hơn hoặc bằng
+3. nút đầy khi nút đó của đủ m giá trị và có m + 1 nhánh, nút chưa đầy là nút chưa có đủ m khoá
+4. nút lá khi nút đó không có nhánh con
+5. nút nửa lá là nút có nhánh rỗng -> nút lá cũng là nút nửa lá
+
+cây B tree 
+1. là cây nhiều nhánh tìm kiếm
+2. các nút nửa lá cùng một mức
+3. tất cả nút trừ nút gốc có ít nhất (n-1)/2 khoá, n là bậc của cây, các nút đầy hơn một nửa
+
+thêm 1 giá trị vào cây: thêm vào nút lá hoặc nút nửa lá
+nếu nút đầy thì chia nút đó ra thành 2 nút con, nút cha có 1 khoá thêm
+
+xoá 1 giá trị khỏi cây:
+1. nếu xoá nút lá thì chỉ cần xoá
+2. nếu không phải nút lá thì tìm giá trị thay thế (giá trị nhỏ nhất của nút con bên phải hoặc lớn nhất nút con bên trái) và xoá giá trị đó
+3. nếu nút sau khi xoá xong bị thiếu khoá thì gộp nút con bên trái hoặc bên phải với nút cha, thế nút cha vào nút bị xoá
+4. nếu nút sau khi xoá xong bị thiếu khoá và không thể làm bước 3 thì gộp 2 nút con bên trái và bên phải với nút cha, và cả nút cha.
+5. nếu nút cha bị thiếu khoá thì gộp nút con bên trái hoặc bên phải với nút cha, thế nút cha vào nút bị xoá
