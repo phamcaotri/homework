@@ -95,6 +95,12 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxx \kill}
 % định nghĩa : P(A) = xác suất của biến cố A
 \begin{thm}
 $P(A)$ được gọi là xác suất của biến cố A
+\begin{equation}
+    P(A + B) = P( A \cup B)
+\end{equation}
+\begin{equation}
+   P(A)P(B) = P(A \cap B) 
+\end{equation}
 \end{thm}
 
 \begin{thm}
@@ -119,7 +125,7 @@ Nếu A B không độc lập
 P(A + B) = P(A) + P(B) - P(AB)
 \end{equation}
 \begin{equation}
-    P(AB) = P(A)P(B) - P(A + B)
+    P(AB) = P(B|A)P(A) = P(A|B)P(B) = P(A) + P(B) - P(A + B)
 \end{equation}
 \end{thm}
 
@@ -155,6 +161,25 @@ Công thức Bayes
 \begin{equation}
 P(A_i|F) = \frac{P(F|A_i)P(A_i)}{P(F)}
 \end{equation}
+Mở rộng cho 3 biến cố A, B C độc lập:
+\begin{equation}
+P(A|BC) = \frac{P(BC|A)P(A)}{P(BC)} = \frac{P(B|A) P(C|A) P(A)}{P(B)P(C)}
+\end{equation}
+Trường hợp $A, B_1 = B_2 = ... = B_n$:
+\begin{equation}
+P(A|B_1B_2...B_n) = \frac{P(B|A)^n P(A)}{P(B)^n}
+\end{equation}
+\end{thm}
+
+\begin{thm}
+    Chứng minh biến cố A B độc lập, ta cần chứng minh 1 trong 2 cách sau:
+    \begin{enumerate}
+        \item $P(AB) = P(A)P(B)$
+        \item $P(A|B) = P(A)$ hoặc $P(B|A) = P(B)$
+    \end{enumerate}
+    Lưu ý: $P(A+B) = P(A) + P(B)$ không phải là điều kiện để A B độc lập \\
+    phải tìm $P(AB)$ từ $P(AB) = P(A)P(B) - P(A+B)$, rồi kiểm tra như trên
+
 \end{thm}
 
 \subsection{Công thức Bernoulli}
@@ -230,6 +255,10 @@ P(X < a) = \int_{-\infty}^a f(x)dx
 Cách tìm hằng số chuẩn hóa
 \begin {equation}
 1 = \int_{-\infty}^{\infty} Cf(x)dx = C\int_a^b f(x)dx = CF(x)|^b_a = CF(b) - CF(a)
+\end{equation}
+hoặc đơn giản hơn:
+\begin{equation}
+    C = \frac{1}{\int_{-\infty}^{\infty}f(x)dx} = \frac{1}{\int_{a}^{b}f(x)dx}
 \end{equation}
 \end{thm}
 
@@ -335,7 +364,6 @@ Cách tìm hằng số chuẩn hóa
     \begin{equation}
     Var(X) = p(1 - p)
     \end{equation}
-    Xem lại công thức Bernoulli ở mục 1.3 (12).
 \end{thm}
 
 \subsection{Phân phối nhị thức}
@@ -481,6 +509,18 @@ Cách tìm hằng số chuẩn hóa
 \end{thm}
 
 \begin{thm}
+    Dùng hiệu chỉnh liên tục để tính xác xuất $P(X =a)$:
+    \begin{equation}
+        P(X = a) \approx P(a - \frac{1}{2} < X < a + \frac{1}{2}) \approx \Phi(\frac{a + \frac{1}{2} - \mu}{\sigma}) - \Phi(\frac{a - \frac{1}{2} - \mu}{\sigma})
+    \end{equation}
+    Dùng hiệu chỉnh rời rạc để tính xác xuất $P( a \leq X \leq b)$:
+    \begin{equation}
+        P(a \leq X \leq b) \approx P(a - \frac{1}{2} < X < b + \frac{1}{2}) \approx \Phi(\frac{b + \frac{1}{2} - \mu}{\sigma}) - \Phi(\frac{a - \frac{1}{2} - \mu}{\sigma})
+    \end{equation}
+
+\end{thm}
+
+\begin{thm}
     Chuyển từ phân phối chuẩn sang phân phối nhị thức:
     \begin{equation}
         N(\mu, \sigma^2) \sim B(n, p) \text{ với } p = \frac{\mu}{\sigma^2}, n = \frac{\sigma^2}{p(1 - p)}
@@ -498,6 +538,13 @@ Cách tìm hằng số chuẩn hóa
     gọi tên các biến cố bằng ký hiệu, tính xác suất các biến cố đó
     \item Tìm công thức cần tính
 \end{enumerate}
+
+\subsection{Dấu hiệu của các phân phối}
+Phân phối nhị thức: số lượng + xác suất \\
+Phân phối Poisson: số lượng + thời gian \\
+Phân phối chuẩn: kỳ vọng (trung bình) + độ lệch chuẩn \\
+
+\subsection{Một số ví dụ}
 Ví dụ: Trong một cửa hiệu kinh doanh điện thoại di động, tỉ lệ điện
 thoại di động của hãng Nokia, Samsung và Iphone lần lượt là 20\%, 50\% và 30\%. Tỉ
 lệ bị trục trặc (về cài đặt) trong thời gian bảo hành của các loại diện thoại di động

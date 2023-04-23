@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.4.14)  23 APR 2023 09:42
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.4.14)  23 APR 2023 12:57
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -645,43 +645,48 @@ Non-PDF special ignored!
 Non-PDF special ignored!
 <special> ps:0.8 setlinewidth 0 setgray
 {c:/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] [3] [4] [5] [6] [7]
-<nd1.png, id=232, 742.775pt x 626.84187pt>
+Underfull \hbox (badness 10000) in paragraph at lines 543--546
+
+ []
+
+[8]
+<nd1.png, id=253, 742.775pt x 626.84187pt>
 File: nd1.png Graphic file (type png)
 <use nd1.png>
-Package pdftex.def Info: nd1.png  used on input line 577.
+Package pdftex.def Info: nd1.png  used on input line 624.
 (pdftex.def)             Requested size: 657.65854pt x 555.02762pt.
 
-Overfull \hbox (151.76854pt too wide) in paragraph at lines 577--578
+Overfull \hbox (151.76854pt too wide) in paragraph at lines 624--625
  [][] 
  []
 
-<nd2.png, id=234, 733.74126pt x 617.80812pt>
+<nd2.png, id=255, 733.74126pt x 617.80812pt>
 File: nd2.png Graphic file (type png)
 <use nd2.png>
-Package pdftex.def Info: nd2.png  used on input line 584.
+Package pdftex.def Info: nd2.png  used on input line 631.
 (pdftex.def)             Requested size: 657.65854pt x 553.77855pt.
 
-Overfull \hbox (151.76854pt too wide) in paragraph at lines 584--585
+Overfull \hbox (151.76854pt too wide) in paragraph at lines 631--632
  [][] 
  []
 
-[8] [9 <./nd1.png>] [10 <./nd2.png>] (./XSTK.aux)
+[9] [10 <./nd1.png>] [11 <./nd2.png>] (./XSTK.aux)
 Package rerunfilecheck Info: File `XSTK.out' has not changed.
-(rerunfilecheck)             Checksum: 1CE1525B2874B6B063E3B54E346B303F;2970.
+(rerunfilecheck)             Checksum: 694A2517F5F19E79BA0484D0C56FBBFD;3330.
  ) 
 Here is how much of TeX's memory you used:
- 18780 strings out of 476017
- 314933 string characters out of 5793766
- 1865660 words of memory out of 5000000
- 38808 multiletter control sequences out of 15000+600000
+ 18796 strings out of 476017
+ 315121 string characters out of 5793766
+ 1866660 words of memory out of 5000000
+ 38810 multiletter control sequences out of 15000+600000
  531541 words of font info for 74 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,9n,76p,473b,536s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,9n,76p,473b,540s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb><c:/texlive/2023/texmf-dist/fonts/type1/vntex/vnr/vnbx12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/vntex/vnr/vnr12.pfb><c:/texlive/2023/texmf-dist/fonts/type1/vntex/vnr/vnr17.pfb><c:/texlive/2023/texmf-dist/fonts/type1/vntex/vnr/vnti12.pfb>
-Output written on XSTK.pdf (10 pages, 609863 bytes).
+Output written on XSTK.pdf (11 pages, 613545 bytes).
 PDF statistics:
- 352 PDF objects out of 1000 (max. 8388607)
- 302 compressed objects within 4 object streams
- 148 named destinations out of 1000 (max. 500000)
- 139 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 377 PDF objects out of 1000 (max. 8388607)
+ 326 compressed objects within 4 object streams
+ 162 named destinations out of 1000 (max. 500000)
+ 155 words of extra memory for PDF output out of 10000 (max. 10000000)
 
