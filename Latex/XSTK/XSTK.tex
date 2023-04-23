@@ -96,10 +96,17 @@ xxxxxxxxxxxxxxxxxxxxxxxxxxxxx \kill}
 \begin{thm}
 $P(A)$ được gọi là xác suất của biến cố A
 \begin{equation}
-    P(A + B) = P( A \cup B)
+    P(A + B) = P( A \cup B) 
 \end{equation}
 \begin{equation}
-   P(A)P(B) = P(A \cap B) 
+    P(A)P(B) = P(A \cap B) 
+ \end{equation}0
+\begin{equation}
+    P(A + B) = P(A) + P(B) - P(AB)
+    \end{equation}
+Nếu A B xung khắc:
+\begin{equation}
+P(A + B) = P(A) + P(B) 
 \end{equation}
 \end{thm}
 
@@ -110,10 +117,6 @@ P(\bar{A}) = 1 - P(A)
 \end{equation}
 \end{thm}
 \begin{thm}
-Nếu A B độc lập
-\begin{equation}
-P(A + B) = P(A) + P(B) 
-\end{equation}
 \begin{equation}
     P(AB) = P(A)P(B)
 \end{equation}
@@ -121,9 +124,6 @@ P(A + B) = P(A) + P(B)
 
 \begin{thm}
 Nếu A B không độc lập
-\begin{equation}
-P(A + B) = P(A) + P(B) - P(AB)
-\end{equation}
 \begin{equation}
     P(AB) = P(B|A)P(A) = P(A|B)P(B) = P(A) + P(B) - P(A + B)
 \end{equation}
@@ -418,7 +418,11 @@ hoặc đơn giản hơn:
  
 \subsection{Phân phối siêu bội}
 \begin{thm}
-    Xét tập N trong đó có M phần tử có tính chất P và N-M phần tử không có tính chất P. chọn k phần tử khác nhau không phân biệt từ N phần tử. Gọi X là số phần tử có tính chất P trong k phần tử đã chọn. X có phân phối siêu bội với 3 tham số N, M, k. Ký hiệu $X \sim H(N, M, k)$, khi đó:
+    Xét tập N trong đó có M phần tử có tính chất P và N-M phần tử không có tính chất P. 
+    Chọn k phần tử khác nhau không phân biệt từ N phần tử. 
+    Gọi X là số phần tử có tính chất P trong k phần tử đã chọn. 
+    X có phân phối siêu bội với 3 tham số N, M, n. 
+    Ký hiệu $X \sim H(N, M, n)$, khi đó:
     \begin{equation}
         P(X = k) = \frac{C_M^k C_{N-M}^{n-k}}{C_N^n}
     \end{equation}
@@ -429,10 +433,16 @@ hoặc đơn giản hơn:
         P(X \leq k) = \sum_{i=0}^k \frac{C_M^i C_{N-M}^{n-i}}{C_N^n}
     \end{equation}
     \begin{equation}
-        E(X) = \frac{Mk}{N}
+        E(X) = \frac{Mn}{N}
     \end{equation}
     \begin{equation}
-        Var(X) = \frac{N-k}{N-1}k\frac{M}{N}(1 - \frac{M}{N})
+        Var(X) = \frac{N-n}{N-1}n\frac{M}{N}(1 - \frac{M}{N})
+    \end{equation}
+\end{thm}
+\begin{thm}
+    Chuyển từ phân phối siêu bội sang phân phối nhị thức:
+    \begin{equation}
+    H(N, M, n) \sim B(n, \frac{M}{N})
     \end{equation}
 \end{thm}
 
@@ -504,6 +514,10 @@ hoặc đơn giản hơn:
     Cách tính $\Phi(z)$:
     \begin{equation}
         \Phi(z) = \int_{-\infty}^z \frac{1}{\sqrt{2\pi}}e^{-\frac{t^2}{2}}dt = \frac{1}{2} + \int_{0}^z \frac{1}{\sqrt{2\pi}}e^{-\frac{t^2}{2}}dt
+    \end{equation}
+    Do $\frac{1}{2}$ bị triệt tiêu, nên:
+    \begin{equation}
+        \Phi(B) - \Phi(A) = \int_{0}^b \frac{1}{\sqrt{2\pi}}e^{-\frac{t^2}{2}}dt - \int_{0}^a \frac{1}{\sqrt{2\pi}}e^{-\frac{t^2}{2}}dt = \int_{a}^b \frac{1}{\sqrt{2\pi}}e^{-\frac{t^2}{2}}dt
     \end{equation}
     Hoặc xem bảng giá trị \ref{fig:nd1} và \ref{fig:nd2}
 \end{thm}
