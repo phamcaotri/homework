@@ -1,9 +1,9 @@
 # Fdb version 4
-["pdflatex"] 1682178663 "c:/Users/caotr/Documents/GitHub/homework/Latex/XSTK.tex" "XSTK.pdf" "XSTK" 1682178664 0
-  "XSTK.aux" 1682178664 2389 ae6288875213bffc26a20721b48e5f92 "pdflatex"
-  "XSTK.out" 1682178664 2417 831c46ee6bb87adaffd264bc176cbd5d "pdflatex"
-  "XSTK.tex" 1682178662 14409 67cc765f8da94748e484dd98b9d288ee ""
-  "c:/Users/caotr/Documents/GitHub/homework/Latex/XSTK.tex" 1682178662 14409 67cc765f8da94748e484dd98b9d288ee ""
+["pdflatex"] 1682217745 "c:/Users/caotr/Documents/GitHub/homework/Latex/XSTK/XSTK.tex" "XSTK.pdf" "XSTK" 1682217747 0
+  "XSTK.aux" 1682217746 3225 27014651933ee740c7565ca157b35239 "pdflatex"
+  "XSTK.out" 1682217746 2970 1ce1525b2874b6b063e3b54e346b303f "pdflatex"
+  "XSTK.tex" 1682217743 21815 0392e4beb22bf34c42379588ccf96ec3 ""
+  "c:/Users/caotr/Documents/GitHub/homework/Latex/XSTK/XSTK.tex" 1682217743 21815 0392e4beb22bf34c42379588ccf96ec3 ""
   "c:/texlive/2023/texmf-dist/fonts/map/fontname/texfonts.map" 1681437329 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "c:/texlive/2023/texmf-dist/fonts/tfm/jknappen/ec/ecrm1200.tfm" 1681436318 3584 f80ddd985bd00e29e9a6047ebd9d4781 ""
   "c:/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1681432990 1004 54797486969f23fa377b128694d548df ""
@@ -25,6 +25,8 @@
   "c:/texlive/2023/texmf-dist/fonts/tfm/vntex/vnr/vnbx12.tfm" 1681446600 4020 c48f3c7e11edde839ff6260300faa1bb ""
   "c:/texlive/2023/texmf-dist/fonts/tfm/vntex/vnr/vnr12.tfm" 1681446600 3984 be7b630197255361b12d153ce5e1bc5b ""
   "c:/texlive/2023/texmf-dist/fonts/tfm/vntex/vnr/vnr17.tfm" 1681446600 3992 d482fc893730ca253996c4cee0a15c44 ""
+  "c:/texlive/2023/texmf-dist/fonts/tfm/vntex/vnr/vnr6.tfm" 1681446600 3988 1f6bc3097731d87cba5c55c000fe39f4 ""
+  "c:/texlive/2023/texmf-dist/fonts/tfm/vntex/vnr/vnr8.tfm" 1681446600 3984 233206e6f80a2fd00ed2ee2bf783da65 ""
   "c:/texlive/2023/texmf-dist/fonts/tfm/vntex/vnr/vnti12.tfm" 1681446600 3380 18cd826d09b074a189366fe693e1263c ""
   "c:/texlive/2023/texmf-dist/fonts/tfm/vntex/vnr/vnti7.tfm" 1681446600 3384 cf6b3f398cf5997454f4ffcb241de139 ""
   "c:/texlive/2023/texmf-dist/fonts/tfm/vntex/vnr/vnti8.tfm" 1681446600 3388 e070eac137e48970dc22ca83b4ff0950 ""
@@ -38,6 +40,7 @@
   "c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb" 1681432990 32569 5e5ddc8df908dea60932f3c484a54c0d ""
   "c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb" 1681432990 32587 65067f817f408bc71a7312f3d9828a9b ""
   "c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb" 1681432990 32626 5abc8bb2f28aa647d4c70f8ea38cc0d3 ""
+  "c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb" 1681432990 30273 87a352d78b6810ae5cfdc68d2fb827b2 ""
   "c:/texlive/2023/texmf-dist/fonts/type1/vntex/vnr/vnbx12.pfb" 1681446600 41089 cd085a6112214f1ec9535fe0d1ee127f ""
   "c:/texlive/2023/texmf-dist/fonts/type1/vntex/vnr/vnr12.pfb" 1681446600 40319 02110ade360715fbba33c66db50ef607 ""
   "c:/texlive/2023/texmf-dist/fonts/type1/vntex/vnr/vnr17.pfb" 1681446600 40384 b6b332b554db567a0151da5ffb2a1eaa ""
@@ -148,6 +151,8 @@
   "c:/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1681447370 4683147 9a6f76ba1d2531f688b92e219d43aae8 ""
   "c:/texlive/2023/texmf-var/web2c/pdftex/pdflatex.fmt" 1681447499 7885550 e4aab4cd71e011882fea57785dedf048 ""
   "c:/texlive/2023/texmf.cnf" 1681447351 713 e69b156964470283e0530f5060668171 ""
+  "nd1.png" 1682179275 304820 8f9fcbd3a6b1ae2af1d253073c3b6703 ""
+  "nd2.png" 1682179300 303158 bdb52f490d111ce54d6b4fb1a4297802 ""
   (generated)
   "XSTK.aux"
   "XSTK.log"

@@ -42,6 +42,9 @@ class Matrix {
                 a[i].resize(col);
             }
         }
+        string getType() {
+            return type;
+        }
 
         void resize(int n) {
             row = col = n;
@@ -194,6 +197,55 @@ class Matrix {
 
 };
 
+Matrix calculate( string s, Matrix a[], int begin, int end) {
+    if (begin == end) {
+        return a[begin];
+    }
+    int i = begin;
+    while (i < end) {
+        if (s[i] == '(') {
+            int j = i+1;
+            int count = 1;
+            while (count != 0) {
+                if (s[j] == '(') {
+                    count++;
+                } else if (s[j] == ')') {
+                    count--;
+                }
+                j++;
+            }
+            a[i] = calculate(s, a, i+1, j-2);
+            i = j-1;
+        }
+        i++;
+    }
+    i = begin;
+    while (i < end) {
+        if (s[i] == '*') {
+            a[i-1] = a[i-1] * a[i+1];
+            for (int j = i; j < end; j++) {
+                a[j] = a[j+2];
+            }
+            end -= 2;
+            i--;
+        }
+        i++;
+    }
+    i = begin;
+    while (i < end) {
+        if (s[i] == '+') {
+            a[i-1] = a[i-1] + a[i+1];
+            for (int j = i; j < end; j++) {
+                a[j] = a[j+2];
+            }
+            end -= 2;
+            i--;
+        }
+        i++;
+    }
+    return a[begin];
+
+}
 
 int main() {
     int n;
@@ -220,44 +272,11 @@ int main() {
     string s;
     cin >> s;
     string s2 = "";
-    bool flag = false;
-    for (auto i = 0; i < s.size(); i++) {
-        if (s[i] == '|' and s[i+2] == '>') {
-            if (flag) {
-                s2 += '*';
-            }
-            s2 += '!';
-            s2 += s[i+1];
-            i += 2;
-            flag = true;
-        } else if (isalpha(s[i])) {
-            if (flag) {
-                s2 += '*';
-            }
-            s2 += s[i];
-            flag = true;
-        } 
-    }
+    bool flag = false; // xem có phải là toán tử đầu tiên không
+    // xử lý string thành dạng chuẩn, ví dụ c<b|a|b> => c*(b*a*!b)
+
     cout << s2 << endl;
-    stack<Matrix> st;
-    for (auto i = 0; i < s2.size(); i++) {
-        if (isalpha(s2[i])) {
-            st.push(a[s2[i]-'a']);
-        } else if (s2[i] == '*') {
-            Matrix x = st.top();
-            st.pop();
-            if (s2[i+1] == '!') {
-                Matrix y = !a[s2[i+2]-'a'];
-                i += 2;
-                st.push(x*y);
-                continue;
-            }
-            Matrix y = a[s2[i+1]-'a'];
-            i++;
-            st.push(y*x);
-        }
-    }
-    st.top().output();
+    calculate(s2, a, 0, s2.size()-1).output();
 
     return 0;
 }
