@@ -1,3 +1,15 @@
+/*###Begin banned keyword - each of the following line if appear in code will raise error. regex supported
+define
+include
+using
+###End banned keyword*/
+
+#include <iostream>
+#include <cstring>
+#include <string>
+using namespace std;
+
+//###INSERT CODE HERE -
 struct Node {
     int data;
     Node* next;
@@ -22,6 +34,11 @@ Node* getNode(int x) {
     return new_node;
 }
 void concate(List &l1, List &l2) {
+    if (l1.head == NULL) {
+        l1.head = l2.head;
+        l1.tail = l2.tail;
+        return;
+    }
     l1.tail->next = l2.head;
     l1.tail = l2.tail;
 }
@@ -59,4 +76,28 @@ void outputList(List &l) {
         this_node = this_node->next;
     }
     cout << endl;
+}
+
+int main()
+{
+    List L1, L2;
+    Init(L1);Init(L2);
+
+    int n; cin>>n;
+    inputList(L1,n);
+    cout<<"Created 1st List: "<<endl;
+    outputList(L1);
+    cout<<endl;
+
+    cin>>n;
+    inputList(L2,n);
+    cout<<"Created 2nd List: "<<endl;
+    outputList(L2);
+    cout<<endl;
+
+    concate(L1,L2); // Noi L2 vao L1
+    cout<<"Updated L1: "<<endl;
+    outputList(L1);
+
+    return 0;
 }
