@@ -16,18 +16,18 @@
 using namespace std;
 
 
-// bra là vector dưới dạng hàng, ket là vector dưới dạng cột
+// bra is row vector, ket is column vector
 class Matrix {
     private:
         vector<vector<complex>> a;
-        // 1: scalar, 2: vector, 3: ma trận
+        // 1: scalar, 2: vector, 3: operator
         string type;
         bool bra; // 1: bra, 0: ket
         int row = 0;
         int col = 0;
 
     public:
-        Matrix(int n = 0) { // khởi tạo ma trận dưới dạng operator hoặc bra
+        Matrix(int n = 0) {
             row = col = n;
             a.resize(n);
             loop_i(n) {
@@ -61,7 +61,7 @@ class Matrix {
                 a[i].resize(col);
             }
         }
-        void operatorInput() { // nhập ma trận dưới dạng operator
+        void operatorInput() {
             loop_ij(row,col) {
                 double x, y;
                 cin >> x >> y;
@@ -69,7 +69,7 @@ class Matrix {
             }
             type = "operator";
         }
-        void vectorInput() { // nhập vector dưới dạng bra
+        void vectorInput() { // bra
             loop_i(col) {
                 double x, y;
                 cin >> x >> y;
@@ -78,7 +78,7 @@ class Matrix {
             type = "vector";
             bra = true;
         }
-        void vectorInput2() { // nhập vector dưới dạng ket
+        void vectorInput2() { // ket
             loop_j(row) {
                 double x, y;
                 cin >> x >> y;
@@ -87,7 +87,7 @@ class Matrix {
             type = "vector";
             bra = false;
         }
-        void scalarInput() { // nhập số phức dưới dạng scalar
+        void scalarInput() {
             double x, y;
             cin >> x >> y;
             a[0][0] = complex(x, y);
@@ -153,7 +153,7 @@ class Matrix {
         }
         friend Matrix operator*(Matrix a, Matrix b) {
             string type = multication_product(a, b);
-            // nếu là scalar thì triển khai thuật toán bra*ket
+            // if scalar, do bra*ket
             if (type == "scalar") {
                 Matrix c(1);
                 c(0, 0) = 0;
@@ -164,7 +164,7 @@ class Matrix {
                 return c;
             } else if (type == "vector" or type == "operator") {
                 if (a.col != b.row) {
-                    return b*a; // fix tạm, hi vọng không bị lỗi
+                    return b*a; // noted
                 }
                 Matrix c(a.row, b.col);
                 loop_ij(c.row,c.col) {
@@ -196,6 +196,7 @@ class Matrix {
 
 
 };
+
 
 Matrix calculate( string s, Matrix a[], int begin, int end) {
     if (begin == end) {
@@ -245,7 +246,7 @@ Matrix calculate( string s, Matrix a[], int begin, int end) {
     }
     return a[begin];
 
-}
+};
 
 int main() {
     int n;
@@ -271,12 +272,15 @@ int main() {
     }
     string s;
     cin >> s;
-    string s2 = "";
-    bool flag = false; // xem có phải là toán tử đầu tiên không
-    // xử lý string thành dạng chuẩn, ví dụ c<b|a|b> => c*(b*a*!b)
-
-    cout << s2 << endl;
-    calculate(s2, a, 0, s2.size()-1).output();
+    //string s2 = "";
+    //c<b|a|b> => c*(b*a*!b)
+    for (int i = 0; i < s.size(); i++) {
+        if (isalpha(s[i])) {
+            s2.push_back(s.substr(i, 1));
+        } else 
+    }
+    //cout << s2 << endl;
+    //calculate(s2, a, 0, s2.size()-1).output();
 
     return 0;
 }

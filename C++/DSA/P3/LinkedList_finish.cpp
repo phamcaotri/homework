@@ -116,6 +116,25 @@ void deleteHead(List &l) {
     }
 }
 
+void deleteTail(List &l) {
+    // trường hợp danh sách rỗng
+    if (l.head == NULL)
+        return;
+    // trường hợp danh sách có 1 phần tử
+    if (l.head == l.tail) {
+        deleteHead(l);
+        return;
+    }
+    // trường hợp danh sách có nhiều phần tử
+    Node* this_node = l.head;
+    while (this_node->next != l.tail) {
+        this_node = this_node->next;
+    }
+    this_node->next = NULL;
+    delete l.tail;
+    l.tail = this_node;
+}
+
 void deleteFirstNodeEqual(List &l, int x) {
     // trường hợp danh sách rỗng
     if (l.head == NULL) {

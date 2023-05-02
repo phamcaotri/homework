@@ -64,19 +64,28 @@ void outputList(List &l) {
     cout << endl;
 }
 
-node* findMiddle(List &l) {
+void addHead(List &l, int x) {
+    node* new_node = getnode(x);
     // trường hợp danh sách rỗng
     if (l.pHead == NULL) {
-        return NULL;
+        l.pHead = l.pTail = new_node;
     }
+    else {
+    // trường hợp danh sách không rỗng
+        new_node->next = l.pHead;
+        l.pHead = new_node;
+    }
+}
+
+void moveLastToFront(List &l) {
+    if(l.pHead == NULL or l.pHead->next == NULL) return;
     node* this_node = l.pHead;
-    // đếm từ 1
-    int count = 0;
-    while (count < l.size/2) {
-        count++;
+    while (this_node->next != l.pTail) {
         this_node = this_node->next;
     }
-    return this_node;
+    addHead(l, l.pTail->info);
+    l.pTail = this_node;
+    this_node->next = NULL;
 }
 int main()
 {
@@ -88,8 +97,8 @@ int main()
     outputList(L);
     cout<<endl;
 
-    node *p=findMiddle(L); //Neu so phan tu chan thi co 2 phan tu chinh giua, chi xuat phan tu chinh giua thu 2
-    if(p)cout<<"The middle element is "<<p->info;
-
+    moveLastToFront(L); //di chuyen node cuoi ve dau danh sach
+    cout<<"Updated List after moving the last element to front of L: "<<endl;
+    outputList(L);
     return 0;
 }
