@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <math.h>
+#include <algorithm>
 using std::cout, std::cin, std::endl, std::string, std::vector;
 
 class Item {
@@ -12,6 +13,7 @@ class Item {
         Item() {
             name = "NoName";
             price = 0;
+
         }
         Item(string name, int price) {
             this->name = name;
@@ -51,6 +53,10 @@ class Level {
             this->exp = exp;
             setMaxExp();
         }
+        void addExp(int exp) {
+            this->exp += exp;
+            setMaxExp();
+        }
         void setMaxExp() {
             while (exp >= maxExp) {
                 exp -= maxExp;
@@ -70,10 +76,6 @@ class Level {
         int calMaxExp() {
             return lv*(500+lv*250);
         }
-        void addExp(int exp) {
-            this->exp += exp;
-            setMaxExp();
-        }
 };
 
 class Inventory {
@@ -82,24 +84,54 @@ class Inventory {
 
     public:
         Inventory() {}
-        void addItem(Item item, int amount) {
+        Inventory(vector<std::pair<Item, int>> items) {
+            this->items = items;
+        }
+        Item getItem(int index) {
+            return items[index].first;
+        }
+        int getAmount(int index) {
+            return items[index].second;
+        }
+        int getSize() {
+            return items.size();
+        }
+        string getItemName(int index) {
+            return items[index].first.getName();
+        }
+        int getItemPrice(int index) {
+            return items[index].first.getPrice();
+        }
+        bool isContain(Item item, int& index) {
             for (int i = 0; i < items.size(); i++) {
-                if (items[i].first.getName() == item.getName()) {
-                    items[i].second += amount;
+                if (getItemName(i) == item.getName()) {
+                    index = i;
+                    return true;
+                }
+            }
+            index = -1;
+            return false;
+        }
+        void addItem(Item item, int amount) {
+            // if item is already in inventory, increase amount
+            int index = -1;
+            if (isContain(item, index)) {
+                items[index].second += amount;
+                return;
+            }
+            // if not, add item in price order
+            for (int i = 0; i < items.size(); i++) {
+                if (item.getPrice() < getItemPrice(i)) {
+                    items.insert(items.begin()+i, std::make_pair(item, amount));
                     return;
                 }
             }
             items.push_back(std::make_pair(item, amount));
         }
-        void removeItem(Item item, int amount) {
-            for (int i = 0; i < items.size(); i++) {
-                if (items[i].first.getName() == item.getName()) {
-                    items[i].second -= amount;
-                    if (items[i].second <= 0) {
-                        items.erase(items.begin()+i);
-                    }
-                    return;
-                }
+        void removeItem(int index, int amount) {
+            items[index].second -= amount;
+            if (items[index].second <= 0) {
+                items.erase(items.begin()+index);
             }
         }
         void showItems() {
@@ -108,11 +140,17 @@ class Inventory {
                 return;
             }
             for (int i = 0; i < items.size(); i++) {
-                cout << items[i].first.getName() << " x" << items[i].second << endl;
+                cout << i+1 << ". " << items[i].first.getName() << " x" << items[i].second << endl;
             }
         }
-        vector<std::pair<Item, int>> getItems() {
-            return items;
+        void showItemsWithPrice(float multiplier = 1.0) {
+            if (items.size() == 0) {
+                cout << "No items" << endl;
+                return;
+            }
+            for (int i = 0; i < items.size(); i++) {
+                cout << i+1 << ". " << items[i].first.getName() << " x" << items[i].second << " - " << items[i].first.getPrice()*multiplier << endl;
+            }
         }
 }; 
 
@@ -161,26 +199,34 @@ class Character {
         void addExp(int exp) {
             lv.addExp(exp);
         }
+        Item getItem(int index) {
+            return Inventory.getItem(index);
+        }
+        int getAmount(int index) {
+            return Inventory.getAmount(index);
+        }
+        int getSize() {
+            return Inventory.getSize();
+        }
         void addItem(Item item, int amount) {
             Inventory.addItem(item, amount);
         }
-        void removeItem(Item item, int amount) {
-            Inventory.removeItem(item, amount);
+        void removeItem(int index, int amount) {
+            Inventory.removeItem(index, amount);
         }
         void showItems() {
             Inventory.showItems();
         }
-        vector<std::pair<Item, int>> getItems() {
-            return Inventory.getItems();
-        }
 
 };
+
+const int INFINITY_AMOUNT = 999999999;
 
 class Shop {
     private:
         string name;
-        vector<std::pair<Item, int>> items;
-        static const int infinity = 999999999;
+        Inventory items;
+        float priceMultiplier;
     public:
         Shop() {
             name = "NoName";
@@ -195,63 +241,37 @@ class Shop {
             return name;
         }
         void addItem(Item item, int amount = 1) {
-            items.push_back(std::make_pair(item, amount));
+            items.addItem(item, amount);
         }
-        void removeItem(int index) {
-            if (index >= 0 && index < items.size()) {
-                items.erase(items.begin()+index);
-                return;
-            }
-            cout << "cannot removed" << endl;
-        }
-        void removeItem(string name) {
-            for (int i = 0; i < items.size(); i++) {
-                if (items[i].first.getName() == name) {
-                    items.erase(items.begin()+i);
-                    break;
-                }
-            }
-            cout << "cannot removed" << endl;
+        void removeItem(int index, int amount = 1) {
+            items.removeItem(index, amount);
         }
         void showItems() {
-            cout << "Shop: " << name << endl;
-            for (int i = 0; i < items.size(); i++) {
-                cout << i+1 << ". " << items[i].first.getName() << " - " << items[i].first.getPrice() << " gold" << " x" << items[i].second << endl;
-            }
+            items.showItemsWithPrice(priceMultiplier);
         }
         Item getItem(int index) {
-            return items[index].first;
-        }
-        Item getItem(string name) {
-            for (int i = 0; i < items.size(); i++) {
-                if (items[i].first.getName() == name) {
-                    return items[i].first;
-                }
-            }
-            return Item();
+            return items.getItem(index);
         }
         int getSize() {
-            return items.size();
+            return items.getSize();
         }
-        void Buy(Item item, Character &player) {
+        void Buy(int shop_item_index, Character &player) {
+            Item item = getItem(shop_item_index);
             if (player.getGold() >= item.getPrice()) {
-                player.setGold(player.getGold()-item.getPrice());
+                player.addGold(-item.getPrice());
+                removeItem(shop_item_index);
                 player.addItem(item, 1);
                 cout << "You bought " << item.getName() << " for " << item.getPrice() << " gold." << endl;
             } else {
                 cout << "You don't have enough gold to buy " << item.getName() << "." << endl;
             }
         }
-        void Sell(Item item, Character &player) {
-            for (int i = 0; i < player.getItems().size(); i++) {
-                if (player.getItems()[i].first.getName() == item.getName()) {
-                    player.removeItem(item, 1);
-                    player.setGold(player.getGold()+item.getPrice());
-                    cout << "You sold " << item.getName() << " for " << item.getPrice() << " gold." << endl;
-                    return;
-                }
-            }
-            cout << "You don't have " << item.getName() << "." << endl;
+        void Sell(Character &player, int player_item_index, int amount = 1) {
+            Item item = player.getItem(player_item_index);
+            player.removeItem(player_item_index, amount);
+            addItem(item, amount);
+            player.addGold(item.getPrice());
+            cout << "You sold " << item.getName() << " for " << item.getPrice() << " gold." << endl;
         }
 };
 
@@ -294,11 +314,12 @@ class GameInterface {
             cout << "5. Exit" << endl;
         }
         void BuyItem() {
+            shop.showItems();
             int index;
             cout << "Enter item index: ";
             cin >> index;
             if (index > 0 && index <= shop.getSize()) {
-                shop.Buy(shop.getItem(index-1), player);
+                shop.Buy(index-1, player);
             } else {
                 cout << "Invalid index." << endl;
             }
@@ -308,7 +329,7 @@ class GameInterface {
             cout << "Enter item index: ";
             cin >> index;
             if (index > 0 && index <= shop.getSize()) {
-                shop.Sell(shop.getItem(index-1), player);
+                shop.Sell(player, index-1);
             } else {
                 cout << "Invalid index." << endl;
             }
@@ -345,6 +366,7 @@ class GameInterface {
         }
 
 };
+
 int main() {
     Character player("Mike8", 100);
     Shop shop("Shop");
