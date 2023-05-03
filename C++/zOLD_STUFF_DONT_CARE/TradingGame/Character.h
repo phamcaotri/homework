@@ -9,26 +9,26 @@ class Character {
     protected:
         string name;
         Level lv;
-        int gold;
+        int coin;
         Inventory Inventory;
     public:
         Character() {
             name = "NoName";
-            gold = 0;
+            coin = 0;
         }
         Character(string name) {
             this->name = name;
-            gold = 0;
+            coin = 0;
         }
         Character(string name, int gold) {
             this->name = name;
-            this->gold = gold;
+            this->coin = gold;
         }
         void showInfo() {
             cout << "Name: " << name << endl;
             cout << "Lv: " << lv.getLv() << endl;
             cout << "Exp: " << lv.getExp() << "/" << lv.getMaxExp() << endl;
-            cout << "Gold: " << gold << endl;
+            cout << "Cold: " << coin << endl;
             cout << "Items: " << endl;
             Inventory.showItems();
         }
@@ -36,16 +36,16 @@ class Character {
             this->name = name;
         }
         void setGold(int gold) {
-            this->gold = gold;
+            this->coin = gold;
         }
         string getName() {
             return name;
         }
         int getGold() {
-            return gold;
+            return coin;
         }
         void addGold(int gold) {
-            this->gold += gold;
+            this->coin += gold;
         }
         void addExp(int exp) {
             lv.addExp(exp);
@@ -67,6 +67,9 @@ class Character {
         }
         void showItems() {
             Inventory.showItems();
+        }
+        void showItemsWithPrice(float priceMultiplier = 1.0) {
+            Inventory.showItemsWithPrice(priceMultiplier);
         }
 
 };

@@ -64,7 +64,7 @@ class Inventory {
         }
         void showItems() {
             if (items.size() == 0) {
-                cout << "No items" << endl;
+                cout << "Empty" << endl;
                 return;
             }
             for (int i = 0; i < items.size(); i++) {
@@ -73,7 +73,7 @@ class Inventory {
         }
         void showItemsWithPrice(float multiplier = 1.0) {
             if (items.size() == 0) {
-                cout << "No items" << endl;
+                cout << "Empty" << endl;
                 return;
             }
             for (int i = 0; i < items.size(); i++) {

@@ -54,6 +54,7 @@ class GameInterface {
             }
         }
         void SellItem() {
+            player.showItemsWithPrice();
             int index;
             cout << "Enter item index: ";
             cin >> index;

@@ -1,14 +1,11 @@
 #include "GameInterface.h"
+#include "DatabaseReader.h"
 
 int main() {
     Character player("Mike8", 100);
     Shop shop("Shop");
-    shop.addItem(Item("Rice", 10));
-    shop.addItem(Item("Sugar", 20));
-    shop.addItem(Item("Wood", 30));
-    shop.addItem(Item("Iron", 40));
-    shop.addItem(Item("Oil", 50));
-    shop.addItem(Item("Silver", 100));
+    ItemReader reader("ItemDatabase.txt");
+    shop.setInventory(reader.getInventory());
     GameInterface game(player, shop);
     game.run();
     return 0;

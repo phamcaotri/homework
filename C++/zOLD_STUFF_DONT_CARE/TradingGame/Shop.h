@@ -27,6 +27,9 @@ class Shop {
         string getName() {
             return name;
         }
+        void setInventory(Inventory items) {
+            this->items = items;
+        }
         void addItem(Item item, int amount = 1) {
             items.addItem(item, amount);
         }

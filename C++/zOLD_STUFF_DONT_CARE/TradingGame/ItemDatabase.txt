@@ -1,0 +1,45 @@
+Wood
+15
+A common material for building ships and houses.
+Rum
+25
+A popular drink among sailors and pirates.
+Sugar
+35
+A sweet commodity that can be refined into molasses or rum.
+Cotton
+45
+A soft fiber that can be woven into cloth or clothing.
+Tobacco
+55
+A dried plant that can be smoked or chewed for pleasure or addiction.
+Spices
+65
+A variety of aromatic substances that can enhance the flavor of food or medicine.
+Silk
+75
+A fine and luxurious fabric that can be used for clothing or decoration.
+Coffee
+85
+A brewed beverage that can stimulate the mind and body.
+Chocolate
+95
+A sweet and delicious treat that can be eaten or drunk.
+Gold
+105
+A precious metal that can be used for jewelry or currency.
+Silver
+115
+A valuable metal that can be used for utensils or coins.
+Pearls
+125
+A rare and beautiful product of oysters that can be worn as ornaments or traded.
+Gems
+135
+A collection of colorful and sparkling stones that can be cut and polished for jewelry or decoration.
+Ivory
+145
+A hard and white material from elephant tusks that can be carved into sculptures or tools.
+Slaves
+155
+A group of human beings that can be bought and sold as property or labor.
