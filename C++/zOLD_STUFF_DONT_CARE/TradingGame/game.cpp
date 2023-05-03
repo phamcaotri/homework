@@ -8,6 +8,7 @@ int main() {
     shop.addItem(Item("Wood", 30));
     shop.addItem(Item("Iron", 40));
     shop.addItem(Item("Oil", 50));
+    shop.addItem(Item("Silver", 100));
     GameInterface game(player, shop);
     game.run();
     return 0;

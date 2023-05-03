@@ -6,6 +6,8 @@
 #include "Item.h"
 #include "Constant.h"
 
+// todo: thêm tính năng thay đổi giá mua/bán
+
 class Shop {
     private:
         string name;
@@ -18,8 +20,9 @@ class Shop {
         Shop(string name) {
             this->name = name;
         }
-        void setName(string name) {
+        void setName(string name, int priceMultiplier = 1.0) {
             this->name = name;
+            this->priceMultiplier = priceMultiplier;
         }
         string getName() {
             return name;

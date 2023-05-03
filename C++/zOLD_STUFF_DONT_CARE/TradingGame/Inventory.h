@@ -77,7 +77,7 @@ class Inventory {
                 return;
             }
             for (int i = 0; i < items.size(); i++) {
-                cout << i+1 << ". " << items[i].first.getName() << " x" << items[i].second << " - " << items[i].first.getPrice()*multiplier << endl;
+                cout << i+1 << ". " << items[i].first.getName() << " x" << items[i].second << " - " << items[i].first.getPrice() << endl;
             }
         }
 }; 

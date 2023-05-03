@@ -57,7 +57,7 @@ class GameInterface {
             int index;
             cout << "Enter item index: ";
             cin >> index;
-            if (index > 0 && index <= shop.getSize()) {
+            if (index > 0 && index <= player.getSize()) {
                 shop.Sell(player, index-1);
             } else {
                 cout << "Invalid index." << endl;
