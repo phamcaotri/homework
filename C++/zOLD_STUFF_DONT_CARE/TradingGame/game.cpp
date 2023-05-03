@@ -31,7 +31,6 @@ class Item {
         }
 };
 
-
 class Level {
     private:
         int lv;
@@ -116,6 +115,7 @@ class Inventory {
             return items;
         }
 }; 
+
 class Character {
     protected:
         string name;
