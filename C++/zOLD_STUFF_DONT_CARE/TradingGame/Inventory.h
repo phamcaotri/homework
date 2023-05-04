@@ -48,6 +48,12 @@ class Inventory {
             index = -1;
             return false;
         }
+        bool isValidIndex(int index) {
+            return index >= 0 && index < items.size();
+        }
+        bool isValidAmount(int index, int amount) {
+            return amount >= 0 && (items[index].second >= amount || items[index].second >= INFINITY_AMOUNT);
+        }
         void addItem(Item item, int amount) {
             // if item is already in inventory, increase amount
             int index = -1;

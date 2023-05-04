@@ -57,80 +57,82 @@ class GameInterface {
         void BuyItem() {
             shop.showItems("buy");
             cout << "You have " << player.getCoin() << COIN_SYMBOL << "." << endl;
-            cout << "Enter item index: ";
-            int index;
-            cin >> index;
-            if (index > 0 && index <= shop.getSize()) {
-                shop.Buy(player, index-1);
+            cout << "Enter item index and amount (default = 1): ";
+            int index, amount = 1;
+            input.getPairInt(index, amount);
+            if (shop.isValidIndex(index-1) && shop.isValidAmount(index-1, amount)) {
+                shop.Buy(player, index-1, amount);
             } else {
-                cout << "Invalid index." << endl;
+                cout << "Invalid input" << endl;
             }
         }
         void SellItem() {
             player.showItems("sell");
-            int index;
             cout << "You have " << player.getCoin() << COIN_SYMBOL << "." << endl;
-            cout << "Enter item index: ";
-            cin >> index;
-            if (index > 0 && index <= player.getSize()) {
-                shop.Sell(player, index-1);
+            cout << "Enter item index and amount (default = 1): ";
+            int index, amount = 1;
+            input.getPairInt(index, amount);
+            if (shop.isValidIndex(index-1) && shop.isValidAmount(index-1, amount)) {
+                shop.Sell(player, index-1, amount);
             } else {
-                cout << "Invalid index." << endl;
+                cout << "Invalid input." << endl;
             }
         }
         void TalkToTrader() {
-            int index;
             cout << "Enter trader index: ";
-            cin >> index;
+            int index;
+            input.getInt(index);
             if (index > 0 && index <= traders.size()) {
                 traders[index-1].showInfo();
             } else {
-                cout << "Invalid index." << endl;
+                cout << "Invalid input." << endl;
             }
         }
         void BuyFromTrader() {
-            int index;
             cout << "Enter trader index: ";
-            cin >> index;
+            int index;
+            input.getInt(index);
             if (index > 0 && index <= traders.size()) {
                 traders[index-1].showItems("buy");
                 cout << "You have " << player.getCoin() << COIN_SYMBOL << "." << endl;
-                int itemIndex;
-                cout << "Enter item index: ";
-                cin >> itemIndex;
+                cout << "Enter item index and amount (default = 1): ";
+                int itemIndex, amount = 1;
+                input.getPairInt(itemIndex, amount);
                 if (itemIndex > 0 && itemIndex <= traders[index-1].getSize()) {
                     player.BuyFrom(traders[index-1], itemIndex-1);
                 } else {
-                    cout << "Invalid index." << endl;
+                    cout << "Invalid input." << endl;
                 }
             } else {
-                cout << "Invalid index." << endl;
+                cout << "Invalid input." << endl;
             }
         }
         void SellToTrader() {
-            int index;
             cout << "Enter trader index: ";
-            cin >> index;
+            int index;
+            input.getInt(index);
             if (index > 0 && index <= traders.size()) {
                 player.showItems("sell");
-                int itemIndex;
                 cout << "You have " << player.getCoin() << COIN_SYMBOL << "." << endl;
-                cout << "Enter item index: ";
-                cin >> itemIndex;
-                if (itemIndex > 0 && itemIndex <= player.getSize()) {
+                cout << "Enter item index and amount (default = 1): ";
+                int itemIndex, amount = 1;
+                input.getPairInt(itemIndex, amount);
+                if (player.isValidIndex(itemIndex-1) && player.isValidAmount(itemIndex-1, amount)) {
                     player.SellTo(traders[index-1], itemIndex-1);
                 } else {
-                    cout << "Invalid index." << endl;
+                    cout << "Invalid input." << endl;
                 }
             } else {
-                cout << "Invalid index." << endl;
+                cout << "Invalid input." << endl;
             }
         }
         void run() {
             do {
                 showInterface();
                 cout << "Enter choice: ";
-                int choice = input.getInt();
+                int choice;
+                input.getInt(choice);
+                clearScreen();
                 cout << "\n-------------------------" << endl;
                 switch (choice) {
                     case 1:

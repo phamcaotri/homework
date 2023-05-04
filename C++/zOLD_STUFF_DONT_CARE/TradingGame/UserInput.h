@@ -4,42 +4,50 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <sstream>
 using std::cin, std::cout, std::endl, std::string, std::vector;
+
+void clearScreen() {
+    cout << "\033[2J\033[1;1H";
+}
 
 class UserInput {
     private:
-        string raw_input;
-        vector<string> prased_input;
+        string input;
+        std::stringstream ss;
     public:
-        UserInput() {}
-        void getRawInput() {
-            getline(cin, raw_input);
+        void getInput() {
+            input = "";
+            getline(cin, input);
+            ss = std::stringstream(input);
         }
-        void praseInput() {
-            prased_input.clear();
-            string temp = "";
-            for (int i = 0; i < raw_input.length(); i++) {
-                if (raw_input[i] == ' ') {
-                    prased_input.push_back(temp);
-                    temp = "";
-                } else {
-                    temp += raw_input[i];
+        // this will prevent the user input breaking the game
+        void getInt(int& output) {
+            getInput();
+            ss >> output;
+            if (ss.fail()) {
+                cout << "Invalid input, try again:" << endl;
+                return getInt(output);
+            }
+        }
+
+        void getPairInt(int& output1, int& output2) {
+            getInput();
+            ss >> output1;
+            if (ss.fail()) {
+                cout << "Invalid input, try again:" << endl;
+                return getPairInt(output1, output2);
+            }
+            if (ss.eof()) {
+                return;
+            } else {
+                ss >> output2;
+                if (ss.fail()) {
+                    cout << "Invalid input, try again:" << endl;
+                    return getPairInt(output1, output2);
                 }
             }
-            prased_input.push_back(temp);
         }
-        vector<string> getInput() {
-            getRawInput();
-            praseInput();
-            return prased_input;
-        }
-        int getInt() {
-            int result;
-            cin >> result;
-            cin.ignore();
-            return result;
-        }
-
-
 };
+
 #endif

@@ -71,6 +71,12 @@ class Character {
         float getSellMultiplier() {
             return sellMultiplier;
         }
+        bool isValidIndex(int index) {
+            return inventory.isValidIndex(index);
+        }
+        bool isValidAmount(int index, int amount) {
+            return inventory.isValidAmount(index, amount);
+        }
         void showItems(string type = "default") {
             if (type == "buy") {
                 inventory.showItemsWithPrice(buyMultiplier);
