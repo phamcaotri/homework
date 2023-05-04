@@ -5,24 +5,21 @@
 #include "Inventory.h"
 #include "Item.h"
 #include "Constant.h"
-
-// todo: thêm tính năng thay đổi giá mua/bán
-
+#include <math.h>
 class Shop {
     private:
         string name;
         Inventory items;
-        float priceMultiplier;
+        float buyMultiplier;
+        float sellMultiplier;
     public:
-        Shop() {
-            name = DEFAULT_NONAME;
-        }
-        Shop(string name) {
+        Shop(string name = DEFAULT_NONAME, float buyMultiplier = STD_BUY_MULTIPLIER, float sellMultiplier = STD_SELL_MULTIPLIER) {
             this->name = name;
+            this->buyMultiplier = buyMultiplier;
+            this->sellMultiplier = sellMultiplier;
         }
-        void setName(string name, int priceMultiplier = 1.0) {
+        void setName(string name) {
             this->name = name;
-            this->priceMultiplier = priceMultiplier;
         }
         string getName() {
             return name;
@@ -36,8 +33,16 @@ class Shop {
         void removeItem(int index, int amount = 1) {
             items.removeItem(index, amount);
         }
-        void showItems() {
-            items.showItemsWithPrice(priceMultiplier);
+        void showItems(string type = "default") {
+            if (type == "buy") {
+                items.showItemsWithPrice(buyMultiplier);
+            }
+            else if (type == "sell") {
+                items.showItemsWithPrice(sellMultiplier);
+            }
+            else {
+                items.showItems();
+            }
         }
         Item getItem(int index) {
             return items.getItem(index);
@@ -45,13 +50,14 @@ class Shop {
         int getSize() {
             return items.getSize();
         }
-        void Buy(int shop_item_index, Character &player) {
+        void Buy(int shop_item_index, Character &player, int amount = 1) {
             Item item = getItem(shop_item_index);
-            if (player.getGold() >= item.getPrice()) {
-                player.addGold(-item.getPrice());
-                removeItem(shop_item_index);
-                player.addItem(item, 1);
-                cout << "You bought " << item.getName() << " for " << item.getPrice() << COIN_SYMBOL <<"." << endl;
+            float price = round(item.getPrice()*buyMultiplier*amount); 
+            if (player.getGold() >= price) {
+                player.addGold(-price);
+                removeItem(shop_item_index, amount);
+                player.addItem(item, amount);
+                cout << "You bought " << item.getName() << " for " << price << COIN_SYMBOL <<"." << endl;
                 cout << "You have " << player.getGold() << COIN_SYMBOL << " left." << endl;
             } else {
                 cout << "You don't have enough " << COIN_NAME <<" to buy " << item.getName() << "." << endl;
@@ -59,10 +65,11 @@ class Shop {
         }
         void Sell(Character &player, int player_item_index, int amount = 1) {
             Item item = player.getItem(player_item_index);
+            float price = round(item.getPrice()*sellMultiplier*amount);
             player.removeItem(player_item_index, amount);
             addItem(item, amount);
-            player.addGold(item.getPrice());
-            cout << "You sold " << item.getName() << " for " << item.getPrice() << COIN_SYMBOL << "." << endl;
+            player.addGold(price);
+            cout << "You sold " << item.getName() << " for " << price << COIN_SYMBOL << "." << endl;
             cout << "You have " << player.getGold() << COIN_SYMBOL << " now." << endl;
         }
 };

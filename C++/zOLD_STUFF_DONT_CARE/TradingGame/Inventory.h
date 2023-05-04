@@ -89,9 +89,9 @@ class Inventory {
             }
             for (int i = 0; i < items.size(); i++) {
                 if (items[i].second < INFINITY_AMOUNT) {
-                    cout << i+1 << ". " << items[i].first.getName() << " x" << items[i].second << " - " << items[i].first.getPrice() << COIN_SYMBOL << endl;
+                    cout << i+1 << ". " << items[i].first.getName() << " x" << items[i].second << " - " << items[i].first.getPrice()*multiplier << COIN_SYMBOL << endl;
                 } else {
-                    cout << i+1 << ". " << items[i].first.getName() << " - " << items[i].first.getPrice() << COIN_SYMBOL << endl;
+                    cout << i+1 << ". " << items[i].first.getName() << " - " << items[i].first.getPrice()*multiplier << COIN_SYMBOL << endl;
                 }
             }
         }

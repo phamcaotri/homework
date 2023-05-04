@@ -19,7 +19,11 @@ cơ chế đọc file
 */
 /*--------------------------- TODO --------------------------------
 cơ chế giá mua cao hơn giá bán
+cơ chế mua bán giữa các character
+thêm mua bán số lượng lớn
+cơ chế tăng exp khi mua bán
 cơ chế lưu game
+cơ chế xem thông tin item
 cơ chế đọc file từ file lưu game.
 
 */

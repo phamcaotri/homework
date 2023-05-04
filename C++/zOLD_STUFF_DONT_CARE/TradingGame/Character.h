@@ -11,10 +11,15 @@ class Character {
         Level lv;
         int coin;
         Inventory Inventory;
+
+        float buyMultiplier;
+        float sellMultiplier;
     public:
-        Character(string name = DEFAULT_NONAME, int coin = STARTING_COIN) {
+        Character(string name = DEFAULT_NONAME, int coin = STARTING_COIN, float buyMultiplier = STD_BUY_MULTIPLIER, float sellMultiplier = STD_SELL_MULTIPLIER) {
             this->name = name;
             this->coin = coin;
+            this->buyMultiplier = buyMultiplier;
+            this->sellMultiplier = sellMultiplier;
         }
         void showInfo() {
             cout << "Name: " << name << endl;
@@ -57,11 +62,14 @@ class Character {
         void removeItem(int index, int amount) {
             Inventory.removeItem(index, amount);
         }
-        void showItems() {
-            Inventory.showItems();
-        }
-        void showItemsWithPrice(float priceMultiplier = 1.0) {
-            Inventory.showItemsWithPrice(priceMultiplier);
+        void showItems(string type = "default") {
+            if (type == "buy") {
+                Inventory.showItemsWithPrice(buyMultiplier);
+            } else if (type == "sell") {
+                Inventory.showItemsWithPrice(sellMultiplier);
+            } else {
+                Inventory.showItemsWithPrice();
+            }
         }
 
 };
