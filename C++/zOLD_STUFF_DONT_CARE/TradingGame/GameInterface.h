@@ -5,6 +5,31 @@
 #include "Shop.h"
 #include "UserInput.h"
 
+void TradeAction(Character player, Character trader, string action) {
+    UserInput input;
+    if (action == "buy") {
+        trader.showItems("buy");
+    } else if (action == "sell") {
+        player.showItems("sell");
+    }
+    cout << "You have " << player.getCoin() << COIN_SYMBOL << "." << endl;
+    cout << "Enter item index and amount (default = 1): ";
+    int index, amount = 1;
+    input.getPairInt(index, amount);
+    if (action == "buy") {
+        if (trader.isValidIndex(index-1) && trader.isValidAmount(index-1, amount)) {
+            player.BuyFrom(trader, index-1, amount);
+        } else {
+            cout << "Invalid input" << endl;
+        }
+    } else if (action == "sell") {
+        if (player.isValidIndex(index-1) && player.isValidAmount(index-1, amount)) {
+            player.SellTo(trader, index-1, amount);
+        } else {
+            cout << "Invalid input" << endl;
+        }
+    }
+}
 class GameInterface {
     private:
         Character player;
@@ -54,29 +79,35 @@ class GameInterface {
             cout << "8. Exit" << endl;
             cout << "-------------------------" << endl;
         }
-        void BuyItem() {
-            shop.showItems("buy");
+        void TradeAction(string action) {
+            if (action == "buy") {
+                shop.showItems("buy");
+            } else if (action == "sell") {
+                player.showItems("sell");
+            }
             cout << "You have " << player.getCoin() << COIN_SYMBOL << "." << endl;
             cout << "Enter item index and amount (default = 1): ";
             int index, amount = 1;
             input.getPairInt(index, amount);
-            if (shop.isValidIndex(index-1) && shop.isValidAmount(index-1, amount)) {
-                shop.Buy(player, index-1, amount);
-            } else {
-                cout << "Invalid input" << endl;
+            if (action == "buy") {
+                if (shop.isValidIndex(index-1) && shop.isValidAmount(index-1, amount)) {
+                    shop.Buy(player, index-1, amount);
+                } else {
+                    cout << "Invalid input" << endl;
+                }
+            } else if (action == "sell") {
+                if (player.isValidIndex(index-1) && player.isValidAmount(index-1, amount)) {
+                    shop.Sell(player, index-1, amount);
+                } else {
+                    cout << "Invalid input." << endl;
+                }
             }
         }
+        void BuyItem() {
+            TradeAction("buy");
+        }
         void SellItem() {
-            player.showItems("sell");
-            cout << "You have " << player.getCoin() << COIN_SYMBOL << "." << endl;
-            cout << "Enter item index and amount (default = 1): ";
-            int index, amount = 1;
-            input.getPairInt(index, amount);
-            if (shop.isValidIndex(index-1) && shop.isValidAmount(index-1, amount)) {
-                shop.Sell(player, index-1, amount);
-            } else {
-                cout << "Invalid input." << endl;
-            }
+            TradeAction("sell");
         }
         void TalkToTrader() {
             cout << "Enter trader index: ";
