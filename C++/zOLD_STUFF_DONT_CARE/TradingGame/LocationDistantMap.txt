@@ -1,0 +1,12 @@
+Port	Port Royal	Tortuga	Nassau	Havana	Cartagena	Portobelo	Veracruz	Saint-Domingue	Martinique	Barbados
+Port Royal	      0	
+Tortuga	        403	 0
+Nassau	        480	 583	0
+Havana	        140	 543  340	 0
+Cartagena	    539	 1362 739  399   0
+Portobelo	    546	 1369 746  406    7	0
+Veracruz	    635	 1458 835  495    96  103	 0
+Saint-Domingue	276  1279 476  1364 1645 1652 1741   0
+Martinique	    724  1727 924  584   865  872  961 430 0
+Barbados        1009 2012 1209 869  1150 1157 1246 615 185 0
+
