@@ -15,10 +15,10 @@ int main() {
 các class cơ bản
 cơ chế mua bán
 cơ chế đọc file
-
+cơ chế giá mua cao hơn giá bán
 */
 /*--------------------------- TODO --------------------------------
-cơ chế giá mua cao hơn giá bán
+biến shop trở thành một class con của class character
 cơ chế mua bán giữa các character
 thêm mua bán số lượng lớn
 cơ chế tăng exp khi mua bán

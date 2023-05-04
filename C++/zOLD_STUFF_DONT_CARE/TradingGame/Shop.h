@@ -50,7 +50,7 @@ class Shop {
         int getSize() {
             return items.getSize();
         }
-        void Buy(int shop_item_index, Character &player, int amount = 1) {
+        void Buy(Character &player, int shop_item_index, int amount = 1) {
             Item item = getItem(shop_item_index);
             float price = round(item.getPrice()*buyMultiplier*amount); 
             if (player.getGold() >= price) {
@@ -73,5 +73,6 @@ class Shop {
             cout << "You have " << player.getGold() << COIN_SYMBOL << " now." << endl;
         }
 };
+
 
 #endif
