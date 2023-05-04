@@ -25,30 +25,4 @@ class Character : public Entity {
         }
 
 };
-
-void TradeAction(Character player, Character trader, string action) {
-    UserInput input;
-    if (action == "buy") {
-        trader.showItems("buy");
-    } else if (action == "sell") {
-        player.showItems("sell");
-    }
-    cout << "You have " << player.getCoin() << COIN_SYMBOL << "." << endl;
-    cout << "Enter item index and amount (default = 1): ";
-    int index, amount = 1;
-    input.getPairInt(index, amount);
-    if (action == "buy") {
-        if (trader.isValidIndex(index-1) && trader.isValidAmount(index-1, amount)) {
-            player.BuyFrom(trader, index-1, amount);
-        } else {
-            cout << "Invalid input" << endl;
-        }
-    } else if (action == "sell") {
-        if (player.isValidIndex(index-1) && player.isValidAmount(index-1, amount)) {
-            player.SellTo(trader, index-1, amount);
-        } else {
-            cout << "Invalid input" << endl;
-        }
-    }
-}
 #endif

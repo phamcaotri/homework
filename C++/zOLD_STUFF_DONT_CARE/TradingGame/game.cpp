@@ -22,16 +22,18 @@ cơ chế mua bán
 cơ chế đọc file
 cơ chế giá mua cao hơn giá bán
 cơ chế mua bán giữa các character
-*/
-/*--------------------------- TODO --------------------------------
 class đọc input từ người dùng
 thêm mua bán số lượng lớn
+gom chung cha các class character, shop, thành một class entity
+fix vấn đề làm tròn số
+*/
+/*--------------------------- TODO --------------------------------
+
 cơ chế tăng exp khi mua bán
 cơ chế lưu game
 cơ chế xem thông tin item
 cơ chế đọc file từ file lưu game.
 xây dựng một môi trường game cơ bản
-gom chung cha các class character, shop, item, thành một class entity
 Thêm mô tả cho player
 
 */

@@ -81,7 +81,7 @@ class Entity {
         }
         void BuyFrom(Entity &seller, int seller_item_index, int amount = 1) {
             Item item = seller.getItem(seller_item_index);
-            float price = round(item.getPrice()*seller.getBuyMultiplier()*amount);
+            float price = round(item.getPrice()*seller.getBuyMultiplier())*amount;
             if (getCoin() >= price) {
                 addCoin(-price);
                 seller.addCoin(price);
@@ -96,7 +96,7 @@ class Entity {
         }
         void SellTo(Entity &buyer, int seller_item_index, int amount = 1) {
             Item item = getItem(seller_item_index);
-            float price = round(item.getPrice()*getSellMultiplier()*amount);
+            float price = round(item.getPrice()*getSellMultiplier())*amount;
             if (buyer.getCoin() >= price) {
                 addCoin(price);
                 buyer.addCoin(-price);
