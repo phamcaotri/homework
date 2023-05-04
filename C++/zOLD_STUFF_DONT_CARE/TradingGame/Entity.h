@@ -1,7 +1,6 @@
 #ifndef ENTITY_H
 #define ENTITY_H
 
-#include "Level.h"
 #include "Item.h"
 #include "Inventory.h"
 
