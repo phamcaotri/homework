@@ -9,6 +9,7 @@ const int STARTING_COIN = 1000;
 const int STARTING_EXP = 0;
 const int STARTING_LV = 1;
 const int STARTING_MAXEXP = 100;
+const float EXP_MULTIPLIER = 1.5;
 
 const float STD_TAX = 0.1;
 const float STD_BUY_MULTIPLIER = 1.4;
