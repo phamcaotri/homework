@@ -33,7 +33,7 @@ class GameInterface {
             player.showInfo();
         }
         void showShop() {
-            shop.showItems();
+            shop.showItems("buy");
         }
         void showInterface() {
             cout << "\n-------------------------" << endl;
@@ -45,7 +45,7 @@ class GameInterface {
             cout << "-------------------------" << endl;
         }
         void BuyItem() {
-            shop.showItems();
+            shop.showItems("buy");
             cout << "You have " << player.getGold() << COIN_SYMBOL << "." << endl;
             int index;
             cout << "Enter item index: ";
@@ -57,7 +57,7 @@ class GameInterface {
             }
         }
         void SellItem() {
-            player.showItemsWithPrice();
+            player.showItems("sell");
             int index;
             cout << "You have " << player.getGold() << COIN_SYMBOL << "." << endl;
             cout << "Enter item index: ";
