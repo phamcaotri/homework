@@ -36,14 +36,17 @@ class GameInterface {
             shop.showItems();
         }
         void showInterface() {
+            cout << "\n-------------------------" << endl;
             cout << "1. Show Player" << endl;
             cout << "2. Show Shop" << endl;
             cout << "3. Buy Item" << endl;
             cout << "4. Sell Item" << endl;
             cout << "5. Exit" << endl;
+            cout << "-------------------------" << endl;
         }
         void BuyItem() {
             shop.showItems();
+            cout << "You have " << player.getGold() << COIN_SYMBOL << "." << endl;
             int index;
             cout << "Enter item index: ";
             cin >> index;
@@ -56,6 +59,7 @@ class GameInterface {
         void SellItem() {
             player.showItemsWithPrice();
             int index;
+            cout << "You have " << player.getGold() << COIN_SYMBOL << "." << endl;
             cout << "Enter item index: ";
             cin >> index;
             if (index > 0 && index <= player.getSize()) {

@@ -2,6 +2,7 @@
 #define ITEM_H
 
 #include <string>
+#include "Constant.h"
 using std::string;
 
 class Item {
@@ -11,12 +12,12 @@ class Item {
         string description;
     public:
         Item() {
-            name = "NoName";
+            name = DEFAULT_NONAME;
             price = 0;
-            description = "NoDescription";
+            description = DEFAULT_NODESCRIPTION;
 
         }
-        Item(string name, int price, string description = "NoDescription") {
+        Item(string name, int price, string description = DEFAULT_NODESCRIPTION) {
             this->name = name;
             this->price = price;
             this->description = description;

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <string>
 #include <map>
 using namespace std;
 
@@ -35,4 +36,6 @@ int main() {
     for (int i = 0; i < n; i++) {
         cout << hs[i] << " ";
     }
+    return 0;
+
 };

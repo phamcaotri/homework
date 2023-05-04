@@ -15,7 +15,7 @@ class Shop {
         float priceMultiplier;
     public:
         Shop() {
-            name = "NoName";
+            name = DEFAULT_NONAME;
         }
         Shop(string name) {
             this->name = name;
@@ -51,9 +51,10 @@ class Shop {
                 player.addGold(-item.getPrice());
                 removeItem(shop_item_index);
                 player.addItem(item, 1);
-                cout << "You bought " << item.getName() << " for " << item.getPrice() << " gold." << endl;
+                cout << "You bought " << item.getName() << " for " << item.getPrice() << COIN_SYMBOL <<"." << endl;
+                cout << "You have " << player.getGold() << COIN_SYMBOL << " left." << endl;
             } else {
-                cout << "You don't have enough gold to buy " << item.getName() << "." << endl;
+                cout << "You don't have enough " << COIN_NAME <<" to buy " << item.getName() << "." << endl;
             }
         }
         void Sell(Character &player, int player_item_index, int amount = 1) {
@@ -61,7 +62,8 @@ class Shop {
             player.removeItem(player_item_index, amount);
             addItem(item, amount);
             player.addGold(item.getPrice());
-            cout << "You sold " << item.getName() << " for " << item.getPrice() << " gold." << endl;
+            cout << "You sold " << item.getName() << " for " << item.getPrice() << COIN_SYMBOL << "." << endl;
+            cout << "You have " << player.getGold() << COIN_SYMBOL << " now." << endl;
         }
 };
 

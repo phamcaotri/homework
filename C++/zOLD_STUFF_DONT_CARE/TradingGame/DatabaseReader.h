@@ -34,8 +34,7 @@ class ItemReader {
                 file >> price;
                 file.ignore();
                 getline(file, description);
-                inventory.addItem(Item(name, price, description), 1);
-                cout << "Added " << name << " to inventory" << endl;
+                inventory.addItem(Item(name, price, description), INFINITY_AMOUNT);
             }
             file.close();
         }

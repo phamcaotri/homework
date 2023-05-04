@@ -1,6 +1,8 @@
 #ifndef LEVEL_H
 #define LEVEL_H
 
+#include "Constant.h"
+
 class Level {
     private:
         int lv;
@@ -9,9 +11,9 @@ class Level {
 
     public:
         Level() {
-            lv = 1;
-            exp = 0;
-            maxExp = 100;
+            lv = STARTING_LV;
+            exp = STARTING_EXP;
+            maxExp = STARTING_MAXEXP;
         }
         void setLv(int lv) {
             this->lv = lv;

@@ -30,6 +30,13 @@ class Inventory {
         int getItemPrice(int index) {
             return items[index].first.getPrice();
         }
+        void increaseAmount(int index, int amount) {
+            if (items[index].second >= INFINITY_AMOUNT) {
+                return;
+            } else {
+                items[index].second += amount;
+            }
+        }
         bool isContain(Item item, int& index) {
             for (int i = 0; i < items.size(); i++) {
                 if (getItemName(i) == item.getName()) {
@@ -44,7 +51,7 @@ class Inventory {
             // if item is already in inventory, increase amount
             int index = -1;
             if (isContain(item, index)) {
-                items[index].second += amount;
+                increaseAmount(index, amount);
                 return;
             }
             // if not, add item in price order
@@ -57,7 +64,7 @@ class Inventory {
             items.push_back(std::make_pair(item, amount));
         }
         void removeItem(int index, int amount) {
-            items[index].second -= amount;
+            increaseAmount(index, -amount);
             if (items[index].second <= 0) {
                 items.erase(items.begin()+index);
             }
@@ -68,7 +75,11 @@ class Inventory {
                 return;
             }
             for (int i = 0; i < items.size(); i++) {
-                cout << i+1 << ". " << items[i].first.getName() << " x" << items[i].second << endl;
+                if (items[i].second < INFINITY_AMOUNT) {
+                    cout << i+1 << ". " << items[i].first.getName() << " x" << items[i].second << endl;
+                } else {
+                    cout << i+1 << ". " << items[i].first.getName() << endl;
+                }
             }
         }
         void showItemsWithPrice(float multiplier = 1.0) {
@@ -77,7 +88,11 @@ class Inventory {
                 return;
             }
             for (int i = 0; i < items.size(); i++) {
-                cout << i+1 << ". " << items[i].first.getName() << " x" << items[i].second << " - " << items[i].first.getPrice() << endl;
+                if (items[i].second < INFINITY_AMOUNT) {
+                    cout << i+1 << ". " << items[i].first.getName() << " x" << items[i].second << " - " << items[i].first.getPrice() << COIN_SYMBOL << endl;
+                } else {
+                    cout << i+1 << ". " << items[i].first.getName() << " - " << items[i].first.getPrice() << COIN_SYMBOL << endl;
+                }
             }
         }
 }; 

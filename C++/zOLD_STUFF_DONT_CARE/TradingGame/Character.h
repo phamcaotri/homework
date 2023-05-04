@@ -12,23 +12,15 @@ class Character {
         int coin;
         Inventory Inventory;
     public:
-        Character() {
-            name = "NoName";
-            coin = 0;
-        }
-        Character(string name) {
+        Character(string name = DEFAULT_NONAME, int coin = STARTING_COIN) {
             this->name = name;
-            coin = 0;
-        }
-        Character(string name, int gold) {
-            this->name = name;
-            this->coin = gold;
+            this->coin = coin;
         }
         void showInfo() {
             cout << "Name: " << name << endl;
             cout << "Lv: " << lv.getLv() << endl;
             cout << "Exp: " << lv.getExp() << "/" << lv.getMaxExp() << endl;
-            cout << "Cold: " << coin << endl;
+            cout << UPPER_COIN_NAME << ": " << coin << COIN_SYMBOL << endl;
             cout << "Items: " << endl;
             Inventory.showItems();
         }
