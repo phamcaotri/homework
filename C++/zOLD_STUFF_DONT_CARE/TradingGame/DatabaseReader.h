@@ -19,7 +19,7 @@ class ItemReader {
         Inventory inventory;
 
     public:
-        ItemReader(string fileName) {
+        ItemReader(string fileName, int amount = INFINITY_AMOUNT) {
             this->fileName = fileName;
             file.open(fileName);
             if (!file.is_open()) {
@@ -34,7 +34,7 @@ class ItemReader {
                 file >> price;
                 file.ignore();
                 getline(file, description);
-                inventory.addItem(Item(name, price, description), INFINITY_AMOUNT);
+                inventory.addItem(Item(name, price, description), amount);
             }
             file.close();
         }

@@ -53,12 +53,12 @@ class Shop {
         void Buy(Character &player, int shop_item_index, int amount = 1) {
             Item item = getItem(shop_item_index);
             float price = round(item.getPrice()*buyMultiplier*amount); 
-            if (player.getGold() >= price) {
-                player.addGold(-price);
+            if (player.getCoin() >= price) {
+                player.addCoin(-price);
                 removeItem(shop_item_index, amount);
                 player.addItem(item, amount);
                 cout << "You bought " << item.getName() << " for " << price << COIN_SYMBOL <<"." << endl;
-                cout << "You have " << player.getGold() << COIN_SYMBOL << " left." << endl;
+                cout << "You have " << player.getCoin() << COIN_SYMBOL << " left." << endl;
             } else {
                 cout << "You don't have enough " << COIN_NAME <<" to buy " << item.getName() << "." << endl;
             }
@@ -68,9 +68,9 @@ class Shop {
             float price = round(item.getPrice()*sellMultiplier*amount);
             player.removeItem(player_item_index, amount);
             addItem(item, amount);
-            player.addGold(price);
+            player.addCoin(price);
             cout << "You sold " << item.getName() << " for " << price << COIN_SYMBOL << "." << endl;
-            cout << "You have " << player.getGold() << COIN_SYMBOL << " now." << endl;
+            cout << "You have " << player.getCoin() << COIN_SYMBOL << " now." << endl;
         }
 };
 

@@ -10,7 +10,7 @@ class Character {
         string name;
         Level lv;
         int coin;
-        Inventory Inventory;
+        Inventory inventory;
 
         float buyMultiplier;
         float sellMultiplier;
@@ -27,40 +27,43 @@ class Character {
             cout << "Exp: " << lv.getExp() << "/" << lv.getMaxExp() << endl;
             cout << UPPER_COIN_NAME << ": " << coin << COIN_SYMBOL << endl;
             cout << "Items: " << endl;
-            Inventory.showItems();
+            inventory.showItems();
         }
         void setName(string name) {
             this->name = name;
         }
-        void setGold(int gold) {
-            this->coin = gold;
+        void setCoin(int coin) {
+            this->coin = coin;
         }
         string getName() {
             return name;
         }
-        int getGold() {
+        void setInventory(Inventory inventory) {
+            this->inventory = inventory;
+        }
+        int getCoin() {
             return coin;
         }
-        void addGold(int gold) {
-            this->coin += gold;
+        void addCoin(int coin) {
+            this->coin += coin;
         }
         void addExp(int exp) {
             lv.addExp(exp);
         }
         Item getItem(int index) {
-            return Inventory.getItem(index);
+            return inventory.getItem(index);
         }
         int getAmount(int index) {
-            return Inventory.getAmount(index);
+            return inventory.getAmount(index);
         }
         int getSize() {
-            return Inventory.getSize();
+            return inventory.getSize();
         }
         void addItem(Item item, int amount) {
-            Inventory.addItem(item, amount);
+            inventory.addItem(item, amount);
         }
         void removeItem(int index, int amount) {
-            Inventory.removeItem(index, amount);
+            inventory.removeItem(index, amount);
         }
         float getBuyMultiplier() {
             return buyMultiplier;
@@ -70,40 +73,42 @@ class Character {
         }
         void showItems(string type = "default") {
             if (type == "buy") {
-                Inventory.showItemsWithPrice(buyMultiplier);
+                inventory.showItemsWithPrice(buyMultiplier);
             } else if (type == "sell") {
-                Inventory.showItemsWithPrice(sellMultiplier);
+                inventory.showItemsWithPrice(sellMultiplier);
             } else {
-                Inventory.showItemsWithPrice();
+                inventory.showItemsWithPrice();
             }
         }
-
+        void BuyFrom(Character &seller, int seller_item_index, int amount = 1) {
+            Item item = seller.getItem(seller_item_index);
+            float price = round(item.getPrice()*seller.getBuyMultiplier()*amount);
+            if (getCoin() >= price) {
+                addCoin(-price);
+                seller.addCoin(price);
+                seller.removeItem(seller_item_index, amount);
+                addItem(item, amount);
+                cout << getName() << " bought " << item.getName() << " from " << seller.getName() << " for " << price << COIN_SYMBOL << "." << endl;
+                cout << getName() << " has " << getCoin() << COIN_SYMBOL << " left." << endl;
+                cout << seller.getName() << " has " << seller.getCoin() << COIN_SYMBOL << " now." << endl;
+            } else {
+                cout << getName() << " doesn't have enough " << COIN_NAME << " to buy " << item.getName() << "." << endl;
+            }
+        }
+        void SellTo(Character &buyer, int seller_item_index, int amount = 1) {
+            Item item = getItem(seller_item_index);
+            float price = round(item.getPrice()*getSellMultiplier()*amount);
+            if (buyer.getCoin() >= price) {
+                addCoin(price);
+                buyer.addCoin(-price);
+                buyer.addItem(item, amount);
+                removeItem(seller_item_index, amount);
+                cout << getName() << " sold " << item.getName() << " to " << buyer.getName() << " for " << price << COIN_SYMBOL << "." << endl;
+                cout << getName() << " has " << getCoin() << COIN_SYMBOL << " now." << endl;
+                cout << buyer.getName() << " has " << buyer.getCoin() << COIN_SYMBOL << " left." << endl;
+            } else {
+                cout << buyer.getName() << " doesn't have enough " << COIN_NAME << " to buy " << item.getName() << "." << endl;
+            }
+        }
 };
-
-void Buy(Character &seller, Character &buyer, int seller_item_index, int amount = 1) {
-    Item item = seller.getItem(seller_item_index);
-    float price = round(item.getPrice()*seller.getSellMultiplier()*amount);
-    if (buyer.getGold() >= price) {
-        buyer.addGold(-price);
-        seller.addGold(price);
-        seller.removeItem(seller_item_index, amount);
-        buyer.addItem(item, amount);
-        cout << buyer.getName() << " bought " << item.getName() << " from " << seller.getName() << " for " << price << COIN_SYMBOL << "." << endl;
-        cout << buyer.getName() << " has " << buyer.getGold() << COIN_SYMBOL << " left." << endl;
-        cout << seller.getName() << " has " << seller.getGold() << COIN_SYMBOL << " now." << endl;
-    } else {
-        cout << buyer.getName() << " doesn't have enough " << COIN_NAME << " to buy " << item.getName() << "." << endl;
-    }
-}
-void Sell(Character &seller, Character &buyer, int buyer_item_index, int amount = 1) {
-    Item item = buyer.getItem(buyer_item_index);
-    float price = round(item.getPrice()*buyer.getBuyMultiplier()*amount);
-    buyer.removeItem(buyer_item_index, amount);
-    seller.addItem(item, amount);
-    buyer.addGold(price);
-    seller.addGold(-price);
-    cout << seller.getName() << " sold " << item.getName() << " to " << buyer.getName() << " for " << price << COIN_SYMBOL << "." << endl;
-    cout << buyer.getName() << " has " << buyer.getGold() << COIN_SYMBOL << " now." << endl;
-    cout << seller.getName() << " has " << seller.getGold() << COIN_SYMBOL << " left." << endl;
-}
 #endif
