@@ -30,7 +30,6 @@ class UserInput {
                 return getInt(output);
             }
         }
-
         void getPairInt(int& output1, int& output2) {
             getInput();
             ss >> output1;

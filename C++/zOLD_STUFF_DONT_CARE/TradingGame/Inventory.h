@@ -10,7 +10,6 @@ using std::vector, std::cin, std::cout, std::endl;
 class Inventory {
     private:
         vector<std::pair<Item, int>> items;
-
     public:
         Inventory() {}
         Inventory(vector<std::pair<Item, int>> items) {

@@ -8,3 +8,14 @@ Veracruz : A city on the Gulf of Mexico that was the main port for trade between
 Saint-Domingue : A French colony on the western part of Hispaniola that was a major producer of sugar, coffee, and indigo, and a destination for African slaves.
 Martinique : A French island in the Lesser Antilles that was a base for privateers who raided Spanish ships and colonies under the authorization of King Louis XIV (r. 1643-1715).
 Barbados : A British island in the eastern Caribbean that was a hub for sugar cultivation and trade, and a source of settlers for other British colonies in the region.
+
+Port Royal sells wood, rum, sugar, cotton, tobacco, and slaves.
+Tortuga sells wood, rum, sugar, tobacco, and slaves.
+Nassau sells wood, rum, sugar, cotton, tobacco, and slaves.
+Havana sells wood, rum, sugar, cotton, tobacco, coffee, chocolate, and slaves.
+Cartagena sells gold, silver, pearls, gems, and ivory.
+Portobelo sells gold, silver, pearls, gems, and ivory.
+Veracruz sells gold, silver, pearls, gems, and ivory.
+Saint-Domingue sells wood, rum, sugar, cotton, tobacco, coffee, chocolate, and slaves.
+Martinique sells wood, rum, sugar, cotton, tobacco, coffee, chocolate, and slaves.
+Barbados sells wood, rum, sugar, cotton, tobacco, coffee, chocolate.

@@ -19,11 +19,13 @@ class Entity {
             this->buyMultiplier = buyMultiplier;
             this->sellMultiplier = sellMultiplier;
         }
-        void showInfo() {
+        void showInfo(string condition = "show items") {
             cout << "Name: " << name << endl;
             cout << UPPER_COIN_NAME << ": " << coin << COIN_SYMBOL << endl;
             cout << "Items: " << endl;
-            inventory.showItems();
+            if (condition == "show items") {
+                inventory.showItems();
+            }
         }
         void setName(string name) {
             this->name = name;

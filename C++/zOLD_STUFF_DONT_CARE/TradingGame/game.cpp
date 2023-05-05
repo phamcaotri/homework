@@ -27,12 +27,18 @@ thêm mua bán số lượng lớn
 gom chung cha các class character, shop, thành một class entity
 fix vấn đề làm tròn số
 cơ chế tăng exp khi mua bán
+xây dựng một môi trường game cơ bản
 */
 /*--------------------------- TODO --------------------------------
-
+tạo danh sách các trader
 cơ chế xem thông tin item
 cơ chế đọc file từ file lưu game.
-xây dựng một môi trường game cơ bản
 Thêm mô tả cho player
 cơ chế lưu game
+thêm class các địa điểm
+thêm class tiến trình thời gian
+thêm class các sự kiện
+nâng cấp gameinterface
+thiết lập ai trader hoạt động độc lập với người chơi (hoạt động nền)
+thiết lập các sự kiện hoạt động nền
 */

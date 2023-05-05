@@ -66,6 +66,7 @@ class GameInterface {
             player.showInfo();
         }
         void showShop() {
+            shop.showInfo("not show items");
             shop.showItems("buy");
         }
         void showInterface() {
