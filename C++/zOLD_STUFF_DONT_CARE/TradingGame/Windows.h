@@ -38,6 +38,11 @@ class Windows {
             for (int i = 0; i < menu_options.size(); i++) {
                 cout << i + 1 << ". " << menu_options[i] << endl;
             }
+            cout << "==============================" << endl;
+        }
+        void pause() {
+            cout << "==============================" << endl;
+            cout << "Press any key to continue..." << endl;
         }
 
 };
