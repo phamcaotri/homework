@@ -1,3 +1,8 @@
+# format
+# name
+# value (in coin)
+# description
+
 Wood
 15
 A common material for building ships and houses.

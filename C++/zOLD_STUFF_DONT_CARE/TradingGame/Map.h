@@ -22,7 +22,11 @@ class Map {
             return locations[index];
         }
         int getDistance(int index1, int index2) {
-            return distances[index1].getDistanceTo(index2);
+            int distance = distances[index1].getDistanceTo(index2);
+            if (distance == -1) {
+                return distances[index2].getDistanceTo(index1);
+            }
+            return distance;
         }
         void addLocation(string location) {
             locations.push_back(location);
@@ -34,10 +38,6 @@ class Map {
                 distance.addDistance(0);
             }
             distances.push_back(distance);
-        }
-        void addDistance(int index1, int index2, int distance) {
-            distances[index1].addDistance(distance);
-            distances[index2].addDistance(distance);
         }
         void removeLocation(int index) {
             locations.erase(locations.begin() + index);
@@ -56,7 +56,7 @@ class Map {
             for (int i = 0; i < locations.size(); i++) {
                 cout << locations[i] << endl;
                 for (int j = 0; j < locations.size(); j++) {
-                    cout << distances[i].getDistanceTo(j) << " ";
+                    cout << getDistance(i, j) << " ";
                 }
                 cout << endl;
             }

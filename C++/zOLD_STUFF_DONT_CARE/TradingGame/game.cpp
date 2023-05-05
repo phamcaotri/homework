@@ -3,9 +3,11 @@
 
 int main() {
     Character player("Mike8", 100);
+
     Shop shop("Shop");
     ItemReader reader(ITEM_FILE);
     shop.setInventory(reader.getInventory());
+
     GameInterface game(player, shop);
 
     ItemReader reader2(ITEM_FILE, 3);
@@ -15,6 +17,8 @@ int main() {
 
     MapReader mapReader("LocationDistanceMap.txt");
     mapReader.getMap().print();
+    game.setMap(mapReader.getMap());
+
     game.run();
     return 0;
 }
@@ -31,6 +35,7 @@ gom chung cha các class character, shop, thành một class entity
 fix vấn đề làm tròn số
 cơ chế tăng exp khi mua bán
 xây dựng một môi trường game cơ bản
+thêm class các địa điểm
 */
 /*--------------------------- TODO --------------------------------
 tạo danh sách các trader
@@ -38,7 +43,6 @@ cơ chế xem thông tin item
 cơ chế đọc file từ file lưu game.
 Thêm mô tả cho player
 cơ chế lưu game
-thêm class các địa điểm
 thêm class tiến trình thời gian
 thêm class các sự kiện
 nâng cấp gameinterface

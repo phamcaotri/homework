@@ -1,0 +1,122 @@
+Sloop: A type of ship that is small and agile, with one mast and one main sail. Often used by individual pirates or those who want to avoid attention.
+Brigantine: A type of ship that has two masts and two main sails, capable of carrying more and having more cannons than a sloop. Often used by small pirate gangs or those who want a balance between speed and strength.
+Schooner: A type of ship that has two or three masts and many small sails, capable of moving very fast in favorable winds. Often used by adventurous pirates or those who want flexibility and evasion.
+Frigate: A type of ship that is large and powerful, with three or four masts and many large sails, capable of carrying a lot and having a lot of cannons. Often used by large pirate gangs or those who want authority and combat ability.
+Galleon: A type of ship that is huge and majestic, with four or five masts and many different sails, capable of carrying a lot a lot and having a lot a lot of cannons. Often used by super large pirate gangs or those who want domination and devastation.
+Caravel: A type of ship that has two or three masts and some triangular sails, capable of moving well in headwinds. Often used by explorers or those who want to discover distant seas.
+Fluyt: A type of ship that has three masts and three main sails, capable of carrying a lot of goods with low cost. Often used by merchants or those who want to profit from trade.
+Man-of-war: A type of warship that is the largest and strongest, with four or six masts and dozens of small sails, capable of carrying very very very many cannons and soldiers. Usually used by armies or those who want destruction and the ability to fight against any enemy.
+
+Type of ship
+Price (coin)
+Time to travel 1 nautical mile in normal conditions (minutes)
+Time to travel 1 nautical mile in bad conditions (minutes)
+Time to travel 1 nautical mile in good conditions (minutes)
+Maximum number of cannons
+Load capacity (tons)
+Operating cost (dong/nautical mile)
+Durability (0-100)
+Repair cost 1% of ship
+Lifespan (months)
+
+Sloop
+10000
+10
+15
+8
+4
+10
+100
+20
+100
+24
+
+Brigantine
+20000
+12
+18
+10
+12
+20
+200
+40
+200
+36
+
+Schooner
+30000
+8
+12
+6
+8
+15
+150
+60
+300
+48
+
+Frigate 
+50000
+15
+25
+12
+40
+50
+500
+80
+60
+
+Galleon
+100000
+20
+35
+18
+80
+100
+1000
+80
+1000
+72
+
+Caravel 
+15000
+9 
+14 
+7 
+6 
+12 
+120
+20
+120
+30
+
+Fluyt 
+25000
+11 
+17 
+9 
+10 
+25 
+250
+40
+250
+42
+
+Man-of-war 
+150000
+22 
+40 
+20 
+100
+150 
+1500 
+100
+2000
+84
+
+Speed = (1- Load capacity / Maximum load) * (Ship condition / 100) * (100 - Lifespan elapsed / 100) * Weather condition
+Time = Distance / Speed
+Load capacity = Number of crew members * 0.1 + Number of cannons * 0.5 + Number of goods
+Damage = (Number of cannons * Cannon quality / 100) / (Distance to target * Weather condition)
+Income = (Number of goods * Goods value) - (Operating cost * Distance traveled)
+Morale = (Number of crew members + Number of battles won - Number of battles lost + Number of rum bottles) / 10

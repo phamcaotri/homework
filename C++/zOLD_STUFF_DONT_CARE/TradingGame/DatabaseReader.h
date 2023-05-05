@@ -31,6 +31,11 @@ class ItemReader {
             int price;
             string description;
             while (!file.eof()) {
+                // ignore comments starting with #
+                if (file.peek() == '#' || file.peek() == '\n') {
+                    file.ignore(1000, '\n');
+                    continue;
+                }
                 getline(file, name);
                 file >> price;
                 file.ignore();
@@ -60,20 +65,22 @@ class MapReader {
             }
             string locationName;
             vector<string> locations;
-            Distance distance;
             vector<Distance> distances;
             while (!file.eof()) {
+                // ignore comments starting with #
+                if (file.peek() == '#' || file.peek() == '\n') {
+                    file.ignore(1000, '\n');
+                    continue;
+                }
                 getline(file, locationName);
                 locations.push_back(locationName);
-                for (int i = 0; i < locations.size(); i++) {
-                    distance.addDistance(-1);
+                Distance distance;
+                int distanceTo;
+                while (file.peek() != '\n' && !file.eof()) {
+                    file >> distanceTo;
+                    distance.addDistance(distanceTo);
                 }
                 distances.push_back(distance);
-                for (int i = 0; i < locations.size(); i++) {
-                    int d;
-                    file >> d;
-                    distances[i].addDistance(d);
-                }
                 file.ignore();
             }
             file.close();

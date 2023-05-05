@@ -7,10 +7,6 @@
 #include <sstream>
 using std::cin, std::cout, std::endl, std::string, std::vector;
 
-void clearScreen() {
-    cout << "\033[2J\033[1;1H";
-}
-
 class UserInput {
     private:
         string input;
