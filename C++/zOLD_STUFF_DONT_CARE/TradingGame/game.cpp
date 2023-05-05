@@ -38,10 +38,11 @@ xây dựng một môi trường game cơ bản
 thêm class các địa điểm
 đánh bóng code
 nâng cấp gameinterface
-*/
-/*--------------------------- TODO --------------------------------
 gom 2 thuộc tính map thành 1
 tạo các địa điểm riêng biệt
+*/
+/*--------------------------- TODO --------------------------------
+xoá lớp windows ko cần thiết
 khởi tạo các shop mặc định cho địa điểm đó
 tạo danh sách các trader
 cơ chế xem thông tin item

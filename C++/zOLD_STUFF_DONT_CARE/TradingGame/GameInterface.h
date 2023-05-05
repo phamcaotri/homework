@@ -150,11 +150,14 @@ class GameInterface {
                 int choice;
                 input.getInt(choice);
                 windows.clearScreen();
+                cout << "==============================" << endl;
                 if (choice > 0 && choice <= options.size()) {
                     (this->*options[choice-1].second)();
                 } else {
                     cout << "Invalid input." << endl;
                 }
+                windows.pause();
+                windows.clearScreen();
             } while (true);
         }
 };

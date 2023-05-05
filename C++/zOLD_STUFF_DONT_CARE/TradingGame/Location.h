@@ -2,7 +2,8 @@
 #define LOCATION_H
 
 #include <string>
-using std::string;
+#include <iostream>
+using std::string, std::cout, std::endl;
 
 #include "Distance.h"
 
@@ -21,7 +22,11 @@ class Location {
             return name;
         }
         int getDistanceTo(int index) {
-            return distance.getDistanceTo(index);
+            if (index < distance.getNumberOfDistances()) {
+                return distance.getDistanceTo(index);
+            } else {
+                return -1;
+            }
         }
         void addDistance(int distance) {
             this->distance.addDistance(distance);
@@ -31,6 +36,18 @@ class Location {
         }
         void setDistance(Distance distance) {
             this->distance = distance;
+        }
+        void removeDistanceTo(int index) {
+            distance.removeDistanceTo(index);
+        }
+// ---------------- METHOD ----------------------
+        void print() {
+            cout << "Location: " << name << endl;
+            cout << "Distances: ";
+            for (int i = 0; i < distance.getNumberOfDistances(); i++) {
+                cout << distance.getDistanceTo(i) << " ";
+            }
+            cout << endl;
         }
 };
 
