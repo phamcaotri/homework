@@ -5,11 +5,13 @@
 
 class Shop : public Entity {
     public:
+// ------------------------- CONSTRUCTOR -------------------------
         Shop(string name = DEFAULT_NONAME, float buyMultiplier = STD_BUY_MULTIPLIER, float sellMultiplier = STD_SELL_MULTIPLIER) {
             this->name = name;
             this->buyMultiplier = buyMultiplier;
             this->sellMultiplier = sellMultiplier;
         }
+// ------------------------- METHOD -------------------------
         void BuyFrom(Entity &seller, int seller_item_index, int amount = 1) override {
             Item item = seller.getItem(seller_item_index);
             float price = round(item.getPrice()*seller.getBuyMultiplier())*amount;

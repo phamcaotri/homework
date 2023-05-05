@@ -11,6 +11,7 @@ class Item {
         int price;
         string description;
     public:
+// ------------------------- CONSTRUCTOR -------------------------
         Item() {
             name = DEFAULT_NONAME;
             price = 0;
@@ -22,6 +23,7 @@ class Item {
             this->price = price;
             this->description = description;
         }
+// ------------------------- GETTER -------------------------
         void setName(string name) {
             this->name = name;
         }

@@ -9,20 +9,14 @@ class Character : public Entity {
     private:
         Level lv;
     public:
+// ------------------------- CONSTRUCTOR -------------------------
         Character(string name = DEFAULT_NONAME, int coin = STARTING_COIN, float buyMultiplier = STD_BUY_MULTIPLIER, float sellMultiplier = STD_SELL_MULTIPLIER) {
             this->name = name;
             this->coin = coin;
             this->buyMultiplier = buyMultiplier;
             this->sellMultiplier = sellMultiplier;
         }
-        void showInfo() {
-            cout << "Name: " << name << endl;
-            cout << "Lv: " << lv.getLv() << endl;
-            cout << "Exp: " << lv.getExp() << "/" << lv.getMaxExp() << endl;
-            cout << UPPER_COIN_NAME << ": " << coin << COIN_SYMBOL << endl;
-            cout << "Items: " << endl;
-            inventory.showItems();
-        }
+// ------------------------- GETTERS, SETTER, ADD, REMOVE -------------------------
         int getLv() {
             return lv.getLv();
         }
@@ -40,6 +34,15 @@ class Character : public Entity {
         }
         void addExp(int exp) {
             lv.addExp(exp);
+        }
+// ------------------------- METHODS -------------------------
+        void showInfo() {
+            cout << "Name: " << name << endl;
+            cout << "Lv: " << lv.getLv() << endl;
+            cout << "Exp: " << lv.getExp() << "/" << lv.getMaxExp() << endl;
+            cout << UPPER_COIN_NAME << ": " << coin << COIN_SYMBOL << endl;
+            cout << "Items: " << endl;
+            inventory.showItems();
         }
         void BuyFrom(Entity &seller, int seller_item_index, int amount = 1) override {
             Item item = seller.getItem(seller_item_index);

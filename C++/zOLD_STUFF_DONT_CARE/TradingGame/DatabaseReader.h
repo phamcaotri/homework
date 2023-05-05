@@ -20,6 +20,7 @@ class ItemReader {
         Inventory inventory;
 
     public:
+// ------------------------- CONSTRUCTOR -------------------------
         ItemReader(string fileName, int amount = INFINITY_AMOUNT) {
             this->fileName = fileName;
             file.open(fileName);
@@ -44,6 +45,7 @@ class ItemReader {
             }
             file.close();
         }
+// ------------------------- GETTER -------------------------
         Inventory getInventory() {
             return inventory;
         }
@@ -56,6 +58,7 @@ class MapReader {
         Map map;
 
     public:
+// ------------------------- CONSTRUCTOR -------------------------
         MapReader(string fileName) {
             this->fileName = fileName;
             file.open(fileName);
@@ -86,6 +89,7 @@ class MapReader {
             file.close();
             map = Map(locations, distances);
         }
+// ------------------------- GETTER -------------------------
         Map getMap() {
             return map;
         }

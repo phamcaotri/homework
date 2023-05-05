@@ -11,10 +11,12 @@ class Location {
         string name;
         Distance distance;
     public:
+// ------------------------- CONSTRUCTOR -------------------------
         Location(string name, Distance distance) {
             this->name = name;
             this->distance = distance;
         }
+// ------------------------- GETTERS, SETTERS -------------------------
         string getName() {
             return name;
         }

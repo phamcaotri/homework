@@ -13,11 +13,13 @@ class Map {
         vector<string> locations;
         vector<Distance> distances;
     public:
+// ------------------------- CONSTRUCTOR -------------------------
         Map() {}
         Map(vector<string> locations, vector<Distance> distances) {
             this->locations = locations;
             this->distances = distances;
         }
+// ------------------------- GETTERS, SETTERS, ADD, REMOVE -------------------------
         string getLocationName(int index) {
             return locations[index];
         }
@@ -52,6 +54,7 @@ class Map {
         int getNumberOfLocations() {
             return locations.size();
         }
+// ------------------------- METHOD -------------------------
         void print() {
             for (int i = 0; i < locations.size(); i++) {
                 cout << locations[i] << endl;
@@ -59,6 +62,12 @@ class Map {
                     cout << getDistance(i, j) << " ";
                 }
                 cout << endl;
+            }
+        }
+        void showMap() {
+            cout << "Map:" << endl;
+            for (int i = 0; i < locations.size(); i++) {
+                cout << locations[i] << endl;
             }
         }
 };

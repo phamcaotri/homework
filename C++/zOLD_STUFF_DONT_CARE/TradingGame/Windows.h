@@ -7,39 +7,26 @@
 #include "Constant.h"
 #include "GameInterface.h"
 using std::cout, std::endl, std::string, std::vector;
-class GameInterface;
-// return pointer to the function option
-class Option {
-    private:
-        string name;
-        void (GameInterface::*function)();
-    public:
-        Option() {}
-        Option(string name, void (GameInterface::*function)()) {
-            this->name = name;
-            this->function = function;
-        }
-        string getName() {
-            return name;
-        }
-        void (GameInterface::*getFunction())() {
-            return function;
-        }
-};
 
 class Windows {
     private:
         string title;
         vector<string> menu_options;
     public:
+// ------------------------- CONSTRUCTOR -------------------------
         Windows(string title = DEFAULT_NONAME) {
             this->title = title;
         }
-        void clearScreen() {
-            cout << "\033[2J\033[1;1H";
-        }
+// ------------------------- GETTER -------------------------
         int getNumberOfMenuOptions() {
             return menu_options.size();
+        }
+        void addMenuOption(string option) {
+            menu_options.push_back(option);
+        }
+// ------------------------- METHOD -------------------------
+        void clearScreen() {
+            cout << "\033[2J\033[1;1H";
         }
         void printTitle() {
             cout << "==============================" << endl;
@@ -52,9 +39,7 @@ class Windows {
                 cout << i + 1 << ". " << menu_options[i] << endl;
             }
         }
-        void addMenuOption(string option) {
-            menu_options.push_back(option);
-        }
+
 };
 
 #endif

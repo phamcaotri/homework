@@ -12,6 +12,7 @@ class UserInput {
         string input;
         std::stringstream ss;
     public:
+// ------------------------- METHOD -------------------------
         void getInput() {
             input = "";
             getline(cin, input);

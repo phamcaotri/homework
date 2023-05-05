@@ -11,10 +11,12 @@ class Inventory {
     private:
         vector<std::pair<Item, int>> items;
     public:
+// ----------------------- CONSTRUCTOR -----------------------
         Inventory() {}
         Inventory(vector<std::pair<Item, int>> items) {
             this->items = items;
         }
+// ------------------------- GETTERS, SETTER, ADD, REMOVE -------------------------
         Item getItem(int index) {
             return items[index].first;
         }
@@ -37,22 +39,6 @@ class Inventory {
                 items[index].second += amount;
             }
         }
-        bool isContain(Item item, int& index) {
-            for (int i = 0; i < items.size(); i++) {
-                if (getItemName(i) == item.getName()) {
-                    index = i;
-                    return true;
-                }
-            }
-            index = -1;
-            return false;
-        }
-        bool isValidIndex(int index) {
-            return index >= 0 && index < items.size();
-        }
-        bool isValidAmount(int index, int amount) {
-            return amount >= 0 && (items[index].second >= amount || items[index].second >= INFINITY_AMOUNT);
-        }
         void addItem(Item item, int amount) {
             // if item is already in inventory, increase amount
             int index = -1;
@@ -74,6 +60,23 @@ class Inventory {
             if (items[index].second <= 0) {
                 items.erase(items.begin()+index);
             }
+        }
+// ------------------------- OTHER METHODS -------------------------
+        bool isContain(Item item, int& index) {
+            for (int i = 0; i < items.size(); i++) {
+                if (getItemName(i) == item.getName()) {
+                    index = i;
+                    return true;
+                }
+            }
+            index = -1;
+            return false;
+        }
+        bool isValidIndex(int index) {
+            return index >= 0 && index < items.size();
+        }
+        bool isValidAmount(int index, int amount) {
+            return amount >= 0 && (items[index].second >= amount || items[index].second >= INFINITY_AMOUNT);
         }
         void showItems() {
             if (items.size() == 0) {

@@ -8,6 +8,7 @@ class Distance {
     private:
         vector<int> distances;
     public:
+// ------------------------- CONSTRUCTOR -------------------------
         Distance() {}
         Distance(vector<int> distances) {
             this->distances = distances;
@@ -17,6 +18,7 @@ class Distance {
                 distances.push_back(0);
             }
         }
+// ------------------------- GETTERS, SETTER, ADD, REMOVE -------------------------
         int getDistanceTo(int index) {
             if (index < distances.size()) {
                 return distances[index];
@@ -24,15 +26,16 @@ class Distance {
                 return -1;
             }
         }
+        int getNumberOfDistances() {
+            return distances.size();
+        }
         void addDistance(int distance) {
             distances.push_back(distance);
         }
         void removeDistanceTo(int index) {
             distances.erase(distances.begin() + index);
         }
-        int getNumberOfDistances() {
-            return distances.size();
-        }
+
         
 };
 

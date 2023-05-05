@@ -10,11 +10,13 @@ class Level {
         int maxExp;
 
     public:
+// ------------------------- CONSTRUCTOR -------------------------
         Level() {
             lv = STARTING_LV;
             exp = STARTING_EXP;
             maxExp = STARTING_MAXEXP;
         }
+// ------------------------- GETTER -------------------------
         void setLv(int lv) {
             this->lv = lv;
             maxExp = calMaxExp();
@@ -43,6 +45,7 @@ class Level {
         int getMaxExp() {
             return maxExp;
         }
+// ------------------------- METHODS -------------------------
         int calMaxExp() {
             return lv*(500+lv*250);
         }

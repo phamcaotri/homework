@@ -40,26 +40,34 @@ class GameInterface {
         Shop shop;
         UserInput input;
         Map map;
-        vector<Option> options;
+        vector<std::pair<string, void (GameInterface::*)()>> options;
         Windows windows;
     public:
+// ------------------------- CONSTRUCTOR -------------------------
         GameInterface() {
             player = Character();
             traders = vector<Character>();
             shop = Shop();
             map = Map();
-            options = vector<Option>();
+            options = vector<std::pair<string, void (GameInterface::*)()>>();
             windows = Windows();
         }
         GameInterface(Character player, Shop shop) {
             this->player = player;
             this->shop = shop;
         }
+// ------------------------- GETTERS, SETTER, ADD, REMOVE -------------------------
         void setPlayer(Character player) {
             this->player = player;
         }
         void setShop(Shop shop) {
             this->shop = shop;
+        }
+        Character getPlayer() {
+            return player;
+        }
+        Shop getShop() {
+            return shop;
         }
         void setMap(Map map) {
             this->map = map;
@@ -68,10 +76,12 @@ class GameInterface {
             traders.push_back(trader);
         }
         void addOption(string name, void (GameInterface::*function)()) {
-            options.push_back(Option(name, function));
+            options.push_back(std::make_pair(name, function));
             windows.addMenuOption(name);
         }
+// ------------------------- METHOD -------------------------
         void initOption() {
+            addOption("Show Map", &GameInterface::showMap);
             addOption("Show Player", &GameInterface::showPlayer);
             addOption("Show Shop", &GameInterface::showShop);
             addOption("Buy Item", &GameInterface::BuyItem);
@@ -81,11 +91,8 @@ class GameInterface {
             addOption("Sell to Trader", &GameInterface::SellToTrader);
             addOption("Exit", &GameInterface::Exit);
         }
-        Character getPlayer() {
-            return player;
-        }
-        Shop getShop() {
-            return shop;
+        void showMap() {
+            map.showMap();
         }
         void showPlayer() {
             player.showInfo();
@@ -93,10 +100,6 @@ class GameInterface {
         void showShop() {
             shop.showInfo("not show items");
             shop.showItems("buy");
-        }
-        void Exit() {
-            cout << "Exiting..." << endl;
-            exit(0);
         }
         void BuyItem() {
             TradeAction(player, shop, "buy");
@@ -134,15 +137,21 @@ class GameInterface {
                 cout << "Invalid input." << endl;
             }
         }
+        void Exit() {
+            cout << "Exiting..." << endl;
+            exit(0);
+        }
+
         void run() {
-            do {
+            initOption();
+            do { 
                 windows.showMenu();
                 cout << "Enter choice: ";
                 int choice;
                 input.getInt(choice);
-                //clearScreen();
+                windows.clearScreen();
                 if (choice > 0 && choice <= options.size()) {
-                    options[choice-1].getFunction();
+                    (this->*options[choice-1].second)();
                 } else {
                     cout << "Invalid input." << endl;
                 }

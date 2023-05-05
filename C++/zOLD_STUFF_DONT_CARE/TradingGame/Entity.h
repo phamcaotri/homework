@@ -9,24 +9,18 @@ class Entity {
         string name;
         int coin;
         Inventory inventory;
-
+// ------------------------- BUY/SELL MULTIPLIER -------------------------
         float buyMultiplier;
         float sellMultiplier;
     public:
+// ------------------------- CONSTRUCTOR -------------------------
         Entity(string name = DEFAULT_NONAME, int coin = STARTING_COIN, float buyMultiplier = STD_BUY_MULTIPLIER, float sellMultiplier = STD_SELL_MULTIPLIER) {
             this->name = name;
             this->coin = coin;
             this->buyMultiplier = buyMultiplier;
             this->sellMultiplier = sellMultiplier;
         }
-        void showInfo(string condition = "show items") {
-            cout << "Name: " << name << endl;
-            cout << UPPER_COIN_NAME << ": " << coin << COIN_SYMBOL << endl;
-            cout << "Items: " << endl;
-            if (condition == "show items") {
-                inventory.showItems();
-            }
-        }
+// ------------------------- GETTERS, SETTER, ADD, REMOVE -------------------------
         void setName(string name) {
             this->name = name;
         }
@@ -66,11 +60,20 @@ class Entity {
         float getSellMultiplier() {
             return sellMultiplier;
         }
+// ------------------------- METHODS -------------------------
         bool isValidIndex(int index) {
             return inventory.isValidIndex(index);
         }
         bool isValidAmount(int index, int amount) {
             return inventory.isValidAmount(index, amount);
+        }
+        void showInfo(string condition = "show items") {
+            cout << "Name: " << name << endl;
+            cout << UPPER_COIN_NAME << ": " << coin << COIN_SYMBOL << endl;
+            cout << "Items: " << endl;
+            if (condition == "show items") {
+                inventory.showItems();
+            }
         }
         void showItems(string type = "default") {
             if (type == "buy") {
