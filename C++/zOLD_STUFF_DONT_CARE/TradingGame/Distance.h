@@ -17,6 +17,9 @@ class Distance {
         void removeDistanceTo(int index) {
             distances.erase(distances.begin() + index);
         }
+        int getNumberOfDistances() {
+            return distances.size();
+        }
         
 };
 

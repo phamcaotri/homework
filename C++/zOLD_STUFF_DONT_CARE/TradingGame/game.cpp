@@ -12,6 +12,9 @@ int main() {
     Character trader("Michael", 1000);
     trader.setInventory(reader2.getInventory());
     game.addTrader(trader);
+
+    MapReader mapReader("LocationDistanceMap.txt");
+    mapReader.getMap().print();
     game.run();
     return 0;
 }

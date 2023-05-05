@@ -55,6 +55,10 @@ class Map {
         void print() {
             for (int i = 0; i < locations.size(); i++) {
                 cout << locations[i] << endl;
+                for (int j = 0; j < locations.size(); j++) {
+                    cout << distances[i].getDistanceTo(j) << " ";
+                }
+                cout << endl;
             }
         }
 };
