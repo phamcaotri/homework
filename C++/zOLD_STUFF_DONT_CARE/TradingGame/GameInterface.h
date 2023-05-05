@@ -4,6 +4,8 @@
 #include "Character.h"
 #include "Shop.h"
 #include "UserInput.h"
+#include "Map.h"
+#include "Windows.h"
 
 void TradeAction(Entity& player, Entity& trader, string action) {
     UserInput input;
@@ -37,11 +39,17 @@ class GameInterface {
         vector<Character> traders;
         Shop shop;
         UserInput input;
+        Map map;
+        vector<Option> options;
+        Windows windows;
     public:
         GameInterface() {
             player = Character();
             traders = vector<Character>();
             shop = Shop();
+            map = Map();
+            options = vector<Option>();
+            windows = Windows();
         }
         GameInterface(Character player, Shop shop) {
             this->player = player;
@@ -53,8 +61,25 @@ class GameInterface {
         void setShop(Shop shop) {
             this->shop = shop;
         }
+        void setMap(Map map) {
+            this->map = map;
+        }
         void addTrader(Character trader) {
             traders.push_back(trader);
+        }
+        void addOption(string name, void (GameInterface::*function)()) {
+            options.push_back(Option(name, function));
+            windows.addMenuOption(name);
+        }
+        void initOption() {
+            addOption("Show Player", &GameInterface::showPlayer);
+            addOption("Show Shop", &GameInterface::showShop);
+            addOption("Buy Item", &GameInterface::BuyItem);
+            addOption("Sell Item", &GameInterface::SellItem);
+            addOption("Talk to Trader", &GameInterface::TalkToTrader);
+            addOption("Buy from Trader", &GameInterface::BuyFromTrader);
+            addOption("Sell to Trader", &GameInterface::SellToTrader);
+            addOption("Exit", &GameInterface::Exit);
         }
         Character getPlayer() {
             return player;
@@ -69,17 +94,9 @@ class GameInterface {
             shop.showInfo("not show items");
             shop.showItems("buy");
         }
-        void showInterface() {
-            cout << "\n-------------------------" << endl;
-            cout << "1. Show Player" << endl;
-            cout << "2. Show Shop" << endl;
-            cout << "3. Buy Item" << endl;
-            cout << "4. Sell Item" << endl;
-            cout << "5. Talk to Trader" << endl;
-            cout << "6. Buy from Trader" << endl;
-            cout << "7. Sell to Trader" << endl;
-            cout << "8. Exit" << endl;
-            cout << "-------------------------" << endl;
+        void Exit() {
+            cout << "Exiting..." << endl;
+            exit(0);
         }
         void BuyItem() {
             TradeAction(player, shop, "buy");
@@ -119,45 +136,18 @@ class GameInterface {
         }
         void run() {
             do {
-                showInterface();
+                windows.showMenu();
                 cout << "Enter choice: ";
                 int choice;
                 input.getInt(choice);
-                clearScreen();
-                cout << "\n-------------------------" << endl;
-                switch (choice) {
-                    case 1:
-                        showPlayer();
-                        break;
-                    case 2:
-                        showShop();
-                        break;
-                    case 3:
-                        BuyItem();
-                        break;
-                    case 4:
-                        SellItem();
-                        break;
-                    case 5:
-                        TalkToTrader();
-                        break;
-                    case 6:
-                        BuyFromTrader();
-                        break;
-                    case 7:
-                        SellToTrader();
-                        break;
-                    case 8:
-                        cout << "Exiting..." << endl;
-                        return;
-                    default:
-                        cout << "Invalid choice." << endl;
-                        break;
+                //clearScreen();
+                if (choice > 0 && choice <= options.size()) {
+                    options[choice-1].getFunction();
+                } else {
+                    cout << "Invalid input." << endl;
                 }
-                cout << "-------------------------" << endl << endl;
             } while (true);
         }
-
 };
 
 #endif
