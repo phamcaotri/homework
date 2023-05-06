@@ -8,17 +8,16 @@ int main() {
     ItemReader reader(ITEM_FILE);
     shop.setInventory(reader.getInventory());
 
-    GameInterface game(player, shop);
+    MapReader mapReader("LocationDistanceMap.txt");
+    Map map = mapReader.getMap();
+    map.print();
+    Location location(map.getLocation(0));
+    GameInterface game(player, shop, map, location);
 
     ItemReader reader2(ITEM_FILE, 3);
     Character trader("Michael", 1000);
     trader.setInventory(reader2.getInventory());
     game.addTrader(trader);
-
-    MapReader mapReader("LocationDistanceMap.txt");
-    mapReader.getMap().print();
-    game.setMap(mapReader.getMap());
-
     game.run();
     return 0;
 }
