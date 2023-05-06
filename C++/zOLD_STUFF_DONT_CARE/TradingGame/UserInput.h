@@ -44,6 +44,13 @@ class UserInput {
                 }
             }
         }
+        void getChar(char& output) {
+            getInput();
+            ss >> output;
+            if (ss.fail()) {
+                return getChar(output);
+            }
+        }
 };
 
 #endif

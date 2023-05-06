@@ -5,9 +5,8 @@
 #include "Shop.h"
 #include "UserInput.h"
 #include "Map.h"
-#include "Windows.h"
 
-void TradeAction(Entity& player, Entity& trader, string action) {
+bool TradeAction(Entity& player, Entity& trader, string action) {
     UserInput input;
     if (action == "buy") {
         trader.showItems("buy");
@@ -18,6 +17,9 @@ void TradeAction(Entity& player, Entity& trader, string action) {
     cout << "Enter item index and amount (default = 1): ";
     int index, amount = 1;
     input.getPairInt(index, amount);
+    if (index == 0) {
+        return RETURN;
+    }
     if (action == "buy") {
         if (trader.isValidIndex(index-1) && trader.isValidAmount(index-1, amount)) {
             player.BuyFrom(trader, index-1, amount);
@@ -31,6 +33,7 @@ void TradeAction(Entity& player, Entity& trader, string action) {
             cout << "Invalid input" << endl;
         }
     }
+    return NO_RETURN;
 }
 
 class GameInterface {
@@ -40,8 +43,7 @@ class GameInterface {
         Shop shop;
         UserInput input;
         Map map;
-        vector<std::pair<string, void (GameInterface::*)()>> options;
-        Windows windows;
+        vector<std::pair<string, bool (GameInterface::*)()>> options;
     public:
 // ------------------------- CONSTRUCTOR -------------------------
         GameInterface() {
@@ -49,8 +51,7 @@ class GameInterface {
             traders = vector<Character>();
             shop = Shop();
             map = Map();
-            options = vector<std::pair<string, void (GameInterface::*)()>>();
-            windows = Windows();
+            options = vector<std::pair<string, bool (GameInterface::*)()>>();
         }
         GameInterface(Character player, Shop shop) {
             this->player = player;
@@ -75,11 +76,36 @@ class GameInterface {
         void addTrader(Character trader) {
             traders.push_back(trader);
         }
-        void addOption(string name, void (GameInterface::*function)()) {
+        void addOption(string name, bool (GameInterface::*function)()) {
             options.push_back(std::make_pair(name, function));
-            windows.addMenuOption(name);
         }
 // ------------------------- METHOD -------------------------
+        void clearScreen() {
+            cout << "\033[2J\033[1;1H";
+        }
+        bool pause() {
+            cout << "==============================" << endl;
+            cout << "Enter choice: ";
+            char key;
+            input.getChar(key);
+            return key == KEY_RETURN;
+        }
+        void guide() {
+            cout << "return: " << KEY_RETURN << endl;
+            cout << "==============================" << endl;
+        }
+        void printTitle() {
+            cout << "==============================" << endl;
+            cout << GAME_TITLE << endl;
+            cout << "==============================" << endl;
+        }
+        void showMenu() {
+            cout << "==============================" << endl;
+            for (int i = 0; i < options.size(); i++) {
+                cout << i + 1 << ". " << options[i].first << endl;
+            }
+            cout << "==============================" << endl;
+        }
         void initOption() {
             addOption("Show Map", &GameInterface::showMap);
             addOption("Show Player", &GameInterface::showPlayer);
@@ -91,23 +117,33 @@ class GameInterface {
             addOption("Sell to Trader", &GameInterface::SellToTrader);
             addOption("Exit", &GameInterface::Exit);
         }
-        void showMap() {
+        bool showMap() {
             map.showMap();
+            return pause();
         }
-        void showPlayer() {
+        bool showPlayer() {
             player.showInfo();
+            return pause();
         }
-        void showShop() {
+        bool showShop() {
             shop.showInfo("not show items");
             shop.showItems("buy");
+            return pause();
         }
-        void BuyItem() {
-            TradeAction(player, shop, "buy");
+        bool BuyItem() {
+            if (TradeAction(player, shop, "buy") == RETURN) {
+                return RETURN;
+            }
+            return pause();
+
         }
-        void SellItem() {
-            TradeAction(player, shop, "sell");
+        bool SellItem() {
+            if (TradeAction(player, shop, "sell") == RETURN) {
+                return RETURN;
+            }
+            return pause();
         }
-        void TalkToTrader() {
+        bool TalkToTrader() {
             cout << "Enter trader index: ";
             int index;
             input.getInt(index);
@@ -117,7 +153,7 @@ class GameInterface {
                 cout << "Invalid input." << endl;
             }
         }
-        void BuyFromTrader() {
+        bool BuyFromTrader() {
             cout << "Enter trader index: ";
             int index;
             input.getInt(index);
@@ -127,7 +163,7 @@ class GameInterface {
                 cout << "Invalid input." << endl;
             }
         }
-        void SellToTrader() {
+        bool SellToTrader() {
             cout << "Enter trader index: ";
             int index;
             input.getInt(index);
@@ -137,7 +173,7 @@ class GameInterface {
                 cout << "Invalid input." << endl;
             }
         }
-        void Exit() {
+        bool Exit() {
             cout << "Exiting..." << endl;
             exit(0);
         }
@@ -145,19 +181,20 @@ class GameInterface {
         void run() {
             initOption();
             do { 
-                windows.showMenu();
+                showMenu();
                 cout << "Enter choice: ";
                 int choice;
                 input.getInt(choice);
-                windows.clearScreen();
-                cout << "==============================" << endl;
                 if (choice > 0 && choice <= options.size()) {
-                    (this->*options[choice-1].second)();
+                    do {
+                        clearScreen();
+                        guide();
+                    }
+                    while ((this->*options[choice-1].second)() == false);
                 } else {
                     cout << "Invalid input." << endl;
                 }
-                windows.pause();
-                windows.clearScreen();
+                clearScreen();
             } while (true);
         }
 };

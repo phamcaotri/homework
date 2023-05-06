@@ -23,4 +23,14 @@ const char* COIN_SYMBOL = "$";
 
 // FILE CONSTANT
 const char* ITEM_FILE = "ItemDatabase.txt";
+
+// MENU CONSTANT
+const char* GAME_TITLE = "Trading Game";
+
+// KEY CONSTANT
+const char KEY_RETURN = '0';
+
+// BOOL CONSTANT
+const bool RETURN = true;
+const bool NO_RETURN = false;
 #endif
