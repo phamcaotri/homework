@@ -43,6 +43,7 @@ class GameInterface {
         Shop shop;
         UserInput input;
         Map map;
+        Location currentLocation;
         vector<std::pair<string, bool (GameInterface::*)()>> options;
     public:
 // ------------------------- CONSTRUCTOR -------------------------
@@ -51,11 +52,14 @@ class GameInterface {
             traders = vector<Character>();
             shop = Shop();
             map = Map();
+            currentLocation = Location();
             options = vector<std::pair<string, bool (GameInterface::*)()>>();
         }
-        GameInterface(Character player, Shop shop) {
+        GameInterface(Character player = Character(), Shop shop = Shop(), Map map = Map(), Location currentLocation = Location()) {
             this->player = player;
             this->shop = shop;
+            this->map = map;
+            this->currentLocation = currentLocation;
         }
 // ------------------------- GETTERS, SETTER, ADD, REMOVE -------------------------
         void setPlayer(Character player) {
@@ -100,6 +104,7 @@ class GameInterface {
             cout << "==============================" << endl;
         }
         void showMenu() {
+            cout << "You are at " << currentLocation.getName() << endl;
             cout << "==============================" << endl;
             for (int i = 0; i < options.size(); i++) {
                 cout << i + 1 << ". " << options[i].first << endl;

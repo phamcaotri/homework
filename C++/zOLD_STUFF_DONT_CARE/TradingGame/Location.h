@@ -13,7 +13,7 @@ class Location {
         Distance distance;
     public:
 // ------------------------- CONSTRUCTOR -------------------------
-        Location(string name, Distance distance) {
+        Location(string name = DEFAULT_NONAME, Distance distance = Distance()) {
             this->name = name;
             this->distance = distance;
         }
