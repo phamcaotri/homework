@@ -27,6 +27,13 @@ class UserInput {
                 return getInt(output);
             }
         }
+        void getInt(int& output, int defaultValue) {
+            getInput();
+            ss >> output;
+            if (ss.fail()) {
+                output = defaultValue;
+            }
+        }
         void getPairInt(int& output1, int& output2) {
             getInput();
             ss >> output1;
@@ -41,6 +48,25 @@ class UserInput {
                 if (ss.fail()) {
                     cout << "Invalid input, try again:" << endl;
                     return getPairInt(output1, output2);
+                }
+            }
+        }
+        void getPairInt(int& output1, int& output2, int defaultValue1, int defaultValue2) {
+            getInput();
+            ss >> output1;
+            if (ss.fail()) {
+                output1 = defaultValue1;
+                output2 = defaultValue2;
+                return;
+            }
+            if (ss.eof()) {
+                return;
+            } else {
+                ss >> output2;
+                if (ss.fail()) {
+                    output1 = defaultValue1;
+                    output2 = defaultValue2;
+                    return;
                 }
             }
         }

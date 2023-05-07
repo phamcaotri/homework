@@ -6,6 +6,7 @@
 #include "UserInput.h"
 #include "Map.h"
 #include "CurrentLocation.h"
+#include "Options.h"
 
 bool TradeAction(Entity& player, Entity& trader, string action) {
     UserInput input;
@@ -17,21 +18,14 @@ bool TradeAction(Entity& player, Entity& trader, string action) {
     cout << "You have " << player.getCoin() << COIN_SYMBOL << "." << endl;
     cout << "Enter item index and amount (default = 1): ";
     int index, amount = 1;
-    input.getPairInt(index, amount);
-    if (index == 0) {
-        return RETURN;
-    }
+    input.getPairInt(index, amount, 0, 0);
     if (action == "buy") {
         if (trader.isValidIndex(index-1) && trader.isValidAmount(index-1, amount)) {
             player.BuyFrom(trader, index-1, amount);
-        } else {
-            cout << "Invalid input" << endl;
         }
     } else if (action == "sell") {
         if (player.isValidIndex(index-1) && player.isValidAmount(index-1, amount)) {
             player.SellTo(trader, index-1, amount);
-        } else {
-            cout << "Invalid input" << endl;
         }
     }
     return NO_RETURN;
@@ -45,7 +39,7 @@ class GameInterface {
         UserInput input;
         Map map;
         Location currentLocation;
-        vector<std::pair<string, bool (GameInterface::*)()>> options;
+        Options<GameInterface> options;
     public:
 // ------------------------- CONSTRUCTOR -------------------------
         GameInterface() {
@@ -54,7 +48,7 @@ class GameInterface {
             shop = Shop();
             map = Map();
             currentLocation = Location();
-            options = vector<std::pair<string, bool (GameInterface::*)()>>();
+            options = Options<GameInterface>();
         }
         GameInterface(Character player = Character(), Shop shop = Shop(), Map map = Map(), Location currentLocation = Location()) {
             this->player = player;
@@ -88,9 +82,6 @@ class GameInterface {
         void addTrader(Character trader) {
             traders.push_back(trader);
         }
-        void addOption(string name, bool (GameInterface::*function)()) {
-            options.push_back(std::make_pair(name, function));
-        }
 // ------------------------- METHOD -------------------------
         void clearScreen() {
             cout << "\033[2J\033[1;1H";
@@ -102,9 +93,8 @@ class GameInterface {
             input.getChar(key);
             return key == KEY_RETURN;
         }
-        void guide() {
-            cout << "return: " << KEY_RETURN << endl;
-            cout << "==============================" << endl;
+        bool returnBack() {
+            return RETURN;
         }
         void printTitle() {
             cout << "==============================" << endl;
@@ -114,21 +104,15 @@ class GameInterface {
         void showMenu() {
             cout << "You are at " << currentLocation.getName() << endl;
             cout << "==============================" << endl;
-            for (int i = 0; i < options.size(); i++) {
-                cout << i + 1 << ". " << options[i].first << endl;
-            }
+            options.showOptions();
             cout << "==============================" << endl;
         }
-        void initOption() {
-            addOption("Show Map", &GameInterface::showMap);
-            addOption("Show Player", &GameInterface::showPlayer);
-            addOption("Show Shop", &GameInterface::showShop);
-            addOption("Buy Item", &GameInterface::BuyItem);
-            addOption("Sell Item", &GameInterface::SellItem);
-            addOption("Talk to Trader", &GameInterface::TalkToTrader);
-            addOption("Buy from Trader", &GameInterface::BuyFromTrader);
-            addOption("Sell to Trader", &GameInterface::SellToTrader);
-            addOption("Exit", &GameInterface::Exit);
+        void initMenu() {
+            options.addOption("Show Map", &GameInterface::showMap);
+            options.addOption("Show Player", &GameInterface::showPlayer);
+            options.addOption("Show Shop", &GameInterface::showShop);
+            options.addOption("Talk to Trader", &GameInterface::TalkToTrader);
+            options.addOption("Exit", &GameInterface::Exit, true);
         }
         bool showMap() {
             map.showMap();
@@ -141,20 +125,18 @@ class GameInterface {
         bool showShop() {
             shop.showInfo("not show items");
             shop.showItems("buy");
-            return pause();
+            Options<GameInterface> sub_options;
+            sub_options.addOption("Buy Item", &GameInterface::BuyItem);
+            sub_options.addOption("Sell Item", &GameInterface::SellItem);
+            sub_options.addOption("Return (other keys)", &GameInterface::returnBack, true);
+            while (sub_options.getChoice(this) == NO_RETURN) {}
+            return RETURN;
         }
         bool BuyItem() {
-            if (TradeAction(player, shop, "buy") == RETURN) {
-                return RETURN;
-            }
-            return pause();
-
+            return TradeAction(player, shop, "buy");
         }
         bool SellItem() {
-            if (TradeAction(player, shop, "sell") == RETURN) {
-                return RETURN;
-            }
-            return pause();
+            return TradeAction(player, shop, "sell");
         }
         bool TalkToTrader() {
             cout << "Enter trader index: ";
@@ -204,7 +186,7 @@ class GameInterface {
         }
 
         void run() {
-            initOption();
+            initMenu();
             do { 
                 showMenu();
                 cout << "Enter choice: ";
@@ -213,9 +195,8 @@ class GameInterface {
                 if (choice > 0 && choice <= options.size()) {
                     do {
                         clearScreen();
-                        guide();
                     }
-                    while ((this->*options[choice-1].second)() == false);
+                    while (options.run(choice-1, this) == NO_RETURN);
                 } else {
                     cout << "Invalid input." << endl;
                 }
