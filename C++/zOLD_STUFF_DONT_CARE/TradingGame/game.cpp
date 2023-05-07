@@ -11,15 +11,14 @@ int main() {
 
     MapReader mapReader("LocationDistanceMap.txt");
     Map map = mapReader.getMap();
-    map.print();
-    Location location(map.getLocation(0));
+    Location location(map.getLocationData(0).getLocationData());
 
     ItemReader reader2(ITEM_FILE, 3);
     Character trader("Michael", 100), trader2("David", 2000);
     trader.setInventory(reader2.getInventory());
     trader2.setInventory(reader2.getInventory());
 
-    CurrentLocation currentLocation(location, vector<Shop>{shop, shop2}, player, vector<Character>{trader, trader2});
+    LocationData currentLocation(location, vector<Shop>{shop, shop2}, player, vector<Character>{trader, trader2});
     GameInterface game(map, currentLocation);
     game.run();
     return 0;
@@ -43,9 +42,11 @@ nâng cấp gameinterface
 gom 2 thuộc tính map thành 1
 tạo các địa điểm riêng biệt
 xoá lớp windows ko cần thiết
+Nâng cấp class GameInterface lần 2
+làm người chơi có thể di chuyển giữa các khu vực
 */
 /*--------------------------- TODO --------------------------------
-làm người chơi có thể di chuyển giữa các khu vực
+
 khởi tạo các shop mặc định cho địa điểm đó
 tạo danh sách các trader
 cơ chế xem thông tin item
