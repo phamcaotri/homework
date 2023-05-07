@@ -2,22 +2,25 @@
 #include "DatabaseReader.h"
 
 int main() {
-    Character player("Mike8", 100);
+    Character player("Mike8", 1000);
 
-    Shop shop("Shop");
+    Shop shop("Shop"), shop2("Shop2");
     ItemReader reader(ITEM_FILE);
     shop.setInventory(reader.getInventory());
+    shop2.setInventory(reader.getInventory());
 
     MapReader mapReader("LocationDistanceMap.txt");
     Map map = mapReader.getMap();
     map.print();
     Location location(map.getLocation(0));
-    GameInterface game(player, shop, map, location);
 
     ItemReader reader2(ITEM_FILE, 3);
-    Character trader("Michael", 1000);
+    Character trader("Michael", 100), trader2("David", 2000);
     trader.setInventory(reader2.getInventory());
-    game.addTrader(trader);
+    trader2.setInventory(reader2.getInventory());
+
+    CurrentLocation currentLocation(location, vector<Shop>{shop, shop2}, player, vector<Character>{trader, trader2});
+    GameInterface game(map, currentLocation);
     game.run();
     return 0;
 }
@@ -39,9 +42,10 @@ thêm class các địa điểm
 nâng cấp gameinterface
 gom 2 thuộc tính map thành 1
 tạo các địa điểm riêng biệt
+xoá lớp windows ko cần thiết
 */
 /*--------------------------- TODO --------------------------------
-xoá lớp windows ko cần thiết
+làm người chơi có thể di chuyển giữa các khu vực
 khởi tạo các shop mặc định cho địa điểm đó
 tạo danh sách các trader
 cơ chế xem thông tin item

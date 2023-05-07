@@ -6,11 +6,16 @@
 using std::string, std::cout, std::endl;
 
 #include "Distance.h"
+#include "Character.h"
+#include "Shop.h"
 
 class Location {
     private:
         string name;
         Distance distance;
+
+        vector<Character> characters;
+        vector<Shop> shops;
     public:
 // ------------------------- CONSTRUCTOR -------------------------
         Location(string name = DEFAULT_NONAME, Distance distance = Distance()) {

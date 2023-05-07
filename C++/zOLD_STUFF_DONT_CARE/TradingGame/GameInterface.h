@@ -5,6 +5,7 @@
 #include "Shop.h"
 #include "UserInput.h"
 #include "Map.h"
+#include "CurrentLocation.h"
 
 bool TradeAction(Entity& player, Entity& trader, string action) {
     UserInput input;
@@ -60,6 +61,13 @@ class GameInterface {
             this->shop = shop;
             this->map = map;
             this->currentLocation = currentLocation;
+        }
+        GameInterface(Map map, CurrentLocation currentLocation) {
+            this->player = currentLocation.getPlayer();
+            this->traders = currentLocation.getTraders();
+            this->shop = currentLocation.getShop();
+            this->map = map;
+            this->currentLocation = currentLocation.getLocation();
         }
 // ------------------------- GETTERS, SETTER, ADD, REMOVE -------------------------
         void setPlayer(Character player) {
@@ -152,31 +160,43 @@ class GameInterface {
             cout << "Enter trader index: ";
             int index;
             input.getInt(index);
+            if (index == 0) {
+                return RETURN;
+            }
             if (index > 0 && index <= traders.size()) {
                 traders[index-1].showInfo();
             } else {
                 cout << "Invalid input." << endl;
             }
+            return pause();
         }
         bool BuyFromTrader() {
             cout << "Enter trader index: ";
             int index;
             input.getInt(index);
+            if (index == 0) {
+                return RETURN;
+            }
             if (index > 0 && index <= traders.size()) {
                 TradeAction(player, traders[index-1], "buy");
             } else {
                 cout << "Invalid input." << endl;
             }
+            return pause();
         }
         bool SellToTrader() {
             cout << "Enter trader index: ";
             int index;
             input.getInt(index);
+            if (index == 0) {
+                return RETURN;
+            }
             if (index > 0 && index <= traders.size()) {
                 TradeAction(player, traders[index-1], "sell");
             } else {
                 cout << "Invalid input." << endl;
             }
+            return pause();
         }
         bool Exit() {
             cout << "Exiting..." << endl;

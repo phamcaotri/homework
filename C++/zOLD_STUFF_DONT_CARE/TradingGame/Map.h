@@ -58,7 +58,7 @@ class Map {
         void showMap() {
             cout << "Map:" << endl;
             for (int i = 0; i < locations.size(); i++) {
-                cout << locations[i].getName() << endl;
+                cout << i+1 << ". " << locations[i].getName() << endl;
             }
         }
 };
