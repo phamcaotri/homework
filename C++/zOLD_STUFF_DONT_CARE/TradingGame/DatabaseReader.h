@@ -69,7 +69,7 @@ class MapReader {
             string locationName;
             // vector<string> locations;
             // vector<Distance> distances;
-            vector<Location> locations;
+            vector<LocationData> locations;
             while (!file.eof()) {
                 // ignore comments starting with #
                 if (file.peek() == '#' || file.peek() == '\n') {
@@ -84,7 +84,7 @@ class MapReader {
                     file >> distanceTo;
                     distance.addDistance(distanceTo);
                 }
-                locations.push_back(Location(locationName, distance));
+                locations.push_back(LocationData(locationName, distance));
                 file.ignore();
             }
             file.close();

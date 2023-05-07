@@ -7,18 +7,18 @@ using std::string, std::vector;
 
 #include "Constant.h"
 #include "UserInput.h"
-template <class Default>
 
+template <class Default>
 class Options {
     private:
-        vector<std::pair<string, bool (Default::*)()>> options;
-        std::pair<string, bool (Default::*)()> option_zero;
+        vector<std::pair<string, bool (Default::*)(int)>> options;
+        std::pair<string, bool (Default::*)(int)> option_zero;
     public:
 // ------------------------- CONSTRUCTOR -------------------------
         Options() {
-            options = vector<std::pair<string, bool (Default::*)()>>();
+            options = vector<std::pair<string, bool (Default::*)(int)>>();
         }
-        Options(vector<std::pair<string, bool (Default::*)()>> options) {
+        Options(vector<std::pair<string, bool (Default::*)(int)>> options) {
             this->options = options;
         }
         Options(Options& options) {
@@ -34,7 +34,7 @@ class Options {
         int size() {
             return options.size();
         }
-        bool getChoice(Default* object) {
+        bool getChoice(Default* object, int parameter = 0) {
             cout << "==============================" << endl;
             showOptions();
             cout << "==============================" << endl;
@@ -43,7 +43,7 @@ class Options {
             UserInput input;
             input.getInt(choice,0);
             clearScreen();
-            bool isReturn = run(choice-1,object);
+            bool isReturn = run(choice-1,object, parameter);
             if (isReturn) {
                 return RETURN;
             } else {
@@ -51,7 +51,7 @@ class Options {
             }
         }
 // ------------------------- ADD, REMOVE --------------------------
-        void addOption(string option, bool (Default::*function)(), bool isZero = false) {
+        void addOption(string option, bool (Default::*function)(int), bool isZero = false) {
             if (isZero) {
                 option_zero = std::make_pair(option, function);
             } else {
@@ -78,11 +78,11 @@ class Options {
                 cout << "0. " << option_zero.first << endl;
             }
         }
-        bool run(int index, Default* object) {
+        bool run(int index, Default* object, int parameter = 0) {
             if (index < 0 || index >= options.size()) {
                 return RETURN;
             }
-            return (object->*options[index].second)();
+            return (object->*options[index].second)(parameter);
         }
 };
 #endif

@@ -6,15 +6,15 @@
 #include <iostream>
 using std::vector, std::string, std::cout, std::endl;
 
-#include "Location.h"
+#include "LocationData.h"
 
 class Map {
     private:
-        vector<Location> locations;
+        vector<LocationData> locations;
     public:
 // ------------------------- CONSTRUCTOR -------------------------
         Map() {}
-        Map(vector<Location> locations) {
+        Map(vector<LocationData> locations) {
             this->locations = locations;
         }
 // ------------------------- GETTERS, SETTERS, ADD, REMOVE -------------------------
@@ -28,10 +28,10 @@ class Map {
             }
             return distance;
         }
-        Location getLocation(int index) {
+        LocationData getLocationData(int index) {
             return locations[index];
         }
-        void addLocation(Location Location) {
+        void addLocation(LocationData Location) {
             locations.push_back(Location);
             for (int i = 0; i < locations.size(); i++) {
                 locations[i].addDistance(0);
@@ -60,6 +60,9 @@ class Map {
             for (int i = 0; i < locations.size(); i++) {
                 cout << i+1 << ". " << locations[i].getName() << endl;
             }
+        }
+        int size() {
+            return locations.size();
         }
 };
 
