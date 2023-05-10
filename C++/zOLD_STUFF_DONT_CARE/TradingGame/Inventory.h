@@ -20,6 +20,14 @@ class Inventory {
         Item getItem(int index) {
             return items[index].first;
         }
+        Item getItem(string name) {
+            for (int i = 0; i < items.size(); i++) {
+                if (items[i].first.getName() == name) {
+                    return items[i].first;
+                }
+            }
+            return Item();
+        }
         int getAmount(int index) {
             return items[index].second;
         }

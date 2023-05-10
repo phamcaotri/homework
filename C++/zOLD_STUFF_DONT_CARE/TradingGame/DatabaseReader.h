@@ -67,8 +67,6 @@ class MapReader {
                 exit(1);
             }
             string locationName;
-            // vector<string> locations;
-            // vector<Distance> distances;
             vector<LocationData> locations;
             while (!file.eof()) {
                 // ignore comments starting with #
@@ -77,7 +75,6 @@ class MapReader {
                     continue;
                 }
                 getline(file, locationName);
-                // locations.push_back(locationName);
                 Distance distance;
                 int distanceTo;
                 while (file.peek() != '\n' && !file.eof()) {
@@ -91,10 +88,66 @@ class MapReader {
             // map = Map(locations, distances);
             map = Map(locations);
         }
+
 // ------------------------- GETTER -------------------------
         Map getMap() {
             return map;
         }
 };
+
+class LocationReader {
+    private:
+        ifstream file;
+        string fileName;
+        vector<LocationData> locations;
+
+    public:
+// ------------------------- CONSTRUCTOR -------------------------
+        LocationReader(string fileName, Map &map, Inventory itemList) {
+            this->fileName = fileName;
+            file.open(fileName);
+            if (!file.is_open()) {
+                cout << "Error opening file " << fileName << endl;
+                exit(1);
+            }
+            for (int i = 0; i < map.size(); i++) {
+                string locationName;
+                vector<Shop> shops;
+                while (!file.eof()) {
+                    // ignore comments starting with #
+                    if (file.peek() == '#' || file.peek() == '\n') {
+                        file.ignore(1000, '\n');
+                        continue;
+                    }
+                    getline(file, locationName);
+                    int shopNumber;
+                    file >> shopNumber;
+                    file.ignore();
+                    for (int j = 0; j < shopNumber; j++) {
+                        string shopName;
+                        Inventory shopInventory;
+                        getline(file, shopName);           
+                        while (file.peek() != '\n' && !file.eof()) {
+                            string item;
+                            file >> item;
+                            shopInventory.addItem(itemList.getItem(item), INFINITY_AMOUNT);
+                        }
+                        shops.push_back(Shop(shopName, shopInventory));
+                    }
+                    locations.push_back(LocationData(shops));
+                    file.ignore();
+                }
+                
+            }
+            map = Map(locations);
+            file.close();
+        }
+
+// ------------------------- GETTER -------------------------
+        vector<LocationData> getLocations() {
+            return locations;
+        }
+};  
+
 
 #endif

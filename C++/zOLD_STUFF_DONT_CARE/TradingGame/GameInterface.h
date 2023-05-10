@@ -61,7 +61,6 @@ class GameInterface {
             this->currentLocation = currentLocation;
         }
         GameInterface(Map map, LocationData currentLocation) {
-            this->player = currentLocation.getPlayer();
             this->traders = currentLocation.getTraders();
             this->shops = currentLocation.getShops();
             this->map = map;

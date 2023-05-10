@@ -12,13 +12,7 @@ class Item {
         string description;
     public:
 // ------------------------- CONSTRUCTOR -------------------------
-        Item() {
-            name = DEFAULT_NONAME;
-            price = 0;
-            description = DEFAULT_NODESCRIPTION;
-
-        }
-        Item(string name, int price, string description = DEFAULT_NODESCRIPTION) {
+        Item(string name = DEFAULT_NONAME, int price = 0, string description = DEFAULT_NODESCRIPTION) {
             this->name = name;
             this->price = price;
             this->description = description;
@@ -41,6 +35,9 @@ class Item {
         }
         string getDescription() {
             return description;
+        }
+        Item getItem() {
+            return *this;
         }
 };
 

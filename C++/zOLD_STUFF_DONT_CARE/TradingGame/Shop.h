@@ -11,6 +11,12 @@ class Shop : public Entity {
             this->buyMultiplier = buyMultiplier;
             this->sellMultiplier = sellMultiplier;
         }
+        Shop(string name, Inventory inventory, float buyMultiplier = STD_BUY_MULTIPLIER, float sellMultiplier = STD_SELL_MULTIPLIER) {
+            this->name = name;
+            this->inventory = inventory;
+            this->buyMultiplier = buyMultiplier;
+            this->sellMultiplier = sellMultiplier;
+        }
 // ------------------------- METHOD -------------------------
         void BuyFrom(Entity &seller, int seller_item_index, int amount = 1) override {
             Item item = seller.getItem(seller_item_index);

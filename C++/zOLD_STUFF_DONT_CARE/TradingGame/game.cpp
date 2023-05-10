@@ -4,21 +4,13 @@
 int main() {
     Character player("Mike8", 1000);
 
-    Shop shop("Shop"), shop2("Shop2");
     ItemReader reader(ITEM_FILE);
-    shop.setInventory(reader.getInventory());
-    shop2.setInventory(reader.getInventory());
-
+    Inventory inventory = reader.getInventory();
     MapReader mapReader("LocationDistanceMap.txt");
     Map map = mapReader.getMap();
-    Location location(map.getLocationData(0).getLocationData());
 
-    ItemReader reader2(ITEM_FILE, 3);
-    Character trader("Michael", 100), trader2("David", 2000);
-    trader.setInventory(reader2.getInventory());
-    trader2.setInventory(reader2.getInventory());
-
-    LocationData currentLocation(location, vector<Shop>{shop, shop2}, player, vector<Character>{trader, trader2});
+    LocationReader locationReader("LocationDataDatabase.txt", map, inventory);
+    LocationData currentLocation = locationReader.getLocations()[0];
     GameInterface game(map, currentLocation);
     game.run();
     return 0;

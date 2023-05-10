@@ -1,0 +1,57 @@
+Port Royal
+3
+Baris Shop
+rum tobacco
+Tataco Shop
+wood sugar cotton
+Slavis Shop
+slaves
+
+Tortuga
+2
+Merchants Shop
+rum tobacco slaves
+Mappa Shop
+wood sugar
+
+Nassau
+1
+Karibik Shop
+wood rum sugar cotton tobacco slaves
+
+Havana
+2
+Cuba Shop
+wood rum tobacco slaves
+Haiti Shop
+sugar cotton coffee chocolate
+
+Cartagena
+1
+Colombia Shop
+gold silver pearls gems ivory
+
+Portobelo
+1
+Panama Shop
+gold silver pearls gems ivory
+
+Veracruz
+1
+Mexico Shop
+gold silver pearls gems ivory
+
+Saint-Domingue
+1
+Ivos Shop
+wood rum sugar cotton tobacco coffee chocolate slaves
+
+Martinique
+1
+Maccus Shop
+wood rum sugar cotton tobacco coffee chocolate slaves
+
+Barbados
+1
+Poni Shop
+wood rum sugar cotton tobacco coffee chocolate
