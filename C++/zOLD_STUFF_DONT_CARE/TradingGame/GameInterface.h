@@ -136,8 +136,8 @@ class GameInterface {
             int index;
             input.getInt(index, 0);
             if (index > 0 && index <= map.size()) {
-                cout << "You are at " << map.getLocationData(index-1).getName() << endl;
-                currentLocation = map.getLocationData(index-1);
+                cout << "You are at " << map[index-1].getName() << endl;
+                currentLocation = map[index-1];
                 updateLocation(currentLocation);
                 return NO_RETURN;
             } else {

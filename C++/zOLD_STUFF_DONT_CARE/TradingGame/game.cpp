@@ -10,7 +10,7 @@ int main() {
     Map map = mapReader.getMap();
 
     LocationReader locationReader("LocationDataDatabase.txt", map, inventory);
-    LocationData currentLocation = locationReader.getLocations()[0];
+    LocationData currentLocation = map[0];
     GameInterface game(map, currentLocation);
     game.run();
     return 0;

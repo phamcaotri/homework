@@ -28,9 +28,6 @@ class Map {
             }
             return distance;
         }
-        LocationData getLocationData(int index) {
-            return locations[index];
-        }
         void addLocation(LocationData Location) {
             locations.push_back(Location);
             for (int i = 0; i < locations.size(); i++) {
@@ -48,6 +45,9 @@ class Map {
         }
         int getNumberOfLocations() {
             return locations.size();
+        }
+        LocationData& operator[](int index) {
+            return locations[index];
         }
 // ------------------------- METHOD -------------------------
         void print() {

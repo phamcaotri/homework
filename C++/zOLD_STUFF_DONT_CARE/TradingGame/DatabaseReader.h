@@ -67,7 +67,6 @@ class MapReader {
                 exit(1);
             }
             string locationName;
-            vector<LocationData> locations;
             while (!file.eof()) {
                 // ignore comments starting with #
                 if (file.peek() == '#' || file.peek() == '\n') {
@@ -81,12 +80,11 @@ class MapReader {
                     file >> distanceTo;
                     distance.addDistance(distanceTo);
                 }
-                locations.push_back(LocationData(locationName, distance));
+                map.addLocation(Location(locationName, distance));
                 file.ignore();
             }
             file.close();
             // map = Map(locations, distances);
-            map = Map(locations);
         }
 
 // ------------------------- GETTER -------------------------
@@ -99,7 +97,6 @@ class LocationReader {
     private:
         ifstream file;
         string fileName;
-        vector<LocationData> locations;
 
     public:
 // ------------------------- CONSTRUCTOR -------------------------
@@ -113,39 +110,31 @@ class LocationReader {
             for (int i = 0; i < map.size(); i++) {
                 string locationName;
                 vector<Shop> shops;
-                while (!file.eof()) {
-                    // ignore comments starting with #
-                    if (file.peek() == '#' || file.peek() == '\n') {
-                        file.ignore(1000, '\n');
-                        continue;
+                if (file.peek() == '#' || file.peek() == '\n') {
+                    file.ignore(1000, '\n');
+                    continue;
+                }
+                getline(file, locationName);
+                int shopNumber;
+                file >> shopNumber;
+                file.ignore();
+                for (int j = 0; j < shopNumber; j++) {
+                    string shopName;
+                    Inventory shopInventory;
+                    getline(file, shopName);           
+                    while (file.peek() != '\n' && !file.eof()) {
+                        string item;
+                        file >> item;
+                        shopInventory.addItem(itemList.getItem(item), INFINITY_AMOUNT);
                     }
-                    getline(file, locationName);
-                    int shopNumber;
-                    file >> shopNumber;
-                    file.ignore();
-                    for (int j = 0; j < shopNumber; j++) {
-                        string shopName;
-                        Inventory shopInventory;
-                        getline(file, shopName);           
-                        while (file.peek() != '\n' && !file.eof()) {
-                            string item;
-                            file >> item;
-                            shopInventory.addItem(itemList.getItem(item), INFINITY_AMOUNT);
-                        }
-                        shops.push_back(Shop(shopName, shopInventory));
-                    }
-                    locations.push_back(LocationData(shops));
+                    shops.push_back(Shop(shopName, shopInventory));
                     file.ignore();
                 }
+                map[i].setShops(shops);
+                file.ignore();
                 
             }
-            map = Map(locations);
             file.close();
-        }
-
-// ------------------------- GETTER -------------------------
-        vector<LocationData> getLocations() {
-            return locations;
         }
 };  
 

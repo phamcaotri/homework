@@ -14,41 +14,17 @@ using std::string, std::vector, std::cout, std::endl;
 class LocationData {
     private:
         Location location;
-        UserInput input;
-
         vector<Shop> shops;
         vector<Character> traders;
     public:
 // ------------------------- CONSTRUCTOR -------------------------
-        LocationData() {
-            location = Location();
-            input = UserInput();
-            shops = vector<Shop>();
-            traders = vector<Character>();
-        }
-        LocationData(Location location, vector<Shop> shops, vector<Character> traders) {
+        LocationData(Location location = Location(), vector<Shop> shops = vector<Shop>(), vector<Character> traders = vector<Character>()) {
             this->location = location;
-            this->input = UserInput();
             this->shops = shops;
             this->traders = traders;
         }
-        LocationData(const LocationData& currentLocation) { // copy constructor
-            shops = currentLocation.shops;
-            traders = currentLocation.traders;
-        }
-        LocationData(string name, Distance distance) {
-            location = Location(name, distance);
-            this->input = UserInput();
-            shops = vector<Shop>();
-            traders = vector<Character>();
-        }
-        LocationData(vector<Shop> shops) {
-            this->shops = shops;
-
-        }
         LocationData& operator=(const LocationData& currentLocation) {
             location = currentLocation.location;
-            this->input = UserInput();
             shops = currentLocation.shops;
             traders = currentLocation.traders;
             return *this;

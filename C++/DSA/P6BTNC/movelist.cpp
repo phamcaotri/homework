@@ -67,6 +67,25 @@ void addTail(List &l, int x) {
     }
 }
 
+// struct pairNode
+// {
+//     Node* left;
+//     Node* right;
+// };
+
+// pairNode findFirstNodeEqual(List l, int x) {
+//     Node* this_node = l.head;
+//     Node* before_node = NULL;
+//     while (this_node != NULL) {
+//         if (this_node->data == x) {
+//             return {before_node, this_node};
+//         }
+//         before_node = this_node;
+//         this_node = this_node->next;
+//     }
+//     return {NULL, NULL};
+// }
+
 Node* findFirstNodeEqual(List &l, int x) {
     Node *this_node = l.head;
     while (this_node != NULL) {
@@ -78,7 +97,7 @@ Node* findFirstNodeEqual(List &l, int x) {
     return NULL;
 }
 
-Node* findNodeIth(List &l, int i) {
+Node* findNodeIth(List l, int i) {
     // nếu đếm từ 1 thì sửa lại dòng này thành if (i < 1 or i > listSize(l))
     if (i < 0 or i >= listSize(l)) {
         // in ra lỗi
@@ -113,100 +132,6 @@ void addAfterNode(List &l, Node* this_node, int x) {
     }
 }
 
-void deleteHead(List &l) {
-    // trường hợp danh sách rỗng
-    if (l.head == NULL) {
-        return;
-    }
-    else {
-        Node* this_node = l.head;
-        l.head = l.head->next;
-        delete this_node;
-    }
-    // trường hợp danh sách có 1 phần tử
-    if (l.head == NULL) {
-        l.tail = NULL;
-    }
-}
-
-void deleteTail(List &l) {
-    // trường hợp danh sách rỗng
-    if (l.head == NULL)
-        return;
-    // trường hợp danh sách có 1 phần tử
-    if (l.head == l.tail) {
-        deleteHead(l);
-        return;
-    }
-    // trường hợp danh sách có nhiều phần tử
-    Node* this_node = l.head;
-    while (this_node->next != l.tail) {
-        this_node = this_node->next;
-    }
-    this_node->next = NULL;
-    delete l.tail;
-    l.tail = this_node;
-}
-
-void deleteFirstNodeEqual(List &l, int x) {
-    // trường hợp danh sách rỗng
-    if (l.head == NULL) {
-        return;
-    }
-    // trường hợp xoá đầu danh sách
-    if (l.head->data == x) {
-        deleteHead(l);
-        return;
-    }
-    // trường hợp danh sách có nhiều hơn 1 phần tử
-    Node* this_node = l.head, *node_before = NULL;
-    while (this_node != NULL) {
-        if (this_node->data == x) {
-            node_before->next = this_node->next;
-            this_node->next = NULL;
-            // trường hợp xoá cuối danh sách
-            if (this_node == l.tail) {
-                l.tail = node_before;
-            }
-            delete this_node;
-            return; // thoát khỏi hàm
-        }
-        else {
-            node_before = this_node;
-            this_node = this_node->next;
-        }
-    }
-
-}
-
-void deleteAllNodeEqual(List &l, int x) {
-    // trường hợp danh sách rỗng
-    if (l.head == NULL) {
-        return;
-    }
-    // trường hợp xoá đầu danh sách
-    while (l.head != NULL && l.head->data == x) {
-        deleteHead(l);
-    }
-    // trường hợp danh sách có nhiều hơn 1 phần tử
-    Node* this_node = l.head, *node_before = NULL;
-    while (this_node != NULL) {
-        if (this_node->data == x) {
-            node_before->next = this_node->next;
-            this_node->next = NULL;
-            // trường hợp xoá cuối danh sách
-            if (this_node == l.tail) {
-                l.tail = node_before;
-            }
-            delete this_node;
-            this_node = node_before->next; // cập nhật lại this_node
-        }
-        else {
-            node_before = this_node;
-            this_node = this_node->next;
-        }
-    }
-}
 
 void inputList(List &l) {
     int n;
@@ -218,7 +143,7 @@ void inputList(List &l) {
     }
 }
 
-void outputList(List &l) {
+void outputList(List l) {
     Node* this_node = l.head;
     while (this_node != NULL) {
         cout << this_node->data << " ";
@@ -227,24 +152,88 @@ void outputList(List &l) {
     cout << endl;
 }
 
-Node* maxValueNode(List &l) {
-    Node* this_node = l.head, *max_node = l.head;
-    while (this_node != NULL) {
-        if (this_node->data > max_node->data) {
-            max_node = this_node;
-        }
-        this_node = this_node->next;
+// void cutToHead(List &l, int a) {
+//     auto [left, right] = findFirstNodeEqual(l, a);
+//     if (right == NULL or left == NULL) return;
+//     left->next = right->next;
+//     right->next = l.head;
+//     l.head = right;
+// }
+
+// void cutToTail(List &l, int a) {
+//     auto [left, right] = findFirstNodeEqual(l, a);
+//     if (right == NULL) return;
+//     if (left == NULL) {
+//         l.head = l.head->next;
+//         right->next == NULL;
+//         l.tail->next = right;
+//         l.tail = right;
+//     }
+//     left->next = right->next;
+//     right->next = NULL;
+//     l.tail->next = right;
+//     l.tail = right;
+// }
+
+// void cutToNode(List &l, int a, int b) {
+//     auto [left, right] = findFirstNodeEqual(l, a);
+//     if (right == NULL) {
+//         cutToHead(l, b);
+//         return;
+//     }
+//     Node* new_node = getNode(b);
+//     new_node->next = right->next;
+//     if (left != NULL) {
+//         left->next = new_node;
+//     }
+
+// }
+
+void moveHeadToTail(List &l, int k) {
+    for (int i = 0; i < k; i++) {
+        Node* temp = l.head;
+        l.head = l.head->next;
+        temp->next = NULL;
+        l.tail->next = temp;
+        l.tail = temp;
     }
-    return max_node;
 }
 
-Node* minValueNode(List &l) {
-    Node* this_node = l.head, *min_node = l.head;
-    while (this_node != NULL) {
-        if (this_node->data < min_node->data) {
-            min_node = this_node;
+int main() {
+    List l;
+    bool check = true;
+    while (check) {
+        int x; cin >> x;
+        int a;
+        switch (x)
+        {
+        case 0:
+            {cin >> a;
+            addHead(l, a);
+            break;}
+        case 1:
+            {cin >> a;
+            addTail(l, a);
+            break;}
+        case 2:
+            {int b; cin >> a >> b;
+            Node* this_node = findFirstNodeEqual(l, a);
+            if (this_node == NULL) {
+                addHead(l, b);
+            } else {
+                addAfterNode(l, this_node, b);
+            }
+            break;}
+        case 3:
+            {int k; cin >> k;
+            moveHeadToTail(l, k);
+            break;}
+        default:
+        check = false;
+            break;
         }
-        this_node = this_node->next;
     }
-    return min_node;
+
+    outputList(l);
+    return 0;
 }
