@@ -11,6 +11,7 @@ using std::vector, std::string, std::cout, std::endl;
 class Map {
     private:
         vector<LocationData> locations;
+        string image;
     public:
 // ------------------------- CONSTRUCTOR -------------------------
         Map() {}
@@ -48,6 +49,13 @@ class Map {
         }
         LocationData& operator[](int index) {
             return locations[index];
+        }
+
+        void setImage(string image) {
+            this->image = image;
+        }
+        string getImage() {
+            return image;
         }
 // ------------------------- METHOD -------------------------
         void print() {

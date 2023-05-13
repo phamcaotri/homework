@@ -7,6 +7,12 @@ using std::vector, std::cin, std::cout, std::endl;
 #include "Item.h"
 #include <math.h>
 
+string lowwerCase(string str) {
+    for (int i = 0; i < str.length(); i++) {
+        str[i] = tolower(str[i]);
+    }
+    return str;
+}
 class Inventory {
     private:
         vector<std::pair<Item, int>> items;
@@ -22,7 +28,7 @@ class Inventory {
         }
         Item getItem(string name) {
             for (int i = 0; i < items.size(); i++) {
-                if (items[i].first.getName() == name) {
+                if (lowwerCase(items[i].first.getName()) == lowwerCase(name)) {
                     return items[i].first;
                 }
             }

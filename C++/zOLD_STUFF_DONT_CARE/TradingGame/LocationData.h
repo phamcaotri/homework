@@ -30,7 +30,7 @@ class LocationData {
             return *this;
         }
 // ------------------------- GETTERS, SETTERS ---------------------
-        vector<Shop> getShops() {
+        vector<Shop>& getShops() {
             return shops;
         }
         void setShops(vector<Shop> shops) {

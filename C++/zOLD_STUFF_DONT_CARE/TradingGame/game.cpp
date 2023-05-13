@@ -7,10 +7,11 @@ int main() {
     ItemReader reader(ITEM_FILE);
     Inventory inventory = reader.getInventory();
     MapReader mapReader("LocationDistanceMap.txt");
+    mapReader.readImage("MapImage.txt");
     Map map = mapReader.getMap();
 
     LocationReader locationReader("LocationDataDatabase.txt", map, inventory);
-    LocationData currentLocation = map[0];
+    shared_ptr<LocationData> currentLocation = make_shared<LocationData>(map[0]);
     GameInterface game(map, currentLocation);
     game.run();
     return 0;
@@ -36,10 +37,13 @@ tạo các địa điểm riêng biệt
 xoá lớp windows ko cần thiết
 Nâng cấp class GameInterface lần 2
 làm người chơi có thể di chuyển giữa các khu vực
+thêm bản đồ
+khởi tạo các shop mặc định cho địa điểm đó
+update LocationData thành shared_ptr
 */
 /*--------------------------- TODO --------------------------------
 
-khởi tạo các shop mặc định cho địa điểm đó
+tạo hệ thống giá cả cho các shop dựa trên mặt hàng
 tạo danh sách các trader
 cơ chế xem thông tin item
 cơ chế đọc file từ file lưu game.

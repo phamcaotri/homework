@@ -87,6 +87,22 @@ class MapReader {
             // map = Map(locations, distances);
         }
 
+        void readImage(string fileName) {
+            string image;
+            file.open(fileName);
+            if (!file.is_open()) {
+                cout << "Error opening file " << fileName << endl;
+                exit(1);
+            }
+            string line;
+            while (!file.eof()) {
+                getline(file, line);
+                image += line + "\n";
+            }
+            map.setImage(image);
+            file.close();
+        }
+
 // ------------------------- GETTER -------------------------
         Map getMap() {
             return map;
