@@ -13,9 +13,6 @@ class Location {
     private:
         string name;
         Distance distance;
-
-        vector<Character> characters;
-        vector<Shop> shops;
     public:
 // ------------------------- CONSTRUCTOR -------------------------
         Location(string name = DEFAULT_NONAME, Distance distance = Distance()) {

@@ -36,10 +36,10 @@ class LocationData {
         void setShops(vector<Shop> shops) {
             this->shops = shops;
         }
-        Location getLocationData() {
+        Location& getLocationData() {
             return location;
         }
-        vector<Character> getTraders() {
+        vector<Character>& getTraders() {
             return traders;
         }
         string getName() {

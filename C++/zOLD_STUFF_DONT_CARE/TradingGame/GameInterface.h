@@ -7,9 +7,6 @@
 #include "Map.h"
 #include "LocationData.h"
 #include "Options.h"
-#include <memory>
-
-using std::shared_ptr, std::make_shared, std::unique_ptr, std::make_unique;
 
 bool TradeAction(Entity& player, Entity& trader, string action) {
     UserInput input;
@@ -43,24 +40,24 @@ class GameInterface {
         Character player;
         UserInput input;
         Map map;
-        shared_ptr<LocationData> currentLocation;
+        int mapIndex;
         Options<GameInterface> options;
     public:
 // ------------------------- CONSTRUCTOR -------------------------
         GameInterface() {
             player = Character();
             map = Map();
-            currentLocation = make_shared<LocationData>();
+            mapIndex = 0;
             options = Options<GameInterface>();
         }
-        GameInterface(Character player = Character(), Map map = Map(), shared_ptr<LocationData> currentLocation = make_shared<LocationData>()) {
-            this->player = player;
+        // GameInterface(Character player = Character(), Map map = Map(), shared_ptr<LocationData> currentLocation = make_shared<LocationData>()) {
+        //     this->player = player;
+        //     this->map = map;
+        //     this->currentLocation = currentLocation;
+        // }
+        GameInterface(Map &map, int startLocation = 0) {
             this->map = map;
-            this->currentLocation = currentLocation;
-        }
-        GameInterface(Map &map, shared_ptr<LocationData> currentLocation) {
-            this->map = map;
-            this->currentLocation = currentLocation;
+            mapIndex = startLocation;
         }
 // ------------------------- GETTERS, SETTER, ADD, REMOVE -------------------------
         void setPlayer(Character player) {
@@ -69,17 +66,11 @@ class GameInterface {
         Character getPlayer() {
             return player;
         }
-        vector<Character> getTraders() {
-            return currentLocation->getTraders();
+        vector<Character>& getTraders() {
+            return map[mapIndex].getTraders();
         }
-        vector<Shop> getShops() {
-            return currentLocation->getShops();
-        }
-        void setMap(Map map) {
-            this->map = map;
-        }
-        void updateLocation(shared_ptr<LocationData> currentLocation) {
-            this->currentLocation = currentLocation;
+        vector<Shop>& getShops() {
+            return map[mapIndex].getShops();
         }
 // ------------------------- METHOD -------------------------
         void clearScreen() {
@@ -94,7 +85,7 @@ class GameInterface {
             cout << "==============================" << endl;
         }
         void showMenu() {
-            cout << "You are at " << currentLocation->getName() << endl;
+            cout << "You are at " << map[mapIndex].getName() << endl;
             cout << "==============================" << endl;
             options.showOptions();
             cout << "==============================" << endl;
@@ -123,8 +114,7 @@ class GameInterface {
             input.getInt(index, 0);
             if (index > 0 && index <= map.size()) {
                 cout << "You are at " << map[index-1].getName() << endl;
-                currentLocation = make_shared<LocationData>(map[index-1]);
-                updateLocation(currentLocation);
+                this->mapIndex = index-1;
                 return NO_RETURN;
             } else {
                 cout << "Invalid index." << endl;
@@ -140,15 +130,15 @@ class GameInterface {
         }
         bool showShop(int) {
             cout << "You can go to these shops: " << endl;
-            for (int i = 0; i < currentLocation->getShops().size(); i++) {
-                cout << i+1 << ". " << currentLocation->getShops()[i].getName() << endl;
+            for (int i = 0; i < map[mapIndex].getShops().size(); i++) {
+                cout << i+1 << ". " << map[mapIndex].getShops()[i].getName() << endl;
             }
             cout << "Go to shop: ";
             int index;
             input.getInt(index, 0);
-            if (index > 0 && index <= currentLocation->getShops().size()) {
-                cout << "You are at " << currentLocation->getShops()[index-1].getName() << endl;
-                currentLocation->getShops()[index-1].showInfo("show items");
+            if (index > 0 && index <= map[mapIndex].getShops().size()) {
+                cout << "You are at " << map[mapIndex].getShops()[index-1].getName() << endl;
+                map[mapIndex].getShops()[index-1].showInfo("show items");
                 Options<GameInterface> sub_options;
                 sub_options.addOption("Buy Item", &BuyItem);
                 sub_options.addOption("Sell Item", &SellItem);
@@ -158,21 +148,21 @@ class GameInterface {
             return RETURN;
         }
         bool BuyItem(int index = 0) {
-            return TradeAction(player, currentLocation->getShops()[index-1], "buy");
+            return TradeAction(player, map[mapIndex].getShops()[index-1], "buy");
         }
         bool SellItem(int index = 0) {
-            return TradeAction(player, currentLocation->getShops()[index-1], "sell");
+            return TradeAction(player, map[mapIndex].getShops()[index-1], "sell");
         }
         bool TalkToTrader(int) {
             cout << "You can talk to these traders: " << endl;
-            for (int i = 0; i < currentLocation->getTraders().size(); i++) {
-                cout << i+1 << ". " << currentLocation->getTraders()[i].getName() << endl;
+            for (int i = 0; i < map[mapIndex].getTraders().size(); i++) {
+                cout << i+1 << ". " << map[mapIndex].getTraders()[i].getName() << endl;
             }
             cout << "Talk to trader: ";
             int index;
             input.getInt(index, 0);
-            if (index > 0 && index <= currentLocation->getTraders().size()) {
-                currentLocation->getTraders()[index-1].showInfo();
+            if (index > 0 && index <= map[mapIndex].getTraders().size()) {
+                map[mapIndex].getTraders()[index-1].showInfo();
                 Options<GameInterface> sub_options;
                 sub_options.addOption("Buy Item", &BuyFromTrader);
                 sub_options.addOption("Sell Item", &SellToTrader);
@@ -182,10 +172,10 @@ class GameInterface {
             return RETURN;
         }
         bool BuyFromTrader(int index = 0) {
-            return TradeAction(player, currentLocation->getTraders()[index-1], "buy");
+            return TradeAction(player, map[mapIndex].getTraders()[index-1], "buy");
         }
         bool SellToTrader(int index = 0) {
-            return TradeAction(player, currentLocation->getTraders()[index-1], "sell");
+            return TradeAction(player, map[mapIndex].getTraders()[index-1], "sell");
         }
         bool Exit(int) {
             cout << "Exiting..." << endl;
@@ -197,7 +187,7 @@ class GameInterface {
             while (true) {
                 clearScreen();
                 printTitle();
-                cout << "You are at " << currentLocation->getName() << endl;
+                cout << "You are at " << map[mapIndex].getName() << endl;
                 options.getChoice(this);
             }
         }
