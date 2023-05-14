@@ -7,7 +7,7 @@ using std::vector, std::cin, std::cout, std::endl;
 #include "Item.h"
 #include <math.h>
 
-string lowwerCase(string str) {
+string lowerCase(string str) {
     for (int i = 0; i < str.length(); i++) {
         str[i] = tolower(str[i]);
     }
@@ -22,28 +22,29 @@ class Inventory {
             this->items = items;
         }
 // ------------------------- GETTERS, SETTER, ADD, REMOVE -------------------------
-        Item& item(int index) {
+        Item& getItem(int index) {
             return items[index].first;
         }
-        Item& item(string name) {
+        Item getItem(string name) {
             for (int i = 0; i < items.size(); i++) {
-                if (lowwerCase(items[i].first.getName()) == lowwerCase(name)) {
+                if (lowerCase(items[i].first.getName()) == lowerCase(name)) {
                     return items[i].first;
                 }
             }
             return Item();
+        }
+        vector<Item> getListItems() {
+            vector<Item> list;
+            for (int i = 0; i < items.size(); i++) {
+                list.push_back(items[i].first);
+            }
+            return list;
         }
         int getAmount(int index) {
             return items[index].second;
         }
         int getSize() {
             return items.size();
-        }
-        string getItemName(int index) {
-            return items[index].first.getName();
-        }
-        int getItemPrice(int index) {
-            return items[index].first.getPrice();
         }
         void increaseAmount(int index, int amount) {
             if (items[index].second >= INFINITY_AMOUNT) {
@@ -61,7 +62,7 @@ class Inventory {
             }
             // if not, add item in price order
             for (int i = 0; i < items.size(); i++) {
-                if (item.getPrice() < getItemPrice(i)) {
+                if (item.getPrice() < getItem(i).getPrice()) {
                     items.insert(items.begin()+i, std::make_pair(item, amount));
                     return;
                 }
@@ -77,7 +78,7 @@ class Inventory {
 // ------------------------- OTHER METHODS -------------------------
         bool isContain(Item item, int& index) {
             for (int i = 0; i < items.size(); i++) {
-                if (getItemName(i) == item.getName()) {
+                if (getItem(i).getName() == item.getName()) {
                     index = i;
                     return true;
                 }

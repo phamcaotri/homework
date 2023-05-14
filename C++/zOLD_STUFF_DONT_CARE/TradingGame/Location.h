@@ -24,7 +24,7 @@ class Location {
             return name;
         }
         int getDistanceTo(int index) {
-            if (index < distance.getNumberOfDistances()) {
+            if (index < distance.getSize()) {
                 return distance.getDistanceTo(index);
             } else {
                 return -1;
@@ -46,7 +46,7 @@ class Location {
         void print() {
             cout << "Location: " << name << endl;
             cout << "Distances: ";
-            for (int i = 0; i < distance.getNumberOfDistances(); i++) {
+            for (int i = 0; i < distance.getSize(); i++) {
                 cout << distance.getDistanceTo(i) << " ";
             }
             cout << endl;

@@ -3,6 +3,7 @@
 
 #include "Item.h"
 #include "Inventory.h"
+#include "PriceSystem.h"
 
 class Entity {
     protected:
@@ -10,62 +11,53 @@ class Entity {
         int coin;
         Inventory inventory;
 // ------------------------- BUY/SELL MULTIPLIER -------------------------
-        float buyMultiplier;
-        float sellMultiplier;
+        PriceSystem priceSystem;
+// -----------------------------------------------------------------------
+        vector<Item> listAcceptItems;
     public:
 // ------------------------- CONSTRUCTOR -------------------------
         Entity(string name = DEFAULT_NONAME, int coin = STARTING_COIN, float buyMultiplier = STD_BUY_MULTIPLIER, float sellMultiplier = STD_SELL_MULTIPLIER) {
             this->name = name;
             this->coin = coin;
-            this->buyMultiplier = buyMultiplier;
-            this->sellMultiplier = sellMultiplier;
+            priceSystem.getBuyMultiplier() = buyMultiplier;
+            priceSystem.getSellMultiplier() = sellMultiplier;
         }
 // ------------------------- GETTERS, SETTER, ADD, REMOVE -------------------------
-        void setName(string name) {
-            this->name = name;
-        }
-        void setCoin(int coin) {
-            this->coin = coin;
-        }
-        string getName() {
+        string& getName() {
             return name;
         }
-        void setInventory(Inventory inventory) {
-            this->inventory = inventory;
-        }
-        int getCoin() {
+        int& getCoin() {
             return coin;
         }
         void addCoin(int coin) {
             this->coin += coin;
         }
-        Item getItem(int index) {
-            return inventory.getItem(index);
+        Inventory& getInventory() {
+            return inventory;
         }
-        int getAmount(int index) {
-            return inventory.getAmount(index);
+        float& getBuyMultiplier() {
+            return priceSystem.getBuyMultiplier();
         }
-        int getSize() {
-            return inventory.getSize();
+        float& getSellMultiplier() {
+            return priceSystem.getSellMultiplier();
         }
-        virtual void addItem(Item item, int amount) {
-            inventory.addItem(item, amount);
+        void MultiplierCalculate(float supply, float demand, float marketCondition, float securityCondition) {
+            priceSystem.MultiplierCalculate(supply, demand, marketCondition, securityCondition);
         }
-        void removeItem(int index, int amount) {
-            inventory.removeItem(index, amount);
-        }
-        float getBuyMultiplier() {
-            return buyMultiplier;
-        }
-        float getSellMultiplier() {
-            return sellMultiplier;
+        void showMultiplier() {
+            priceSystem.showInfo();
         }
 // ------------------------- METHODS -------------------------
-        bool isValidIndex(int index) {
-            return inventory.isValidIndex(index);
-        }
-        bool isValidAmount(int index, int amount) {
-            return inventory.isValidAmount(index, amount);
+        bool isAcceptItem(Item item) {
+            if (listAcceptItems.size() == 0) {
+                return true;
+            }
+            for (int i = 0; i < listAcceptItems.size(); i++) {
+                if (item.getName() == listAcceptItems[i].getName()) {
+                    return true;
+                }
+            }
+            return false;
         }
         void showInfo(string condition = "show items") {
             cout << "Name: " << name << endl;
@@ -77,9 +69,9 @@ class Entity {
         }
         void showItems(string type = "default") {
             if (type == "buy") {
-                inventory.showItemsWithPrice(buyMultiplier);
+                inventory.showItemsWithPrice(priceSystem.getBuyMultiplier());
             } else if (type == "sell") {
-                inventory.showItemsWithPrice(sellMultiplier);
+                inventory.showItemsWithPrice(priceSystem.getSellMultiplier());
             } else {
                 inventory.showItemsWithPrice();
             }

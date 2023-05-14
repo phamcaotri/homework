@@ -26,7 +26,7 @@ class Distance {
                 return -1;
             }
         }
-        int getNumberOfDistances() {
+        int getSize() {
             return distances.size();
         }
         void addDistance(int distance) {

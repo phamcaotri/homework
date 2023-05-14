@@ -141,7 +141,7 @@ class LocationReader {
                     while (file.peek() != '\n' && !file.eof()) {
                         string item_name;
                         file >> item_name;
-                        shopInventory.addItem(itemList.item(item_name), INFINITY_AMOUNT);
+                        shopInventory.addItem(itemList.getItem(item_name), INFINITY_AMOUNT);
                     }
                     shops.push_back(Shop(shopName, shopInventory));
                     file.ignore();

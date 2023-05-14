@@ -18,22 +18,13 @@ class Item {
             this->description = description;
         }
 // ------------------------- GETTER -------------------------
-        void setName(string name) {
-            this->name = name;
-        }
-        void setPrice(int price) {
-            this->price = price;
-        }
-        void setDescription(string description) {
-            this->description = description;
-        }
-        string getName() {
+        string& getName() {
             return name;
         }
-        int getPrice() {
+        int& getPrice() {
             return price;
         }
-        string getDescription() {
+        string& getDescription() {
             return description;
         }
 };

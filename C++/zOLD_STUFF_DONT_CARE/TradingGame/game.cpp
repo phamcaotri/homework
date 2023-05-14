@@ -11,7 +11,7 @@ int main() {
     Map map = mapReader.getMap();
 
     LocationReader locationReader("LocationDataDatabase.txt", map, inventory);
-    GameInterface game(map, 0);
+    GameInterface game(player, map, 0);
     game.run();
     return 0;
 }
@@ -41,10 +41,10 @@ khởi tạo các shop mặc định cho địa điểm đó
 update LocationData thành shared_ptr
 xoá cơ chế shared_ptr này, thay bằng truy cập trực tiếp vào map
 khoá mua bán những món không có trong shop
+tạo hệ thống giá cả cho các shop dựa trên mặt hàng
 */
 /*--------------------------- TODO --------------------------------
 
-tạo hệ thống giá cả cho các shop dựa trên mặt hàng
 tạo danh sách các trader
 cơ chế xem thông tin item
 cơ chế đọc file từ file lưu game.

@@ -20,13 +20,13 @@ bool TradeAction(Entity& player, Entity& trader, string action) {
     int index, amount = 1;
     input.getPairInt(index, amount, 0, 0);
     if (action == "buy") {
-        if (trader.isValidIndex(index-1) && trader.isValidAmount(index-1, amount)) {
+        if (trader.getInventory().isValidIndex(index-1) && trader.getInventory().isValidAmount(index-1, amount)) {
             player.BuyFrom(trader, index-1, amount);
         } else {
             cout << "Invalid index or amount." << endl;
         }
     } else if (action == "sell") {
-        if (player.isValidIndex(index-1) && player.isValidAmount(index-1, amount)) {
+        if (player.getInventory().isValidIndex(index-1) && player.getInventory().isValidAmount(index-1, amount)) {
             player.SellTo(trader, index-1, amount);
         } else {
             cout << "Invalid index or amount." << endl;
@@ -50,12 +50,8 @@ class GameInterface {
             mapIndex = 0;
             options = Options<GameInterface>();
         }
-        // GameInterface(Character player = Character(), Map map = Map(), shared_ptr<LocationData> currentLocation = make_shared<LocationData>()) {
-        //     this->player = player;
-        //     this->map = map;
-        //     this->currentLocation = currentLocation;
-        // }
-        GameInterface(Map &map, int startLocation = 0) {
+        GameInterface(Character player, Map &map, int startLocation = 0) {
+            this->player = player;
             this->map = map;
             mapIndex = startLocation;
         }
@@ -95,6 +91,7 @@ class GameInterface {
             options.addOption("Show Player", &showPlayer);
             options.addOption("Show Shop", &showShop);
             options.addOption("Talk to Trader", &TalkToTrader);
+            options.addOption("Next Day", &NextDay);
             options.addOption("Exit", &Exit);
         }
         bool showMap(int) {
@@ -139,6 +136,7 @@ class GameInterface {
             if (index > 0 && index <= map[mapIndex].getShops().size()) {
                 cout << "You are at " << map[mapIndex].getShops()[index-1].getName() << endl;
                 map[mapIndex].getShops()[index-1].showInfo("show items");
+                map[mapIndex].getShops()[index-1].showMultiplier();
                 Options<GameInterface> sub_options;
                 sub_options.addOption("Buy Item", &BuyItem);
                 sub_options.addOption("Sell Item", &SellItem);
@@ -177,6 +175,26 @@ class GameInterface {
         bool SellToTrader(int index = 0) {
             return TradeAction(player, map[mapIndex].getTraders()[index-1], "sell");
         }
+        int day = 0;
+        float supply = 100;
+        float demand = 100;
+        float market = 100;
+        float security = 100;
+        bool NextDay(int) {
+            day++;
+            for (int i = 0; i < map[mapIndex].getShops().size(); i++) {
+                supply += 5 - rand()%10;
+                demand += 5 - rand()%10;
+                market += 5 - rand()%10;
+                security += 5 - rand()%10;
+                map[mapIndex].getShops()[i].MultiplierCalculate(supply/100, demand/100, market/100, security/100);
+            }
+            //map[mapIndex].getShops()[0].nextDay();
+            // for (int i = 0; i < map[mapIndex].getTraders().size(); i++) {
+            //     map[mapIndex].getTraders()[i].nextDay();
+            // }
+            return RETURN;
+        }
         bool Exit(int) {
             cout << "Exiting..." << endl;
             exit(0);
@@ -188,6 +206,7 @@ class GameInterface {
                 clearScreen();
                 printTitle();
                 cout << "You are at " << map[mapIndex].getName() << endl;
+                cout << "number of days: " << day << endl;
                 options.getChoice(this);
             }
         }
