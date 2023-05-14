@@ -11,8 +11,7 @@ int main() {
     Map map = mapReader.getMap();
 
     LocationReader locationReader("LocationDataDatabase.txt", map, inventory);
-    shared_ptr<LocationData> currentLocation = make_shared<LocationData>(map[0]);
-    GameInterface game(map, currentLocation);
+    GameInterface game(map, 0);
     game.run();
     return 0;
 }
@@ -40,6 +39,8 @@ làm người chơi có thể di chuyển giữa các khu vực
 thêm bản đồ
 khởi tạo các shop mặc định cho địa điểm đó
 update LocationData thành shared_ptr
+xoá cơ chế shared_ptr này, thay bằng truy cập trực tiếp vào map
+khoá mua bán những món không có trong shop
 */
 /*--------------------------- TODO --------------------------------
 

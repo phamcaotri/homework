@@ -48,7 +48,7 @@ class Entity {
         int getSize() {
             return inventory.getSize();
         }
-        void addItem(Item item, int amount) {
+        virtual void addItem(Item item, int amount) {
             inventory.addItem(item, amount);
         }
         void removeItem(int index, int amount) {

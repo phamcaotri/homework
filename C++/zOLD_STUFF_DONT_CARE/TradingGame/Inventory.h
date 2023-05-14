@@ -18,15 +18,14 @@ class Inventory {
         vector<std::pair<Item, int>> items;
     public:
 // ----------------------- CONSTRUCTOR -----------------------
-        Inventory() {}
-        Inventory(vector<std::pair<Item, int>> items) {
+        Inventory(vector<std::pair<Item, int>> items = vector<std::pair<Item, int>>()) {
             this->items = items;
         }
 // ------------------------- GETTERS, SETTER, ADD, REMOVE -------------------------
-        Item getItem(int index) {
+        Item& item(int index) {
             return items[index].first;
         }
-        Item getItem(string name) {
+        Item& item(string name) {
             for (int i = 0; i < items.size(); i++) {
                 if (lowwerCase(items[i].first.getName()) == lowwerCase(name)) {
                     return items[i].first;

@@ -36,9 +36,6 @@ class Item {
         string getDescription() {
             return description;
         }
-        Item getItem() {
-            return *this;
-        }
 };
 
 #endif
