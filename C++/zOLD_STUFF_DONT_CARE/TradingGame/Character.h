@@ -62,7 +62,7 @@ class Character : public Entity {
         }
         void SellTo(Entity &buyer, int seller_item_index, int amount = 1) override {
             Item item = getInventory().getItem(seller_item_index);
-            float price = round(item.getPrice()*getSellMultiplier())*amount;
+            float price = round(item.getPrice()*buyer.getSellMultiplier())*amount;
             if (!buyer.isAcceptItem(item)) {
                 cout << buyer.getName() << " doesn't trade " << item.getName() << "." << endl;
                 return;

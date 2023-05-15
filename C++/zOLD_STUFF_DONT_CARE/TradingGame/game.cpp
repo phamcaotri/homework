@@ -44,7 +44,6 @@ khoá mua bán những món không có trong shop
 tạo hệ thống giá cả cho các shop dựa trên mặt hàng
 */
 /*--------------------------- TODO --------------------------------
-
 tạo danh sách các trader
 cơ chế xem thông tin item
 cơ chế đọc file từ file lưu game.

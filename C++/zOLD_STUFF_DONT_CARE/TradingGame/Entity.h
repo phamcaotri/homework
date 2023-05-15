@@ -76,6 +76,15 @@ class Entity {
                 inventory.showItemsWithPrice();
             }
         }
+        void showItems_setPrice(string type = "default", float multiplier = 1) {
+            if (type == "buy") {
+                inventory.showItemsWithPrice(multiplier);
+            } else if (type == "sell") {
+                inventory.showItemsWithPrice(multiplier);
+            } else {
+                inventory.showItemsWithPrice();
+            }
+        }
         virtual void BuyFrom(Entity &seller, int seller_item_index, int amount = 1) {};
         virtual void SellTo(Entity &buyer, int seller_item_index, int amount = 1) {};
 };

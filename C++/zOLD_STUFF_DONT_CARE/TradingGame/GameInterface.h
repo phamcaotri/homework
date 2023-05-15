@@ -13,7 +13,7 @@ bool TradeAction(Entity& player, Entity& trader, string action) {
     if (action == "buy") {
         trader.showItems("buy");
     } else if (action == "sell") {
-        player.showItems("sell");
+        player.showItems_setPrice("sell", trader.getSellMultiplier());
     }
     cout << "You have " << player.getCoin() << COIN_SYMBOL << "." << endl;
     cout << "Enter item index and amount (default = 1): ";
@@ -182,13 +182,14 @@ class GameInterface {
         float security = 100;
         bool NextDay(int) {
             day++;
-            for (int i = 0; i < map[mapIndex].getShops().size(); i++) {
-                supply += 5 - rand()%10;
-                demand += 5 - rand()%10;
-                market += 5 - rand()%10;
-                security += 5 - rand()%10;
-                map[mapIndex].getShops()[i].MultiplierCalculate(supply/100, demand/100, market/100, security/100);
-            }
+            for (int i = 0; i < map.size(); i++)
+                for (int j = 0; j < map[i].getShops().size(); j++) {
+                    supply += 5 - rand()%10;
+                    demand += 5 - rand()%10;
+                    market += 5 - rand()%10;
+                    security += 5 - rand()%10;
+                    map[i].getShops()[j].MultiplierCalculate(supply/100, demand/100, market/100, security/100);
+                }
             //map[mapIndex].getShops()[0].nextDay();
             // for (int i = 0; i < map[mapIndex].getTraders().size(); i++) {
             //     map[mapIndex].getTraders()[i].nextDay();
