@@ -186,7 +186,7 @@ class GameInterface {
                 for (int j = 0; j < map[i].getShops().size(); j++) {
                     supply += 5 - rand()%10;
                     demand += 5 - rand()%10;
-                    market += 5 - rand()%10;
+                    market += 4 - rand()%10;
                     security += 5 - rand()%10;
                     map[i].getShops()[j].MultiplierCalculate(supply/100, demand/100, market/100, security/100);
                 }

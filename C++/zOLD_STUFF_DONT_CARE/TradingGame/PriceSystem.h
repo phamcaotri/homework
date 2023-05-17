@@ -30,8 +30,9 @@ class PriceSystem {
         }
 
         void MultiplierCalculate(float supply, float demand, float marketCondition, float securityCondition) {
-            buyMultiplier = STD_BUY_MULTIPLIER * demand * marketCondition * (2-securityCondition);
-            sellMultiplier = STD_SELL_MULTIPLIER * supply * marketCondition * (securityCondition);
+            buyMultiplier = STD_BUY_MULTIPLIER * (supply / demand) * marketCondition * (2-securityCondition);
+            // sellMultiplier = STD_SELL_MULTIPLIER * supply * marketCondition * (securityCondition);
+            sellMultiplier = buyMultiplier * 0.7;
         }
 
 

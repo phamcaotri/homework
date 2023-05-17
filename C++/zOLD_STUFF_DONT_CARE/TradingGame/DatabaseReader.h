@@ -143,7 +143,7 @@ class LocationReader {
                         file >> item_name;
                         shopInventory.addItem(itemList.getItem(item_name), INFINITY_AMOUNT);
                     }
-                    shops.push_back(Shop(shopName, shopInventory));
+                    shops.push_back(Shop(shopName, shopInventory, 10000));
                     file.ignore();
                 }
                 map[i].setShops(shops);
