@@ -1,0 +1,25 @@
+KẾ THỪA
+QUAN HỆ GIỮA CÁC LỚP ĐỐI TƯỢNG
+vẽ lớp đối tượng
+có 4 quan hệ chính:
+- quan hệ 1-1
+- quan hệ 1-n
+- quan hệ n-n
+- quan hệ đặc biệt hoá, tổng quát hoá
+
+CLASS A : tổng quát
+^
+|
+CLASS B : đặc biệt
+
+Kế thừa: là một đặc điểm của các ngôn ngữ lập trình hướng đối tượng, dùng để biểu diễn mối quan hệ đặc biệt hoá - tổng quát hoá giữa các lớp.
+
+Lớp cha (lớp cơ sở)
+^
+|
+Lớp con (lớp dẫn xuất)
+
+protected tương tự private, nhưng cho phép lớp con sử dụng
+ký hiệu: #
+
+
