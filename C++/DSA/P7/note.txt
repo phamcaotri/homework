@@ -1,0 +1,18 @@
+BẢNG BĂM
+
+Nối kết
+- nối kết trực tiếp
+bảng băm bao gồm nhiều danh sách liên kết, các phần tử có thứ tự
+
+- nối kết hợp nhất
+là mảng, mỗi phần tử có 2 thông tin. 1 là khóa, 2 là next (NULL, -1)
+nếu xung đột, đưa vào từ cuối danh sách, nếu trống thì thêm vào, cập nhật next là vị trí mới chèn
+lúc tìm kiếm, tìm index, nếu không thấy thì qua địa chỉ next
+
+Băm lại (địa chỉ mở)
+- dò tuyến tính
+f_i(x) = (f(x) + i) %  -> tệ
+- dò bậc 2
+f_i(x) = (f(x) + i^2) %  -> tốt hơn
+- băm kép
+Đập đi xây lại (băm lại)
