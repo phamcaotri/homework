@@ -55,7 +55,7 @@ class Zed : public Tuong {
     public:
         using Tuong::Tuong;
         int Skill(int x) {
-            if (getLuot() % 3 == 0 and getLuot() != 0) {
+            if (getLuot() % 3 == 0) {
                 return (atk+x) * 3;
             }
             return atk+x;
@@ -67,10 +67,11 @@ class Zed : public Tuong {
 };
 
 
+
 class Game {
     private:
         int luot;
-        vector<multimap<int, Tuong*>> DStuong; // loai, <sao, tuong>
+        vector<tuple< int, int, Tuong*>> DStuong; // [stt] <loai, sao, tuong>
     public:
         Game() {
             luot = 0;
@@ -79,36 +80,32 @@ class Game {
             int n; cin >> n >> luot;
             for (int i = 0; i < n; i++) {
                 int loai; cin >> loai;
-                DStuong.resize(loai);
                     if (loai == 1) {
                         Shaco* t = new Shaco();
                         t->Nhap();
-                        DStuong[0].insert(make_pair(1, t));
+                        DStuong.push_back(make_tuple(1, 1, t));
                     } else {
                         Zed* t = new Zed();
                         t->Nhap();
-                        DStuong[1].insert(make_pair(1, t));
+                        DStuong.push_back(make_tuple(2, 1, t));
                     }  
+                NangCap();
+                //Xuat2();
+                // if (CoDu2LoaiTuong()) {
+                //     cout << "\nNhan buff 10" << endl;
+                // }
             }
             for (int i = 0; i < luot; i++) {
-                // int loai; cin >> loai;
-                // DStuong.resize(loai);
-                // if (n > 0) {
-                //     if (loai == 1) {
-                //         Shaco* t = new Shaco();
-                //         t->Nhap();
-                //         DStuong[0].insert(make_pair(1, t));
-                //     } else {
-                //         Zed* t = new Zed();
-                //         t->Nhap();
-                //         DStuong[1].insert(make_pair(1, t));
-                //     }  
-                //     n--;
-
-                // }
                 CapNhatLuot();
-                NangCap();
                 TinhDamage();
+
+
+                // cout << "Luot " << i+1 << ":" << endl;
+                // cout << "Sat thuong: " << endl;
+                // Xuat3();
+                // cout << "Tong sat thuong: " << endl;
+                // Xuat();
+                // cout << endl;
                 
             }
         }
@@ -117,16 +114,12 @@ class Game {
             int atk_bo_sung = 0;
             if (CoDu2LoaiTuong()) {
                 atk_bo_sung = 10;
-                for (int i = 0; i < DStuong.size(); i++) {
-                    for (auto& [sao, tuong] : DStuong[i]) {
-                        tuong->getTongAtk() += tuong->Skill(atk_bo_sung);
-                    }
+                for (auto& [loai, sao, tuong] : DStuong) {
+                    tuong->getTongAtk() += tuong->Skill(atk_bo_sung);
                 }
             } else {
-                for (int i = 0; i < DStuong.size(); i++) {
-                    for (auto& [sao, tuong] : DStuong[i]) {
-                        tuong->getTongAtk() += tuong->getAtk();
-                    }
+                for (auto& [loai, sao, tuong] : DStuong) {
+                    tuong->getTongAtk() += tuong->Skill(0);
                 }
             }
 
@@ -134,52 +127,112 @@ class Game {
         }
 
         bool CoDu2LoaiTuong() {
-            if (DStuong.size() >= 2) {
+            if (countTuong(1) >= 1 and countTuong(2) >= 1) {
                 return true;
             }
             return false;
         }
-
-        void NangCap() {
-            for (int i = 0; i < DStuong.size(); i++) {
-                if (DStuong[i].count(1) == 3) {
-                    int new_atk = 0;
-                    for (auto& [sao, tuong] : DStuong[i]) {
-                        new_atk += tuong->getAtk();
-                    }
-                    new_atk *= 2; 
-                    DStuong[i].insert(make_pair(2, DStuong[i].begin()->second->newTuong(2, new_atk)));
-                    DStuong[i].erase(1);
-                }
-                if (DStuong[i].count(2) == 3) {
-                    int new_atk = 0;
-                    for (auto& [sao, tuong] : DStuong[i]) {
-                        new_atk += tuong->getAtk();
-                    }
-                    new_atk *= 3;
-                    DStuong[i].erase(2);
-                    DStuong[i].insert(make_pair(3, DStuong[i].begin()->second->newTuong(3, new_atk)));
+        int countTuong(int this_loai, int this_sao) {
+            int count = 0;
+            for (auto [loai, sao, tuong] : DStuong) {
+                if (this_loai == loai and this_sao == sao) {
+                    count++;
                 }
             }
-            
+            return count;
+        }
+        int countTuong(int this_loai) {
+            int count = 0;
+            for (auto [loai, sao, tuong] : DStuong) {
+                if (this_loai == loai) {
+                    count++;
+                }
+            }
+            return count;
+        }
+
+        void deleteTuong(int this_loai, int this_sao) {
+            int tong_atk = 0;
+            int n = 3;
+            auto first_it = DStuong.begin();
+            for (auto it = DStuong.begin(); it != DStuong.end(); ) {
+               auto& [loai, sao, tuong] = *it;
+                if (this_loai == loai and this_sao == sao) {
+                    tong_atk += tuong->getAtk();
+                    if (n == 3) {
+                        first_it = DStuong.erase(it);
+                    } else {
+                        DStuong.erase(it);
+                    }
+                     
+                     
+                     n--;
+                     if (n == 0) {
+                        auto new_tuong = tuong->newTuong(this_sao + 1, tong_atk*(this_sao+1));
+                        DStuong.insert(first_it, make_tuple(this_loai, this_sao + 1, new_tuong));
+                        return;
+                     }
+                     it = DStuong.begin();
+                } else {
+                     it++;
+                } 
+            }
+        }
+        void NangCap() {
+            for (auto it = DStuong.begin(); it != DStuong.end();) {
+                auto [loai, sao, tuong] = *it;
+                if (sao == 1) {
+                    if (countTuong(loai, 1) == 3) {
+                        deleteTuong(loai, 1);
+                        it = DStuong.begin();
+                        
+                    } else {
+                        it++;
+                    }
+                } else if (sao == 2) {
+                    if (countTuong(loai, 2) == 3) {
+                        deleteTuong(loai, 2);
+                        it = DStuong.begin();
+                    } else {
+                        it++;
+                    }
+                } else {
+                    it++;
+                }
+
+            }
         }
 
         void CapNhatLuot() {
-            for (int i = 0; i < DStuong.size(); i++) {
-                for (auto& [sao, tuong] : DStuong[i]) {
-                    tuong->getLuot()++;
-                }
+            for (auto& [loai, sao, tuong] : DStuong) {
+                tuong->getLuot()++;
             }
         }
         void Xuat() {
-            for (int i = 0; i < DStuong.size(); i++) {
-                for (auto& [sao, tuong] : DStuong[i]) {
-                    if (i == 0) {
+            for (auto& [loai, sao, tuong] : DStuong) {
+                    if (loai == 1) {
                         cout << "Shaco - " << tuong->getTongAtk() << endl;
                     } else {
                         cout << "Zed - " << tuong->getTongAtk() << endl;
                     }
-                }
+            }
+        }
+        void Xuat2() {
+            for (auto& [loai, sao, tuong] : DStuong) {
+                    if (loai == 1) {
+                        cout << tuong->getSao() << "* "<< "Shaco - " << tuong->getAtk() << endl;
+                    } else {
+                        cout << tuong->getSao() << "* "<< "Zed - " << tuong->getAtk() << endl;
+                    }
+            }
+        }
+        void Xuat3() {
+            for (auto& [loai, sao, tuong] : DStuong) {
+                    if (loai == 1) {
+                        cout << tuong->getSao() << "* "<< "Shaco - " << tuong->Skill(10) << endl;
+                    } else {
+                        cout << tuong->getSao() << "* "<< "Zed - " << tuong->Skill(10) << endl;
+                    }
             }
         }
 
