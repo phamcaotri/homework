@@ -23,3 +23,12 @@ protected tương tự private, nhưng cho phép lớp con sử dụng
 ký hiệu: #
 
 
+kiểu kế thừa:
+public: đưa kiểu lớp cha về nguyên trạng trong lớp con
+protected: đưa kiểu lớp cha về protected trong lớp con
+private: đưa kiểu lớp cha về private trong lớp con
+
+lưu ý: private lớp cha vẫn kế thừa về lớp con nhưng không sử dụng được.
+tức là, nếu kế thừa private, thì public và protected lớp cha vẫn có thể được sử dụng như kiểu private ở lớp con.
+
+Có thể sử dụng ép kiểu thay thế đa hình
