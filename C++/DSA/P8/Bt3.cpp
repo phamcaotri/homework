@@ -57,7 +57,6 @@ void process(vector<vector<int>>& g, int v, int n) {
 
 int main()
 {
-
 	int v, e, n;
 	cin >> v >> e >> n; //v: số đỉnh, e: số cạnh, n: số thao tác
 	vector<vector<int> > G;

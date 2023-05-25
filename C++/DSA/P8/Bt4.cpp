@@ -10,58 +10,74 @@ using
 #include <string>
 using namespace std;
 
-//###INSERT CODE HERE -
+// ###INSERT CODE HERE -
 
-struct Graph {
+struct Graph
+{
     vector<vector<int>> g;
     map<string, int> m;
     vector<string> index;
-    
-    void nhap(int v, int e) {
-        g = vector<vector<int>>(v, vector<int>(v,0));
-        for (int i = 0; i < v; i++) {
-            string c; cin >> c;
+
+    void nhap(int v, int e)
+    {
+        g = vector<vector<int>>(v, vector<int>(v, 0));
+        for (int i = 0; i < v; i++)
+        {
+            string c;
+            cin >> c;
             m[c] = i;
             index.push_back(c);
         }
-        for (int i = 0; i < e; i++) {
-            string x, y; cin >> x >> y;
+        for (int i = 0; i < e; i++)
+        {
+            string x, y;
+            cin >> x >> y;
             g[m[x]][m[y]] = 1;
         }
     }
 
-    void myProcess(int n) {
-        for (int k = 0; k < n; k++) {
-            int num; cin >> num;
+    void myProcess(int n)
+    {
+        for (int k = 0; k < n; k++)
+        {
+            int num;
+            cin >> num;
             switch (num)
             {
             case 1:
+            {
+                string x, y;
+                cin >> x >> y;
+                if (g[m[x]][m[y]] == 1)
                 {
-                string x, y; cin >> x >> y;
-                if (g[m[x]][m[y]] == 1) {
                     cout << "TRUE";
-                } else {
+                }
+                else
+                {
                     cout << "FALSE";
                 }
                 break;
-                }
-            
+            }
+
             default:
-                {
+            {
                 string x;
                 cin >> x;
                 bool flag = false;
-                for (int i = 0; i < g.size(); i++) {
-                    if (g[m[x]][i] == 1) {
+                for (int i = 0; i < g.size(); i++)
+                {
+                    if (g[m[x]][i] == 1)
+                    {
                         cout << index[i] << " ";
                         flag = true;
                     }
                 }
-                if (flag == false) {
+                if (flag == false)
+                {
                     cout << "NONE";
                 }
                 break;
-                }
+            }
             }
             cout << '\n';
         }
@@ -71,9 +87,9 @@ struct Graph {
 int main()
 {
     Graph G;
-    int v, e, n; cin >> v >> e >> n;
+    int v, e, n;
+    cin >> v >> e >> n;
     G.nhap(v, e);
     G.myProcess(n);
     return 0;
 }
-
