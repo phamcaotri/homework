@@ -1,0 +1,23 @@
+ĐỒ THỊ
+Bài toán tô màu đồ thị
+input:
+    n : số lượng đỉnh
+    một đồ thị G = (V, E) Đỉnh biểu diễn một quốc gia, cạnh biểu diễn mqh láng giềng
+    bảng màu (mảng)
+output:
+    danh sách màu tương ứng với quốc gia
+
+cách nhập đồ thị
+    nhập 2 số v e, là số đỉnh số cạnh của đồ thị
+    mỗi e dòng tiếp theo là một cặp số cho biết đỉnh đầu và đỉnh cuối của cạnh đó.
+    nếu các đỉnh có tên thì dòng thứ 2 là v tên đỉnh
+
+ma trận kề
+    nếu ma trận có n đỉnh, thì ma trận là một ma trận vuông nxn
+    dòng có index i lưu thông tin của đỉnh i
+    ô của ma trận lưu quan hệ giữa 2 đỉnh
+
+    nếu là đồ thị đa hoặc ma trận trọng số thì ô lưu số cạnh / trọng số
+
+
+
