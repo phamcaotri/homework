@@ -141,5 +141,7 @@
     "**/*.fls": true,
     "**/*.log": true,
     "**/*synctex.gz": true
-  }
+  },
+  "vim.useSystemClipboard": true,
+  "vim.useCtrlKeys": false
 }
