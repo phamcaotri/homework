@@ -143,5 +143,7 @@
     "**/*synctex.gz": true
   },
   "vim.useSystemClipboard": true,
-  "vim.useCtrlKeys": false
+  "vim.useCtrlKeys": false,
+  "editor.snippets.codeActions.enabled": true,
+  "C_Cpp.suggestSnippets": false
 }

@@ -32,3 +32,12 @@ lưu ý: private lớp cha vẫn kế thừa về lớp con nhưng không sử d
 tức là, nếu kế thừa private, thì public và protected lớp cha vẫn có thể được sử dụng như kiểu private ở lớp con.
 
 Có thể sử dụng ép kiểu thay thế đa hình
+đa hình là hiện tượng các đối tượng thuộc các lớp khác nhau nằm trong cùng cây kế thừa có khả năng hiểu cùng một phương thức theo cách khác nhau.
+
+Phương thức ảo: 
+
+Hàm thuần ảo là hàm không có phần cài đặc. trong c++, hàm thuần ảo được khai báo bằng cách đặt = 0 sau tên hàm.
+lớp thuần ảo (lớp cơ sử trừu tượng) là lớp có ít nhất một hàm thuần ảo.
+trong java, interface là lớp mà tất cả các hàm đều là hàm thuần ảo.
+
+lớp thuần ảo không cho phép tạo đối tượng

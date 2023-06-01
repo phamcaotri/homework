@@ -3,6 +3,7 @@
 #include <vector>
 #include <iostream>
 #include <algorithm>
+#include <typeinfo>
 using namespace std;
 
 class DV {
@@ -173,7 +174,7 @@ class TrangTrai {
                     dan[j]->capNhat();
                 }
             }
-        }
+        } 
         void Xuat() {
             cout << "Bo: " << dan[0]->size() << "," << dan[0]->getSua() << endl;
             cout << "Cuu: " << dan[1]->size() << "," << dan[1]->getSua() << endl;
