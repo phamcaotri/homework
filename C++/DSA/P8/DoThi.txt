@@ -19,5 +19,36 @@ ma trận kề
 
     nếu là đồ thị đa hoặc ma trận trọng số thì ô lưu số cạnh / trọng số
 
+Duyệt đồ thị
+Phương pháp để xét qua tất cả các đỉnh của đồ thị theo một nguyên tắc nhất định
+có 2 cách duyệt:
+    tìm kiếm theo chiều rộng
+    tìm kiếm theo chiều sâu
+        ưu tiên lựa chọn đi về phía đỉnh kề của nó trước.
+        thống nhât: chọn đứa con được sinh ra sau cùng
+        xử lý khi đi ngõ cụt: quay lui (backtraking)
+        nếu quay lui về đỉnh gốc mà vẫn chưa tìm được đỉnh cần tìm thì kết luận không có đỉnh đó trong đồ thị
 
+        cách cài đặt: dùng stack
+            đưa đỉnh gốc vào stack
+            lấy đỉnh đầu tiên ra khỏi stack
+            xét các đỉnh kề của nó
+            nếu đỉnh kề chưa được duyệt thì đưa vào stack
+            lặp lại cho đến khi stack rỗng
+
+            lưu ý: kiểm tra xem đỉnh kề có được duyệt chưa, nếu rồi thì không bỏ vào stack nữa
+            B1:
+                open = {s}
+                close = {}
+            B2:
+                nếu open rỗng thì dừng
+                p = open.pop()
+                close.add(p)
+            B3:
+                xét các đỉnh kề của p
+                nếu đỉnh kề chưa được duyệt thì đưa vào open
+            B4:
+                lặp lại B2
+
+                    dùng kỹ thuật đệ quy quay lui (backtraking)
 
