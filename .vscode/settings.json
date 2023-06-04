@@ -145,5 +145,6 @@
   "vim.useSystemClipboard": true,
   "vim.useCtrlKeys": false,
   "editor.snippets.codeActions.enabled": true,
-  "C_Cpp.suggestSnippets": false
+  "C_Cpp.suggestSnippets": false,
+  "C_Cpp.errorSquiggles": "enabled"
 }
