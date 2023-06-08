@@ -23,7 +23,7 @@ Node* getNode(int x) {
     return p;
 }
 
-Node* Search(Tree& t, int b) {
+Node* Search(Tree& t, int b ) {
     if (!t) {
         return NULL;
     }

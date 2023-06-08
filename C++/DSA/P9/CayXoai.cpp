@@ -58,6 +58,7 @@ void insert2(Tree& t, int x, int& position, int& step) {
 
 
 
+
 int main() {
     Tree t = NULL;
     vector<tuple<int,int,int>> list_position_step_x;
@@ -70,7 +71,7 @@ int main() {
         cin >> x;
         int position = 0;
         int step = 0;
-        insert(t, x, position, step);
+        insert2(t, x, position, step);
         list_position_step_x.push_back({position, step, x});
         if (position < min) {
             min = position;
