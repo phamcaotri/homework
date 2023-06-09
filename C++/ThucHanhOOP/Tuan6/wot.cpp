@@ -114,6 +114,7 @@ class _2DG8M : public DongCo {
             return 400.0 / khoi_luong_tan * km_da_di / 100.0;
         }
 };
+
 class Tank {
     protected:
         string ten;

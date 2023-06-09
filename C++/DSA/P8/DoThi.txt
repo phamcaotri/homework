@@ -51,4 +51,42 @@ có 2 cách duyệt:
                 lặp lại B2
 
                     dùng kỹ thuật đệ quy quay lui (backtraking)
+BFS
 
+b1 khởi tạo:
+    open = {s}
+    close = {}
+
+b2 while open != {}:
+    lấu p từ đầu open (xoá p khỏi open)
+    nếu p là đỉnh cần tìm:
+        return p
+    bỏ p vào close
+    tìm các đỉnh kề với close vào open (chưa có trong close)
+b3 nếu không tìm thấy:
+    return None
+
+khi thực hiện những giải thuật này cần lưu ý những tình huống xử lý đặc biệt.
+
+
+BÀI TOÁN TÌM ĐƯỜNG ĐI NGẮN nhất
+
+1. tìm đường đi ngắn nhất từ một đỉnh đến một đỉnh khác: có hướng, đơn đồ thị, có trọng số cạnh ( >= 0), đỉnh xuất phát, đỉnh đích. output. độ dài đường đi ngắn nhất
+2. tìm đường đi ngắn nhất từ một đỉnh đến tất cả các đỉnh còn lại
+3. tìm đường đi ngắn nhất giữa tất cả các cặp đỉnh. output: nC2 độ dài đường đi ngắn nhất giữa các cặp đỉnh
+
+1.
+thuật dijkstra
+
+input: đồ thị có hướng, có trọng số cạnh, đỉnh xuất phát, đỉnh đích
+output: độ dài đường đi ngắn nhất
+
+b1 khởi tạo
+open = {s}
+close = {}
+d[s] = 0
+
+b2: while open != {}:
+    lấy p từ đầu open (xoá p khỏi open) có d[p] nhỏ nhất
+    nếu p là đỉnh đích:
+        return d[p]
