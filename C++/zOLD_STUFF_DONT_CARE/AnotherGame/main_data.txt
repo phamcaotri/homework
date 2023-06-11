@@ -14,6 +14,5 @@ PLAYER_SKILLS
 1
 basic attack
 just a basic attack
-just me
-hahaha
 50
+0
