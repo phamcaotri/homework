@@ -1,0 +1,3 @@
+THIS IS LINE 1
+# This is a comment 2, it should be ignored
+this is line 3

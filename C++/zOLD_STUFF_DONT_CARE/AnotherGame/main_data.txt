@@ -1,0 +1,19 @@
+PLAYER_INFO
+Xiaolin
+a normal player
+^ . ^
+
+PLAYER_STATS
+100
+150
+50
+60
+70
+
+PLAYER_SKILLS
+1
+basic attack
+just a basic attack
+just me
+hahaha
+50

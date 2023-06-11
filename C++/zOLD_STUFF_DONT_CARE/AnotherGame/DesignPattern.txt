@@ -1,0 +1,395 @@
+
+    Factory Method Pattern
+    Singleton Pattern
+    Strategy Pattern
+    Observer Pattern
+    Decorator Pattern
+
+Factory Method Pattern
+
+#include <iostream>
+#include <vector>
+using namespace std;
+
+// Lớp trừu tượng GameObject
+class GameObject {
+public:
+    virtual void draw() = 0;
+};
+
+// Lớp con Player
+class Player: public GameObject {
+public:
+    void draw() {
+        cout << "Drawing Player" << endl;
+    }
+};
+
+// Lớp con Enemy
+class Enemy: public GameObject {
+public:
+    void draw() {
+        cout << "Drawing Enemy" << endl;
+    }
+};
+
+// Factory Method
+class GameObjectFactory {
+public:
+    virtual GameObject* createObject() = 0;
+};
+
+// Factory Method tạo ra đối tượng Player
+class PlayerFactory: public GameObjectFactory {
+public:
+    GameObject* createObject() {
+        return new Player();
+    }
+};
+
+// Factory Method tạo ra đối tượng Enemy
+class EnemyFactory: public GameObjectFactory {
+public:
+    GameObject* createObject() {
+        return new Enemy();
+    }
+};
+
+int main() {
+    // Tạo ra một danh sách các đối tượng trong game
+    vector<GameObject*> objects;
+
+    // Sử dụng Factory Method để tạo ra các đối tượng và thêm vào danh sách
+    GameObjectFactory* factory1 = new PlayerFactory();
+    objects.push_back(factory1->createObject());
+
+    GameObjectFactory* factory2 = new EnemyFactory();
+    objects.push_back(factory2->createObject());
+
+    // Vẽ tất cả các đối tượng trong game
+    for (int i = 0; i < objects.size(); i++) {
+        objects[i]->draw();
+    }
+
+    return 0;
+}
+
+Factory Method Pattern là một mẫu thiết kế phần mềm cho phép chúng ta tạo ra các đối tượng một cách linh hoạt và dễ dàng mở rộng. Trong thiết kế game, Factory Method Pattern có thể được áp dụng cho nhiều phần khác nhau của game, bao gồm:
+
+    Tạo đối tượng cho các đối tượng trong game, chẳng hạn như các nhân vật, vật phẩm, quái vật, v.v. Bằng cách sử dụng Factory Method Pattern, chúng ta có thể tạo ra các đối tượng này một cách động, dựa trên các thông số được đưa ra, chẳng hạn như cấp độ của người chơi, loại vật phẩm, địa điểm, v.v.
+
+    Tạo đối tượng cho các hệ thống trong game, chẳng hạn như hệ thống tạo đội hình, hệ thống chiến đấu, hệ thống nhiệm vụ, v.v. Factory Method Pattern có thể được sử dụng để tạo ra các đối tượng này một cách linh hoạt và dễ dàng mở rộng.
+
+    Tạo đối tượng cho các giao diện trong game, chẳng hạn như giao diện người dùng, giao diện trò chơi, v.v. Factory Method Pattern có thể được sử dụng để tạo ra các đối tượng này một cách động, dựa trên các thông số được đưa ra, chẳng hạn như kích cỡ màn hình, phân giải, v.v.
+
+    Tạo đối tượng cho các trạng thái trong game, chẳng hạn như trạng thái của nhân vật, trạng thái của màn hình, v.v. Factory Method Pattern có thể được sử dụng để tạo ra các đối tượng này một cách linh hoạt và dễ dàng mở rộng.
+
+
+Singleton Pattern
+
+#include <iostream>
+using namespace std;
+
+class Singleton {
+private:
+    static Singleton* instance; // Chỉ có một đối tượng duy nhất
+    int data; // Dữ liệu của đối tượng
+
+    Singleton() { // Hàm tạo ẩn
+        data = 0;
+    }
+public:
+    static Singleton* getInstance() { // Phương thức tạo hoặc trả về đối tượng Singleton
+        if (instance == NULL) {
+            instance = new Singleton();
+        }
+        return instance;
+    }
+
+    void setData(int newData) { // Cập nhật dữ liệu của đối tượng
+        data = newData;
+    }
+
+    int getData() { // Truy xuất dữ liệu của đối tượng
+        return data;
+    }
+};
+
+Singleton* Singleton::instance = NULL;
+
+int main() {
+    Singleton* s1 = Singleton::getInstance();
+    Singleton* s2 = Singleton::getInstance();
+
+    s1->setData(100);
+
+    cout << s1->getData() << endl; // output: 100
+    cout << s2->getData() << endl; // output: 100
+
+    s2->setData(200);
+
+    cout << s1->getData() << endl; // output: 200
+    cout << s2->getData() << endl; // output: 200
+
+    return 0;
+}
+
+Singleton Pattern là một mẫu thiết kế phần mềm cho phép chúng ta đảm bảo rằng một lớp chỉ có một đối tượng duy nhất trong toàn bộ ứng dụng. Trong lập trình game, Singleton Pattern có thể được sử dụng cho các phần sau:
+
+    Game Manager: Game Manager là một lớp quản lý toàn bộ trò chơi, có thể chứa các thông tin như điểm số của người chơi, số mạng còn lại, màn chơi hiện tại, v.v. Sử dụng Singleton Pattern cho Game Manager đảm bảo rằng chỉ có một đối tượng Game Manager trong toàn bộ ứng dụng, giúp cho việc quản lý và sử dụng thông tin của trò chơi trở nên dễ dàng hơn.
+
+    Audio Manager: Audio Manager là một lớp quản lý âm thanh trong trò chơi, có thể chứa các thông tin như tệp âm thanh, âm lượng hiện tại, v.v. Sử dụng Singleton Pattern cho Audio Manager đảm bảo rằng chỉ có một đối tượng Audio Manager trong toàn bộ ứng dụng, giúp cho việc quản lý và phát lại âm thanh trong trò chơi trở nên dễ dàng hơn.
+
+    Input Manager: Input Manager là một lớp quản lý đầu vào trong trò chơi, có thể chứa các thông tin như các phím bàn phím, cấu hình bàn phím, v.v. Sử dụng Singleton Pattern cho Input Manager đảm bảo rằng chỉ có một đối tượng Input Manager trong toàn bộ ứng dụng, giúp cho việc quản lý và xử lý đầu vào trong trò chơi trở nên dễ dàng hơn.
+
+    Resource Manager: Resource Manager là một lớp quản lý tài nguyên trong trò chơi, bao gồm các tệp hình ảnh, âm thanh, đối tượng 3D, v.v. Sử dụng Singleton Pattern cho Resource Manager đảm bảo rằng chỉ có một đối tượng Resource Manager trong toàn bộ ứng dụng, giúp cho việc quản lý và sử dụng tài nguyên trong trò chơi trở nên dễ dàng hơn.
+
+
+Strategy Pattern
+
+// Lớp base chứa interface cho Strategy Pattern
+class IAttackStrategy
+{
+public:
+    virtual void attack() = 0;
+};
+
+// Các lớp con implement interface của IAttackStrategy
+class SwordAttackStrategy : public IAttackStrategy
+{
+public:
+    void attack() override {
+        // Code xử lý tấn công bằng kiếm
+    }
+};
+
+class BowAttackStrategy : public IAttackStrategy
+{
+public:
+    void attack() override {
+        // Code xử lý tấn công bằng cung
+    }
+};
+
+class MagicAttackStrategy : public IAttackStrategy
+{
+public:
+    void attack() override {
+        // Code xử lý tấn công bằng phép thuật
+    }
+};
+
+// Lớp chứa Strategy và cho phép thay đổi Strategy tùy ý
+class Character
+{
+private:
+    IAttackStrategy* attackStrategy;
+
+public:
+    Character(IAttackStrategy* strategy) : attackStrategy(strategy) {}
+
+    void setAttackStrategy(IAttackStrategy* strategy) {
+        attackStrategy = strategy;
+    }
+
+    void attack() {
+        attackStrategy->attack();
+    }
+};
+
+// Sử dụng Strategy Pattern trong game
+int main()
+{
+    // Khởi tạo Character với SwordAttackStrategy
+    Character character(new SwordAttackStrategy);
+
+    // Thay đổi Strategy thành BowAttackStrategy
+    character.setAttackStrategy(new BowAttackStrategy);
+
+    // Thực hiện tấn công
+    character.attack();
+
+    return 0;
+}
+
+    Hệ thống AI: Trong các trò chơi, hệ thống AI được sử dụng để điều khiển hành vi của các đối tượng trong trò chơi. Sử dụng Strategy Pattern cho hệ thống AI cho phép chúng ta định nghĩa một họ các thuật toán AI và đóng gói từng thuật toán vào một lớp riêng biệt. Điều này cho phép chúng ta tùy chọn hoặc thay đổi thuật toán AI một cách độc lập với các đối tượng sử dụng chúng, giúp cho hệ thống AI trở nên linh hoạt hơn.
+
+    Hệ thống tấn công: Trong các trò chơi, hệ thống tấn công được sử dụng để xử lý các hành động tấn công của các đối tượng trong trò chơi. Sử dụng Strategy Pattern cho hệ thống tấn công cho phép chúng ta định nghĩa một họ các thuật toán tấn công và đóng gói từng thuật toán vào một lớp riêng biệt. Điều này cho phép chúng ta tùy chọn hoặc thay đổi thuật toán tấn công một cách độc lập với các đối tượng sử dụng chúng, giúp cho hệ thống tấn công trở nên linh hoạt hơn.
+
+    Hệ thống di chuyển: Trong các trò chơi, hệ thống di chuyển được sử dụng để xử lý các hành động di chuyển của các đối tượng trong trò chơi. Sử dụng Strategy Pattern cho hệ thống di chuyển cho phép chúng ta định nghĩa một họ các thuật toán di chuyển và đóng gói từng thuật toán vào một lớp riêng biệt. Điều này cho phép chúng ta tùy chọn hoặc thay đổi thuật toán di chuyển một cách độc lập với các đối tượng sử dụng chúng, giúp cho hệ thống di chuyển trở nên linh hoạt hơn.
+
+    Hệ thống xử lý sự kiện: Trong các trò chơi, hệ thống xử lý sự kiện được sử dụng để xử lý các sự kiện xảy ra trong trò chơi, chẳng hạn như sự kiện bàn phím, chuột, v.v. Sử dụng Strategy Pattern cho hệ thống xử lý sự kiện cho phép chúng ta định nghĩa một họ các thuật toán xử lý sự kiện và đóng gói từng thuật toán vào một lớp riêng biệt. Điều này cho phép chúng ta tùy chọn hoặc thay đổi thuật toán xử lý sự kiện một cách độc lập với các đối tượng sử dụng chúng, giúp cho hệ thống xử lý sự kiện trở nên linh hoạt hơn.
+
+
+Observer Pattern
+
+#include <iostream>
+#include <vector>
+
+// Lớp base chứa interface cho Observer Pattern
+class IObserver
+{
+public:
+    virtual void onEvent() = 0;
+};
+
+// Lớp chứa các đối tượng Observer và cho phép gửi thông báo đến các Observer
+class EventSystem
+{
+private:
+    std::vector<IObserver*> observers;
+
+public:
+    void addObserver(IObserver* observer) {
+        observers.push_back(observer);
+    }
+
+    void notifyObservers() {
+        for (IObserver* observer : observers) {
+            observer->onEvent();
+        }
+    }
+};
+
+// Lớp chứa trạng thái và sử dụng EventSystem để gửi thông báo khi trạng thái thay đổi
+class Character
+{
+private:
+    std::string name;
+    int health;
+    EventSystem eventSystem;
+
+public:
+    Character(std::string name, int health) : name(name), health(health) {}
+
+    void setHealth(int value) {
+        health = value;
+        eventSystem.notifyObservers();
+    }
+
+    int getHealth() const {
+        return health;
+    }
+
+    // Đăng ký với EventSystem để nhận thông báo khi trạng thái của Character thay đổi
+    void registerObserver(IObserver* observer) {
+        eventSystem.addObserver(observer);
+    }
+};
+
+// Lớp con implement interface của IObserver để xử lý sự kiện khi trạng thái của Character thay đổi
+class HealthBar : public IObserver
+{
+private:
+    Character* character;
+
+public:
+    HealthBar(Character* character) : character(character) {}
+
+    void onEvent() override {
+        std::cout << "Health Bar: " << character->getHealth() << std::endl;
+    }
+};
+
+// Sử dụng Observer Pattern trong game
+int main()
+{
+    // Khởi tạo Character và HealthBar
+    Character character("Player 1", 100);
+    HealthBar healthBar(&character);
+
+    // Đăng ký HealthBar với Character để nhận thông báo khi trạng thái thay đổi
+    character.registerObserver(&healthBar);
+
+    // Thay đổi trạng thái của Character và gửi thông báo đến các Observer
+    character.setHealth(50);
+
+    return 0;
+}
+
+Trong lập trình game, chúng ta có thể sử dụng Observer Pattern để giải quyết các vấn đề sau:
+
+    Hệ thống sự kiện: Trong các trò chơi, hệ thống sự kiện được sử dụng để thông báo cho các đối tượng về các sự kiện xảy ra trong trò chơi, chẳng hạn như sự kiện va chạm, sự kiện người chơi thay đổi trạng thái, v.v. Sử dụng Observer Pattern cho hệ thống sự kiện cho phép các đối tượng đăng ký để nhận thông báo khi sự kiện xảy ra. Điều này giúp cho hệ thống sự kiện trở nên linh hoạt hơn.
+
+    Hệ thống AI: Trong các trò chơi, hệ thống AI được sử dụng để điều khiển hành vi của các đối tượng trong trò chơi. Sử dụng Observer Pattern cho hệ thống AI cho phép các đối tượng AI đăng ký để theo dõi trạng thái của các đối tượng khác và thực hiện hành động phù hợp khi trạng thái của đối tượng khác thay đổi. Điều này giúp cho hệ thống AI trở nên linh hoạt và phản ứng nhanh hơn.
+
+    Hệ thống âm thanh và đồ họa: Trong các trò chơi, hệ thống âm thanh và đồ họa được sử dụng để hiển thị các hiệu ứng âm thanh và hình ảnh. Sử dụng Observer Pattern cho hệ thống âm thanh và đồ họa cho phép các đối tượng đăng ký để nhận thông báo khi các sự kiện xảy ra, chẳng hạn như khi một vật thể di chuyển hoặc khi một âm thanh mới được phát ra. Điều này giúp cho hệ thống âm thanh và đồ họa trở nên linh hoạt hơn và phản ứng nhanh hơn.
+
+
+Decorator Pattern
+
+#include <iostream>
+
+// Lớp base chứa interface cho Decorator Pattern
+class IWeapon
+{
+public:
+    virtual void attack() = 0;
+};
+
+// Lớp cơ bản Weapon
+class Weapon : public IWeapon
+{
+public:
+    void attack() override {
+        std::cout << "Basic attack" << std::endl;
+    }
+};
+
+// Lớp Decorator tăng sức mạnh đòn tấn công
+class DamageBoost : public IWeapon
+{
+private:
+    IWeapon* weapon;
+    int boostAmount;
+
+public:
+    DamageBoost(IWeapon* weapon, int boostAmount) : weapon(weapon), boostAmount(boostAmount) {}
+
+    void attack() override {
+        weapon->attack();
+        std::cout << "Damage boosted by " << boostAmount << std::endl;
+    }
+};
+
+// Lớp Decorator tăng tốc độ tấn công
+class AttackSpeedBoost : public IWeapon
+{
+private:
+    IWeapon* weapon;
+    int boostAmount;
+
+public:
+    AttackSpeedBoost(IWeapon* weapon, int boostAmount) : weapon(weapon), boostAmount(boostAmount) {}
+
+    void attack() override {
+        weapon->attack();
+        std::cout << "Attack speed boosted by " << boostAmount << std::endl;
+    }
+};
+
+// Sử dụng Decorator Pattern trong game
+int main()
+{
+    // Khởi tạo Weapon cơ bản
+    IWeapon* weapon = new Weapon();
+
+    // Thêm Decorator tăng sức mạnh đòn tấn công
+    weapon = new DamageBoost(weapon, 10);
+
+    // Thêm Decorator tăng tốc độ tấn công
+    weapon = new AttackSpeedBoost(weapon, 20);
+
+    // Sử dụng Weapon với các tính năng được tăng cường
+    weapon->attack();
+
+    return 0;
+}
+
+Decorator Pattern là một mẫu thiết kế phần mềm thuộc nhóm Structural Pattern trong kỹ thuật lập trình hướng đối tượng. Nó cho phép chúng ta mở rộng hoặc thêm mới tính năng của một đối tượng mà không cần phải sửa đổi lớp gốc của đối tượng đó.
+
+Theo mẫu Decorator Pattern, chúng ta định nghĩa một lớp base (hoặc interface) để đại diện cho đối tượng gốc, sau đó tạo ra các lớp Decorator để bọc đối tượng gốc và thêm các tính năng mới vào nó. Mỗi lớp Decorator cũng kế thừa từ lớp base và giữ một tham chiếu đến đối tượng gốc, cùng với các tính năng mới mà nó thêm vào.
+
+Với Decorator Pattern, chúng ta có thể tạo ra một chuỗi các lớp Decorator, mỗi lớp thêm một tính năng mới vào đối tượng trước đó. Khi sử dụng đối tượng, chúng ta chỉ cần gọi phương thức của đối tượng cuối cùng trong chuỗi, nó sẽ tự động gọi các phương thức của các Decorator trước đó.
+
+Việc sử dụng Decorator Pattern giúp cho mã nguồn trở nên linh hoạt hơn, dễ dàng bảo trì và mở rộng tính năng của đối tượng mà không ảnh hưởng đến các đối tượng khác trong hệ thống. Nó cũng giúp tránh việc tạo ra quá nhiều lớp con riêng biệt cho các tính năng mới, làm cho mã nguồn trở nên phức tạp và khó bảo trì.
