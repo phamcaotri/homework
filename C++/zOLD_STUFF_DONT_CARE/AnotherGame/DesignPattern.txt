@@ -386,6 +386,52 @@ int main()
     return 0;
 }
 
+class Character; // lớp trừu tượng của đối tượng được quan sát
+class Skill { // lớp trừu tượng của đối tượng quan sát
+public:
+    virtual void onCharacterAction(Character* character) = 0; // phương thức xử lý sự kiện
+    virtual ~Skill() {} // hàm hủy ảo
+};
+
+class Character { // lớp đối tượng được quan sát
+public:
+    void addAction() { // phương thức thêm hành động cho nhân vật
+        // xử lý thêm hành động
+        notify(); // thông báo cho tất cả các kỹ năng biết
+    }
+    void addSkill(Skill* skill) { // phương thức đăng ký kỹ năng
+        skills.push_back(skill);
+    }
+    void removeSkill(Skill* skill) { // phương thức huỷ đăng ký kỹ năng
+        skills.remove(skill);
+    }
+    void notify() { // phương thức gửi thông báo cho tất cả các kỹ năng
+        for (Skill* skill : skills) {
+            skill->onCharacterAction(this);
+        }
+    }
+private:
+    list<Skill*> skills; // danh sách các kỹ năng đã đăng ký để theo dõi
+};
+
+class SomeSkill : public Skill { // lớp cụ thể của đối tượng quan sát
+public:
+    void onCharacterAction(Character* character) override { // phương thức xử lý sự kiện
+        // xử lý tác động của nhân vật đến kỹ năng
+    }
+};
+
+int main() {
+    Character* character = new Character();
+    SomeSkill* skill = new SomeSkill();
+    character->addSkill(skill); // đăng ký kỹ năng SomeSkill để theo dõi các sự kiện của nhân vật
+    character->addAction(); // thực hiện một hành động của nhân vật
+    character->removeSkill(skill); // huỷ đăng ký kỹ năng
+    delete skill;
+    delete character;
+    return 0;
+}
+
 Decorator Pattern là một mẫu thiết kế phần mềm thuộc nhóm Structural Pattern trong kỹ thuật lập trình hướng đối tượng. Nó cho phép chúng ta mở rộng hoặc thêm mới tính năng của một đối tượng mà không cần phải sửa đổi lớp gốc của đối tượng đó.
 
 Theo mẫu Decorator Pattern, chúng ta định nghĩa một lớp base (hoặc interface) để đại diện cho đối tượng gốc, sau đó tạo ra các lớp Decorator để bọc đối tượng gốc và thêm các tính năng mới vào nó. Mỗi lớp Decorator cũng kế thừa từ lớp base và giữ một tham chiếu đến đối tượng gốc, cùng với các tính năng mới mà nó thêm vào.

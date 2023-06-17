@@ -16,3 +16,27 @@ basic attack
 just a basic attack
 50
 0
+1
+
+ENEMIES
+1
+
+ENEMY_INFO
+Goblin
+a goblin
+x
+
+ENEMY_STATS
+50
+50
+50
+50
+50
+
+ENEMY_SKILLS
+1
+basic attack
+just a basic attack
+50
+0
+1

@@ -1,0 +1,10 @@
+Thuật toán: viết mã giả
+Độ phức tạp, xấu nhất, tốt nhất, trung bình ôn kỹ.
+danh sách lk bỏ ds liên kết kép
+Đặc trưng của thuật toán
+cây: bỏ avl, đỏ đen
+B-Tree vẽ rồi xoá
+xem tại sao B-tree lại thường có bậc lẻ chứ không phải bậc chẳn
+B-tree luyện thêm bậc 5
+Đồ thị học hết
+Bảng băm: học những dạng lạ lại

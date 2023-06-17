@@ -152,6 +152,9 @@ class StastInfo {
         int get_hp() {
             return hp;
         }
+        void change_hp(int value) {
+            hp += value;
+        }
         int get_mp() {
             return mp;
         }
@@ -166,6 +169,9 @@ class StastInfo {
         }
 
 };
+
+class Character;
+
 
 class Skill {
     protected:
@@ -185,12 +191,134 @@ class Skill {
             this->cooldown = cooldown;
             this->level = level;
         }
-        Skill(string name, string description, int damage, int mp_cost) {
+        Skill(string name, string description, int mp_cost, int cooldown, int level) {
             this->basic_info = BasicInfo(name, description);
             this->mp_cost = mp_cost;
             this->cooldown = cooldown;
             this->level = level;
         }
+        void apply(Character* character) {
+            //
+        }
+        string get_name() {
+            return basic_info.get_name();
+        }
+};
+
+class Team {
+    private:
+        string name;
+        list<Character*> characters;
+    public:
+        void add_character(Character* character) {
+            characters.push_back(character);
+        }
+        void remove_character(Character* character) {
+            characters.remove(character);
+        }
+        void skill_apply(Skill* skill) {
+            for (auto character : characters) {
+                skill->apply(character);
+            }
+        }
+
+};
+
+
+
+class Character {
+    protected:
+        BasicInfo basic_info;
+        StastInfo stast_info;
+        list<Skill*> skills;
+    public:
+        Character() {
+            basic_info = BasicInfo();
+            stast_info = StastInfo();
+            skills.clear();
+        }
+        Character(BasicInfo basic_info, StastInfo stast_info, list<Skill*> skills) {
+            this->basic_info = basic_info;
+            this->stast_info = stast_info;
+            this->skills = skills;
+        }
+        BasicInfo get_basic_info() {
+            return basic_info;
+        }
+        StastInfo get_stast_info() {
+            return stast_info;
+        }
+        list<Skill*> get_skills() {
+            return skills;
+        }
+        void set_basic_info(BasicInfo basic_info) {
+            this->basic_info = basic_info;
+        }
+        void set_stast_info(StastInfo stast_info) {
+            this->stast_info = stast_info;
+        }
+        void set_skills(list<Skill*> skills) {
+            this->skills = skills;
+        }
+        void add_skill(Skill* skill) {
+            skills.push_back(skill);
+        }
+        void remove_skill(Skill* skill) {
+            skills.remove(skill);
+        }
+        void skill_apply(Skill* skill) {
+            skill->apply(this);
+        }
+        void use_skill(int index, Character* character) {
+            skills[index]->apply(character);
+        }
+        string get_name() {
+            return basic_info.get_name();
+        }
+        void attack(Character* character) {
+            character->be_attacked(stast_info.get_attack());
+        }
+        void be_attacked(int attack) {
+            stast_info.change_hp(-attack);
+        }
+
+};
+
+class Player : public Character {
+    public:
+        using Character::Character;
+};
+
+class Enemy : public Character {
+    public:
+        using Character::Character;
+};
+
+class CharacterFactory {
+        // private:
+        //     GameData game_data;
+        // public:
+        //     CharacterFactory(GameData game_data) {
+        //         this->game_data = game_data;
+        //     }
+        //     Player create_player() {
+
+        //     }
+        //     Enemy create_enemy() {
+
+        //     }
+};
+
+class SkillFactory {
+        // private:
+        //     GameData game_data;
+        // public:
+        //     SkillFactory(GameData game_data) {
+        //         this->game_data = game_data;
+        //     }
+        //     Skill create_skill(string skill_name) {
+
+        //     }
 };
 
 class DataProcess {
@@ -236,22 +364,17 @@ class DataProcess {
 class GameData {
     private:
         DataProcess data;
-    public:
-        GameData(string file_name) {
-            ReadAll reader(file_name);
-            data.set_data(reader.read());
-        }
-        BasicInfo get_player_basic_info() {
+        BasicInfo get_character_basic_info(string header) {
             data.reset_pos();
-            data.go_to_string("PLAYER_INFO\n");
+            data.go_to_string(header);
             string name = data.getline();
             string description = data.getline();
             string image = data.getline(); 
             return BasicInfo(name, description, image);
         }
-        StastInfo get_player_stats_info() {
+        StastInfo get_character_stats_info(string header) {
             data.reset_pos();
-            data.go_to_string("PLAYER_STATS\n");
+            data.go_to_string(header);
             int hp = stoi(data.getline());
             int mp = stoi(data.getline());
             int attack = stoi(data.getline());
@@ -259,303 +382,123 @@ class GameData {
             int speed = stoi(data.getline());
             return StastInfo(hp, mp, attack, defense, speed);
         }        
-        vector<Skill> get_player_skills() {
+        list<Skill*> get_character_skills(string header) {
             data.reset_pos();
-            data.go_to_string("PLAYER_SKILLS\n");
-            vector<Skill> skills;
+            data.go_to_string(header);
+            list<Skill*> skills;
             int skill_count = stoi(data.getline());
             for (int i = 0; i < skill_count; i++) {
                 string name = data.getline();
                 string description = data.getline();
-                int damage = stoi(data.getline());
+                int cooldown = stoi(data.getline());
                 int mp_cost = stoi(data.getline());
-                skills.push_back(Skill(name, description, damage, mp_cost));
+                int level = stoi(data.getline());
+                skills.push_back(new Skill(BasicInfo(name, description, ""), mp_cost, cooldown, level));
             }
             return skills;
         }
-};
-
-class Character {
-    protected:
-        BasicInfo basic_info;
-        StastInfo stast_info;
-        vector<Skill> skills;
     public:
-        Character() {
-            basic_info = BasicInfo();
-            stast_info = StastInfo();
-            skills.clear();
+        GameData(string file_name) {
+            ReadAll reader(file_name);
+            data.set_data(reader.read());
         }
-        Character(BasicInfo basic_info, StastInfo stast_info, vector<Skill> skills) {
-            this->basic_info = basic_info;
-            this->stast_info = stast_info;
-            this->skills = skills;
-        }
-        BasicInfo get_basic_info() {
-            return basic_info;
-        }
-        StastInfo get_stast_info() {
-            return stast_info;
-        }
-        vector<Skill> get_skills() {
-            return skills;
-        }
-        void set_basic_info(BasicInfo basic_info) {
-            this->basic_info = basic_info;
-        }
-        void set_stast_info(StastInfo stast_info) {
-            this->stast_info = stast_info;
-        }
-        void set_skills(vector<Skill> skills) {
-            this->skills = skills;
-        }
-        void add_skill(Skill skill) {
-            skills.push_back(skill);
+        Player get_player_info() {
+            BasicInfo basic_info = get_character_basic_info("PLAYER_INFO\n");
+            StastInfo stats_info = get_character_stats_info("PLAYER_STATS\n");
+            list<Skill*> skills = get_character_skills("PLAYER_SKILLS\n");
+            return Player(basic_info, stats_info, skills);
         }
 
-
-};
-
-class SingleTargetSkill {
-    protected:
-        Character* target;
-    public:
-        SingleTargetSkill() {
-            target = NULL;
+        vector<Enemy*> get_enemies_info() {
+            vector<Enemy*> enemies;
+            data.reset_pos();
+            data.go_to_string("ENEMIES\n");
+            int enemy_count = stoi(data.getline());
+            for (int i = 0; i < enemy_count; i++) {
+                BasicInfo basic_info = get_character_basic_info("ENEMY_INFO\n");
+                StastInfo stats_info = get_character_stats_info("ENEMY_STATS\n");
+                list<Skill*> skills = get_character_skills("ENEMY_SKILLS\n");
+                enemies.push_back(new Enemy(basic_info, stats_info, skills));
+            }
+            return enemies;
         }
-        SingleTargetSkill(Character* target) {
-            this->target = target;
-        }
-        Character* get_target() {
-            return target;
-        }
-};
-
-class MultiTargetSkill {
-    protected:
-        vector<Character*> targets;
-    public:
-        MultiTargetSkill() {
-            targets.clear();
-        }
-        MultiTargetSkill(vector<Character*> targets) {
-            this->targets = targets;
-        }
-        vector<Character*> get_targets() {
-            return targets;
-        }
-};
-
-class BuffSkill : public Skill, public SingleTargetSkill {
-    protected:
-        int duration;
-    public:
-        BuffSkill(BasicInfo basic_info, int mp_cost, int cooldown, int level, int duration) : Skill(basic_info, mp_cost, cooldown, level) {
-            this->duration = duration;
-        }
-        int get_duration() {
-            return duration;
-        }
-};
-
-class MultiBuffSkill : public Skill, public MultiTargetSkill {
-    protected:
-        int duration;
-    public:
-        MultiBuffSkill(BasicInfo basic_info, int mp_cost, int cooldown, int level, int duration) : Skill(basic_info, mp_cost, cooldown, level) {
-            this->duration = duration;
-        }
-        int get_duration() {
-            return duration;
-        }
-};
-
-class DebuffSkill : public Skill, public SingleTargetSkill {
-    protected:
-        int duration;
-    public:
-        DebuffSkill(BasicInfo basic_info, int mp_cost, int cooldown, int level, int duration) : Skill(basic_info, mp_cost, cooldown, level) {
-            this->duration = duration;
-        }
-        int get_duration() {
-            return duration;
-        }
-};
-
-class MultiDebuffSkill : public Skill, public MultiTargetSkill {
-    protected:
-        int duration;
-    public:
-        MultiDebuffSkill(BasicInfo basic_info, int mp_cost, int cooldown, int level, int duration) : Skill(basic_info, mp_cost, cooldown, level) {
-            this->duration = duration;
-        }
-        int get_duration() {
-            return duration;
-        }
-};
-
-class AttackSkill : public Skill, public SingleTargetSkill {
-    protected:
-        int damage;
-    public:
-        AttackSkill(BasicInfo basic_info, int mp_cost, int cooldown, int level, int damage) : Skill(basic_info, mp_cost, cooldown, level) {
-            this->damage = damage;
-        }
-        int get_damage() {
-            return damage;
-        }
-};
-
-class MultiAttackSkill : public Skill, public MultiTargetSkill {
-    protected:
-        int damage;
-    public:
-        MultiAttackSkill(BasicInfo basic_info, int mp_cost, int cooldown, int level, int damage) : Skill(basic_info, mp_cost, cooldown, level) {
-            this->damage = damage;
-        }
-        int get_damage() {
-            return damage;
-        }
-};
-
-class HealSkill : public Skill, public SingleTargetSkill {
-    protected:
-        int heal;
-    public:
-        HealSkill(BasicInfo basic_info, int mp_cost, int cooldown, int level, int heal) : Skill(basic_info, mp_cost, cooldown, level) {
-            this->heal = heal;
-        }
-        int get_heal() {
-            return heal;
-        }
-};
-
-class MultiHealSkill : public Skill, public MultiTargetSkill {
-    protected:
-        int heal;
-    public:
-        MultiHealSkill(BasicInfo basic_info, int mp_cost, int cooldown, int level, int heal) : Skill(basic_info, mp_cost, cooldown, level) {
-            this->heal = heal;
-        }
-        int get_heal() {
-            return heal;
-        }
-};
-
-class PassiveSkill : public Skill, public SingleTargetSkill {
-    protected:
-        int duration;
-    public:
-        PassiveSkill(BasicInfo basic_info, int mp_cost, int cooldown, int level, int duration) : Skill(basic_info, mp_cost, cooldown, level) {
-            this->duration = duration;
-        }
-        int get_duration() {
-            return duration;
-        }
-};
-
-class ShieldSkill : public Skill, public SingleTargetSkill {
-    protected:
-        int duration;
-        int shield;
-    public:
-        ShieldSkill(BasicInfo basic_info, int mp_cost, int cooldown, int level, int duration, int shield) : Skill(basic_info, mp_cost, cooldown, level) {
-            this->duration = duration;
-            this->shield = shield;
-        }
-        int get_duration() {
-            return duration;
-        }
-        int get_shield() {
-            return shield;
-        }
-};
-
-class MultiShieldSkill : public Skill, public MultiTargetSkill {
-    protected:
-        int duration;
-        int shield;
-    public:
-        MultiShieldSkill(BasicInfo basic_info, int mp_cost, int cooldown, int level, int duration, int shield) : Skill(basic_info, mp_cost, cooldown, level) {
-            this->duration = duration;
-            this->shield = shield;
-        }
-        int get_duration() {
-            return duration;
-        }
-        int get_shield() {
-            return shield;
-        }
-};
-
-class BasicAttack : public AttackSkill {
-    public:
-        using AttackSkill::AttackSkill;
-};
-
-
-
-
-
-class DamageCalculator {
-    public:
-        static int calculate_damage(Character* attacker, Character* defender, AttackSkill* skill) {
-            int damage = skill->get_damage();
-            damage += attacker->get_stast_info().get_attack();
-            damage -= defender->get_stast_info().get_defense();
-            return damage;
-        }
-};
-
-class Player : public Character {
-    public:
-        using Character::Character;
-};
-
-class Enemy : public Character {
-    public:
-        using Character::Character;
-};
-
-class CharacterFactory {
-        // private:
-        //     GameData game_data;
-        // public:
-        //     CharacterFactory(GameData game_data) {
-        //         this->game_data = game_data;
-        //     }
-        //     Player create_player() {
-
-        //     }
-        //     Enemy create_enemy() {
-
-        //     }
-};
-
-class SkillFactory {
-        // private:
-        //     GameData game_data;
-        // public:
-        //     SkillFactory(GameData game_data) {
-        //         this->game_data = game_data;
-        //     }
-        //     Skill create_skill(string skill_name) {
-
-        //     }
 };
 
 class Battle {
-        // private:
-        //     Player player;
-        //     vector<Enemy> enemies;
-        // public:
-        //     Battle(Player player, vector<Enemy> enemies) {
-        //         this->player = player;
-        //         this->enemies = enemies;
-        //     }
-        //     void run() {
-
-        //     }
+        private:
+            Player* player;
+            vector<Enemy*> enemies;
+        public:
+            Battle(Player* player, vector<Enemy*> enemies) {
+                this->player = player;
+                this->enemies = enemies;
+            }
+            void run() {
+                cout << "Battle started!" << endl;
+                cout << "Player: " << player->get_name() << endl;
+                cout << "Enemies: " << endl;
+                for (int i = 0; i < enemies.size(); i++) {
+                    cout << enemies[i]->get_name() << endl;
+                }
+                while (true) {
+                    cout << "What do you want to do?" << endl;
+                    cout << "1. Attack" << endl;
+                    cout << "2. Skills" << endl;
+                    cout << "3. Items" << endl;
+                    cout << "4. Run" << endl;
+                    int choice;
+                    cin >> choice;
+                    if (choice == 1) {
+                        cout << "Who do you want to attack?" << endl;
+                        for (int i = 0; i < enemies.size(); i++) {
+                            cout << i + 1 << ". " << enemies[i]->get_name() << endl;
+                        }
+                        int enemy_choice;
+                        cin >> enemy_choice;
+                        player->attack(enemies[enemy_choice - 1]);
+                        for (int i = 0; i < enemies.size(); i++) {
+                            enemies[i]->attack(player);
+                        }
+                    }
+                    else if (choice == 2) {
+                        cout << "Which skill do you want to use?" << endl;
+                        list<Skill*> skills = player->get_skills();
+                        int i = 1;
+                        for (auto it = skills.begin(); it != skills.end(); it++) {
+                            cout << i << ". " << (*it)->get_name() << endl;
+                            i++;
+                        }
+                        int skill_choice;
+                        cin >> skill_choice;
+                        player->use_skill(skills.begin(), skill_choice - 1, enemies);
+                        for (int i = 0; i < enemies.size(); i++) {
+                            enemies[i]->attack(player);
+                        }
+                    }
+                    else if (choice == 3) {
+                        cout << "Which item do you want to use?" << endl;
+                        list<Item*> items = player->get_items();
+                        int i = 1;
+                        for (auto it = items.begin(); it != items.end(); it++) {
+                            cout << i << ". " << (*it)->get_name() << endl;
+                            i++;
+                        }
+                        int item_choice;
+                        cin >> item_choice;
+                        player->use_item(items.begin(), item_choice - 1);
+                        for (int i = 0; i < enemies.size(); i++) {
+                            enemies[i]->attack(player);
+                        }
+                    }
+                    else if (choice == 4) {
+                        cout << "You ran away!" << endl;
+                        break;
+                    }
+                    else {
+                        cout << "Invalid choice!" << endl;
+                    }
+                }
+            }
 };
 
 class Game {
@@ -566,11 +509,12 @@ class Game {
     public:
         void init(string file_name) {
             game_data = new GameData(file_name);
-            player = new Player(game_data->get_player_basic_info(), game_data->get_player_stats_info(), game_data->get_player_skills());
-            enemies.clear();
+            player = new Player(game_data->get_player_info());
+            enemies = game_data->get_enemies_info();
         }
         void run() {
-
+            Battle battle(player, enemies);
+            battle.run();
         }
 };
 
@@ -582,7 +526,7 @@ class Game {
 #define MAGENTA(x) "\033[35m" x "\033[0m"
 #define CYAN(x) "\033[36m" x "\033[0m"
 
-typedef function<bool(string&)> TestFunc;;
+typedef function<bool(string&)> TestFunc;
 class Test {
     private:
         vector<pair<string, TestFunc>> tests;
