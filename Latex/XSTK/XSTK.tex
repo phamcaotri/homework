@@ -100,7 +100,7 @@ $P(A)$ được gọi là xác suất của biến cố A
 \end{equation}
 \begin{equation}
     P(A)P(B) = P(A \cap B) 
- \end{equation}0
+ \end{equation}
 \begin{equation}
     P(A + B) = P(A) + P(B) - P(AB)
     \end{equation}
@@ -335,36 +335,6 @@ hoặc đơn giản hơn:
 \end{thm}
 
 \section{Các phân phối xác suất thường gặp}
-\subsection{Phân phối Bernoulli}
-\begin{thm}
-    Một phép thử Bernoulli là một phép thử chỉ có hai kết quả có thể xảy ra: thành công A hoặc thất bại $\bar{A}$, trong đó $P(A) = p$ và $P(\bar{A}) = 1 - p$.
-    Phân phối Bernoulli: Ký hiệu $X \sim B(p)$, khi đó:
-    \begin{equation}
-    f(x) = \begin{cases}
-    p, & x = 1 \\
-    1 - p, & x = 0
-    \end{cases}
-    \end{equation}
-    \begin{equation}
-    F(x) = \begin{cases}
-        p & x = 1 \\
-        1 - p & x = 0 \\
-        0 & \text{otherwise}
-    \end{cases}
-    \end{equation}
-    \begin{equation}
-    P(X = 1) = p
-    \end{equation}
-    \begin {equation}
-    P(X = 0) = 1 - p
-    \end{equation}
-    \begin{equation}
-    E(X) = p
-    \end{equation}
-    \begin{equation}
-    Var(X) = p(1 - p)
-    \end{equation}
-\end{thm}
 
 \subsection{Phân phối nhị thức}
 \begin{thm}
@@ -406,6 +376,7 @@ hoặc đơn giản hơn:
     \begin{equation}
     B(n, p) \sim P(\lambda), \text{ với } \lambda = np
     \end{equation}
+    Điều kiện: n $ \geq $ 30 và np $ \leq $ 5
 
 \end{thm}
 \begin{thm}
@@ -413,7 +384,7 @@ hoặc đơn giản hơn:
     \begin{equation}
     B(n, p) \sim N(\mu, \sigma^2), \text{ với } \mu = np, \sigma^2 = np(1 - p)
     \end{equation}
-
+    Điều kiện: n $ \geq $ 30 và np $ \geq $ 5 và n(1-p) $ \geq $ 5
 \end{thm}
  
 \subsection{Phân phối siêu bội}
@@ -541,6 +512,235 @@ hoặc đơn giản hơn:
     \end{equation}
 
 \end{thm}
+
+\section {Vector ngẫu nhiên}
+\subsection{Vector ngẫu nhiên rời rạc}
+
+\begin{thm}
+    Để biến cố X, Y độc lập thì:
+    \begin{equation}
+        P(x, y) = P_X (x)P_Y (y) , \forall x, y
+    \end{equation}
+\end{thm}
+
+\begin{thm}
+    Bảng phân phối xác suất đồng thời:
+    \begin{table}[h!]
+        \centering
+        \begin{tabular}{|c|c|c|c|c|}
+            \hline
+            p(x, y) & y = 0 & y = 1 & y = 2 & p(x) \\
+            \hline
+            x = 0 & 0.1 & 0.2 & 0.1 & 0.4 \\
+            \hline
+            x = 1 & 0.1 & 0.2 & 0.1 & 0.4 \\
+            \hline
+            x = 2 & 0.1 & 0.1 & 0.1 & 0.3 \\
+            \hline
+            p(y) & 0.3 & 0.5 & 0.3 & 1 \\
+            \hline
+        \end{tabular}
+        \caption{Bảng phân phối xác suất đồng thời}
+        \label{tab:ppx}
+    \end{table}
+\end{thm}
+
+\begin{thm}
+    Xác suất có điều kiện:
+    \begin{equation}
+        P(X = x | Y = y) = \frac{P(X = x, Y = y)}{P(Y = y)}
+    \end{equation}
+    Kỳ vọng có điều kiện:
+    \begin{equation}
+        E(X | Y = y) = \sum_{x} xP(X = x | Y = y)
+    \end{equation}
+\end{thm}
+
+\subsection{Vector ngẫu nhiên liên tục}
+\begin{thm}
+    Có dạng:
+    \begin{equation}
+        f(x, y) = \begin{cases}
+            ... & 0 \leq x \leq 1, 0 \leq y \leq 1 \\
+            0 & \text{otherwise}
+        \end{cases}
+    \end{equation}
+\end{thm}
+
+\begin{thm}
+    Hàm mật độ thành phần của X:
+    \begin{equation}
+        f_X (x) = \int_{-\infty}^{\infty} f(x, y)dy
+    \end{equation}
+    Hàm mật độ thành phần của Y:
+    \begin{equation}
+        f_Y (y) = \int_{-\infty}^{\infty} f(x, y)dx
+    \end{equation}
+\end{thm}
+
+\begin{thm}
+    Hàm mật độ xác suất có điều kiện:
+    \begin{equation}
+        f(x|y) = \frac{f(x, y)}{f_Y (y)}
+    \end{equation}
+    Kỳ vọng có điều kiện:
+    \begin{equation}
+        E(X | Y = y) = \int_{-\infty}^{\infty} xf(x | y)dx
+    \end{equation}
+
+\end{thm}
+
+\begin{thm}
+    Cách tính xác suất của biến ngẫu nhiên liên tục:
+    \begin{equation}
+        P(a \leq X \leq b) = \int_{a}^{b} f_X (x)dx
+    \end{equation}
+    \begin{equation}
+        P(a \leq X \leq b | Y = y) = \int_{a}^{b} f(x | y)dx
+    \end{equation}
+    \begin{equation}
+        P(a \leq X \leq b, c \leq Y \leq d) = \int_{a}^{b} \int_{c}^{d} f(x, y)dydx
+    \end{equation}
+\end{thm}
+
+\section {Thống kê}
+\subsection{Kiến thức cơ bản}
+\begin{thm}
+    Định nghĩa: \\
+    $\alpha$ là mức ý nghĩa. \\
+    $\gamma = 1 - \alpha$ là độ tin cậy. \\
+    $\epsilon$ là sai số. \\
+    $\bar{x}$ là trung bình mẫu. \\
+    $ f = \frac{m}{n}$ là tần suất. \\
+    $\mu$ là trung bình của quần thể. \\
+    $\sigma$ là độ lệch chuẩn của quần thể. \\
+    $\sigma _{n - 1}$ là độ lệch chuẩn của mẫu. \\
+    $n$ là số lượng mẫu. \\
+    $m$ là số lượng mẫu có tính chất cần chứng minh. \\
+    $z_{\alpha/2}$, $z_{\alpha}$ : phân phối chuẩn. \\
+    $t_{\alpha/2}$, $t_{\alpha}$ : phân phối t có n - 1 bậc tự do. \\
+
+\end{thm}
+\subsection{Tìm khoảng ước lượng cho trung bình quần thể khi $\sigma$ đã biết}
+\begin{thm}
+    Bước 1: tìm $t_{\alpha/2}$ bằng bảng phân phối chuẩn. \\
+    Bước 2: tính \begin{equation}
+        \epsilon = t_{\alpha/2} \frac{\sigma}{\sqrt{n}}
+    \end{equation}
+    nếu tìm khoảng tối thiểu, tối đa thì (áp dụng chung): \begin{equation}
+        \epsilon = t_{\alpha} \frac{\sigma}{\sqrt{n}}
+    \end{equation}
+    Bước 3: tính khoảng ước lượng: \begin{equation}
+        \mu \in (\bar{x} - \epsilon, \bar{x} + \epsilon)
+    \end{equation}
+    Nếu tìm khoảng tối thiểu, tối đa thì: kết luận phía còn lại $\infty$
+
+\end{thm}
+\subsection{Tìm khoảng ước lượng cho trung bình quần thể khi $\sigma$ chưa biết}
+\begin{thm}
+    Tương tự, nhưng thay $\sigma$ bằng $\sigma _{n - 1}$ \\
+
+\begin{equation}
+    \epsilon = t_{\alpha/2} \frac{\sigma _{n - 1}}{\sqrt{n}}
+\end{equation}
+Khoảng ước lượng: \begin{equation}
+    \mu \in (\bar{x} - \epsilon, \bar{x} + \epsilon)
+\end{equation}
+Lưu ý: dùng phân phối t nếu $n < 30$, dùng phân phối chuẩn nếu $n \geq 30$. \\
+
+
+\end{thm}
+
+\subsection{Tìm khoảng tin cậy}
+\begin{thm}
+    Tương tự, nhưng thay $\bar{x}$ bằng $f = \frac{m}{n}$, dùng phân phối chuẩn. \\
+
+\begin{equation}
+    \epsilon = z_{\alpha/2} \sqrt{\frac{f(1 - f)}{n}}
+\end{equation}
+Khoảng ước lượng: \begin{equation}
+    p \in (f - \epsilon, f + \epsilon)
+\end{equation}
+Công thức xác định cỡ mẫu:
+\begin{equation}
+    n \geq \frac{z_{\alpha/2}^2 f(1 - f)}{\epsilon^2}
+\end{equation}
+Nếu chưa biết $f$:
+\begin{equation}
+    n \geq \frac{z_{\alpha/2}^2}{4\epsilon^2}
+\end{equation}
+
+\end{thm}
+
+\section {Kiểm định giả thuyết}
+\subsection{So sánh tỉ lệ tổng thể với tỉ lệ mẫu}
+\begin{thm}
+    \begin{equation}
+        H_0: p = p_0
+    \end{equation}
+    \begin{equation}
+        H_1: p \neq p_0
+    \end{equation}
+    Bước 1: tìm $f = \frac{m}{n}$,  $t_{\alpha/2}$ bằng bảng phân phối chuẩn. \\
+    Bước 2: tính \begin{equation}
+        t_0 = \frac{\abs{f - p_0}\sqrt{n}}{\sqrt{p_0(1 - p_0)}}
+    \end{equation}
+    Bước 4: so sánh $t_0$ với $t_{\alpha/2}$:
+    \begin{itemize}
+        \item Nếu $t_0 \leq t_{\alpha/2}$ thì không bác bỏ $H_0$
+        \item Nếu $ t_0 > t_{\alpha/2}$ thì bác bỏ $H_0$
+    \end{itemize}
+\end{thm}
+
+\subsection{Kiểm tra một phía}
+\begin{thm}
+    \begin{equation}
+        H_0: p = p_0
+    \end{equation}
+    \begin{equation}
+        H_1: p > p_0
+    \end{equation}
+    Bước 1: tìm $f = \frac{m}{n}$,  $t_{\alpha}$ bằng bảng phân phối chuẩn. \\
+    Bước 2: tính \begin{equation}
+        t_0 = \frac{(f - p_0)\sqrt{n}}{\sqrt{p_0(1 - p_0)}}
+    \end{equation}
+    Bước 4: so sánh $t_0$ với $t_{\alpha}$:
+    \begin{itemize}
+        \item Nếu $t_0 \leq t_{\alpha}$ thì không bác bỏ $H_0$
+        \item Nếu $ t_0 > t_{\alpha}$ thì bác bỏ $H_0$
+    \end{itemize}
+\end{thm}
+
+\begin{thm}
+    Tương tự:
+    \begin{equation}
+        H_0: p = p_0
+    \end{equation}
+    \begin{equation}
+        H_1: p < p_0
+    \end{equation}
+    Bước 1: tìm $f = \frac{m}{n}$,  $-t_{\alpha}$ bằng bảng phân phối chuẩn. \\
+    Bước 2: tính \begin{equation}
+        t_0 = \frac{(f - p_0)\sqrt{n}}{\sqrt{p_0(1 - p_0)}}
+    \end{equation}
+    Bước 4: so sánh $t_0$ với $-t_{\alpha}$:
+    \begin{itemize}
+        \item Nếu $t_0 \geq -t_{\alpha}$ thì không bác bỏ $H_0$
+        \item Nếu $ t_0 < -t_{\alpha}$ thì bác bỏ $H_0$
+    \end{itemize}
+\end{thm}
+
+\subsection{Đối với trung bình mẫu}
+\begin{thm}
+    Tương tự, nhưng thay $f$ bằng $\bar{x}$, $p_0$ bằng $\mu_0$, $p$ bằng $\mu$. \\
+    Nếu $\sigma$ đã biết, dùng phân phối chuẩn. \\
+    Nếu $\sigma$ chưa biết, tính $\sigma_{n-1}$ từ mẫu. Khi đó, nếu $n \geq 30$, dùng phân phối chuẩn. Nếu $n < 30$, dùng phân phối Student. \\
+    \begin{equation}
+        t_0 = \frac{\abs{\bar{x} - \mu_0}\sqrt{n}}{\sigma}
+    \end{equation}
+    Lưu ý: cách dùng $\alpha$, $\alpha/2$, $-t_{\alpha}$,..., dấu abs tương tự như trên.
+\end{thm}
+
 
 \section {Các dạng toán thường gặp}
 \subsection{Dàn ý giải 1 bài toán bất kỳ}

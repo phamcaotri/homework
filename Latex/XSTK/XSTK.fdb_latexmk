@@ -1,11 +1,13 @@
 # Fdb version 4
-["pdflatex"] 1682240936 "c:/Users/caotr/Documents/GitHub/homework/Latex/XSTK/XSTK.tex" "XSTK.pdf" "XSTK" 1682240939 0
-  "XSTK.aux" 1682240939 3496 09c62416ff533709c9c9bdc5f87f33a2 "pdflatex"
-  "XSTK.out" 1682240939 3330 694a2517f5f19e79ba0484d0c56fbbfd "pdflatex"
-  "XSTK.tex" 1682240935 24158 300a3ec7750b419a8894d1f5b18a5d60 ""
-  "c:/Users/caotr/Documents/GitHub/homework/Latex/XSTK/XSTK.tex" 1682240935 24158 300a3ec7750b419a8894d1f5b18a5d60 ""
+["pdflatex"] 1687688004 "c:/Users/caotr/Documents/GitHub/homework/Latex/XSTK/XSTK.tex" "XSTK.pdf" "XSTK" 1687688006 0
+  "XSTK.aux" 1687688005 5316 786cb366861d9947ea4daa9816f60747 "pdflatex"
+  "XSTK.out" 1687688005 5796 74deb4b0eb43d80f8d9b1c598c9c14b5 "pdflatex"
+  "XSTK.tex" 1687688002 31051 02d2660ccaa14ca379a466e1193b592a ""
+  "c:/Users/caotr/Documents/GitHub/homework/Latex/XSTK/XSTK.tex" 1687688002 31051 02d2660ccaa14ca379a466e1193b592a ""
+  "c:/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1681434898 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "c:/texlive/2023/texmf-dist/fonts/map/fontname/texfonts.map" 1681437329 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "c:/texlive/2023/texmf-dist/fonts/tfm/jknappen/ec/ecrm1200.tfm" 1681436318 3584 f80ddd985bd00e29e9a6047ebd9d4781 ""
+  "c:/texlive/2023/texmf-dist/fonts/tfm/jknappen/ec/tcrm1200.tfm" 1681436318 1536 74b7293ec3713bb7fdca8dd1bd1f469c ""
   "c:/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1681432990 1004 54797486969f23fa377b128694d548df ""
   "c:/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex8.tfm" 1681432990 988 bdf658c3bfc2d96d3c8b02cfc1c94c20 ""
   "c:/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm" 1681432990 916 f87d7c45f9c908e672703b83b72241a3 ""
@@ -41,6 +43,7 @@
   "c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb" 1681432990 32587 65067f817f408bc71a7312f3d9828a9b ""
   "c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb" 1681432990 32626 5abc8bb2f28aa647d4c70f8ea38cc0d3 ""
   "c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cmextra/cmex8.pfb" 1681432990 30273 87a352d78b6810ae5cfdc68d2fb827b2 ""
+  "c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb" 1681434898 136101 b18d10b3436f8cb0cd04046deb340fe7 ""
   "c:/texlive/2023/texmf-dist/fonts/type1/vntex/vnr/vnbx12.pfb" 1681446600 41089 cd085a6112214f1ec9535fe0d1ee127f ""
   "c:/texlive/2023/texmf-dist/fonts/type1/vntex/vnr/vnr12.pfb" 1681446600 40319 02110ade360715fbba33c66db50ef607 ""
   "c:/texlive/2023/texmf-dist/fonts/type1/vntex/vnr/vnr17.pfb" 1681446600 40384 b6b332b554db567a0151da5ffb2a1eaa ""

@@ -770,6 +770,8 @@ INPUT c:/texlive/2023/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm7.tfm
 INPUT c:/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map
 INPUT c:/texlive/2023/texmf-dist/fonts/tfm/vntex/vnr/vnti8.tfm
 INPUT c:/texlive/2023/texmf-dist/fonts/tfm/vntex/vnr/vnti7.tfm
+INPUT c:/texlive/2023/texmf-dist/fonts/tfm/jknappen/ec/tcrm1200.tfm
+INPUT c:/texlive/2023/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc
 INPUT c:/texlive/2023/texmf-dist/fonts/tfm/vntex/vnr/vnr8.tfm
 INPUT c:/texlive/2023/texmf-dist/fonts/tfm/vntex/vnr/vnr6.tfm
 INPUT ./nd1.png
@@ -796,6 +798,7 @@ INPUT c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb
 INPUT c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
 INPUT c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb
 INPUT c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb
+INPUT c:/texlive/2023/texmf-dist/fonts/type1/public/cm-super/sfrm1200.pfb
 INPUT c:/texlive/2023/texmf-dist/fonts/type1/vntex/vnr/vnbx12.pfb
 INPUT c:/texlive/2023/texmf-dist/fonts/type1/vntex/vnr/vnr12.pfb
 INPUT c:/texlive/2023/texmf-dist/fonts/type1/vntex/vnr/vnr17.pfb
