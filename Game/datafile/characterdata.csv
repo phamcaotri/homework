@@ -1,0 +1,4 @@
+﻿id,name,lv,hp,attack,def
+gb,golbin,1,10,2,2
+gb2,golbin,5,50,10,10
+pl,player,1,100,10,10

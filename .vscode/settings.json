@@ -146,5 +146,6 @@
   "vim.useCtrlKeys": false,
   "editor.snippets.codeActions.enabled": true,
   "C_Cpp.suggestSnippets": false,
-  "C_Cpp.errorSquiggles": "enabled"
+  "C_Cpp.errorSquiggles": "enabled",
+  "godot_tools.scene_file_config": "c:\\Users\\caotr\\Documents\\GitHub\\homework\\PhysicEmulator"
 }
