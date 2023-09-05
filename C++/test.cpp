@@ -88,23 +88,26 @@ void NLR(Tree T)
     }
 }
 
-void xuly(vector<Node *> &place, Tree T, int MAX, int MIN)
-{
-    if (!T)
-        return;
-    if (place[T->site - MIN] == NULL)
-    {
-        place[T->site - (MIN)] = T;
-    }
-    else if (place[T->site - MIN] != NULL and place[T->site - MIN]->info <= place[0 - MIN]->info and T->site - MIN > -MIN)
-    {
+void xuly(vector<Node *> &place, Tree T, int MAX, int MIN) {
+    if (!T) return; //base case
+    // if T is the first node with the same site, put it to the place
+    if (T->site - MIN >= 0 and T->site - MIN <= MAX) {
+        if (place[T->site - MIN] == NULL) {
+            place[T->site - (MIN)] = T;
+        } 
+        // if T is not the first node with the same site, 
+        // compare the info of T and the first node with the same site
+        else if (place[T->site - MIN] != NULL 
+            and place[T->site - MIN]->info <= place[0 - MIN]->info 
+            and T->site - MIN > -MIN) {
 
-        place[T->site - (MIN)] = T;
-    }
-    else if (place[T->site - MIN] != NULL and place[T->site - MIN]->info >= place[0 - MIN]->info and T->site - MIN < -MIN)
-    {
+            place[T->site - (MIN)] = T;
+        } else if (place[T->site - MIN] != NULL 
+            and place[T->site - MIN]->info >= place[0 - MIN]->info 
+            and T->site - MIN < -MIN) {
 
-        place[T->site - (MIN)] = T;
+            place[T->site - (MIN)] = T;
+        }
     }
     xuly(place, T->pLeft, MAX, MIN);
     xuly(place, T->pRight, MAX, MIN);

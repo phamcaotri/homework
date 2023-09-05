@@ -147,5 +147,6 @@
   "editor.snippets.codeActions.enabled": true,
   "C_Cpp.suggestSnippets": false,
   "C_Cpp.errorSquiggles": "enabled",
-  "godot_tools.scene_file_config": "c:\\Users\\caotr\\Documents\\GitHub\\homework\\PhysicEmulator"
+  "godot_tools.scene_file_config": "c:\\Users\\caotr\\Documents\\GitHub\\homework\\PhysicEmulator",
+  "python.defaultInterpreterPath": "C:\\Users\\caotr\\AppData\\Local\\Programs\\Python\\Python311"
 }
