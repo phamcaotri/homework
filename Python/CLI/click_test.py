@@ -1,12 +1,28 @@
-import argparse
+import click
 
-def cli():
-    parser = argparse.ArgumentParser(description='CLI Example')
-    parser.add_argument('--name', help='Your name')
-    parser.add_argument('--age', help='Your age')
-    args = parser.parse_args()
-    print(f'Name: {args.name}')
-    print(f'Age: {args.age}')
+class CLI:
+    def __init__(self):
+        self.cli = click.Group()
+
+    def hello(self):
+        click.echo('Hello World!')
+
+    def prompt(self):
+        command = click.prompt('>>', type=str)
+        
+        commands = {
+            'hello': self.hello
+        }
+
+        func = commands.get(command, None)
+
+        if func is not None:
+            func()
+        else:
+            click.echo('Command not found')
+
+
 
 if __name__ == '__main__':
-    cli()
+    cli = CLI()
+    cli.prompt()
