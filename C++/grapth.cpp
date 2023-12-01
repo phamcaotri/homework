@@ -48,7 +48,7 @@ public:
     vector<int> findexits(int n, vector<vector<int>> &m, vector<int> &k){
         map<int, set<int>> graph = tograph(m);
         vector<int> ans;
-        if (n <= k.size()){
+        if (true){
             for (int start = 1; start <= graph.size(); start++){
                 auto path = bfs(graph, start, k);
                 ans.push_back(path.size() - 1);
