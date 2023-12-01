@@ -51,10 +51,48 @@ public:
     }
 };
 
+/*
+Dữ liệu vào:
+10 2
+10 8
+9
+6 7
+7 5
+5 8
+8 1
+1 10
+10 3
+3 4
+4 9
+9 2
+
+*/
+
 int main() {
-    int n = 10;
-    vector<vector<int>> m = { {6, 7}, {7,5},{5,8},{8,1},{1,10},{10,3},{3,4},{4,9},{9,2} };
-    set<int> k = { 10,8 };
+    // int n = 10;
+    // vector<vector<int>> m = { {6, 7}, {7,5},{5,8},{8,1},{1,10},{10,3},{3,4},{4,9},{9,2} };
+    // set<int> k = { 10,8 };
+    int n, temp_k;
+    cin >> n >> temp_k;
+    set<int> k;
+    for (int i = 0; i < temp_k; i++) {
+        int temp;
+        cin >> temp;
+        k.insert(temp);
+    }
+    vector<vector<int>> m;
+    int temp_m;
+    cin >> temp_m;
+    for (int i = 0; i < temp_m; i++) {
+        vector<int> temp;
+        for (int j = 0; j < 2; j++) {
+            int temp2;
+            cin >> temp2;
+            temp.push_back(temp2);
+        }
+        m.push_back(temp);
+    }
+
     Solution s;
     vector<int> ans = s.findexits(n, m, k);
     for (auto& i : ans) {
