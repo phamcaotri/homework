@@ -1,0 +1,8 @@
+giải nén random.zip trên cùng 1 thư mục, sao cho:
+- <Tên thư mục>:
+    - jupino.ipynb
+    - memedataset_random.csv
+    - random:
+        - 12345678.jpg
+        - 23456789.jpg
+        ...
