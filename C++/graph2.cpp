@@ -45,6 +45,23 @@ public:
         }
         return graph;
     }
+/*
+    def findexits(self, n, m, k):
+        graph = self.tograph(m)
+        if n <= len(k):
+            for start in range(1, len(graph) + 1):
+                yield len(next(self.bfs(graph, start, k))) - 1
+        else:
+            pathlist = {}
+            for start in k:
+                for path in self.bfs(graph, start, range(1, n + 1)):
+                    pathlist[path[-1]] = len(path) - 1 if path[-1] not in pathlist else min(pathlist[path[-1]], len(path) - 1)
+            for i in range(1, n + 1):
+                if i not in pathlist:
+                    yield -1
+                else:
+                    yield pathlist[i]
+*/
     vector<int> findexits(int n, vector<vector<int>> &m, vector<int> &k){
         map<int, set<int>> graph = tograph(m);
         vector<int> ans;
@@ -57,8 +74,18 @@ public:
         else{
             map<int, int> pathlist;
             for (auto &start: k){
-                auto path = bfs(graph, start, k);
-                pathlist[path.back()] = path.size() - 1;
+                set<int> rangeN;
+                for (int i = 1; i <= n; i++){
+                    rangeN.insert(i);
+                }
+                for (auto &path: bfs(graph, start, rangeN)){
+                    if (pathlist.find(path) == pathlist.end()){
+                        pathlist[path] = path.size() - 1;
+                    }
+                    else{
+                        pathlist[path] = min(pathlist[path], (int)path.size() - 1);
+                    }
+                }
             }
             for (int i = 1; i <= n; i++){
                 if (pathlist.find(i) == pathlist.end()){

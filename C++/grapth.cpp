@@ -31,21 +31,42 @@ public:
         return ans;
     }
 
-    map<int, set<int>> tograph(const vector<vector<int>>& m) {
+    vector<int> findexits(int n, const vector<vector<int>>& m, const set<int>& k) {
         map<int, set<int>> graph;
         for (auto& i : m) {
             graph[i[0]].insert(i[1]);
             graph[i[1]].insert(i[0]);
         }
-        return graph;
-    }
-
-    vector<int> findexits(int n, const vector<vector<int>>& m, const set<int>& k) {
-        map<int, set<int>> graph = tograph(m);
         vector<int> ans;
-        for (int start = 1; start <= graph.size(); start++) {
-            auto path = bfs(graph, start, k);
-            ans.push_back(path.size() - 1);
+        if (n <= k.size()) {
+            for (int start = 1; start <= graph.size(); start++) {
+                auto path = bfs(graph, start, k);
+                ans.push_back(path.size() - 1);
+            }
+        }
+        else {
+            map<int, int> pathlist;
+
+            for (auto& start : k) {
+                for (int i = 1; i <= n; i++) {
+                    auto path = bfs(graph, start, { i });
+                    if (pathlist.count(path.back()) == 0) {
+                        pathlist[path.back()] = path.size() - 1;
+                    }
+                    else {
+                        pathlist[path.back()] = min(pathlist[path.back()], (int)path.size() - 1);
+                    }
+                }
+            }
+            for (int i = 1; i <= n; i++) {
+                if (pathlist.count(i) == 0) {
+                    ans.push_back(-1);
+                }
+                else {
+                    ans.push_back(pathlist[i]);
+                }
+            }
+
         }
         return ans;
     }
