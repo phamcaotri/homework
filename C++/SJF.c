@@ -126,7 +126,10 @@ int main() {
     inputProcess(iNumberOfProcess, Input); 
     quickSort(Input, 0, iNumberOfProcess - 1, 
 SORT_BY_ARRIVAL); 
- 
+    while (iTerminated < iNumberOfProcess) {
+        while (iRemain > 0)
+    }
+/*
     pushProcess(&iReady, ReadyQueue, Input[0]); 
     removeProcess(&iRemain, 0, Input); 
  
@@ -172,7 +175,7 @@ ReadyQueue[0].iArrival;
 ReadyQueue[0].iArrival; 
         } 
     } 
- 
+*/
     printf("\n===== FCFS Scheduling =====\n"); 
     exportGanttChart(iTerminated, TerminatedArray); 
  
