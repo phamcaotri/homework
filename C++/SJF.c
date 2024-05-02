@@ -152,8 +152,7 @@ SORT_BY_ARRIVAL);
         }
         // nếu có process trong ready queue
         if (iReady > 0) {
-            // sắp xếp ready queue theo burst time để lấy process có burst time nhỏ nhất
-            quickSort(ReadyQueue, 0, iReady - 1, SORT_BY_BURST);
+
             for (int i = 0; i < iReady; i++) {
                 printf("\nReady Queue: ");
                 printProcess(iReady, ReadyQueue);
@@ -166,6 +165,8 @@ SORT_BY_ARRIVAL);
             // thời gian chờ là thời gian phản hồi vì non-preemptive
             ReadyQueue[0].iWaiting = ReadyQueue[0].iResponse;
             ReadyQueue[0].iTaT = ReadyQueue[0].iFinish - ReadyQueue[0].iArrival;
+            // sắp xếp ready queue theo burst time để lấy process có burst time nhỏ nhất
+            quickSort(ReadyQueue, 0, iReady - 1, SORT_BY_BURST);
         }
     }
 /*
