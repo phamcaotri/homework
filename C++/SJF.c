@@ -154,6 +154,10 @@ SORT_BY_ARRIVAL);
         if (iReady > 0) {
             // sắp xếp ready queue theo burst time để lấy process có burst time nhỏ nhất
             quickSort(ReadyQueue, 0, iReady - 1, SORT_BY_BURST);
+            for (int i = 0; i < iReady; i++) {
+                printf("\nReady Queue: ");
+                printProcess(iReady, ReadyQueue);
+            }
             pushProcess(&iTerminated, TerminatedArray, ReadyQueue[0]);
             removeProcess(&iReady, 0, ReadyQueue);
             ReadyQueue[0].iStart = TerminatedArray[iTerminated - 1].iFinish;
