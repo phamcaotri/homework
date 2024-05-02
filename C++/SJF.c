@@ -135,16 +135,10 @@ SORT_BY_ARRIVAL);
     ReadyQueue[0].iWaiting = ReadyQueue[0].iResponse; 
     ReadyQueue[0].iTaT = ReadyQueue[0].iFinish - ReadyQueue[0].iArrival; 
 // nếu đã thực thi hết process thì ngừng
+    int index = 0;
     while (iTerminated < iNumberOfProcess) {
+        
         if (iReady > 0) {
-            int lowest_burst = ReadyQueue[0].iBurst;
-            int index = 0;
-            for (int i = 1; i < iReady; i++) {
-                if (ReadyQueue[i].iBurst < lowest_burst) {
-                    lowest_burst = ReadyQueue[i].iBurst;
-                    index = i;
-                }
-            }
             pushProcess(&iTerminated, TerminatedArray, ReadyQueue[index]);
             removeProcess(&iReady, index, ReadyQueue);
         } else {
@@ -163,7 +157,6 @@ SORT_BY_ARRIVAL);
                 }
             }
             int lowest_burst = ReadyQueue[0].iBurst;
-            int index = 0;
             for (int i = 1; i < iReady; i++) {
                 if (ReadyQueue[i].iBurst < lowest_burst) {
                     lowest_burst = ReadyQueue[i].iBurst;
