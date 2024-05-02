@@ -28,7 +28,7 @@ void printProcess(int n, PCB P[]) {
 void exportGanttChart (int n, PCB P[]) {
     printf("\nGantt Chart: ");
     for (int i = 0; i < n; i++) {
-        printf("P%d (%d, %d) -> ", P[i].iPID, P[i].iStart, P[i].iFinish);
+        printf("| %d P%d %d |", P[i].iStart, P[i].iPID, P[i].iFinish);
     }
     printf("\n");
 }
