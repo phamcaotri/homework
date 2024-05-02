@@ -146,17 +146,9 @@ SORT_BY_ARRIVAL);
             removeProcess(&iRemain, 0, Input);
             continue;
         }
-        if (iRemain > 0) {
-            int i = 0;
-            while (i < iRemain) {
-                if (Input[i].iArrival <= TerminatedArray[iTerminated - 1].iFinish) {
-                    pushProcess(&iReady, ReadyQueue, Input[i]);
-                    removeProcess(&iRemain, i, Input);
-                } else {
-                    i++;
-                }
-            }
-
+        while (iRemain > 0 && Input[0].iArrival <= TerminatedArray[iTerminated - 1].iFinish) {
+            pushProcess(&iReady, ReadyQueue, Input[0]);
+            removeProcess(&iRemain, 0, Input);
         }
         int lowest_burst = ReadyQueue[0].iBurst;
         for (int i = 1; i < iReady; i++) {
