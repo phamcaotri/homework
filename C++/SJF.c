@@ -151,6 +151,7 @@ SORT_BY_ARRIVAL);
             removeProcess(&iRemain, 0, Input);
         }
         int lowest_burst = ReadyQueue[0].iBurst;
+        index = 0;
         for (int i = 1; i < iReady; i++) {
             if (ReadyQueue[i].iBurst < lowest_burst) {
                 lowest_burst = ReadyQueue[i].iBurst;
