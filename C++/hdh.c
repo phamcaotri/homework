@@ -74,9 +74,9 @@ void quickSort(PCB P[], int low, int high, int iCriteria) {
     }
 }
  
-void calculateAWT(int n, PCB P[]) 
+void calculateAWT(int n, PCB P[]) {}
  
-void calculateATaT(int n, PCB P[]) 
+void calculateATaT(int n, PCB P[]) {}
  
 int main() { 
     PCB Input[10]; 
