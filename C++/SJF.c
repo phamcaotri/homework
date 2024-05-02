@@ -163,12 +163,13 @@ SORT_BY_ARRIVAL);
             }
             pushProcess(&iTerminated, TerminatedArray, ReadyQueue[index]);
             removeProcess(&iReady, index, ReadyQueue);
-            ReadyQueue[0].iStart = TerminatedArray[iTerminated - 1].iFinish;
-            ReadyQueue[0].iFinish = ReadyQueue[0].iStart + ReadyQueue[0].iBurst;
-            ReadyQueue[0].iResponse = ReadyQueue[0].iStart - ReadyQueue[0].iArrival;
-            // thời gian chờ là thời gian phản hồi vì non-preemptive
-            ReadyQueue[0].iWaiting = ReadyQueue[0].iResponse;
-            ReadyQueue[0].iTaT = ReadyQueue[0].iFinish - ReadyQueue[0].iArrival;
+            for (int i = 1; i < iReady; i++) {
+                if (ReadyQueue[i].iBurst < lowest_burst) {
+                    lowest_burst = ReadyQueue[i].iBurst;
+                    index = i;
+                }
+            }
+
 
         }
     }
