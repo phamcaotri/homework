@@ -144,6 +144,11 @@ SORT_BY_ARRIVAL);
         } else {
             pushProcess(&iReady, ReadyQueue, Input[0]);
             removeProcess(&iRemain, 0, Input);
+            ReadyQueue[0].iStart = ReadyQueue[0].iArrival; 
+            ReadyQueue[0].iFinish = ReadyQueue[0].iStart + ReadyQueue[0].iBurst; 
+            ReadyQueue[0].iResponse = ReadyQueue[0].iStart - ReadyQueue[0].iArrival; 
+            ReadyQueue[0].iWaiting = ReadyQueue[0].iResponse; 
+            ReadyQueue[0].iTaT = ReadyQueue[0].iFinish - ReadyQueue[0].iArrival; 
             continue;
         }
         while (iRemain > 0 && Input[0].iArrival <= TerminatedArray[iTerminated - 1].iFinish) {
