@@ -50,7 +50,7 @@ void removeProcess(int *n, int index, PCB P[]) {
     (*n)--;
 }
  
-int swapProcess(PCB *P, PCB *Q) {
+void swapProcess(PCB *P, PCB *Q) {
     PCB temp = *P;
     *P = *Q;
     *Q = temp;
@@ -163,13 +163,6 @@ SORT_BY_ARRIVAL);
             }
             pushProcess(&iTerminated, TerminatedArray, ReadyQueue[index]);
             removeProcess(&iReady, index, ReadyQueue);
-            for (int i = 1; i < iReady; i++) {
-                if (ReadyQueue[i].iBurst < lowest_burst) {
-                    lowest_burst = ReadyQueue[i].iBurst;
-                    index = i;
-                }
-            }
-
 
         }
     }
