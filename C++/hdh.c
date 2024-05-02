@@ -19,11 +19,22 @@ void inputProcess(int n, PCB P[]) {
         scanf("%d %d", &P[i].iArrival, &P[i].iBurst);
     }
 }
- 
+
+/*
 void printProcess(int n, PCB P[]) {
     PCB process = P[n - 1];
     printf("P%d (%d, %d)\n", process.iPID, process.iArrival, process.iBurst);
 }
+*/
+
+void printProcess(int n, PCB P[]) {
+    printf("\nPID\tArrival\tBurst\tStart\tFinish\tWaiting\tResponse\tTaT\n");
+    for (int i = 0; i < n; ++i) {
+        printf("%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\n", P[i].iPID, P[i].iArrival, P[i].iBurst,
+               P[i].iStart, P[i].iFinish, P[i].iWaiting, P[i].iResponse, P[i].iTaT);
+    }
+}
+
  
 void exportGanttChart (int n, PCB P[]) {
     printf("\nGantt Chart: ");
