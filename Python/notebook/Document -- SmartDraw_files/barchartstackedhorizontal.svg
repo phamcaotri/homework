@@ -1,0 +1,46 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #416bcf;
+      }
+
+      .cls-2 {
+        fill: #009543;
+      }
+
+      .cls-3 {
+        fill: #ffba07;
+      }
+
+      .cls-4 {
+        fill: #e00d1e;
+      }
+    </style>
+  </defs>
+  <title>barchartstackedhorizontal</title>
+  <g>
+    <rect class="cls-1" x="6.122" y="-6.122" width="21.3252" height="33.5692" transform="translate(27.4472 -6.122) rotate(90)"/>
+    <rect class="cls-2" x="34.15433" y="-0.60405" width="21.3252" height="22.53329" transform="translate(55.47952 -34.15433) rotate(90)"/>
+    <rect class="cls-3" x="51.30287" y="4.78765" width="21.3252" height="11.74989" transform="translate(72.62807 -51.30287) rotate(90)"/>
+    <rect class="cls-4" x="64.74193" y="3.10544" width="21.3252" height="15.11431" transform="translate(86.06712 -64.74193) rotate(90)"/>
+  </g>
+  <g>
+    <rect class="cls-1" x="4.17451" y="22.05043" width="21.3252" height="29.67421" transform="translate(51.72464 22.05043) rotate(90)"/>
+    <rect class="cls-2" x="32.20683" y="23.67339" width="21.3252" height="26.42828" transform="translate(79.75696 -5.9819) rotate(90)"/>
+    <rect class="cls-3" x="54.88655" y="27.42891" width="21.3252" height="18.91725" transform="translate(102.43668 -28.66162) rotate(90)"/>
+    <rect class="cls-4" x="72.01031" y="29.33038" width="21.3252" height="15.11431" transform="translate(119.56044 -45.78537) rotate(90)"/>
+  </g>
+  <g>
+    <rect class="cls-1" x="7.6346" y="44.81526" width="21.3252" height="36.5944" transform="translate(81.40967 44.81526) rotate(90)"/>
+    <rect class="cls-2" x="42.5746" y="46.45075" width="21.3252" height="33.32343" transform="translate(116.34967 9.87527) rotate(90)"/>
+    <rect class="cls-3" x="65.21924" y="57.23752" width="21.3252" height="11.74989" transform="translate(138.9943 -12.76937) rotate(90)"/>
+    <polygon class="cls-4" points="100 73.775 100 52.45 81.663 52.45 81.764 73.775 100 73.775"/>
+  </g>
+  <g>
+    <rect class="cls-1" x="11.39976" y="67.27504" width="21.3252" height="44.12472" transform="translate(111.39976 67.27504) rotate(90)"/>
+    <rect class="cls-2" x="40.54863" y="82.23198" width="21.3252" height="14.21085" transform="translate(140.54863 38.12618) rotate(90)"/>
+    <rect class="cls-3" x="55.48345" y="81.51496" width="21.3252" height="15.64489" transform="translate(155.48345 23.19136) rotate(90)"/>
+    <rect class="cls-4" x="74.42236" y="78.22789" width="21.3252" height="22.21903" transform="translate(174.42236 4.25245) rotate(90)"/>
+  </g>
+</svg>

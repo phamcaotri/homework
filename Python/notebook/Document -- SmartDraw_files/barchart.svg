@@ -1,0 +1,20 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #416bcf;
+      }
+
+      .cls-2 {
+        fill: #ffba07;
+      }
+    </style>
+  </defs>
+  <title>barchart</title>
+  <rect class="cls-1" y="21.55793" width="14.03912" height="78.44207"/>
+  <rect class="cls-2" x="14.09001" y="38.21905" width="14.03912" height="61.78095"/>
+  <rect class="cls-1" x="36.00447" y="50.82935" width="14.03912" height="49.17065"/>
+  <rect class="cls-2" x="50.09448" y="44.08129" width="14.03912" height="55.91871"/>
+  <rect class="cls-1" x="71.87087" y="6.74805" width="14.03912" height="93.25195"/>
+  <rect class="cls-2" x="85.96088" width="14.03912" height="100"/>
+</svg>

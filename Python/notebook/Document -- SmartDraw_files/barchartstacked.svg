@@ -1,0 +1,46 @@
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #416bcf;
+      }
+
+      .cls-2 {
+        fill: #009543;
+      }
+
+      .cls-3 {
+        fill: #ffba07;
+      }
+
+      .cls-4 {
+        fill: #e00d1e;
+      }
+    </style>
+  </defs>
+  <title>barchartstacked</title>
+  <g>
+    <rect class="cls-1" y="66.4308" width="21.3252" height="33.5692"/>
+    <rect class="cls-2" y="43.91643" width="21.3252" height="22.53329"/>
+    <rect class="cls-3" y="32.15958" width="21.3252" height="11.74989"/>
+    <rect class="cls-4" y="17.03832" width="21.3252" height="15.11431"/>
+  </g>
+  <g>
+    <rect class="cls-1" x="26.22493" y="70.32579" width="21.3252" height="29.67421"/>
+    <rect class="cls-2" x="26.22493" y="43.91643" width="21.3252" height="26.42828"/>
+    <rect class="cls-3" x="26.22493" y="24.99222" width="21.3252" height="18.91725"/>
+    <rect class="cls-4" x="26.22493" y="9.76994" width="21.3252" height="15.11431"/>
+  </g>
+  <g>
+    <rect class="cls-1" x="52.44987" y="63.4056" width="21.3252" height="36.5944"/>
+    <rect class="cls-2" x="52.44987" y="30.10109" width="21.3252" height="33.32343"/>
+    <rect class="cls-3" x="52.44987" y="18.24322" width="21.3252" height="11.74989"/>
+    <polygon class="cls-4" points="73.775 0 52.45 0 52.45 18.337 73.775 18.236 73.775 0"/>
+  </g>
+  <g>
+    <rect class="cls-1" x="78.6748" y="55.87528" width="21.3252" height="44.12472"/>
+    <rect class="cls-2" x="78.6748" y="41.68335" width="21.3252" height="14.21085"/>
+    <rect class="cls-3" x="78.6748" y="26.03151" width="21.3252" height="15.64489"/>
+    <rect class="cls-4" x="78.6748" y="3.80553" width="21.3252" height="22.21903"/>
+  </g>
+</svg>
