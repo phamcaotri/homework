@@ -129,13 +129,6 @@ SORT_BY_ARRIVAL);
 
     pushProcess(&iReady, ReadyQueue, Input[0]); 
     removeProcess(&iRemain, 0, Input); 
- 
-    ReadyQueue[0].iStart = ReadyQueue[0].iArrival; 
-    ReadyQueue[0].iFinish = ReadyQueue[0].iStart + ReadyQueue[0].iBurst; 
-    ReadyQueue[0].iResponse = ReadyQueue[0].iStart - ReadyQueue[0].iArrival;
-    // thời gian chờ là thời gian phản hồi vì non-preemptive
-    ReadyQueue[0].iWaiting = ReadyQueue[0].iResponse; 
-    ReadyQueue[0].iTaT = ReadyQueue[0].iFinish - ReadyQueue[0].iArrival; 
 
 // nếu đã thực thi hết process thì ngừng
     while (iTerminated < iNumberOfProcess) {
@@ -162,11 +155,6 @@ SORT_BY_ARRIVAL);
                 }
             }
             pushProcess(&iTerminated, TerminatedArray, ReadyQueue[index]);
-            ReadyQueue[index].iStart = TerminatedArray[iTerminated - 1].iFinish; 
-            ReadyQueue[index].iFinish = ReadyQueue[index].iStart + ReadyQueue[index].iBurst; 
-            ReadyQueue[index].iResponse = ReadyQueue[index].iStart - ReadyQueue[index].iArrival; 
-            ReadyQueue[index].iWaiting = ReadyQueue[index].iResponse; 
-            ReadyQueue[index].iTaT = ReadyQueue[index].iFinish - ReadyQueue[index].iArrival; 
             removeProcess(&iReady, index, ReadyQueue);
         }
     }
