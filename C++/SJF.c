@@ -156,20 +156,21 @@ SORT_BY_ARRIVAL);
                     i++;
                 }
             }
-            int lowest_burst = ReadyQueue[0].iBurst;
-            for (int i = 1; i < iReady; i++) {
-                if (ReadyQueue[i].iBurst < lowest_burst) {
-                    lowest_burst = ReadyQueue[i].iBurst;
-                    index = i;
-                }
-            }
-            ReadyQueue[index].iStart = TerminatedArray[iTerminated - 1].iFinish;
-            ReadyQueue[index].iFinish = ReadyQueue[index].iStart + ReadyQueue[index].iBurst;
-            ReadyQueue[index].iResponse = ReadyQueue[index].iStart - ReadyQueue[index].iArrival;
-            ReadyQueue[index].iWaiting = ReadyQueue[index].iResponse;
-            ReadyQueue[index].iTaT = ReadyQueue[index].iFinish - ReadyQueue[index].iArrival;
 
         }
+        int lowest_burst = ReadyQueue[0].iBurst;
+        for (int i = 1; i < iReady; i++) {
+            if (ReadyQueue[i].iBurst < lowest_burst) {
+                lowest_burst = ReadyQueue[i].iBurst;
+                index = i;
+            }
+        }
+        ReadyQueue[index].iStart = TerminatedArray[iTerminated - 1].iFinish;
+        ReadyQueue[index].iFinish = ReadyQueue[index].iStart + ReadyQueue[index].iBurst;
+        ReadyQueue[index].iResponse = ReadyQueue[index].iStart - ReadyQueue[index].iArrival;
+        ReadyQueue[index].iWaiting = ReadyQueue[index].iResponse;
+        ReadyQueue[index].iTaT = ReadyQueue[index].iFinish - ReadyQueue[index].iArrival;
+
 
     }
 
