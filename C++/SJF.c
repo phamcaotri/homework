@@ -162,8 +162,12 @@ SORT_BY_ARRIVAL);
                 }
             }
             pushProcess(&iTerminated, TerminatedArray, ReadyQueue[index]);
+            ReadyQueue[index].iStart = TerminatedArray[iTerminated - 1].iFinish; 
+            ReadyQueue[index].iFinish = ReadyQueue[index].iStart + ReadyQueue[index].iBurst; 
+            ReadyQueue[index].iResponse = ReadyQueue[index].iStart - ReadyQueue[index].iArrival; 
+            ReadyQueue[index].iWaiting = ReadyQueue[index].iResponse; 
+            ReadyQueue[index].iTaT = ReadyQueue[index].iFinish - ReadyQueue[index].iArrival; 
             removeProcess(&iReady, index, ReadyQueue);
-
         }
     }
 /*
