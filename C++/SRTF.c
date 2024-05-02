@@ -164,7 +164,7 @@ SORT_BY_ARRIVAL);
             if (lowest_burst < TerminatedArray[iTerminated - 1].iBurst) {
                 pushProcess(&iReady, ReadyQueue, TerminatedArray[iTerminated - 1]);
                 removeProcess(&iTerminated, iReady - 1, TerminatedArray);
-                ReadyQueue[iReady - 1].iStart = ReadyQueue[iReady - 1].iArrival;
+                ReadyQueue[iReady - 1].iBurst -= ReadyQueue[index].iStart - ReadyQueue[index].iFinish;
 
 
                 pushProcess(&iTerminated, TerminatedArray, ReadyQueue[index]);
