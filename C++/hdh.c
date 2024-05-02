@@ -158,10 +158,8 @@ ReadyQueue[0].iArrival;
  
         if (iReady > 0) 
         { 
-           pushProcess(&iTerminated, TerminatedArray, 
-ReadyQueue[0]); 
+            pushProcess(&iTerminated, TerminatedArray, ReadyQueue[0]); 
             removeProcess(&iReady, 0, ReadyQueue); 
-             
             ReadyQueue[0].iStart = TerminatedArray[iTerminated - 1].iFinish; 
             ReadyQueue[0].iFinish = ReadyQueue[0].iStart + ReadyQueue[0].iBurst; 
             ReadyQueue[0].iResponse = ReadyQueue[0].iStart - ReadyQueue[0].iArrival; 
