@@ -28,7 +28,7 @@ void printProcess(int n, PCB P[]) {
 */
 
 void printProcess(int n, PCB P[]) {
-    printf("\nPID\tArrival\tBurst\tStart\tFinish\tWaiting\tResponse\tTaT\n");
+    printf("\nPID\tArrival\tBurst\tStart\tFinish\tWT\tRT\tTT\n");
     for (int i = 0; i < n; ++i) {
         printf("%d\t%d\t%d\t%d\t%d\t%d\t%d\t%d\n", P[i].iPID, P[i].iArrival, P[i].iBurst,
                P[i].iStart, P[i].iFinish, P[i].iWaiting, P[i].iResponse, P[i].iTaT);
@@ -39,9 +39,9 @@ void printProcess(int n, PCB P[]) {
 void exportGanttChart (int n, PCB P[]) {
     printf("\nGantt Chart: ");
     for (int i = 0; i < n; i++) {
-        printf("| %d P%d %d |", P[i].iStart, P[i].iPID, P[i].iFinish);
+        printf("| %d P%d %d ", P[i].iStart, P[i].iPID, P[i].iFinish);
     }
-    printf("\n");
+    printf("|\n");
 }
  
 void pushProcess(int *n, PCB P[], PCB Q) {
