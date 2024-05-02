@@ -162,7 +162,13 @@ SORT_BY_ARRIVAL);
             }
             // nếu process mới đến có burst time nhỏ hơn process đang chạy thì thay thế và cập nhật lại thời gian
             if (lowest_burst < TerminatedArray[iTerminated - 1].iBurst) {
+                pushProcess(&iReady, ReadyQueue, TerminatedArray[iTerminated - 1]);
+                removeProcess(&iTerminated, iReady - 1, TerminatedArray);
+                ReadyQueue[iReady - 1].iStart = ReadyQueue[iReady - 1].iArrival;
 
+
+                pushProcess(&iTerminated, TerminatedArray, ReadyQueue[index]);
+                removeProcess(&iReady, index, ReadyQueue);
             }
             // cập nhật thời gian cho process mới đó
             ReadyQueue[index].iStart = TerminatedArray[iTerminated - 1].iFinish;
