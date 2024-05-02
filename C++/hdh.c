@@ -13,20 +13,37 @@ typedef struct {
  
 void inputProcess(int n, PCB P[]) {
     for (int i = 0; i < n; i++) {
-        printf("input PID: %d\n", i + 1);
-        scanf("%d", &P[i].iPID);
+        printf("input P%d:\n", i + 1);
+        P[i].iPID = i + 1;
         printf("input Arrival Time and Burst Time: ");
         scanf("%d %d", &P[i].iArrival, &P[i].iBurst);
     }
 }
  
-void printProcess(int n, PCB P[]) {}
+void printProcess(int n, PCB P[]) {
+    PCB process = P[n - 1];
+    printf("P%d (%d, %d)\n", process.iPID, process.iArrival, process.iBurst);
+}
  
-void exportGanttChart (int n, PCB P[]) {}
+void exportGanttChart (int n, PCB P[]) {
+    printf("\nGantt Chart: ");
+    for (int i = 0; i < n; i++) {
+        printf("P%d (%d, %d) -> ", P[i].iPID, P[i].iStart, P[i].iFinish);
+    }
+    printf("\n");
+}
  
-void pushProcess(int *n, PCB P[], PCB Q) {}
+void pushProcess(int *n, PCB P[], PCB Q) {
+    P[*n] = Q;
+    (*n)++;
+}
  
-void removeProcess(int *n, int index, PCB P[]) {}
+void removeProcess(int *n, int index, PCB P[]) {
+    for (int i = index; i < *n - 1; i++) {
+        P[i] = P[i + 1];
+    }
+    (*n)--;
+}
  
 int swapProcess(PCB *P, PCB *Q) {
     PCB temp = *P;
@@ -74,9 +91,21 @@ void quickSort(PCB P[], int low, int high, int iCriteria) {
     }
 }
  
-void calculateAWT(int n, PCB P[]) {}
+void calculateAWT(int n, PCB P[]) {
+    int iSum = 0;
+    for (int i = 0; i < n; i++) {
+        iSum += P[i].iWaiting;
+    }
+    printf("Average Waiting Time: %.2f\n", (float)iSum / n);
+}
  
-void calculateATaT(int n, PCB P[]) {}
+void calculateATaT(int n, PCB P[]) {
+    int iSum = 0;
+    for (int i = 0; i < n; i++) {
+        iSum += P[i].iTaT;
+    }
+    printf("Average Turnaround Time: %.2f\n", (float)iSum / n);
+}
  
 int main() { 
     PCB Input[10]; 
