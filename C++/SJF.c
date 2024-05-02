@@ -136,7 +136,8 @@ SORT_BY_ARRIVAL);
             removeProcess(&iReady, index, ReadyQueue);
         } else {
         // nếu không có process nào trong queue thì thêm process tiếp theo vào queue
-        // cập nhật thời gian và skip để tránh sai thông tin
+        // cập nhật thời gian và skip bước tìm burst time nhỏ nhất
+        // vì không cần và nếu tìm thì sẽ sai kết quả
             pushProcess(&iReady, ReadyQueue, Input[0]);
             removeProcess(&iRemain, 0, Input);
             ReadyQueue[0].iStart = ReadyQueue[0].iArrival; 
@@ -146,10 +147,12 @@ SORT_BY_ARRIVAL);
             ReadyQueue[0].iTaT = ReadyQueue[0].iFinish - ReadyQueue[0].iArrival; 
             continue;
         }
+        // sau khi process chạy thì kiểm tra xem có process nào mới đến không
         while (iRemain > 0 && Input[0].iArrival <= TerminatedArray[iTerminated - 1].iFinish) {
             pushProcess(&iReady, ReadyQueue, Input[0]);
             removeProcess(&iRemain, 0, Input);
         }
+        // tìm process có burst time nhỏ nhất
         int lowest_burst = ReadyQueue[0].iBurst;
         index = 0;
         for (int i = 1; i < iReady; i++) {
@@ -158,6 +161,7 @@ SORT_BY_ARRIVAL);
                 index = i;
             }
         }
+        // cập nhật thời gian cho process mới đó
         ReadyQueue[index].iStart = TerminatedArray[iTerminated - 1].iFinish;
         ReadyQueue[index].iFinish = ReadyQueue[index].iStart + ReadyQueue[index].iBurst;
         ReadyQueue[index].iResponse = ReadyQueue[index].iStart - ReadyQueue[index].iArrival;
