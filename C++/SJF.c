@@ -127,21 +127,16 @@ int main() {
     quickSort(Input, 0, iNumberOfProcess - 1, 
 SORT_BY_ARRIVAL); 
 
-    pushProcess(&iReady, ReadyQueue, Input[0]); 
-    removeProcess(&iRemain, 0, Input); 
-    ReadyQueue[0].iStart = ReadyQueue[0].iArrival; 
-    ReadyQueue[0].iFinish = ReadyQueue[0].iStart + ReadyQueue[0].iBurst; 
-    ReadyQueue[0].iResponse = ReadyQueue[0].iStart - ReadyQueue[0].iArrival; 
-    ReadyQueue[0].iWaiting = ReadyQueue[0].iResponse; 
-    ReadyQueue[0].iTaT = ReadyQueue[0].iFinish - ReadyQueue[0].iArrival; 
 // nếu đã thực thi hết process thì ngừng
-    int index = 0;
+    int index = 0; // dùng để lưu vị trí của process có burst time nhỏ nhất
     while (iTerminated < iNumberOfProcess) {
-        
+        // nếu trong queue có process thì thực thi
         if (iReady > 0) {
             pushProcess(&iTerminated, TerminatedArray, ReadyQueue[index]);
             removeProcess(&iReady, index, ReadyQueue);
         } else {
+        // nếu không có process nào trong queue thì thêm process tiếp theo vào queue
+        // cập nhật thời gian và skip để tránh sai thông tin
             pushProcess(&iReady, ReadyQueue, Input[0]);
             removeProcess(&iRemain, 0, Input);
             ReadyQueue[0].iStart = ReadyQueue[0].iArrival; 
