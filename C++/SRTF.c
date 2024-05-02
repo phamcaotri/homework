@@ -151,7 +151,7 @@ SORT_BY_ARRIVAL);
         while (iRemain > 0 && Input[0].iArrival <= TerminatedArray[iTerminated - 1].iFinish) {
             pushProcess(&iReady, ReadyQueue, Input[0]);
             removeProcess(&iRemain, 0, Input);
-            // tìm process có burst time nhỏ nhất
+            // tìm process có burst time nhỏ nhất, bao gồm cả process đang chạy
             int lowest_burst = ReadyQueue[0].iBurst;
             index = 0;
             for (int i = 1; i < iReady; i++) {
@@ -159,6 +159,10 @@ SORT_BY_ARRIVAL);
                     lowest_burst = ReadyQueue[i].iBurst;
                     index = i;
                 }
+            }
+            // nếu process mới đến có burst time nhỏ hơn process đang chạy thì thay thế và cập nhật lại thời gian
+            if (lowest_burst < TerminatedArray[iTerminated - 1].iBurst) {
+
             }
             // cập nhật thời gian cho process mới đó
             ReadyQueue[index].iStart = TerminatedArray[iTerminated - 1].iFinish;
