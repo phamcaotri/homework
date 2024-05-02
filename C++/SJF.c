@@ -126,6 +126,17 @@ int main() {
     inputProcess(iNumberOfProcess, Input); 
     quickSort(Input, 0, iNumberOfProcess - 1, 
 SORT_BY_ARRIVAL); 
+
+    pushProcess(&iReady, ReadyQueue, Input[0]); 
+    removeProcess(&iRemain, 0, Input); 
+ 
+    ReadyQueue[0].iStart = ReadyQueue[0].iArrival; 
+    ReadyQueue[0].iFinish = ReadyQueue[0].iStart + ReadyQueue[0].iBurst; 
+    ReadyQueue[0].iResponse = ReadyQueue[0].iStart - ReadyQueue[0].iArrival;
+    // thời gian chờ là thời gian phản hồi vì non-preemptive
+    ReadyQueue[0].iWaiting = ReadyQueue[0].iResponse; 
+    ReadyQueue[0].iTaT = ReadyQueue[0].iFinish - ReadyQueue[0].iArrival; 
+
 // nếu đã thực thi hết process thì ngừng
     while (iTerminated < iNumberOfProcess) {
         // nếu còn process chưa nằm trong ready queue
@@ -153,7 +164,53 @@ SORT_BY_ARRIVAL);
             ReadyQueue[0].iTaT = ReadyQueue[0].iFinish - ReadyQueue[0].iArrival;
         }
     }
-
+/*
+    pushProcess(&iReady, ReadyQueue, Input[0]); 
+    removeProcess(&iRemain, 0, Input); 
+ 
+    ReadyQueue[0].iStart = ReadyQueue[0].iArrival; 
+    ReadyQueue[0].iFinish = ReadyQueue[0].iStart + 
+ReadyQueue[0].iBurst; 
+    ReadyQueue[0].iResponse = ReadyQueue[0].iStart - 
+ReadyQueue[0].iArrival; 
+    ReadyQueue[0].iWaiting = ReadyQueue[0].iResponse; 
+    ReadyQueue[0].iTaT = ReadyQueue[0].iFinish - 
+ReadyQueue[0].iArrival; 
+ 
+    printf("\nReady Queue: "); 
+    printProcess(1, ReadyQueue); 
+ 
+    while (iTerminated < iNumberOfProcess) 
+    { 
+        while (iRemain > 0) 
+        { 
+            if (Input[0].iArrival <= ReadyQueue[0].iFinish) 
+            { 
+                pushProcess(&iReady, ReadyQueue, Input[0]); 
+                removeProcess(&iRemain, 0, Input); 
+                continue; 
+            } 
+            else 
+                break; 
+        } 
+ 
+        if (iReady > 0) 
+        { 
+           pushProcess(&iTerminated, TerminatedArray, 
+ReadyQueue[0]); 
+            removeProcess(&iReady, 0, ReadyQueue); 
+             
+            ReadyQueue[0].iStart = TerminatedArray[iTerminated - 1].iFinish; 
+            ReadyQueue[0].iFinish = ReadyQueue[0].iStart + 
+ReadyQueue[0].iBurst; 
+            ReadyQueue[0].iResponse = ReadyQueue[0].iStart - 
+ReadyQueue[0].iArrival; 
+            ReadyQueue[0].iWaiting = ReadyQueue[0].iResponse; 
+            ReadyQueue[0].iTaT = ReadyQueue[0].iFinish - 
+ReadyQueue[0].iArrival; 
+        } 
+    } 
+*/
     printf("\n===== FCFS Scheduling =====\n"); 
     exportGanttChart(iTerminated, TerminatedArray); 
  
