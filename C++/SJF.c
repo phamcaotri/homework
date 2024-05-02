@@ -132,19 +132,6 @@ SORT_BY_ARRIVAL);
 
 // nếu đã thực thi hết process thì ngừng
     while (iTerminated < iNumberOfProcess) {
-        // nếu còn process chưa nằm trong ready queue
-        while (iRemain > 0) {
-            // kiểm tra process xuất hiện khi process trước đang thực thi thì đưa vào ready queue
-            if (Input[0].iArrival <= ReadyQueue[0].iFinish) {
-                pushProcess(&iReady, ReadyQueue, Input[0]);
-                removeProcess(&iRemain, 0, Input);
-                continue;
-            } else {
-                break;
-            }
-
-        }
-        // nếu có process trong ready queue
         if (iReady > 0) {
             int lowest_burst = ReadyQueue[0].iBurst;
             int index = 0;
@@ -156,55 +143,25 @@ SORT_BY_ARRIVAL);
             }
             pushProcess(&iTerminated, TerminatedArray, ReadyQueue[index]);
             removeProcess(&iReady, index, ReadyQueue);
+        } else {
+            pushProcess(&iReady, ReadyQueue, Input[0]);
+            removeProcess(&iRemain, 0, Input);
+            continue;
         }
+        if (iRemain > 0) {
+            int i = 0;
+            while (i < iRemain) {
+                if (Input[i].iArrival <= TerminatedArray[iTerminated - 1].iFinish) {
+                    pushProcess(&iReady, ReadyQueue, Input[i]);
+                    removeProcess(&iRemain, i, Input);
+                } else {
+                    i++;
+                }
+            }
+        }
+
     }
-/*
-    pushProcess(&iReady, ReadyQueue, Input[0]); 
-    removeProcess(&iRemain, 0, Input); 
- 
-    ReadyQueue[0].iStart = ReadyQueue[0].iArrival; 
-    ReadyQueue[0].iFinish = ReadyQueue[0].iStart + 
-ReadyQueue[0].iBurst; 
-    ReadyQueue[0].iResponse = ReadyQueue[0].iStart - 
-ReadyQueue[0].iArrival; 
-    ReadyQueue[0].iWaiting = ReadyQueue[0].iResponse; 
-    ReadyQueue[0].iTaT = ReadyQueue[0].iFinish - 
-ReadyQueue[0].iArrival; 
- 
-    printf("\nReady Queue: "); 
-    printProcess(1, ReadyQueue); 
- 
-    while (iTerminated < iNumberOfProcess) 
-    { 
-        while (iRemain > 0) 
-        { 
-            if (Input[0].iArrival <= ReadyQueue[0].iFinish) 
-            { 
-                pushProcess(&iReady, ReadyQueue, Input[0]); 
-                removeProcess(&iRemain, 0, Input); 
-                continue; 
-            } 
-            else 
-                break; 
-        } 
- 
-        if (iReady > 0) 
-        { 
-           pushProcess(&iTerminated, TerminatedArray, 
-ReadyQueue[0]); 
-            removeProcess(&iReady, 0, ReadyQueue); 
-             
-            ReadyQueue[0].iStart = TerminatedArray[iTerminated - 1].iFinish; 
-            ReadyQueue[0].iFinish = ReadyQueue[0].iStart + 
-ReadyQueue[0].iBurst; 
-            ReadyQueue[0].iResponse = ReadyQueue[0].iStart - 
-ReadyQueue[0].iArrival; 
-            ReadyQueue[0].iWaiting = ReadyQueue[0].iResponse; 
-            ReadyQueue[0].iTaT = ReadyQueue[0].iFinish - 
-ReadyQueue[0].iArrival; 
-        } 
-    } 
-*/
+
     printf("\n===== FCFS Scheduling =====\n"); 
     exportGanttChart(iTerminated, TerminatedArray); 
  
