@@ -163,15 +163,21 @@ ReadyQueue[0]);
             removeProcess(&iReady, 0, ReadyQueue); 
              
             ReadyQueue[0].iStart = TerminatedArray[iTerminated - 1].iFinish; 
-            ReadyQueue[0].iFinish = ReadyQueue[0].iStart + 
-ReadyQueue[0].iBurst; 
-            ReadyQueue[0].iResponse = ReadyQueue[0].iStart - 
-ReadyQueue[0].iArrival; 
+            ReadyQueue[0].iFinish = ReadyQueue[0].iStart + ReadyQueue[0].iBurst; 
+            ReadyQueue[0].iResponse = ReadyQueue[0].iStart - ReadyQueue[0].iArrival; 
             ReadyQueue[0].iWaiting = ReadyQueue[0].iResponse; 
-            ReadyQueue[0].iTaT = ReadyQueue[0].iFinish - 
-ReadyQueue[0].iArrival; 
-        } 
-    } 
+            ReadyQueue[0].iTaT = ReadyQueue[0].iFinish - ReadyQueue[0].iArrival; 
+        } else { 
+            pushProcess(&iReady, ReadyQueue, Input[0]); 
+            removeProcess(&iRemain, 0, Input); 
+             
+            ReadyQueue[0].iStart = ReadyQueue[0].iArrival; 
+            ReadyQueue[0].iFinish = ReadyQueue[0].iStart  + ReadyQueue[0].iBurst;
+            ReadyQueue[0].iResponse = ReadyQueue[0].iStart - ReadyQueue[0].iArrival;
+            ReadyQueue[0].iWaiting = ReadyQueue[0].iResponse;
+            ReadyQueue[0].iTaT = ReadyQueue[0].iFinish - ReadyQueue[0].iArrival;
+        }
+    }
  
     printf("\n===== FCFS Scheduling =====\n"); 
     exportGanttChart(iTerminated, TerminatedArray); 
