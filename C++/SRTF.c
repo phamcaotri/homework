@@ -104,14 +104,14 @@ int max(int a, int b) {
     return a > b ? a : b;
 }
 
-void calculateAverageWTandTaT(int n, PCB P[]) {
-    int iTotalWT = 0, iTotalTaT = 0;
-    for (int i = 0; i < n; i++) {
-        iTotalWT += P[i].iWaiting;
-        iTotalTaT += P[i].iTaT;
+void calculateAverageWTandTaT(int n, PCB P[], int iTotalProcess) {
+    float fTotalWaiting = 0, fTotalTaT = 0;
+    for (int i = 0; i < iTotalProcess; i++) {
+        fTotalWaiting += P[i].iWaiting;
+        fTotalTaT += P[i].iTaT;
     }
-    printf("\nAverage Waiting Time: %.2f\n", (float)iTotalWT / n);
-    printf("Average Turnaround Time: %.2f\n", (float)iTotalTaT / n);
+    printf("\nAverage Waiting Time: %.2f\n", fTotalWaiting / iTotalProcess);
+    printf("Average Turnaround Time: %.2f\n", fTotalTaT / iTotalProcess);
 }
 
 void mergeProcesses(int n, PCB P[]) {
@@ -252,6 +252,6 @@ SORT_BY_ARRIVAL);
     quickSort(TerminatedArray, 0, iTerminated - 1, SORT_BY_PID); 
     mergeProcesses(iTerminated, TerminatedArray);
     printProcess(iTerminated, TerminatedArray);
-    calculateAverageWTandTaT(iTerminated, TerminatedArray);
+    calculateAverageWTandTaT(iTerminated, TerminatedArray, iNumberOfProcess);
     return 0; 
 } 
