@@ -55,67 +55,6 @@ void swapProcess(PCB *P, PCB *Q) {
     *P = *Q;
     *Q = temp;
 }
-void merge(PCB P[], int low, int mid, int high, int iCriteria) {
-    int i, j, k;
-    int n1 = mid - low + 1;
-    int n2 = high - mid;
-
-    PCB L[n1], R[n2];
-
-    for (i = 0; i < n1; i++)
-        L[i] = P[low + i];
-    for (j = 0; j < n2; j++)
-        R[j] = P[mid + 1 + j];
-
-    i = 0;
-    j = 0;
-    k = low;
-
-    while (i < n1 && j < n2) {
-        int bSwap = 0;
-        if (iCriteria == SORT_BY_ARRIVAL) {
-            bSwap = L[i].iArrival <= R[j].iArrival;
-        } else if (iCriteria == SORT_BY_PID) {
-            bSwap = L[i].iPID <= R[j].iPID;
-        } else if (iCriteria == SORT_BY_BURST) {
-            bSwap = L[i].iBurst <= R[j].iBurst;
-        } else if (iCriteria == SORT_BY_START) {
-            bSwap = L[i].iStart <= R[j].iStart;
-        }
-
-        if (bSwap) {
-            P[k] = L[i];
-            i++;
-        } else {
-            P[k] = R[j];
-            j++;
-        }
-        k++;
-    }
-
-    while (i < n1) {
-        P[k] = L[i];
-        i++;
-        k++;
-    }
-
-    while (j < n2) {
-        P[k] = R[j];
-        j++;
-        k++;
-    }
-}
-
-void mergeSort(PCB P[], int low, int high, int iCriteria) {
-    if (low < high) {
-        int mid = low + (high - low) / 2;
-
-        mergeSort(P, low, mid, iCriteria);
-        mergeSort(P, mid + 1, high, iCriteria);
-
-        merge(P, low, mid, high, iCriteria);
-    }
-}
 
 int partition (PCB P[], int low, int high, int iCriteria) {
     int pivot = 0;
@@ -172,41 +111,31 @@ void quickSort(PCB P[], int low, int high, int iCriteria) {
 //     }
 //     printf("Average Turnaround Time: %.2f\n", (float)iSum / n);
 // }
-void calculateAWT(int count, PCB array[]) {
-    int totalWaitingTime = 0;
-    int processCount = 0;
-    int currentPid = -1;
-    int totalBurstTime = 0;
-
-    for (int i = 0; i < count; i++) {
-        if (array[i].iPID != currentPid) {
-            currentPid = array[i].iPID;
-            processCount++;
-            totalBurstTime = 0;
-        }
-        totalBurstTime += array[i].iBurst;
-        totalWaitingTime += array[i].iTaT - totalBurstTime;
+void calculateAWT(int n, PCB P[]) {
+    float * AWT = (float *)malloc(n * sizeof(float));
+    float * ATaT = (float *)malloc(n * sizeof(float));
+    AWT[0] = 0;
+    ATaT[0] = P[0].iBurst;
+    for (int i = 1; i < n; i++) {
+        AWT[i] = AWT[i - 1] + P[i - 1].iBurst;
+        ATaT[i] = ATaT[i - 1] + P[i].iBurst;
     }
+    printf("Average Waiting Time: %.2f\n", AWT[n - 1] / n);
+    printf("Average Turnaround Time: %.2f\n", ATaT[n - 1] / n);
+    free(AWT);
+    free(ATaT);
 
-    float averageWaitingTime = (float)totalWaitingTime / processCount;
-    printf("Average Waiting Time: %.2f\n", averageWaitingTime);
+
 }
 
 void calculateATaT(int count, PCB array[]) {
-    int totalTurnaroundTime = 0;
-    int processCount = 0;
-    int currentPid = -1;
 
+    float sum = 0;
     for (int i = 0; i < count; i++) {
-        if (array[i].iPID != currentPid) {
-            currentPid = array[i].iPID;
-            processCount++;
-        }
-        totalTurnaroundTime = array[i].iTaT;
+        sum += array[i].iTaT;
     }
-
-    float averageTurnaroundTime = (float)totalTurnaroundTime / processCount;
-    printf("Average Turnaround Time: %.2f\n", averageTurnaroundTime);
+    printf("Average Turnaround Time: %.2f\n", sum / count);
+    
 }
 
 int main() { 
@@ -282,8 +211,8 @@ SORT_BY_ARRIVAL);
     printf("\n===== FCFS Scheduling =====\n"); 
     exportGanttChart(iTerminated, TerminatedArray); 
  
-    mergeSort(TerminatedArray, 0, iTerminated - 1, 
-SORT_BY_PID); 
+//     mergeSort(TerminatedArray, 0, iTerminated - 1, 
+// SORT_BY_PID); 
  
     calculateAWT(iTerminated, TerminatedArray); 
     calculateATaT(iTerminated, TerminatedArray); 
