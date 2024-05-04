@@ -105,32 +105,13 @@ int max(int a, int b) {
 }
 
 void calculateAverageWTandTaT(int n, PCB P[]) {
-    int *totalBurstTime = (int *)calloc(n, sizeof(int));
-    int *completionTime = (int *)calloc(n, sizeof(int));
-    int *arrivalTime = (int *)malloc(n * sizeof(int));
+    int iTotalWT = 0, iTotalTaT = 0;
     for (int i = 0; i < n; i++) {
-        arrivalTime[i] = INT_MAX;
+        iTotalWT += P[i].iWaiting;
+        iTotalTaT += P[i].iTaT;
     }
-
-    for (int i = 0; i < n; i++) {
-        int pid = P[i].iPID - 1; // Adjust for 0-indexed array
-        totalBurstTime[pid] += P[i].iBurst;
-        completionTime[pid] = max(completionTime[pid], P[i].iFinish);
-        arrivalTime[pid] = min(arrivalTime[pid], P[i].iArrival);
-    }
-
-    float totalWT = 0, totalTaT = 0;
-    for (int i = 0; i < n; i++) {
-        totalWT += completionTime[i] - totalBurstTime[i] - arrivalTime[i];
-        totalTaT += completionTime[i] - arrivalTime[i];
-    }
-
-    printf("Average Waiting Time: %.2f\n", totalWT / n);
-    printf("Average Turnaround Time: %.2f\n", totalTaT / n);
-
-    free(totalBurstTime);
-    free(completionTime);
-    free(arrivalTime);
+    printf("\nAverage Waiting Time: %.2f\n", (float)iTotalWT / n);
+    printf("Average Turnaround Time: %.2f\n", (float)iTotalTaT / n);
 }
 
 int main() { 
