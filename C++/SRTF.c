@@ -169,8 +169,8 @@ SORT_BY_ARRIVAL);
                 // removeProcess(&iTerminated, iReady - 1, TerminatedArray);
 
 
-                pushProcess(&iTerminated, TerminatedArray, ReadyQueue[index]);
-                removeProcess(&iReady, index, ReadyQueue);
+                // pushProcess(&iTerminated, TerminatedArray, ReadyQueue[index]);
+                // removeProcess(&iReady, index, ReadyQueue);
             }
             // cập nhật thời gian cho process mới đó
             ReadyQueue[index].iStart = TerminatedArray[iTerminated - 1].iFinish;
