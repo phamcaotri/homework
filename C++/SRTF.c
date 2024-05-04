@@ -96,47 +96,22 @@ void quickSort(PCB P[], int low, int high, int iCriteria) {
     }
 }
  
-// void calculateAWT(int n, PCB P[]) {
-//     int iSum = 0;
-//     for (int i = 0; i < n; i++) {
-//         iSum += P[i].iWaiting;
-//     }
-//     printf("Average Waiting Time: %.2f\n", (float)iSum / n);
-// }
- 
-// void calculateATaT(int n, PCB P[]) {
-//     int iSum = 0;
-//     for (int i = 0; i < n; i++) {
-//         iSum += P[i].iTaT;
-//     }
-//     printf("Average Turnaround Time: %.2f\n", (float)iSum / n);
-// }
 void calculateAWT(int n, PCB P[]) {
-    float * AWT = (float *)malloc(n * sizeof(float));
-    float * ATaT = (float *)malloc(n * sizeof(float));
-    AWT[0] = 0;
-    ATaT[0] = P[0].iBurst;
-    for (int i = 1; i < n; i++) {
-        AWT[i] = AWT[i - 1] + P[i - 1].iBurst;
-        ATaT[i] = ATaT[i - 1] + P[i].iBurst;
+    int iSum = 0;
+    for (int i = 0; i < n; i++) {
+        iSum += P[i].iWaiting;
     }
-    printf("Average Waiting Time: %.2f\n", AWT[n - 1] / n);
-    printf("Average Turnaround Time: %.2f\n", ATaT[n - 1] / n);
-    free(AWT);
-    free(ATaT);
-
-
+    printf("Average Waiting Time: %.2f\n", (float)iSum / n);
+}
+ 
+void calculateATaT(int n, PCB P[]) {
+    int iSum = 0;
+    for (int i = 0; i < n; i++) {
+        iSum += P[i].iTaT;
+    }
+    printf("Average Turnaround Time: %.2f\n", (float)iSum / n);
 }
 
-void calculateATaT(int count, PCB array[]) {
-
-    float sum = 0;
-    for (int i = 0; i < count; i++) {
-        sum += array[i].iTaT;
-    }
-    printf("Average Turnaround Time: %.2f\n", sum / count);
-    
-}
 
 int main() { 
     PCB Input[10]; 
@@ -169,7 +144,7 @@ SORT_BY_ARRIVAL);
             ReadyQueue[0].iStart = ReadyQueue[0].iArrival; 
             ReadyQueue[0].iFinish = ReadyQueue[0].iStart + ReadyQueue[0].iBurst; 
             ReadyQueue[0].iResponse = ReadyQueue[0].iStart - ReadyQueue[0].iArrival; 
-            ReadyQueue[0].iWaiting = ReadyQueue[0].iResponse; 
+            ReadyQueue[0].iWaiting = ReadyQueue[0].iResponse;
             ReadyQueue[0].iTaT = ReadyQueue[0].iFinish - ReadyQueue[0].iArrival; 
             continue;
         }
@@ -211,8 +186,8 @@ SORT_BY_ARRIVAL);
     printf("\n===== FCFS Scheduling =====\n"); 
     exportGanttChart(iTerminated, TerminatedArray); 
  
-//     mergeSort(TerminatedArray, 0, iTerminated - 1, 
-// SORT_BY_PID); 
+    quickSort(TerminatedArray, 0, iTerminated - 1, 
+SORT_BY_PID); 
  
     calculateAWT(iTerminated, TerminatedArray); 
     calculateATaT(iTerminated, TerminatedArray); 
