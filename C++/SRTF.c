@@ -152,6 +152,7 @@ SORT_BY_ARRIVAL);
                 // TerminatedArray[iTerminated - 1].iFinish = ReadyQueue[index].iStart + ReadyQueue[index].iArrival;
                 // pushProcess(&iReady, ReadyQueue, TerminatedArray[iTerminated - 1]);
                 // removeProcess(&iTerminated, iReady - 1, TerminatedArray);
+                ReadyQueue[index].iBurst -= TerminatedArray[iTerminated - 1].iFinish - ReadyQueue[index].iStart;
                 break;
 
                 // pushProcess(&iTerminated, TerminatedArray, ReadyQueue[index]);
