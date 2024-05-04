@@ -160,7 +160,7 @@ SORT_BY_ARRIVAL);
             continue;
         }
         // sau khi process chạy thì kiểm tra xem có process nào mới đến không
-        if (iRemain > 0 && Input[0].iArrival <= TerminatedArray[iTerminated - 1].iFinish) {
+        while (iRemain > 0 && Input[0].iArrival <= TerminatedArray[iTerminated - 1].iFinish) {
             pushProcess(&iReady, ReadyQueue, Input[0]);
             removeProcess(&iRemain, 0, Input);
             // tìm process có burst time nhỏ nhất, bao gồm cả process đang chạy
@@ -174,12 +174,12 @@ SORT_BY_ARRIVAL);
             }
             // nếu process mới đến có burst time nhỏ hơn process đang chạy thì thay thế và cập nhật lại thời gian
             if (lowest_burst < TerminatedArray[iTerminated - 1].iBurst - ReadyQueue[index].iArrival) {
-                // tính thời gian burst còn lại của process đang chạy
-                TerminatedArray[iTerminated - 1].iBurst -= ReadyQueue[index].iArrival;
-                TerminatedArray[iTerminated - 1].iFinish = ReadyQueue[index].iStart + ReadyQueue[index].iArrival;
-                pushProcess(&iReady, ReadyQueue, TerminatedArray[iTerminated - 1]);
+                // // tính thời gian burst còn lại của process đang chạy
+                // TerminatedArray[iTerminated - 1].iBurst -= ReadyQueue[index].iArrival;
+                // TerminatedArray[iTerminated - 1].iFinish = ReadyQueue[index].iStart + ReadyQueue[index].iArrival;
+                // pushProcess(&iReady, ReadyQueue, TerminatedArray[iTerminated - 1]);
                 // removeProcess(&iTerminated, iReady - 1, TerminatedArray);
-
+                break;
 
                 // pushProcess(&iTerminated, TerminatedArray, ReadyQueue[index]);
                 // removeProcess(&iReady, index, ReadyQueue);
@@ -190,7 +190,6 @@ SORT_BY_ARRIVAL);
             ReadyQueue[index].iResponse = ReadyQueue[index].iStart - ReadyQueue[index].iArrival;
             ReadyQueue[index].iWaiting = ReadyQueue[index].iResponse;
             ReadyQueue[index].iTaT = ReadyQueue[index].iFinish - ReadyQueue[index].iArrival;
-            continue;
             
         }
         // tìm process có burst time nhỏ nhất, bao gồm cả process đang chạy
