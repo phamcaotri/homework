@@ -133,13 +133,11 @@ void mergeProcesses(int n, PCB P[]) {
         count[pid]++;
     }
 
+    int j = 0;
     for (int i = 0; i < n; i++) {
         if (count[i] > 0) {
             mergedProcesses[i].iWaiting = mergedProcesses[i].iTaT - mergedProcesses[i].iBurst;
-            printf("PID: %d, Arrival: %d, Burst: %d, Start: %d, Finish: %d, WT: %d, RT: %d, TT: %d\n",
-                mergedProcesses[i].iPID, mergedProcesses[i].iArrival, mergedProcesses[i].iBurst,
-                mergedProcesses[i].iStart, mergedProcesses[i].iFinish, mergedProcesses[i].iWaiting,
-                mergedProcesses[i].iResponse, mergedProcesses[i].iTaT);
+            P[j++] = mergedProcesses[i];
         }
     }
 
