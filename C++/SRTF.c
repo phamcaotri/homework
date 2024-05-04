@@ -95,33 +95,6 @@ void quickSort(PCB P[], int low, int high, int iCriteria) {
         quickSort(P, pi + 1, high, iCriteria);
     }
 }
- 
-void calculateAWT(int n, PCB P[], int iNumberOfProcess) {
-    float *TaT = (float *)malloc(iNumberOfProcess * sizeof(float));
-    float *AWT = (float *)malloc(iNumberOfProcess * sizeof(float));
-    // TaT: the largest tat of process
-    // AWT: tat - burst time of process
-    for (int i = 0; i < n; i++) {
-        TaT[i] = P[i].iTaT;
-        AWT[i] = TaT[i] - P[i].iBurst;
-    }
-    float iSum = 0;
-    for (int i = 0; i < n; i++) {
-        iSum += AWT[i];
-    }
-    printf("Average Waiting Time: %.2f\n", iSum / n);
-    free(TaT);
-    free(AWT);
-
-}
- 
-void calculateATaT(int n, PCB P[], int iNumberOfProcess) {
-    // int iSum = 0;
-    // for (int i = 0; i < n; i++) {
-    //     iSum += P[i].iTaT;
-    // }
-    // printf("Average Turnaround Time: %.2f\n", (float)iSum / n);
-}
 
 
 int main() { 
@@ -225,11 +198,7 @@ SORT_BY_ARRIVAL);
     printf("\n===== FCFS Scheduling =====\n"); 
     exportGanttChart(iTerminated, TerminatedArray); 
  
-    quickSort(TerminatedArray, 0, iTerminated - 1, 
-SORT_BY_PID); 
- 
-    calculateAWT(iTerminated, TerminatedArray, iNumberOfProcess);
-    calculateATaT(iTerminated, TerminatedArray, iNumberOfProcess);
-     
+    quickSort(TerminatedArray, 0, iTerminated - 1, SORT_BY_PID); 
+
     return 0; 
 } 
