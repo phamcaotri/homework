@@ -112,7 +112,7 @@ void calculateAWT(int n, PCB P[], int iNumberOfProcess) {
     printf("Average Waiting Time: %.2f\n", iSum / n);
     free(TaT);
     free(AWT);
-    
+
 }
  
 void calculateATaT(int n, PCB P[], int iNumberOfProcess) {
@@ -163,6 +163,34 @@ SORT_BY_ARRIVAL);
         while (iRemain > 0 && Input[0].iArrival <= TerminatedArray[iTerminated - 1].iFinish) {
             pushProcess(&iReady, ReadyQueue, Input[0]);
             removeProcess(&iRemain, 0, Input);
+            // tìm process có burst time nhỏ nhất, bao gồm cả process đang chạy
+            int lowest_burst = ReadyQueue[0].iBurst;
+            index = 0;
+            for (int i = 1; i < iReady; i++) {
+                if (ReadyQueue[i].iBurst < lowest_burst) {
+                    lowest_burst = ReadyQueue[i].iBurst;
+                    index = i;
+                }
+            }
+            // nếu process mới đến có burst time nhỏ hơn process đang chạy thì thay thế và cập nhật lại thời gian
+            if (lowest_burst < TerminatedArray[iTerminated - 1].iBurst - ReadyQueue[index].iArrival) {
+                // tính thời gian burst còn lại của process đang chạy
+                TerminatedArray[iTerminated - 1].iBurst -= ReadyQueue[index].iArrival;
+                TerminatedArray[iTerminated - 1].iFinish = ReadyQueue[index].iStart + ReadyQueue[index].iArrival;
+                pushProcess(&iReady, ReadyQueue, TerminatedArray[iTerminated - 1]);
+                // removeProcess(&iTerminated, iReady - 1, TerminatedArray);
+
+
+                // pushProcess(&iTerminated, TerminatedArray, ReadyQueue[index]);
+                // removeProcess(&iReady, index, ReadyQueue);
+            }
+            // cập nhật thời gian cho process mới đó
+            ReadyQueue[index].iStart = TerminatedArray[iTerminated - 1].iFinish;
+            ReadyQueue[index].iFinish = ReadyQueue[index].iStart + ReadyQueue[index].iBurst;
+            ReadyQueue[index].iResponse = ReadyQueue[index].iStart - ReadyQueue[index].iArrival;
+            ReadyQueue[index].iWaiting = ReadyQueue[index].iResponse;
+            ReadyQueue[index].iTaT = ReadyQueue[index].iFinish - ReadyQueue[index].iArrival;
+            continue;
         }
         // tìm process có burst time nhỏ nhất, bao gồm cả process đang chạy
         int lowest_burst = ReadyQueue[0].iBurst;
