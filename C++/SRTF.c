@@ -161,10 +161,9 @@ SORT_BY_ARRIVAL);
                 }
             }
             // nếu process mới đến có burst time nhỏ hơn process đang chạy thì thay thế và cập nhật lại thời gian
-            TerminatedArray[iTerminated - 1].iBurst -= ReadyQueue[index].iArrival;
-            if (lowest_burst < TerminatedArray[iTerminated - 1].iBurst) {
+            if (lowest_burst < TerminatedArray[iTerminated - 1].iBurst - ReadyQueue[index].iArrival) {
                 // tính thời gian burst còn lại của process đang chạy
-                // TerminatedArray[iTerminated - 1].iBurst -= ReadyQueue[index].iStart;
+                TerminatedArray[iTerminated - 1].iBurst -= ReadyQueue[index].iArrival;
                 pushProcess(&iReady, ReadyQueue, TerminatedArray[iTerminated - 1]);
                 // removeProcess(&iTerminated, iReady - 1, TerminatedArray);
 
