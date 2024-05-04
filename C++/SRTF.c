@@ -55,7 +55,68 @@ void swapProcess(PCB *P, PCB *Q) {
     *P = *Q;
     *Q = temp;
 }
- 
+void merge(PCB P[], int low, int mid, int high, int iCriteria) {
+    int i, j, k;
+    int n1 = mid - low + 1;
+    int n2 = high - mid;
+
+    PCB L[n1], R[n2];
+
+    for (i = 0; i < n1; i++)
+        L[i] = P[low + i];
+    for (j = 0; j < n2; j++)
+        R[j] = P[mid + 1 + j];
+
+    i = 0;
+    j = 0;
+    k = low;
+
+    while (i < n1 && j < n2) {
+        int bSwap = 0;
+        if (iCriteria == SORT_BY_ARRIVAL) {
+            bSwap = L[i].iArrival <= R[j].iArrival;
+        } else if (iCriteria == SORT_BY_PID) {
+            bSwap = L[i].iPID <= R[j].iPID;
+        } else if (iCriteria == SORT_BY_BURST) {
+            bSwap = L[i].iBurst <= R[j].iBurst;
+        } else if (iCriteria == SORT_BY_START) {
+            bSwap = L[i].iStart <= R[j].iStart;
+        }
+
+        if (bSwap) {
+            P[k] = L[i];
+            i++;
+        } else {
+            P[k] = R[j];
+            j++;
+        }
+        k++;
+    }
+
+    while (i < n1) {
+        P[k] = L[i];
+        i++;
+        k++;
+    }
+
+    while (j < n2) {
+        P[k] = R[j];
+        j++;
+        k++;
+    }
+}
+
+void mergeSort(PCB P[], int low, int high, int iCriteria) {
+    if (low < high) {
+        int mid = low + (high - low) / 2;
+
+        mergeSort(P, low, mid, iCriteria);
+        mergeSort(P, mid + 1, high, iCriteria);
+
+        merge(P, low, mid, high, iCriteria);
+    }
+}
+
 int partition (PCB P[], int low, int high, int iCriteria) {
     int pivot = 0;
     if (iCriteria == SORT_BY_ARRIVAL) {
@@ -221,7 +282,7 @@ SORT_BY_ARRIVAL);
     printf("\n===== FCFS Scheduling =====\n"); 
     exportGanttChart(iTerminated, TerminatedArray); 
  
-    quickSort(TerminatedArray, 0, iTerminated - 1, 
+    mergeSort(TerminatedArray, 0, iTerminated - 1, 
 SORT_BY_PID); 
  
     calculateAWT(iTerminated, TerminatedArray); 
