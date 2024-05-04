@@ -96,15 +96,10 @@ void quickSort(PCB P[], int low, int high, int iCriteria) {
     }
 }
  
-void calculateAWT(int n, PCB P[]) {
-    int iSum = 0;
-    for (int i = 0; i < n; i++) {
-        iSum += P[i].iWaiting;
-    }
-    printf("Average Waiting Time: %.2f\n", (float)iSum / n);
-}
+void calculateAWT(int n, PCB P[], `int iNumberOfProcess) {
+
  
-void calculateATaT(int n, PCB P[]) {
+void calculateATaT(int n, PCB P[], int iNumberOfProcess) {
     int iSum = 0;
     for (int i = 0; i < n; i++) {
         iSum += P[i].iTaT;
@@ -189,8 +184,8 @@ SORT_BY_ARRIVAL);
     quickSort(TerminatedArray, 0, iTerminated - 1, 
 SORT_BY_PID); 
  
-    calculateAWT(iTerminated, TerminatedArray); 
-    calculateATaT(iTerminated, TerminatedArray); 
+    calculateAWT(iTerminated, TerminatedArray, iNumberOfProcess);
+    calculateATaT(iTerminated, TerminatedArray, iNumberOfProcess);
      
     return 0; 
 } 
