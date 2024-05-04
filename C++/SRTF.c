@@ -164,6 +164,7 @@ SORT_BY_ARRIVAL);
             if (lowest_burst < TerminatedArray[iTerminated - 1].iBurst - ReadyQueue[index].iArrival) {
                 // tính thời gian burst còn lại của process đang chạy
                 TerminatedArray[iTerminated - 1].iBurst -= ReadyQueue[index].iArrival;
+                TerminatedArray[iTerminated - 1].iFinish = ReadyQueue[index].iStart + ReadyQueue[index].iArrival;
                 pushProcess(&iReady, ReadyQueue, TerminatedArray[iTerminated - 1]);
                 // removeProcess(&iTerminated, iReady - 1, TerminatedArray);
 
