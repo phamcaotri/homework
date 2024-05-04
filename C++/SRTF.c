@@ -114,6 +114,39 @@ void calculateAverageWTandTaT(int n, PCB P[]) {
     printf("Average Turnaround Time: %.2f\n", (float)iTotalTaT / n);
 }
 
+void mergeProcesses(int n, PCB P[]) {
+    PCB *mergedProcesses = (PCB *)calloc(n, sizeof(PCB));
+    int *count = (int *)calloc(n, sizeof(int));
+
+    for (int i = 0; i < n; i++) {
+        int pid = P[i].iPID - 1; // Adjust for 0-indexed array
+        if (count[pid] == 0) {
+            mergedProcesses[pid] = P[i];
+        } else {
+            mergedProcesses[pid].iArrival = min(mergedProcesses[pid].iArrival, P[i].iArrival);
+            mergedProcesses[pid].iBurst += P[i].iBurst;
+            mergedProcesses[pid].iStart = min(mergedProcesses[pid].iStart, P[i].iStart);
+            mergedProcesses[pid].iFinish = max(mergedProcesses[pid].iFinish, P[i].iFinish);
+            mergedProcesses[pid].iResponse = min(mergedProcesses[pid].iResponse, P[i].iResponse);
+            mergedProcesses[pid].iTaT = max(mergedProcesses[pid].iTaT, P[i].iTaT);
+        }
+        count[pid]++;
+    }
+
+    for (int i = 0; i < n; i++) {
+        if (count[i] > 0) {
+            mergedProcesses[i].iWaiting = mergedProcesses[i].iTaT - mergedProcesses[i].iBurst;
+            printf("PID: %d, Arrival: %d, Burst: %d, Start: %d, Finish: %d, WT: %d, RT: %d, TT: %d\n",
+                mergedProcesses[i].iPID, mergedProcesses[i].iArrival, mergedProcesses[i].iBurst,
+                mergedProcesses[i].iStart, mergedProcesses[i].iFinish, mergedProcesses[i].iWaiting,
+                mergedProcesses[i].iResponse, mergedProcesses[i].iTaT);
+        }
+    }
+
+    free(mergedProcesses);
+    free(count);
+}
+
 int main() { 
     PCB Input[10]; 
     PCB ReadyQueue[10]; 
@@ -219,6 +252,7 @@ SORT_BY_ARRIVAL);
     exportGanttChart(iTerminated, TerminatedArray); 
  
     quickSort(TerminatedArray, 0, iTerminated - 1, SORT_BY_PID); 
+    mergeProcesses(iTerminated, TerminatedArray);
     printProcess(iTerminated, TerminatedArray);
     calculateAverageWTandTaT(iTerminated, TerminatedArray);
     return 0; 
