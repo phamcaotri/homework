@@ -111,18 +111,20 @@ void quickSort(PCB P[], int low, int high, int iCriteria) {
 //     }
 //     printf("Average Turnaround Time: %.2f\n", (float)iSum / n);
 // }
- 
 void calculateAWT(int count, PCB array[]) {
     int totalWaitingTime = 0;
     int processCount = 0;
     int currentPid = -1;
+    int totalBurstTime = 0;
 
     for (int i = 0; i < count; i++) {
         if (array[i].iPID != currentPid) {
             currentPid = array[i].iPID;
             processCount++;
+            totalBurstTime = 0;
         }
-        totalWaitingTime += array[i].iWaiting;
+        totalBurstTime += array[i].iBurst;
+        totalWaitingTime += array[i].iTaT - totalBurstTime;
     }
 
     float averageWaitingTime = (float)totalWaitingTime / processCount;
@@ -139,7 +141,7 @@ void calculateATaT(int count, PCB array[]) {
             currentPid = array[i].iPID;
             processCount++;
         }
-        totalTurnaroundTime += array[i].iTaT;
+        totalTurnaroundTime = array[i].iTaT;
     }
 
     float averageTurnaroundTime = (float)totalTurnaroundTime / processCount;
