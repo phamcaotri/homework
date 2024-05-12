@@ -233,3 +233,56 @@ int main() {
     calculateAverageWTandTaT(iTerminated, TerminatedArray, iNumberOfProcess);
     return 0; 
 } 
+
+
+int main() { 
+    PCB Input[10]; 
+    PCB ReadyQueue[10]; 
+    PCB TerminatedArray[10]; 
+
+    int iNumberOfProcess; 
+    printf("Please input number of Process: "); 
+    scanf("%d", &iNumberOfProcess); 
+
+    int timeQuantum;
+    printf("Please input the time quantum: ");
+    scanf("%d", &timeQuantum);
+
+    int iRemain = iNumberOfProcess, iReady = 0, iTerminated = 0; 
+
+    inputProcess(iNumberOfProcess, Input); 
+    quickSort(Input, 0, iNumberOfProcess - 1, SORT_BY_ARRIVAL); 
+
+    int currentTime = 0;
+    while (iTerminated < iNumberOfProcess) {
+        while (iRemain > 0 && Input[0].iArrival <= currentTime) {
+            pushProcess(&iReady, ReadyQueue, Input[0]);
+            removeProcess(&iRemain, 0, Input);
+        }
+
+        if (iReady > 0) {
+            if (ReadyQueue[0].iBurst > timeQuantum) {
+                ReadyQueue[0].iBurst -= timeQuantum;
+                currentTime += timeQuantum;
+                pushProcess(&iReady, ReadyQueue, ReadyQueue[0]);
+                removeProcess(&iReady, 0, ReadyQueue);
+            } else {
+                currentTime += ReadyQueue[0].iBurst;
+                ReadyQueue[0].iFinish = currentTime;
+                pushProcess(&iTerminated, TerminatedArray, ReadyQueue[0]);
+                removeProcess(&iReady, 0, ReadyQueue);
+            }
+        } else {
+            currentTime++;
+        }
+    }
+
+    printf("\n===== Round Robin Scheduling =====\n"); 
+    exportGanttChart(iTerminated, TerminatedArray); 
+
+    quickSort(TerminatedArray, 0, iTerminated - 1, SORT_BY_PID); 
+    mergeProcesses(iTerminated, TerminatedArray);
+    printProcess(iTerminated, TerminatedArray);
+    calculateAverageWTandTaT(iTerminated, TerminatedArray, iNumberOfProcess);
+    return 0; 
+} 
