@@ -166,11 +166,18 @@ int main() {
     inputProcess(iNumberOfProcess, Input); 
     quickSort(Input, 0, iNumberOfProcess - 1, SORT_BY_ARRIVAL); 
 
-    int index = 0;
+    int index = 0; // lưu vị trí của tiến trình có thời gian chạy ngắn nhất
+    // ngừng khi đã thực thi hết tất cả các process và trong ready queue không còn process nào
+    // điều kiện ready queue để tránh 1 process thực thi nhiều lần
+    // khiến điều kiện trước đó không còn đúng
     while (iTerminated < iNumberOfProcess || iReady > 0) {
+        // nếu trong queue có process thì thực thi process đó
         if (iReady > 0) {
             pushProcess(&iTerminated, TerminatedArray, ReadyQueue[index]);
             removeProcess(&iReady, index, ReadyQueue);
+        // ngược lại thì thêm process tiếp theo vào queue,
+        // điều này giúp tránh bug trường hợp các process có thời gian
+        // cách xa nhau
         } else {
             pushProcess(&iReady, ReadyQueue, Input[0]);
             removeProcess(&iRemain, 0, Input);
@@ -181,11 +188,14 @@ int main() {
             ReadyQueue[0].iTaT = ReadyQueue[0].iFinish - ReadyQueue[0].iArrival; 
             continue;
         }
-
+        // kiểm tra xem có process mới đến không
+        // dùng while để tránh trường hợp có nhiều process mới đến cùng 1 lúc
         while (iRemain > 0 && Input[0].iArrival <= TerminatedArray[iTerminated - 1].iFinish) {
+            // thêm process mới đó vào queue
             pushProcess(&iReady, ReadyQueue, Input[0]);
             removeProcess(&iRemain, 0, Input);
 
+            // tìm process có remain time nhỏ nhất
             int lowest_burst = ReadyQueue[0].iBurst;
             index = 0;
             for (int i = 1; i < iReady; i++) {
@@ -194,17 +204,24 @@ int main() {
                     index = i;
                 }
             }
-
+            // nếu process đó có remain time nhỏ hơn remain time của process đang chạy
+            // thì thực thi process đó và cập nhật thời gian cho process bị ngắt
             if (lowest_burst < TerminatedArray[iTerminated - 1].iBurst - ReadyQueue[index].iArrival) {
                 TerminatedArray[iTerminated - 1].iBurst -= ReadyQueue[index].iArrival;
                 TerminatedArray[iTerminated - 1].iFinish = ReadyQueue[index].iStart + ReadyQueue[index].iArrival;
                 pushProcess(&iReady, ReadyQueue, TerminatedArray[iTerminated - 1]);
+                // gọi break khỏi vòng lặp nếu có process mới thay thế
+                // để tránh update thời gian dòng dưới sai cho process đó
                 break;
             }
-
+            // nếu không có process nào có remain time nhỏ hơn thì cập nhật thời gian cho process tiếp theo
+            // như thể SJF
             updateProcessTimes(&ReadyQueue[index], TerminatedArray[iTerminated - 1].iFinish);
         }
-
+        // chạy lại tìm process có remain time nhỏ nhất
+        // cho trường hợp có process mới đến và thay thế process đang chạy
+        // để tìm và cập nhật thời gian cho process kế tiếp
+        // (vì cần phải cập nhật thời gian trước khi process đó chạy)
         int lowest_burst = ReadyQueue[0].iBurst;
         index = 0;
         for (int i = 1; i < iReady; i++) {
@@ -221,6 +238,7 @@ int main() {
         }
 
         updateProcessTimes(&ReadyQueue[index], TerminatedArray[iTerminated - 1].iFinish);
+
         TerminatedArray[iTerminated - 1].iBurst = ReadyQueue[index].iStart - TerminatedArray[iTerminated - 1].iStart;
     }
 
