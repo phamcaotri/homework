@@ -221,7 +221,6 @@ int main() {
         // chạy lại tìm process có remain time nhỏ nhất
         // cho trường hợp có process mới đến và thay thế process đang chạy
         // để tìm và cập nhật thời gian cho process kế tiếp
-        // (vì cần phải cập nhật thời gian trước khi process đó chạy)
         int lowest_burst = ReadyQueue[0].iBurst;
         index = 0;
         for (int i = 1; i < iReady; i++) {
