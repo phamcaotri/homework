@@ -211,16 +211,16 @@ int main() {
                 TerminatedArray[iTerminated - 1].iFinish = ReadyQueue[index].iStart + ReadyQueue[index].iArrival;
                 pushProcess(&iReady, ReadyQueue, TerminatedArray[iTerminated - 1]);
                 // gọi break khỏi vòng lặp nếu có process mới thay thế
-                // để tránh update thời gian dòng dưới sai cho process đó
+                // để tránh update thời gian dòng dưới sai cho process đó (cập nhật 2 lần)
                 break;
             }
             // nếu không có process nào có remain time nhỏ hơn thì cập nhật thời gian cho process tiếp theo
             // như thể SJF
             updateProcessTimes(&ReadyQueue[index], TerminatedArray[iTerminated - 1].iFinish);
         }
-        // chạy lại tìm process có remain time nhỏ nhất
-        // cho trường hợp có process mới đến và thay thế process đang chạy
-        // để tìm và cập nhật thời gian cho process kế tiếp
+        // TH1: nếu process bị ngắt ở trên thì tìm và cập nhật thời gian cho process tiếp theo
+        // TH2: nếu không có process nào bị ngắt thì tìm process có remain time nhỏ nhất
+        // và xem nó có nhỏ hơn remain time của process đang chạy không
         int lowest_burst = ReadyQueue[0].iBurst;
         index = 0;
         for (int i = 1; i < iReady; i++) {
@@ -237,7 +237,7 @@ int main() {
         }
 
         updateProcessTimes(&ReadyQueue[index], TerminatedArray[iTerminated - 1].iFinish);
-
+        // cập nhật lại brust cho process bị ngắt để tổng thời gian chạy = burst time
         TerminatedArray[iTerminated - 1].iBurst = ReadyQueue[index].iStart - TerminatedArray[iTerminated - 1].iStart;
     }
 
