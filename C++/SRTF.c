@@ -244,8 +244,6 @@ int main() {
             int total_burst = TerminatedArray[iTerminated - 1].iBurst;
             int brusted = ReadyQueue[index].iArrival - TerminatedArray[iTerminated - 1].iStart;
             int current_burst = total_burst - brusted;
-            printProcess(iReady, ReadyQueue);
-            printProcess(iTerminated, TerminatedArray);
             if (lowest_burst < current_burst) {
                 updateProcessTimes(&ReadyQueue[index], ReadyQueue[index].iArrival);
                 PCB temp = TerminatedArray[iTerminated - 1];
