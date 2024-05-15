@@ -133,11 +133,11 @@ void calculateAverageWTandTaT(int n, PCB P[], int iTotalProcess) {
     printf("Average Turnaround Time: %.2f\n", fTotalTaT / iTotalProcess);
 }
 
-void mergeProcesses(int n, PCB P[]) {
-    PCB *mergedProcesses = (PCB *)calloc(n, sizeof(PCB));
-    int *count = (int *)calloc(n, sizeof(int));
+void mergeProcesses(int* n, PCB P[]) {
+    PCB *mergedProcesses = (PCB *)calloc(*n, sizeof(PCB));
+    int *count = (int *)calloc(*n, sizeof(int));
 
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < *n; i++) {
         int pid = P[i].iPID - 1; // Adjust for 0-indexed array
         if (count[pid] == 0) {
             mergedProcesses[pid] = P[i];
@@ -153,13 +153,13 @@ void mergeProcesses(int n, PCB P[]) {
     }
 
     int j = 0;
-    for (int i = 0; i < n; i++) {
+    for (int i = 0; i < *n; i++) {
         if (count[i] > 0) {
             mergedProcesses[i].iWaiting = mergedProcesses[i].iTaT - mergedProcesses[i].iBurst;
             P[j++] = mergedProcesses[i];
         }
     }
-
+    *n = j;
     free(mergedProcesses);
     free(count);
 }
@@ -252,12 +252,12 @@ int main() {
             }
         }
     }
-
+    printProcess(iTerminated, TerminatedArray);
     printf("\n===== FCFS Scheduling =====\n"); 
     exportGanttChart(iTerminated, TerminatedArray); 
  
     mergeSort(TerminatedArray, 0, iTerminated - 1, SORT_BY_PID); 
-    mergeProcesses(iTerminated, TerminatedArray);
+    mergeProcesses(&iTerminated, TerminatedArray);
     printProcess(iTerminated, TerminatedArray);
     calculateAverageWTandTaT(iTerminated, TerminatedArray, iNumberOfProcess);
     return 0; 
