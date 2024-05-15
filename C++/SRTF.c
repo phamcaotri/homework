@@ -311,7 +311,7 @@ int main() {
                 temp.iBurst = quantum;
                 pushProcess(&iReady, ReadyQueue, temp);
                 TerminatedArray[iTerminated - 1].iBurst -= quantum;
-                TerminatedArray[iTerminated - 1].iFinish = ReadyQueue[0].iArrival;
+                TerminatedArray[iTerminated - 1].iFinish = TerminatedArray[iTerminated - 1].iStart + quantum;
                 TerminatedArray[iTerminated - 1].iTaT = TerminatedArray[iTerminated - 1].iFinish - TerminatedArray[iTerminated - 1].iArrival;
             }
         }
