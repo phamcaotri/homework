@@ -243,9 +243,12 @@ int main() {
             // nếu process đó có remain time nhỏ hơn remain time của process đang chạy
             // thì thực thi process đó và cập nhật thời gian cho process bị ngắt
             if (lowest_burst < TerminatedArray[iTerminated - 1].iBurst - (ReadyQueue[index].iArrival - TerminatedArray[iTerminated - 1].iStart)) {
-                TerminatedArray[iTerminated - 1].iBurst -= ReadyQueue[index].iArrival - TerminatedArray[iTerminated - 1].iStart;
-                TerminatedArray[iTerminated - 1].iFinish = ReadyQueue[index].iStart + ReadyQueue[index].iArrival;
-                pushProcess(&iReady, ReadyQueue, TerminatedArray[iTerminated - 1]);
+                PCB temp = TerminatedArray[iTerminated - 1];
+                temp.iArrival = ReadyQueue[index].iArrival;
+                temp.iBurst -= ReadyQueue[index].iArrival - TerminatedArray[iTerminated - 1].iStart;
+                TerminatedArray[iTerminated - 1].iBurst = ReadyQueue[index].iArrival - TerminatedArray[iTerminated - 1].iStart;
+                TerminatedArray[iTerminated - 1].iFinish = ReadyQueue[index].iStart;
+                pushProcess(&iReady, ReadyQueue, temp);
                 printProcess(iReady, ReadyQueue);
                 printProcess(iTerminated, TerminatedArray);
                 // gọi break khỏi vòng lặp nếu có process mới thay thế
@@ -269,16 +272,19 @@ int main() {
         }
 
         if (lowest_burst < TerminatedArray[iTerminated - 1].iBurst - (ReadyQueue[index].iArrival- TerminatedArray[iTerminated - 1].iStart)) {
-            TerminatedArray[iTerminated - 1].iBurst -= ReadyQueue[index].iArrival - TerminatedArray[iTerminated - 1].iStart;
-            TerminatedArray[iTerminated - 1].iFinish = ReadyQueue[index].iStart + ReadyQueue[index].iArrival;
-            pushProcess(&iReady, ReadyQueue, TerminatedArray[iTerminated - 1]);
+                PCB temp = TerminatedArray[iTerminated - 1];
+                temp.iArrival = ReadyQueue[index].iArrival;
+                temp.iBurst -= ReadyQueue[index].iArrival - TerminatedArray[iTerminated - 1].iStart;
+                TerminatedArray[iTerminated - 1].iBurst = ReadyQueue[index].iArrival - TerminatedArray[iTerminated - 1].iStart;
+                TerminatedArray[iTerminated - 1].iFinish = ReadyQueue[index].iStart;
+                pushProcess(&iReady, ReadyQueue, temp);
                 printProcess(iReady, ReadyQueue);
                 printProcess(iTerminated, TerminatedArray);
         }
 
         updateProcessTimes(&ReadyQueue[index], TerminatedArray[iTerminated - 1].iFinish);
         // cập nhật lại brust cho process bị ngắt để tổng thời gian chạy = burst time
-        TerminatedArray[iTerminated - 1].iBurst = ReadyQueue[index].iStart - TerminatedArray[iTerminated - 1].iStart;
+        // TerminatedArray[iTerminated - 1].iBurst = ReadyQueue[index].iStart - TerminatedArray[iTerminated - 1].iStart;
     }
 
     printf("\n===== FCFS Scheduling =====\n"); 
