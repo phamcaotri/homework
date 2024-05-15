@@ -302,18 +302,19 @@ int main() {
             continue;
         }
 
-        if (iRemain > 0 && Input[0].iArrival <= TerminatedArray[iTerminated - 1].iFinish) {
+        while (iRemain > 0 && Input[0].iArrival <= TerminatedArray[iTerminated - 1].iFinish) {
             pushProcess(&iReady, ReadyQueue, Input[0]);
             removeProcess(&iRemain, 0, Input);
-            if (ReadyQueue[0].iBurst > quantum) {
-                PCB temp = TerminatedArray[iTerminated - 1];
-                temp.iArrival = TerminatedArray[iTerminated - 1].iStart + quantum;
-                temp.iBurst = quantum;
-                pushProcess(&iReady, ReadyQueue, temp);
-                TerminatedArray[iTerminated - 1].iBurst -= quantum;
-                TerminatedArray[iTerminated - 1].iFinish = TerminatedArray[iTerminated - 1].iStart + quantum;
-                TerminatedArray[iTerminated - 1].iTaT = TerminatedArray[iTerminated - 1].iFinish - TerminatedArray[iTerminated - 1].iArrival;
-            }
+        }
+        if (ReadyQueue[0].iBurst > quantum) {
+            PCB temp = TerminatedArray[iTerminated - 1];
+            temp.iArrival = TerminatedArray[iTerminated - 1].iStart + quantum;
+            temp.iBurst = quantum;
+            pushProcess(&iReady, ReadyQueue, temp);
+            TerminatedArray[iTerminated - 1].iBurst -= quantum;
+            TerminatedArray[iTerminated - 1].iFinish = TerminatedArray[iTerminated - 1].iStart + quantum;
+            TerminatedArray[iTerminated - 1].iTaT = TerminatedArray[iTerminated - 1].iFinish - TerminatedArray[iTerminated - 1].iArrival;
+            
         }
     }
 
