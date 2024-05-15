@@ -189,81 +189,158 @@ void inputRandomProcess(int n, PCB P[]) {
 }
 
 
-// int main() { 
-//     PCB Input[10]; 
-//     PCB ReadyQueue[10]; 
-//     PCB TerminatedArray[10]; 
+int main() { 
+    PCB Input[10]; 
+    PCB ReadyQueue[10]; 
+    PCB TerminatedArray[10]; 
 
-//     int iNumberOfProcess; 
-//     printf("Please input number of Process: "); 
-//     scanf("%d", &iNumberOfProcess); 
-//     int iRemain = iNumberOfProcess, iReady = 0, iTerminated = 0; 
-//     // inputRandomProcess(iNumberOfProcess, Input);
-//     inputProcess(iNumberOfProcess, Input); 
-//     mergeSort(Input, 0, iNumberOfProcess - 1, SORT_BY_ARRIVAL); 
+    int iNumberOfProcess; 
+    printf("Please input number of Process: "); 
+    scanf("%d", &iNumberOfProcess); 
+    int iRemain = iNumberOfProcess, iReady = 0, iTerminated = 0; 
+    // inputRandomProcess(iNumberOfProcess, Input);
+    inputProcess(iNumberOfProcess, Input); 
+    mergeSort(Input, 0, iNumberOfProcess - 1, SORT_BY_ARRIVAL); 
 
-//     int space = 0; // kiểm tra xem có khoảng trống giữa các process không
-//     while (iTerminated < iNumberOfProcess || iReady > 0) {
+    int space = 0; // kiểm tra xem có khoảng trống giữa các process không
+    while (iTerminated < iNumberOfProcess || iReady > 0) {
     
-//         if (iReady > 0) {
-//             // cập nhật thời gian khác nhau nếu có khoảng trống:
-//             // nếu có khoảng trống thì dựa trên thời gian đến của process hiện tại
-//             // nếu không thì dựa trên thời gian kết thúc của process trước đó
-//             if (space == 1) {
-//                 updateProcessTimes(&ReadyQueue[0], ReadyQueue[0].iArrival);
-//                 space = 0;
-//             } else {
-//                 updateProcessTimes(&ReadyQueue[0], TerminatedArray[iTerminated - 1].iFinish);
-//             }
-//             pushProcess(&iTerminated, TerminatedArray, ReadyQueue[0]);
-//             removeProcess(&iReady, 0, ReadyQueue);
-//         } else {
-//             // nếu không có process nào trong queue thì thêm process tiếp theo vào queue
-//             // và báo hiệu có khoảng trống
-//             pushProcess(&iReady, ReadyQueue, Input[0]);
-//             removeProcess(&iRemain, 0, Input);
-//             space = 1;
-//             continue;
-//         }
-//         // kiểm tra xem có process nào mới đến không
-//         while (iRemain > 0 && Input[0].iArrival <= TerminatedArray[iTerminated - 1].iFinish) {
-//             // nếu có thì thêm vào queue
-//             pushProcess(&iReady, ReadyQueue, Input[0]);
-//             removeProcess(&iRemain, 0, Input);
-//             // sắp xếp queue theo burst time
-//             mergeSort(ReadyQueue, 0, iReady - 1, SORT_BY_BURST);
-//             int lowest_burst = ReadyQueue[0].iBurst;
+        if (iReady > 0) {
+            // cập nhật thời gian khác nhau nếu có khoảng trống:
+            // nếu có khoảng trống thì dựa trên thời gian đến của process hiện tại
+            // nếu không thì dựa trên thời gian kết thúc của process trước đó
+            if (space == 1) {
+                updateProcessTimes(&ReadyQueue[0], ReadyQueue[0].iArrival);
+                space = 0;
+            } else {
+                updateProcessTimes(&ReadyQueue[0], TerminatedArray[iTerminated - 1].iFinish);
+            }
+            pushProcess(&iTerminated, TerminatedArray, ReadyQueue[0]);
+            removeProcess(&iReady, 0, ReadyQueue);
+        } else {
+            // nếu không có process nào trong queue thì thêm process tiếp theo vào queue
+            // và báo hiệu có khoảng trống
+            pushProcess(&iReady, ReadyQueue, Input[0]);
+            removeProcess(&iRemain, 0, Input);
+            space = 1;
+            continue;
+        }
+        // kiểm tra xem có process nào mới đến không
+        while (iRemain > 0 && Input[0].iArrival <= TerminatedArray[iTerminated - 1].iFinish) {
+            // nếu có thì thêm vào queue
+            pushProcess(&iReady, ReadyQueue, Input[0]);
+            removeProcess(&iRemain, 0, Input);
+            // sắp xếp queue theo burst time
+            mergeSort(ReadyQueue, 0, iReady - 1, SORT_BY_BURST);
+            int lowest_burst = ReadyQueue[0].iBurst;
 
-//             int total_burst = TerminatedArray[iTerminated - 1].iBurst;
-//             int brusted = ReadyQueue[0].iArrival - TerminatedArray[iTerminated - 1].iStart;
-//             int current_burst = total_burst - brusted;
-//             // nếu burst time của process mới đến nhỏ hơn burst time của process đang chạy
-//             if (lowest_burst < current_burst) {
-//                 // thì cập nhật thời gian cho process mới đó để tính toán
-//                 updateProcessTimes(&ReadyQueue[0], ReadyQueue[0].iArrival);
-//                 // cập nhật thời gian cho process đang chạy và trả lại queue
-//                 PCB temp = TerminatedArray[iTerminated - 1];
-//                 temp.iArrival = ReadyQueue[0].iArrival;
-//                 temp.iBurst = current_burst;
-//                 pushProcess(&iReady, ReadyQueue, temp);
-//                 // cập nhật lại burst time cho process đang chạy để tính toán
-//                 TerminatedArray[iTerminated - 1].iBurst = brusted;
-//                 TerminatedArray[iTerminated - 1].iFinish = ReadyQueue[0].iArrival;
-//                 TerminatedArray[iTerminated - 1].iTaT = TerminatedArray[iTerminated - 1].iFinish - TerminatedArray[iTerminated - 1].iArrival;
+            int total_burst = TerminatedArray[iTerminated - 1].iBurst;
+            int brusted = ReadyQueue[0].iArrival - TerminatedArray[iTerminated - 1].iStart;
+            int current_burst = total_burst - brusted;
+            // nếu burst time của process mới đến nhỏ hơn burst time của process đang chạy
+            if (lowest_burst < current_burst) {
+                // thì cập nhật thời gian cho process mới đó để tính toán
+                updateProcessTimes(&ReadyQueue[0], ReadyQueue[0].iArrival);
+                // cập nhật thời gian cho process đang chạy và trả lại queue
+                PCB temp = TerminatedArray[iTerminated - 1];
+                temp.iArrival = ReadyQueue[0].iArrival;
+                temp.iBurst = current_burst;
+                pushProcess(&iReady, ReadyQueue, temp);
+                // cập nhật lại burst time cho process đang chạy để tính toán
+                TerminatedArray[iTerminated - 1].iBurst = brusted;
+                TerminatedArray[iTerminated - 1].iFinish = ReadyQueue[0].iArrival;
+                TerminatedArray[iTerminated - 1].iTaT = TerminatedArray[iTerminated - 1].iFinish - TerminatedArray[iTerminated - 1].iArrival;
 
-//             }
-//         }
-//     }
-//     printProcess(iTerminated, TerminatedArray);
-//     printf("\n===== FCFS Scheduling =====\n"); 
-//     exportGanttChart(iTerminated, TerminatedArray); 
+            }
+        }
+    }
+    printProcess(iTerminated, TerminatedArray);
+    printf("\n===== FCFS Scheduling =====\n"); 
+    exportGanttChart(iTerminated, TerminatedArray); 
  
-//     mergeSort(TerminatedArray, 0, iTerminated - 1, SORT_BY_PID); 
-//     mergeProcesses(&iTerminated, TerminatedArray);
-//     printProcess(iTerminated, TerminatedArray);
-//     calculateAverageWTandTaT(iTerminated, TerminatedArray, iNumberOfProcess);
-//     return 0; 
-// } 
+    mergeSort(TerminatedArray, 0, iTerminated - 1, SORT_BY_PID); 
+    mergeProcesses(&iTerminated, TerminatedArray);
+    printProcess(iTerminated, TerminatedArray);
+    calculateAverageWTandTaT(iTerminated, TerminatedArray, iNumberOfProcess);
+    return 0; 
+} 
+
+int main() { 
+    PCB Input[10]; 
+    PCB ReadyQueue[10]; 
+    PCB TerminatedArray[10]; 
+
+    int iNumberOfProcess; 
+    printf("Please input number of Process: "); 
+    scanf("%d", &iNumberOfProcess); 
+    int iRemain = iNumberOfProcess, iReady = 0, iTerminated = 0; 
+    // inputRandomProcess(iNumberOfProcess, Input);
+    inputProcess(iNumberOfProcess, Input); 
+    mergeSort(Input, 0, iNumberOfProcess - 1, SORT_BY_ARRIVAL); 
+
+    int space = 0; // kiểm tra xem có khoảng trống giữa các process không
+    while (iTerminated < iNumberOfProcess || iReady > 0) {
+    
+        if (iReady > 0) {
+            // cập nhật thời gian khác nhau nếu có khoảng trống:
+            // nếu có khoảng trống thì dựa trên thời gian đến của process hiện tại
+            // nếu không thì dựa trên thời gian kết thúc của process trước đó
+            if (space == 1) {
+                updateProcessTimes(&ReadyQueue[0], ReadyQueue[0].iArrival);
+                space = 0;
+            } else {
+                updateProcessTimes(&ReadyQueue[0], TerminatedArray[iTerminated - 1].iFinish);
+            }
+            pushProcess(&iTerminated, TerminatedArray, ReadyQueue[0]);
+            removeProcess(&iReady, 0, ReadyQueue);
+        } else {
+            // nếu không có process nào trong queue thì thêm process tiếp theo vào queue
+            // và báo hiệu có khoảng trống
+            pushProcess(&iReady, ReadyQueue, Input[0]);
+            removeProcess(&iRemain, 0, Input);
+            space = 1;
+            continue;
+        }
+        // kiểm tra xem có process nào mới đến không
+        while (iRemain > 0 && Input[0].iArrival <= TerminatedArray[iTerminated - 1].iFinish) {
+            // nếu có thì thêm vào queue
+            pushProcess(&iReady, ReadyQueue, Input[0]);
+            removeProcess(&iRemain, 0, Input);
+            // sắp xếp queue theo burst time
+            mergeSort(ReadyQueue, 0, iReady - 1, SORT_BY_BURST);
+            int lowest_burst = ReadyQueue[0].iBurst;
+
+            int total_burst = TerminatedArray[iTerminated - 1].iBurst;
+            int brusted = ReadyQueue[0].iArrival - TerminatedArray[iTerminated - 1].iStart;
+            int current_burst = total_burst - brusted;
+            // nếu burst time của process mới đến nhỏ hơn burst time của process đang chạy
+            if (lowest_burst < current_burst) {
+                // thì cập nhật thời gian cho process mới đó để tính toán
+                updateProcessTimes(&ReadyQueue[0], ReadyQueue[0].iArrival);
+                // cập nhật thời gian cho process đang chạy và trả lại queue
+                PCB temp = TerminatedArray[iTerminated - 1];
+                temp.iArrival = ReadyQueue[0].iArrival;
+                temp.iBurst = current_burst;
+                pushProcess(&iReady, ReadyQueue, temp);
+                // cập nhật lại burst time cho process đang chạy để tính toán
+                TerminatedArray[iTerminated - 1].iBurst = brusted;
+                TerminatedArray[iTerminated - 1].iFinish = ReadyQueue[0].iArrival;
+                TerminatedArray[iTerminated - 1].iTaT = TerminatedArray[iTerminated - 1].iFinish - TerminatedArray[iTerminated - 1].iArrival;
+
+            }
+        }
+    }
+    printProcess(iTerminated, TerminatedArray);
+    printf("\n===== FCFS Scheduling =====\n"); 
+    exportGanttChart(iTerminated, TerminatedArray); 
+ 
+    mergeSort(TerminatedArray, 0, iTerminated - 1, SORT_BY_PID); 
+    mergeProcesses(&iTerminated, TerminatedArray);
+    printProcess(iTerminated, TerminatedArray);
+    calculateAverageWTandTaT(iTerminated, TerminatedArray, iNumberOfProcess);
+    return 0; 
+} 
+
 
 int main() { 
     PCB Input[10]; 
