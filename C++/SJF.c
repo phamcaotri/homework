@@ -156,8 +156,9 @@ int main() {
     printf("Please input number of Process: "); 
     scanf("%d", &iNumberOfProcess); 
     int iRemain = iNumberOfProcess, iReady = 0, iTerminated = 
-0; inputRandomProcess(iNumberOfProcess, Input);
-    // inputProcess(iNumberOfProcess, Input); 
+0; 
+    // inputRandomProcess(iNumberOfProcess, Input);
+    inputProcess(iNumberOfProcess, Input); 
     mergeSort(Input, 0, iNumberOfProcess - 1, 
 SORT_BY_ARRIVAL); 
 
