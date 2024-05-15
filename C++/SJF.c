@@ -1,5 +1,6 @@
 #include <stdio.h> 
 #include <stdlib.h> 
+#include <time.h>
 #define SORT_BY_ARRIVAL 0 
 #define SORT_BY_PID 1 
 #define SORT_BY_BURST 2 
@@ -129,7 +130,23 @@ void calculateATaT(int n, PCB P[]) {
     }
     printf("Average Turnaround Time: %.2f\n", (float)iSum / n);
 }
- 
+
+void inputRandomProcess(int n, PCB P[]) {
+    srand(time(0));
+    for (int i = 0; i < n; i++) {
+        P[i].iPID = i + 1;
+        P[i].iArrival = rand() % 21;
+        P[i].iBurst = rand() % 11 + 2;
+        P[i].iStart = 0;
+        P[i].iFinish = 0;
+        P[i].iResponse = 0;
+        P[i].iWaiting = 0;
+        P[i].iTaT = 0;
+    }
+    printf("\nRandom Process:\n");
+    printProcess(n, P);
+}
+
 int main() { 
     PCB Input[10]; 
     PCB ReadyQueue[10]; 
@@ -139,9 +156,8 @@ int main() {
     printf("Please input number of Process: "); 
     scanf("%d", &iNumberOfProcess); 
     int iRemain = iNumberOfProcess, iReady = 0, iTerminated = 
-0; 
- 
-    inputProcess(iNumberOfProcess, Input); 
+0; inputRandomProcess(iNumberOfProcess, Input);
+    // inputProcess(iNumberOfProcess, Input); 
     mergeSort(Input, 0, iNumberOfProcess - 1, 
 SORT_BY_ARRIVAL); 
 
