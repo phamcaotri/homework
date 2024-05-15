@@ -189,9 +189,9 @@ void inputRandomProcess(int n, PCB P[]) {
 }
 
 int main() { 
-    PCB Input[10]; 
-    PCB ReadyQueue[10]; 
-    PCB TerminatedArray[10]; 
+    PCB Input[100]; 
+    PCB ReadyQueue[100]; 
+    PCB TerminatedArray[100]; 
 
     int iNumberOfProcess; 
     printf("Please input number of Process: "); 
