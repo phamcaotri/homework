@@ -202,7 +202,6 @@ int main() {
     inputProcess(iNumberOfProcess, Input); 
     mergeSort(Input, 0, iNumberOfProcess - 1, SORT_BY_ARRIVAL); 
 
-    int index = 0; // lưu vị trí của tiến trình có thời gian chạy ngắn nhất
     int space = 0; // kiểm tra xem có khoảng trống giữa các process không
     while (iTerminated < iNumberOfProcess || iReady > 0) {
     
@@ -211,13 +210,13 @@ int main() {
             // nếu có khoảng trống thì dựa trên thời gian đến của process hiện tại
             // nếu không thì dựa trên thời gian kết thúc của process trước đó
             if (space == 1) {
-                updateProcessTimes(&ReadyQueue[index], ReadyQueue[index].iArrival);
+                updateProcessTimes(&ReadyQueue[0], ReadyQueue[0].iArrival);
                 space = 0;
             } else {
-                updateProcessTimes(&ReadyQueue[index], TerminatedArray[iTerminated - 1].iFinish);
+                updateProcessTimes(&ReadyQueue[0], TerminatedArray[iTerminated - 1].iFinish);
             }
-            pushProcess(&iTerminated, TerminatedArray, ReadyQueue[index]);
-            removeProcess(&iReady, index, ReadyQueue);
+            pushProcess(&iTerminated, TerminatedArray, ReadyQueue[0]);
+            removeProcess(&iReady, 0, ReadyQueue);
         } else {
             // nếu không có process nào trong queue thì thêm process tiếp theo vào queue
             // và báo hiệu có khoảng trống
@@ -233,24 +232,23 @@ int main() {
             removeProcess(&iRemain, 0, Input);
             // sắp xếp queue theo burst time
             mergeSort(ReadyQueue, 0, iReady - 1, SORT_BY_BURST);
-            index = 0; // lấy process có burst time nhỏ nhất
-            int lowest_burst = ReadyQueue[index].iBurst;
+            int lowest_burst = ReadyQueue[0].iBurst;
 
             int total_burst = TerminatedArray[iTerminated - 1].iBurst;
-            int brusted = ReadyQueue[index].iArrival - TerminatedArray[iTerminated - 1].iStart;
+            int brusted = ReadyQueue[0].iArrival - TerminatedArray[iTerminated - 1].iStart;
             int current_burst = total_burst - brusted;
             // nếu burst time của process mới đến nhỏ hơn burst time của process đang chạy
             if (lowest_burst < current_burst) {
                 // thì cập nhật thời gian cho process mới đó để tính toán
-                updateProcessTimes(&ReadyQueue[index], ReadyQueue[index].iArrival);
+                updateProcessTimes(&ReadyQueue[0], ReadyQueue[0].iArrival);
                 // cập nhật thời gian cho process đang chạy và trả lại queue
                 PCB temp = TerminatedArray[iTerminated - 1];
-                temp.iArrival = ReadyQueue[index].iArrival;
+                temp.iArrival = ReadyQueue[0].iArrival;
                 temp.iBurst = current_burst;
                 pushProcess(&iReady, ReadyQueue, temp);
                 // cập nhật lại burst time cho process đang chạy để tính toán
                 TerminatedArray[iTerminated - 1].iBurst = brusted;
-                TerminatedArray[iTerminated - 1].iFinish = ReadyQueue[index].iArrival;
+                TerminatedArray[iTerminated - 1].iFinish = ReadyQueue[0].iArrival;
                 TerminatedArray[iTerminated - 1].iTaT = TerminatedArray[iTerminated - 1].iFinish - TerminatedArray[iTerminated - 1].iArrival;
 
             }
