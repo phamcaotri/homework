@@ -147,7 +147,7 @@ void mergeProcesses(int* n, PCB P[]) {
             mergedProcesses[pid].iStart = min(mergedProcesses[pid].iStart, P[i].iStart);
             mergedProcesses[pid].iFinish = max(mergedProcesses[pid].iFinish, P[i].iFinish);
             mergedProcesses[pid].iResponse = min(mergedProcesses[pid].iResponse, P[i].iResponse);
-            mergedProcesses[pid].iTaT = max(mergedProcesses[pid].iTaT, P[i].iTaT);
+            mergedProcesses[pid].iTaT += P[i].iTaT;
         }
         count[pid]++;
     }
@@ -247,9 +247,9 @@ int main() {
                 temp.iArrival = ReadyQueue[index].iArrival;
                 temp.iBurst = current_burst;
                 pushProcess(&iReady, ReadyQueue, temp);
-                updateProcessTimes(&TerminatedArray[iTerminated - 1], ReadyQueue[index].iArrival);
                 TerminatedArray[iTerminated - 1].iBurst = brusted;
                 TerminatedArray[iTerminated - 1].iFinish = ReadyQueue[index].iArrival;
+                TerminatedArray[iTerminated - 1].iTaT = TerminatedArray[iTerminated - 1].iFinish - TerminatedArray[iTerminated - 1].iArrival;
 
             }
         }
