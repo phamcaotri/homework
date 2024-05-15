@@ -247,8 +247,10 @@ int main() {
                 temp.iArrival = ReadyQueue[index].iArrival;
                 temp.iBurst = current_burst;
                 pushProcess(&iReady, ReadyQueue, temp);
+                updateProcessTimes(&TerminatedArray[iTerminated - 1], ReadyQueue[index].iArrival);
                 TerminatedArray[iTerminated - 1].iBurst = brusted;
                 TerminatedArray[iTerminated - 1].iFinish = ReadyQueue[index].iArrival;
+
             }
         }
     }
