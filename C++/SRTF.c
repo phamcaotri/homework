@@ -209,6 +209,8 @@ int main() {
     while (iTerminated < iNumberOfProcess || iReady > 0) {
         // nếu trong queue có process thì thực thi process đó
         if (iReady > 0) {
+            // cập nhật thời gian cho process đó
+            updateProcessTimes(&ReadyQueue[index], TerminatedArray[iTerminated - 1].iFinish);
             pushProcess(&iTerminated, TerminatedArray, ReadyQueue[index]);
             removeProcess(&iReady, index, ReadyQueue);
         // ngược lại thì thêm process tiếp theo vào queue,
@@ -248,7 +250,6 @@ int main() {
                 TerminatedArray[iTerminated - 1].iBurst = brusted;
                 TerminatedArray[iTerminated - 1].iFinish = ReadyQueue[index].iArrival;
             }
-            updateProcessTimes(&ReadyQueue[index], TerminatedArray[iTerminated - 1].iFinish);
         }
     }
 
