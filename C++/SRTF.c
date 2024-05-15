@@ -297,7 +297,6 @@ int main() {
                 pushProcess(&iReady, ReadyQueue, ReadyQueue[0]);
                 removeProcess(&iReady, 0, ReadyQueue);
             } else {
-                ReadyQueue[0].iFinish += ReadyQueue[0].iBurst;
                 pushProcess(&iTerminated, TerminatedArray, ReadyQueue[0]);
                 removeProcess(&iReady, 0, ReadyQueue);
             }
