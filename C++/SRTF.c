@@ -302,7 +302,7 @@ int main() {
             continue;
         }
 
-        while (iRemain > 0 && Input[0].iArrival <= TerminatedArray[iTerminated - 1].iFinish) {
+        if (iRemain > 0 && Input[0].iArrival <= TerminatedArray[iTerminated - 1].iFinish) {
             pushProcess(&iReady, ReadyQueue, Input[0]);
             removeProcess(&iRemain, 0, Input);
             if (ReadyQueue[0].iBurst > quantum) {
