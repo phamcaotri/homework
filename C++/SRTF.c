@@ -229,19 +229,16 @@ int main() {
             removeProcess(&iRemain, 0, Input);
 
             // tìm process có remain time nhỏ nhất
-            int lowest_burst = ReadyQueue[0].iBurst;
+            mergeSort(ReadyQueue, 0, iReady - 1, SORT_BY_BURST);
             index = 0;
-            for (int i = 1; i < iReady; i++) {
-                if (ReadyQueue[i].iBurst < lowest_burst) {
-                    lowest_burst = ReadyQueue[i].iBurst;
-                    index = i;
-                }
-            }
+            int lowest_burst = ReadyQueue[index].iBurst;
             // nếu process đó có remain time nhỏ hơn remain time của process đang chạy
             // thì thực thi process đó và cập nhật thời gian cho process bị ngắt
             int total_burst = TerminatedArray[iTerminated - 1].iBurst;
             int brusted = ReadyQueue[index].iArrival - TerminatedArray[iTerminated - 1].iStart;
             int current_burst = total_burst - brusted;
+            printProcess(iReady, ReadyQueue);
+            printProcess(iTerminated, TerminatedArray);
             if (lowest_burst < current_burst) {
                 updateProcessTimes(&ReadyQueue[index], ReadyQueue[index].iArrival);
                 PCB temp = TerminatedArray[iTerminated - 1];
