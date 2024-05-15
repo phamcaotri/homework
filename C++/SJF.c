@@ -171,7 +171,7 @@ SORT_BY_ARRIVAL);
 
     }
 
-    printf("\n===== FCFS Scheduling =====\n"); 
+    printf("\n===== SJF Scheduling =====\n"); 
     exportGanttChart(iTerminated, TerminatedArray); 
  
     quickSort(TerminatedArray, 0, iTerminated - 1, 
