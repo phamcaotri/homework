@@ -210,6 +210,7 @@ int main() {
         // nếu trong queue có process thì thực thi process đó
         if (iReady > 0) {
             // cập nhật thời gian cho process đó
+            // updateProcessTimes(&ReadyQueue[index], ReadyQueue[index].iArrival);
             updateProcessTimes(&ReadyQueue[index], TerminatedArray[iTerminated - 1].iFinish);
             pushProcess(&iTerminated, TerminatedArray, ReadyQueue[index]);
             removeProcess(&iReady, index, ReadyQueue);
