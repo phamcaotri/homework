@@ -291,18 +291,10 @@ int main() {
             } else {
                 updateProcessTimes(&ReadyQueue[0], TerminatedArray[iTerminated - 1].iFinish);
             }
-            if (ReadyQueue[0].iBurst > quantum) {
-                PCB temp = ReadyQueue[0];
-                // temp.iBurst = quantum;
-                // pushProcess(&iReady, ReadyQueue, temp);
-                ReadyQueue[0].iBurst -= quantum;
-                ReadyQueue[0].iFinish = ReadyQueue[0].iStart + quantum;
-                ReadyQueue[0].iTaT = ReadyQueue[0].iFinish - ReadyQueue[0].iArrival;
-                
-            } else {
-                pushProcess(&iTerminated, TerminatedArray, ReadyQueue[0]);
-                removeProcess(&iReady, 0, ReadyQueue);
-            }
+
+            pushProcess(&iTerminated, TerminatedArray, ReadyQueue[0]);
+            removeProcess(&iReady, 0, ReadyQueue);
+
         } else {
             pushProcess(&iReady, ReadyQueue, Input[0]);
             removeProcess(&iRemain, 0, Input);
@@ -313,6 +305,15 @@ int main() {
         while (iRemain > 0 && Input[0].iArrival <= TerminatedArray[iTerminated - 1].iFinish) {
             pushProcess(&iReady, ReadyQueue, Input[0]);
             removeProcess(&iRemain, 0, Input);
+            if (ReadyQueue[0].iBurst > quantum) {
+                PCB temp = TerminatedArray[iTerminated - 1];
+                temp.iArrival = ReadyQueue[0].iArrival;
+                temp.iBurst = quantum;
+                pushProcess(&iReady, ReadyQueue, temp);
+                TerminatedArray[iTerminated - 1].iBurst -= quantum;
+                TerminatedArray[iTerminated - 1].iFinish = ReadyQueue[0].iArrival;
+                TerminatedArray[iTerminated - 1].iTaT = TerminatedArray[iTerminated - 1].iFinish - TerminatedArray[iTerminated - 1].iArrival;
+            }
         }
     }
 
