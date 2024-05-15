@@ -206,12 +206,17 @@ int main() {
     // ngừng khi đã thực thi hết tất cả các process và trong ready queue không còn process nào
     // điều kiện ready queue để tránh 1 process thực thi nhiều lần
     // khiến điều kiện trước đó không còn đúng
+    int space = 0;
     while (iTerminated < iNumberOfProcess || iReady > 0) {
         // nếu trong queue có process thì thực thi process đó
         if (iReady > 0) {
             // cập nhật thời gian cho process đó
-            // updateProcessTimes(&ReadyQueue[index], ReadyQueue[index].iArrival);
-            updateProcessTimes(&ReadyQueue[index], TerminatedArray[iTerminated - 1].iFinish);
+            if (space == 1) {
+                updateProcessTimes(&ReadyQueue[index], ReadyQueue[index].iArrival);
+                space = 0;
+            } else {
+                updateProcessTimes(&ReadyQueue[index], TerminatedArray[iTerminated - 1].iFinish);
+            }
             pushProcess(&iTerminated, TerminatedArray, ReadyQueue[index]);
             removeProcess(&iReady, index, ReadyQueue);
         // ngược lại thì thêm process tiếp theo vào queue,
@@ -220,7 +225,7 @@ int main() {
         } else {
             pushProcess(&iReady, ReadyQueue, Input[0]);
             removeProcess(&iRemain, 0, Input);
-            updateProcessTimes(&ReadyQueue[0], ReadyQueue[0].iArrival);
+            space = 1;
             continue;
         }
         // kiểm tra xem có process mới đến không
