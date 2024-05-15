@@ -307,7 +307,7 @@ int main() {
             removeProcess(&iRemain, 0, Input);
             if (ReadyQueue[0].iBurst > quantum) {
                 PCB temp = TerminatedArray[iTerminated - 1];
-                temp.iArrival = ReadyQueue[0].iArrival;
+                temp.iArrival = TerminatedArray[iTerminated - 1].iStart + quantum;
                 temp.iBurst = quantum;
                 pushProcess(&iReady, ReadyQueue, temp);
                 TerminatedArray[iTerminated - 1].iBurst -= quantum;
