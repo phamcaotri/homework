@@ -293,12 +293,10 @@ int main() {
             }
             if (ReadyQueue[0].iBurst > quantum) {
                 PCB temp = ReadyQueue[0];
-                temp.iBurst -= quantum;
-                temp.iFinish = temp.iStart + quantum;
-                temp.iTaT = temp.iFinish - temp.iArrival;
-                pushProcess(&iReady, ReadyQueue, temp);
-                ReadyQueue[0].iStart = temp.iFinish;
-                ReadyQueue[0].iFinish = ReadyQueue[0].iStart + ReadyQueue[0].iBurst;
+                // temp.iBurst = quantum;
+                // pushProcess(&iReady, ReadyQueue, temp);
+                ReadyQueue[0].iBurst -= quantum;
+                ReadyQueue[0].iFinish = ReadyQueue[0].iStart + quantum;
                 ReadyQueue[0].iTaT = ReadyQueue[0].iFinish - ReadyQueue[0].iArrival;
                 
             } else {
