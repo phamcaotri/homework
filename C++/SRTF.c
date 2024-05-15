@@ -217,11 +217,8 @@ int main() {
         } else {
             pushProcess(&iReady, ReadyQueue, Input[0]);
             removeProcess(&iRemain, 0, Input);
+            updateProcessTimes(&ReadyQueue[0], ReadyQueue[0].iArrival);
             ReadyQueue[0].iStart = ReadyQueue[0].iArrival; 
-            ReadyQueue[0].iFinish = ReadyQueue[0].iStart + ReadyQueue[0].iBurst; 
-            ReadyQueue[0].iResponse = ReadyQueue[0].iStart - ReadyQueue[0].iArrival; 
-            ReadyQueue[0].iWaiting = ReadyQueue[0].iResponse;
-            ReadyQueue[0].iTaT = ReadyQueue[0].iFinish - ReadyQueue[0].iArrival; 
             continue;
         }
         // kiểm tra xem có process mới đến không
@@ -242,49 +239,20 @@ int main() {
             }
             // nếu process đó có remain time nhỏ hơn remain time của process đang chạy
             // thì thực thi process đó và cập nhật thời gian cho process bị ngắt
-            if (lowest_burst < TerminatedArray[iTerminated - 1].iBurst - (ReadyQueue[index].iArrival - TerminatedArray[iTerminated - 1].iStart)) {
+            int total_burst = TerminatedArray[iTerminated - 1].iBurst;
+            int brusted = ReadyQueue[index].iArrival - TerminatedArray[iTerminated - 1].iStart;
+            int current_burst = total_burst - brusted;
+            if (lowest_burst < current_burst) {
+                updateProcessTimes(&ReadyQueue[index], ReadyQueue[index].iArrival);
                 PCB temp = TerminatedArray[iTerminated - 1];
                 temp.iArrival = ReadyQueue[index].iArrival;
-                temp.iBurst -= ReadyQueue[index].iArrival - TerminatedArray[iTerminated - 1].iStart;
-                TerminatedArray[iTerminated - 1].iBurst = ReadyQueue[index].iArrival - TerminatedArray[iTerminated - 1].iStart;
-                TerminatedArray[iTerminated - 1].iFinish = ReadyQueue[index].iStart;
+                temp.iBurst = current_burst;
                 pushProcess(&iReady, ReadyQueue, temp);
-                printProcess(iReady, ReadyQueue);
-                printProcess(iTerminated, TerminatedArray);
-                // gọi break khỏi vòng lặp nếu có process mới thay thế
-                // để tránh update thời gian dòng dưới sai cho process đó (cập nhật 2 lần)
-                break;
+                TerminatedArray[iTerminated - 1].iBurst = brusted;
+                TerminatedArray[iTerminated - 1].iFinish = ReadyQueue[index].iArrival;
             }
-            // nếu không có process nào có remain time nhỏ hơn thì cập nhật thời gian cho process tiếp theo
-            // như thể SJF
             updateProcessTimes(&ReadyQueue[index], TerminatedArray[iTerminated - 1].iFinish);
         }
-        // TH1: nếu process bị ngắt ở trên thì tìm và cập nhật thời gian cho process tiếp theo
-        // TH2: nếu không có process nào bị ngắt thì tìm process có remain time nhỏ nhất
-        // và xem nó có nhỏ hơn remain time của process đang chạy không
-        int lowest_burst = ReadyQueue[0].iBurst;
-        index = 0;
-        for (int i = 1; i < iReady; i++) {
-            if (ReadyQueue[i].iBurst < lowest_burst) {
-                lowest_burst = ReadyQueue[i].iBurst;
-                index = i;
-            }
-        }
-
-        if (lowest_burst < TerminatedArray[iTerminated - 1].iBurst - (ReadyQueue[index].iArrival- TerminatedArray[iTerminated - 1].iStart)) {
-                PCB temp = TerminatedArray[iTerminated - 1];
-                temp.iArrival = ReadyQueue[index].iArrival;
-                temp.iBurst -= ReadyQueue[index].iArrival - TerminatedArray[iTerminated - 1].iStart;
-                TerminatedArray[iTerminated - 1].iBurst = ReadyQueue[index].iArrival - TerminatedArray[iTerminated - 1].iStart;
-                TerminatedArray[iTerminated - 1].iFinish = ReadyQueue[index].iStart;
-                pushProcess(&iReady, ReadyQueue, temp);
-                printProcess(iReady, ReadyQueue);
-                printProcess(iTerminated, TerminatedArray);
-        }
-
-        updateProcessTimes(&ReadyQueue[index], TerminatedArray[iTerminated - 1].iFinish);
-        // cập nhật lại brust cho process bị ngắt để tổng thời gian chạy = burst time
-        // TerminatedArray[iTerminated - 1].iBurst = ReadyQueue[index].iStart - TerminatedArray[iTerminated - 1].iStart;
     }
 
     printf("\n===== FCFS Scheduling =====\n"); 
