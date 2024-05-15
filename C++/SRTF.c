@@ -243,7 +243,6 @@ int main() {
             // nếu process đó có remain time nhỏ hơn remain time của process đang chạy
             // thì thực thi process đó và cập nhật thời gian cho process bị ngắt
             if (lowest_burst < TerminatedArray[iTerminated - 1].iBurst - (ReadyQueue[index].iArrival - TerminatedArray[iTerminated - 1].iStart)) {
-                TerminatedArray[iTerminated - 1].iArrival = ReadyQueue[index].iStart;
                 TerminatedArray[iTerminated - 1].iBurst -= ReadyQueue[index].iArrival - TerminatedArray[iTerminated - 1].iStart;
                 TerminatedArray[iTerminated - 1].iFinish = ReadyQueue[index].iStart + ReadyQueue[index].iArrival;
                 pushProcess(&iReady, ReadyQueue, TerminatedArray[iTerminated - 1]);
@@ -270,7 +269,6 @@ int main() {
         }
 
         if (lowest_burst < TerminatedArray[iTerminated - 1].iBurst - (ReadyQueue[index].iArrival- TerminatedArray[iTerminated - 1].iStart)) {
-            TerminatedArray[iTerminated - 1].iArrival = ReadyQueue[index].iStart;
             TerminatedArray[iTerminated - 1].iBurst -= ReadyQueue[index].iArrival - TerminatedArray[iTerminated - 1].iStart;
             TerminatedArray[iTerminated - 1].iFinish = ReadyQueue[index].iStart + ReadyQueue[index].iArrival;
             pushProcess(&iReady, ReadyQueue, TerminatedArray[iTerminated - 1]);
