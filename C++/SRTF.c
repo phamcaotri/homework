@@ -1,5 +1,6 @@
 #include <stdio.h> 
 #include <stdlib.h> 
+#include <time.h>
 #define SORT_BY_ARRIVAL 0 
 #define SORT_BY_PID 1 
 #define SORT_BY_BURST 2 
@@ -56,43 +57,61 @@ void swapProcess(PCB *P, PCB *Q) {
     *Q = temp;
 }
 
-int partition (PCB P[], int low, int high, int iCriteria) {
-    int pivot = 0;
-    if (iCriteria == SORT_BY_ARRIVAL) {
-        pivot = P[high].iArrival;
-    } else if (iCriteria == SORT_BY_PID) {
-        pivot = P[high].iPID;
-    } else if (iCriteria == SORT_BY_BURST) {
-        pivot = P[high].iBurst;
-    } else if (iCriteria == SORT_BY_START) {
-        pivot = P[high].iStart;
-    }
-    int i = (low - 1);
-    for (int j = low; j<=high;j++) {
+void merge(PCB P[], int l, int m, int r, int iCriteria) {
+    int i, j, k;
+    int n1 = m - l + 1;
+    int n2 = r - m;
+
+    PCB L[n1], R[n2];
+
+    for (i = 0; i < n1; i++)
+        L[i] = P[l + i];
+    for (j = 0; j < n2; j++)
+        R[j] = P[m + 1 + j];
+
+    i = 0;
+    j = 0;
+    k = l;
+    while (i < n1 && j < n2) {
         int bSwap = 0;
         if (iCriteria == SORT_BY_ARRIVAL) {
-            bSwap = P[j].iArrival < pivot;
+            bSwap = L[i].iArrival <= R[j].iArrival;
         } else if (iCriteria == SORT_BY_PID) {
-            bSwap = P[j].iPID < pivot;
+            bSwap = L[i].iPID <= R[j].iPID;
         } else if (iCriteria == SORT_BY_BURST) {
-            bSwap = P[j].iBurst < pivot;
+            bSwap = L[i].iBurst <= R[j].iBurst;
         } else if (iCriteria == SORT_BY_START) {
-            bSwap = P[j].iStart < pivot;
+            bSwap = L[i].iStart <= R[j].iStart;
         }
         if (bSwap) {
+            P[k] = L[i];
             i++;
-            swapProcess(&P[i], &P[j]);
+        } else {
+            P[k] = R[j];
+            j++;
         }
+        k++;
     }
-    swapProcess(&P[i+1], &P[high]);
-    return (i+1);
+
+    while (i < n1) {
+        P[k] = L[i];
+        i++;
+        k++;
+    }
+
+    while (j < n2) {
+        P[k] = R[j];
+        j++;
+        k++;
+    }
 }
- 
-void quickSort(PCB P[], int low, int high, int iCriteria) {
-    if (low < high) {
-        int pi = partition(P, low, high, iCriteria);
-        quickSort(P, low, pi - 1, iCriteria);
-        quickSort(P, pi + 1, high, iCriteria);
+
+void mergeSort(PCB P[], int l, int r, int iCriteria) {
+    if (l < r) {
+        int m = l + (r - l) / 2;
+        mergeSort(P, l, m, iCriteria);
+        mergeSort(P, m + 1, r, iCriteria);
+        merge(P, l, m, r, iCriteria);
     }
 }
 
@@ -153,6 +172,23 @@ void updateProcessTimes(PCB *process, int finishTime) {
     process->iTaT = process->iFinish - process->iArrival;
 }
 
+void inputRandomProcess(int n, PCB P[]) {
+    srand(time(0));
+    for (int i = 0; i < n; i++) {
+        P[i].iPID = i + 1;
+        P[i].iArrival = rand() % 21;
+        P[i].iBurst = rand() % 11 + 2;
+        P[i].iStart = 0;
+        P[i].iFinish = 0;
+        P[i].iResponse = 0;
+        P[i].iWaiting = 0;
+        P[i].iTaT = 0;
+    }
+    printf("\nRandom Process:\n");
+    printProcess(n, P);
+}
+
+
 int main() { 
     PCB Input[10]; 
     PCB ReadyQueue[10]; 
@@ -162,9 +198,9 @@ int main() {
     printf("Please input number of Process: "); 
     scanf("%d", &iNumberOfProcess); 
     int iRemain = iNumberOfProcess, iReady = 0, iTerminated = 0; 
-
+    // inputRandomProcess(iNumberOfProcess, Input);
     inputProcess(iNumberOfProcess, Input); 
-    quickSort(Input, 0, iNumberOfProcess - 1, SORT_BY_ARRIVAL); 
+    mergeSort(Input, 0, iNumberOfProcess - 1, SORT_BY_ARRIVAL); 
 
     int index = 0; // lưu vị trí của tiến trình có thời gian chạy ngắn nhất
     // ngừng khi đã thực thi hết tất cả các process và trong ready queue không còn process nào
@@ -244,7 +280,7 @@ int main() {
     printf("\n===== FCFS Scheduling =====\n"); 
     exportGanttChart(iTerminated, TerminatedArray); 
  
-    quickSort(TerminatedArray, 0, iTerminated - 1, SORT_BY_PID); 
+    mergeSort(TerminatedArray, 0, iTerminated - 1, SORT_BY_PID); 
     mergeProcesses(iTerminated, TerminatedArray);
     printProcess(iTerminated, TerminatedArray);
     calculateAverageWTandTaT(iTerminated, TerminatedArray, iNumberOfProcess);
@@ -252,54 +288,54 @@ int main() {
 } 
 
 
-int main() { 
-    PCB Input[10]; 
-    PCB ReadyQueue[10]; 
-    PCB TerminatedArray[10]; 
+// int main() { 
+//     PCB Input[10]; 
+//     PCB ReadyQueue[10]; 
+//     PCB TerminatedArray[10]; 
 
-    int iNumberOfProcess; 
-    printf("Please input number of Process: "); 
-    scanf("%d", &iNumberOfProcess); 
+//     int iNumberOfProcess; 
+//     printf("Please input number of Process: "); 
+//     scanf("%d", &iNumberOfProcess); 
 
-    int timeQuantum;
-    printf("Please input the time quantum: ");
-    scanf("%d", &timeQuantum);
+//     int timeQuantum;
+//     printf("Please input the time quantum: ");
+//     scanf("%d", &timeQuantum);
 
-    int iRemain = iNumberOfProcess, iReady = 0, iTerminated = 0; 
+//     int iRemain = iNumberOfProcess, iReady = 0, iTerminated = 0; 
 
-    inputProcess(iNumberOfProcess, Input); 
-    quickSort(Input, 0, iNumberOfProcess - 1, SORT_BY_ARRIVAL); 
+//     inputProcess(iNumberOfProcess, Input); 
+//     quickSort(Input, 0, iNumberOfProcess - 1, SORT_BY_ARRIVAL); 
 
-    int currentTime = 0;
-    while (iTerminated < iNumberOfProcess) {
-        while (iRemain > 0 && Input[0].iArrival <= currentTime) {
-            pushProcess(&iReady, ReadyQueue, Input[0]);
-            removeProcess(&iRemain, 0, Input);
-        }
+//     int currentTime = 0;
+//     while (iTerminated < iNumberOfProcess) {
+//         while (iRemain > 0 && Input[0].iArrival <= currentTime) {
+//             pushProcess(&iReady, ReadyQueue, Input[0]);
+//             removeProcess(&iRemain, 0, Input);
+//         }
 
-        if (iReady > 0) {
-            if (ReadyQueue[0].iBurst > timeQuantum) {
-                ReadyQueue[0].iBurst -= timeQuantum;
-                currentTime += timeQuantum;
-                pushProcess(&iReady, ReadyQueue, ReadyQueue[0]);
-                removeProcess(&iReady, 0, ReadyQueue);
-            } else {
-                currentTime += ReadyQueue[0].iBurst;
-                ReadyQueue[0].iFinish = currentTime;
-                pushProcess(&iTerminated, TerminatedArray, ReadyQueue[0]);
-                removeProcess(&iReady, 0, ReadyQueue);
-            }
-        } else {
-            currentTime++;
-        }
-    }
+//         if (iReady > 0) {
+//             if (ReadyQueue[0].iBurst > timeQuantum) {
+//                 ReadyQueue[0].iBurst -= timeQuantum;
+//                 currentTime += timeQuantum;
+//                 pushProcess(&iReady, ReadyQueue, ReadyQueue[0]);
+//                 removeProcess(&iReady, 0, ReadyQueue);
+//             } else {
+//                 currentTime += ReadyQueue[0].iBurst;
+//                 ReadyQueue[0].iFinish = currentTime;
+//                 pushProcess(&iTerminated, TerminatedArray, ReadyQueue[0]);
+//                 removeProcess(&iReady, 0, ReadyQueue);
+//             }
+//         } else {
+//             currentTime++;
+//         }
+//     }
 
-    printf("\n===== Round Robin Scheduling =====\n"); 
-    exportGanttChart(iTerminated, TerminatedArray); 
+//     printf("\n===== Round Robin Scheduling =====\n"); 
+//     exportGanttChart(iTerminated, TerminatedArray); 
 
-    quickSort(TerminatedArray, 0, iTerminated - 1, SORT_BY_PID); 
-    mergeProcesses(iTerminated, TerminatedArray);
-    printProcess(iTerminated, TerminatedArray);
-    calculateAverageWTandTaT(iTerminated, TerminatedArray, iNumberOfProcess);
-    return 0; 
-} 
+//     quickSort(TerminatedArray, 0, iTerminated - 1, SORT_BY_PID); 
+//     mergeProcesses(iTerminated, TerminatedArray);
+//     printProcess(iTerminated, TerminatedArray);
+//     calculateAverageWTandTaT(iTerminated, TerminatedArray, iNumberOfProcess);
+//     return 0; 
+// } 
