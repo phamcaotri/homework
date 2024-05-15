@@ -244,6 +244,7 @@ int main() {
             // thì thực thi process đó và cập nhật thời gian cho process bị ngắt
             if (lowest_burst < TerminatedArray[iTerminated - 1].iBurst - (ReadyQueue[index].iArrival - TerminatedArray[iTerminated - 1].iStart)) {
                 TerminatedArray[iTerminated - 1].iBurst -= ReadyQueue[index].iArrival - TerminatedArray[iTerminated - 1].iStart;
+                TerminatedArray[iTerminated - 1].iStart = ReadyQueue[index].iArrival;
                 TerminatedArray[iTerminated - 1].iFinish = ReadyQueue[index].iStart + ReadyQueue[index].iArrival;
                 pushProcess(&iReady, ReadyQueue, TerminatedArray[iTerminated - 1]);
                 // gọi break khỏi vòng lặp nếu có process mới thay thế
@@ -268,6 +269,7 @@ int main() {
 
         if (lowest_burst < TerminatedArray[iTerminated - 1].iBurst - (ReadyQueue[index].iArrival- TerminatedArray[iTerminated - 1].iStart)) {
             TerminatedArray[iTerminated - 1].iBurst -= ReadyQueue[index].iArrival - TerminatedArray[iTerminated - 1].iStart;
+            TerminatedArray[iTerminated - 1].iStart = ReadyQueue[index].iArrival;
             TerminatedArray[iTerminated - 1].iFinish = ReadyQueue[index].iStart + ReadyQueue[index].iArrival;
             pushProcess(&iReady, ReadyQueue, TerminatedArray[iTerminated - 1]);
         }
