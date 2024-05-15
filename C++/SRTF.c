@@ -220,7 +220,6 @@ int main() {
             pushProcess(&iReady, ReadyQueue, Input[0]);
             removeProcess(&iRemain, 0, Input);
             updateProcessTimes(&ReadyQueue[0], ReadyQueue[0].iArrival);
-            ReadyQueue[0].iStart = ReadyQueue[0].iArrival; 
             continue;
         }
         // kiểm tra xem có process mới đến không
